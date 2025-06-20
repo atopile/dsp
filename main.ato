@@ -1,4 +1,99 @@
+#pragma experiment("BRIDGE_CONNECT")
+
 """Brand new atopile project!"""
 
+import DifferentialPair
+
 module App:
+    dsp = new DSP
+    tops = new StereoXLROutput
+    subs = new MonoXLROutput[2]
+    mixer_output = new StereoXLRInput
+    mixer_input = new StereoRCAOutput
+    microphone_input = new MonoXLRInput # TODO: is this balanced?
+    mems_microphone = new MEMSMicrophone
+    rpi = new RPI # Ethernet included
+    usbc_pd = new USBC_PD
+    regulator_5v = new Regulator_5V
+    dmx = new DMXOut
+    oled = new OLED
+    mode_button = new Button
+    output_gain_knob = new Potentiometer
+    i2s_connector = new I2SConnector
+    i2c_connector = new QwiicConnector
+
+module MonoXLRInput:
+    input_connector = new XLR
+    output = new I2S
+
+module StereoRCAOutput:
+    input = new I2S
+    output_connector_left = new RCA
+    output_connector_right = new RCA
+
+module StereoXLRInput:
+    input_connector_left = new XLR
+    input_connector_right = new XLR
+    output = new I2S
+
+module StereoXLROutput:
+    input = new I2S
+    output_connector_left = new XLR
+    output_connector_right = new XLR
+
+module MonoXLROutput:
+    input = new I2S
+    output_connector = new XLR
+
+module BalancedToI2S:
+    input = new XLRInterface
+    output = new I2S
+
+    protection = new Protection
+    amp = new OpAmp
+    adc = new ADC
+
+    #todo: do we need a buffer here?
+    input ~> protection ~> amp ~> adc ~> output
+
+module I2SToBalanced:
+    input = new I2S
+    output = new XLRInterface
+
+    protection = new Protection
+    amp = new OpAmp
+    adc = new DAC
+
+    #todo: do we need a buffer here?
+    input ~> protection ~> amp ~> adc ~> output
+
+module ADC:
+    # PCM186x
     pass
+
+module I2S:
+    pass
+
+component RCA:
+    pass
+
+component XLR:
+    pass
+
+component DSP:
+    pass
+
+component DAC:
+    # TAD5242
+    pass
+
+component Protection:
+    pass
+
+interface XLRInterface:
+    pass
+
+interface RCAInterface:
+    pass
+
+
