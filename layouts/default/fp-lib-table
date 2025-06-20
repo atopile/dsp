@@ -21,4 +21,18 @@
         (options "")
         (descr "atopile: part lib: SHOU_HAN_PJ_342")
     )
+    (lib
+        (name "Neutrik_NCJ6FA_H")
+        (type "KiCad")
+        (uri "${KIPRJMOD}/../../parts/Neutrik_NCJ6FA_H")
+        (options "")
+        (descr "atopile: part lib: Neutrik_NCJ6FA_H")
+    )
+    (lib
+        (name "Neutrik_NC3MAAH_1")
+        (type "KiCad")
+        (uri "${KIPRJMOD}/../../parts/Neutrik_NC3MAAH_1")
+        (options "")
+        (descr "atopile: part lib: Neutrik_NC3MAAH_1")
+    )
 )

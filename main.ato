@@ -2,6 +2,9 @@
 
 """Brand new atopile project!"""
 
+from "parts/Neutrik_NCJ6FA_H/Neutrik_NCJ6FA_H.ato" import Neutrik_NCJ6FA_H_package
+from "parts/HOOYA_DIN_327/HOOYA_DIN_327.ato" import HOOYA_DIN_327_package
+
 import DifferentialPair
 
 module App:
@@ -90,12 +93,28 @@ component DAC:
 component Protection:
     pass
 
+# TODO: Add XLR 3-7 pin interfaces to the standard library
 interface XLRInterface3P:
     signal hot
     signal cold
     signal gnd
 
 interface RCAInterface:
-    pass
+    signal hot
+    signal gnd
+
+module XLRInput:
+    package = new Neutrik_NCJ6FA_H_package
+    xlr_interface = new XLRInterface3P
+    xlr_interface.gnd ~ package.1
+    xlr_interface.hot ~ package.2
+    xlr_interface.cold ~ package.3
+
+module XLROutput:
+    package = new HOOYA_DIN_327_package
+    xlr_interface = new XLRInterface3P
+    xlr_interface.gnd ~ package.1
+    xlr_interface.hot ~ package.2
+    xlr_interface.cold ~ package.3
 
 

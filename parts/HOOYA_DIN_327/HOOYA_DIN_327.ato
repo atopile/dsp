@@ -9,7 +9,7 @@ component HOOYA_DIN_327_package:
 
     # This trait marks this file as auto-generated
     # If you want to manually change it, remove the trait
-    trait is_auto_generated<system="ato_part", source="easyeda:C309324", date="2025-06-20T22:56:57.507277+00:00", checksum="952bfce613e5ed3057ed55549ea46bc1f462c89392871261070d693659638215">
+    trait is_auto_generated<system="ato_part", source="easyeda:C309324", date="2025-06-20T23:24:07.948258+00:00", checksum="f6854eae05987579a45a47547f90a487391b4c69f7ad24e580cad7805984f7d4">
 
     trait is_atomic_part<manufacturer="HOOYA", partnumber="DIN-327", footprint="CONN-TH_DIN-327.kicad_mod", symbol="DIN-327.kicad_sym", model="CONN-TH_DIN-327.step">
     trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C309324", manufacturer="HOOYA", partno="DIN-327">

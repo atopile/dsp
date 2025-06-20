@@ -1,10 +1,10 @@
 (kicad_symbol_lib
     (version 1)
     (generator "faebryk")
-    (symbol "DIN-323PP"
-        (property "Reference" "J"
+    (symbol "NCJ6FA-H"
+        (property "Reference" "PS"
             (id 0)
-            (at 0 7.62 0)
+            (at 0 13.97 0)
             (effects
                 (font
                     (size 1.27 1.27)
@@ -12,9 +12,9 @@
                 (hide no)
             )
         )
-        (property "Value" "DIN-323PP"
+        (property "Value" "NCJ6FA-H"
             (id 1)
-            (at 0 -10.16 0)
+            (at 0 -13.97 0)
             (effects
                 (font
                     (size 1.27 1.27)
@@ -22,9 +22,9 @@
                 (hide no)
             )
         )
-        (property "Footprint" "C309317:CONN-TH_DIN-323PP"
+        (property "Footprint" "C368458:CONN-TH_NCJ6FA-H"
             (id 2)
-            (at 0 -12.7 0)
+            (at 0 -16.51 0)
             (effects
                 (font
                     (size 1.27 1.27)
@@ -32,9 +32,9 @@
                 (hide yes)
             )
         )
-        (property "Datasheet" "https://lcsc.com/product-detail/Others_HOOYA-DIN-323PP_C309317.html"
+        (property "Datasheet" "https://lcsc.com/product-detail/Others_Neutrik-NCJ6FA-H_C368458.html"
             (id 3)
-            (at 0 -15.24 0)
+            (at 0 -19.05 0)
             (effects
                 (font
                     (size 1.27 1.27)
@@ -42,9 +42,9 @@
                 (hide yes)
             )
         )
-        (property "LCSC Part" "C309317"
+        (property "LCSC Part" "C368458"
             (id 5)
-            (at 0 -17.78 0)
+            (at 0 -21.59 0)
             (effects
                 (font
                     (size 1.27 1.27)
@@ -52,7 +52,7 @@
                 (hide yes)
             )
         )
-        (property "checksum" "4669e0c4255e44b09957adc84a42dd65ba8c6f4a84e43219776bcc2360288da0"
+        (property "checksum" "25585160fae00c373d4bdd8e0c8af29d1d270382850f8d318d00cdaa14d31372"
             (at 0 0 0)
             (effects
                 (font
@@ -63,66 +63,10 @@
         )
         (in_bom yes)
         (on_board yes)
-        (symbol "DIN-323PP_0_1"
-            (polyline
-                (stroke
-                    (width 0)
-                    (type default)
-                    (color 0 0 0 0)
-                )
-                (fill
-                    (type none)
-                )
-                (pts
-                    (xy -2.54 2.54)
-                    (xy 3.56 2.54)
-                )
-            )
-            (polyline
-                (stroke
-                    (width 0)
-                    (type default)
-                    (color 0 0 0 0)
-                )
-                (fill
-                    (type none)
-                )
-                (pts
-                    (xy -2.54 -2.54)
-                    (xy 3.56 -2.54)
-                )
-            )
-            (polyline
-                (stroke
-                    (width 0)
-                    (type default)
-                    (color 0 0 0 0)
-                )
-                (fill
-                    (type none)
-                )
-                (pts
-                    (xy -2.54 0)
-                    (xy -0.25 0)
-                )
-            )
-            (polyline
-                (stroke
-                    (width 0)
-                    (type default)
-                    (color 0 0 0 0)
-                )
-                (fill
-                    (type none)
-                )
-                (pts
-                    (xy -2.54 -5.08)
-                    (xy -0.76 -3.56)
-                )
-            )
+        (symbol "NCJ6FA-H_0_1"
             (circle
-                (center 2.54 0)
-                (end 7.37 0)
+                (center -1.27 10.16)
+                (end -0.89 10.16)
                 (stroke
                     (width 0)
                     (type default)
@@ -132,65 +76,21 @@
                     (type none)
                 )
             )
-            (circle
-                (center 0.51 0)
-                (end 1.27 0)
+            (rectangle
+                (start -2.54 11.43)
+                (end 2.54 -11.43)
                 (stroke
                     (width 0)
                     (type default)
                     (color 0 0 0 0)
                 )
                 (fill
-                    (type none)
-                )
-            )
-            (circle
-                (center 4.32 2.54)
-                (end 5.08 2.54)
-                (stroke
-                    (width 0)
-                    (type default)
-                    (color 0 0 0 0)
-                )
-                (fill
-                    (type none)
-                )
-            )
-            (circle
-                (center 4.32 -2.54)
-                (end 5.08 -2.54)
-                (stroke
-                    (width 0)
-                    (type default)
-                    (color 0 0 0 0)
-                )
-                (fill
-                    (type none)
+                    (type background)
                 )
             )
             (pin unspecified line
-                (at -7.62 2.54 0)
-                (length 5.08)
-                (name "2"
-                    (effects
-                        (font
-                            (size 1.27 1.27)
-                        )
-                        (hide no)
-                    )
-                )
-                (number "2"
-                    (effects
-                        (font
-                            (size 1.27 1.27)
-                        )
-                        (hide no)
-                    )
-                )
-            )
-            (pin unspecified line
-                (at -7.62 -2.54 0)
-                (length 5.08)
+                (at -5.08 8.89 0)
+                (length 2.54)
                 (name "1"
                     (effects
                         (font
@@ -209,8 +109,28 @@
                 )
             )
             (pin unspecified line
-                (at -7.62 0 0)
-                (length 5.08)
+                (at -5.08 6.35 0)
+                (length 2.54)
+                (name "2"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+                (number "2"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+            )
+            (pin unspecified line
+                (at -5.08 3.81 0)
+                (length 2.54)
                 (name "3"
                     (effects
                         (font
@@ -229,8 +149,88 @@
                 )
             )
             (pin unspecified line
-                (at -7.62 -5.08 0)
-                (length 5.08)
+                (at -5.08 1.27 0)
+                (length 2.54)
+                (name "S"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+                (number "4"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+            )
+            (pin unspecified line
+                (at -5.08 -1.27 0)
+                (length 2.54)
+                (name "R"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+                (number "5"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+            )
+            (pin unspecified line
+                (at -5.08 -3.81 0)
+                (length 2.54)
+                (name "T"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+                (number "6"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+            )
+            (pin unspecified line
+                (at -5.08 -6.35 0)
+                (length 2.54)
+                (name "T"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+                (number "7"
+                    (effects
+                        (font
+                            (size 1.27 1.27)
+                        )
+                        (hide no)
+                    )
+                )
+            )
+            (pin unspecified line
+                (at -5.08 -8.89 0)
+                (length 2.54)
                 (name "G"
                     (effects
                         (font
@@ -239,7 +239,7 @@
                         (hide no)
                     )
                 )
-                (number "G"
+                (number "8"
                     (effects
                         (font
                             (size 1.27 1.27)
