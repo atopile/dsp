@@ -90,8 +90,10 @@ component DAC:
 component Protection:
     pass
 
-interface XLRInterface:
-    pass
+interface XLRInterface3P:
+    signal hot
+    signal cold
+    signal gnd
 
 interface RCAInterface:
     pass
