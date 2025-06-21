@@ -10,6 +10,7 @@ from "atopile/ti-tps54560x/ti-tps54560x.ato" import TPS54560x
 from "atopile/rpi-cm5/cm5.ato" import CM5
 from "atopile/buttons/buttons.ato" import ButtonPullup, ButtonSKRPACE010
 from "atopile/stemma-connectors/main.ato" import StemmaQTVertical
+from "atopile/ti-pcm1865/ti-pcm1865.ato" import Texas_Instruments_PCM1865_driver
 
 module App:
     dsp = new DSP
@@ -68,7 +69,7 @@ module BalancedToI2S:
 
     protection = new Protection
     amp = new OpAmp
-    adc = new ADC
+    adc = new Texas_Instruments_PCM1865_driver
 
     #todo: do we need a buffer here?
     # input ~> protection ~> amp ~> adc ~> output
@@ -83,10 +84,6 @@ module I2SToBalanced:
 
     #todo: do we need a buffer here?
     # input ~> protection ~> amp ~> adc ~> output
-
-module ADC:
-    # PCM186x
-    pass
 
 module I2S:
     pass
