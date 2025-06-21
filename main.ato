@@ -3,6 +3,7 @@
 """Brand new atopile project!"""
 
 import DifferentialPair
+import OpAmp
 
 from "atopile/st-stusb4500/st-stusb4500.ato" import STUSB4500
 from "atopile/ti-tps54560x/ti-tps54560x.ato" import TPS54560x
@@ -66,7 +67,7 @@ module BalancedToI2S:
     output = new I2S
 
     protection = new Protection
-    # amp = new OpAmp
+    amp = new OpAmp
     adc = new ADC
 
     #todo: do we need a buffer here?
@@ -77,7 +78,7 @@ module I2SToBalanced:
     output = new XLRInterface
 
     protection = new Protection
-    # amp = new OpAmp
+    amp = new OpAmp
     adc = new DAC
 
     #todo: do we need a buffer here?
