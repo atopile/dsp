@@ -4,6 +4,12 @@
 
 import DifferentialPair
 
+from "atopile/st-stusb4500/st-stusb4500.ato" import STUSB4500
+from "atopile/ti-tps54560x/ti-tps54560x.ato" import TPS54560x
+from "atopile/rpi-cm5/cm5.ato" import CM5
+from "atopile/buttons/buttons.ato" import ButtonPullup, ButtonSKRPACE010
+from "atopile/stemma-connectors/main.ato" import StemmaQTVertical
+
 module App:
     dsp = new DSP
     tops = new StereoXLROutput
@@ -11,16 +17,26 @@ module App:
     mixer_output = new StereoXLRInput
     mixer_input = new StereoRCAOutput
     microphone_input = new MonoXLRInput # TODO: is this balanced?
-    mems_microphone = new MEMSMicrophone
-    rpi = new RPI # Ethernet included
-    usbc_pd = new USBC_PD
-    regulator_5v = new Regulator_5V
-    dmx = new DMXOut
-    oled = new OLED
-    mode_button = new Button
-    output_gain_knob = new Potentiometer
-    i2s_connector = new I2SConnector
-    i2c_connector = new QwiicConnector
+    # mems_microphone = new MEMSMicrophone
+
+    usbc_pd = new STUSB4500
+    regulator_5v = new TPS54560x
+    rpi = new CM5
+
+    usbc_pd.power_out ~> regulator_5v ~> rpi.power_5v
+
+    # dmx = new DMXOut
+    # oled = new OLED
+
+    mode_button = new ButtonPullup
+    mode_button.btn -> ButtonSKRPACE010
+
+    # output_gain_knob = new Potentiometer
+    # i2s_connector = new I2SConnector
+
+    i2c_connector = new StemmaQTVertical
+    rpi.i2cs[0] ~ i2c_connector.i2c
+    rpi.power_3v3 ~ i2c_connector.power
 
 module MonoXLRInput:
     input_connector = new XLR
@@ -50,22 +66,22 @@ module BalancedToI2S:
     output = new I2S
 
     protection = new Protection
-    amp = new OpAmp
+    # amp = new OpAmp
     adc = new ADC
 
     #todo: do we need a buffer here?
-    input ~> protection ~> amp ~> adc ~> output
+    # input ~> protection ~> amp ~> adc ~> output
 
 module I2SToBalanced:
     input = new I2S
     output = new XLRInterface
 
     protection = new Protection
-    amp = new OpAmp
+    # amp = new OpAmp
     adc = new DAC
 
     #todo: do we need a buffer here?
-    input ~> protection ~> amp ~> adc ~> output
+    # input ~> protection ~> amp ~> adc ~> output
 
 module ADC:
     # PCM186x
@@ -95,5 +111,3 @@ interface XLRInterface:
 
 interface RCAInterface:
     pass
-
-

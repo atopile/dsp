@@ -1,4 +1,4 @@
-requires-atopile: "0.9.8"
+requires-atopile: 0.9.8
 
 paths:
   src: ./
@@ -20,3 +20,20 @@ builds:
 #   summary: # fill me!
 #   license: MIT license
 #   homepage: # fill me!
+
+dependencies:
+- type: registry
+  identifier: atopile/stemma-connectors
+  release: 0.1.0
+- type: registry
+  identifier: atopile/st-stusb4500
+  release: 0.1.3
+- type: registry
+  identifier: atopile/ti-tps54560x
+  release: 0.1.3
+- type: registry
+  identifier: atopile/rpi-cm5
+  release: 0.1.3
+- type: registry
+  identifier: atopile/buttons
+  release: 0.1.7
