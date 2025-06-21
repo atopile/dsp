@@ -142,7 +142,11 @@ module XLROutput_driver:
 module TRSAudioJack3mm5_driver:
     package = new SHOU_HAN_PJ_342_package
     audio_signal = new TRSInterfaceStereo
-    audio_signal.audio_signal_left.line ~ package.5; audio_signal.audio_signal_left.line ~ package.7
-    audio_signal.audio_signal_right.line ~ package.4; audio_signal.audio_signal_right.line ~ package.6
+    audio_signal.audio_signal_left.line ~ package.5
+    audio_signal.audio_signal_left.line ~ package.7
+    
+    audio_signal.audio_signal_right.line ~ package.4
+    audio_signal.audio_signal_right.line ~ package.6
+    
     audio_signal.audio_signal_left.gnd ~ package.3
     audio_signal.audio_signal_right.gnd ~ package.3
