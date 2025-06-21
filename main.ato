@@ -4,6 +4,7 @@
 
 import DifferentialPair
 import OpAmp
+import ElectricPower
 
 from "atopile/st-stusb4500/st-stusb4500.ato" import STUSB4500
 from "atopile/ti-tps54560x/ti-tps54560x.ato" import TPS54560x
@@ -24,8 +25,11 @@ module App:
     usbc_pd = new STUSB4500
     regulator_5v = new TPS54560x
     rpi = new CM5
+    power_5v = new ElectricPower
+    power_5v.voltage = 5V +/- 5%
 
-    usbc_pd.power_out ~> regulator_5v ~> rpi.power_5v
+    usbc_pd.power_out ~> regulator_5v ~> power_5v
+    power_5v ~ rpi.power_5v
 
     # dmx = new DMXOut
     # oled = new OLED
