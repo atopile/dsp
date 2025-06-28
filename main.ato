@@ -11,16 +11,16 @@ import ElectricalSignal
 
 module App:
     dsp = new DSP
-    tops = new StereoXLROutput
-    subs = new MonoXLROutput[2]
-    mixer_output = new StereoXLRInput
-    mixer_input = new StereoRCAOutput
-    microphone_input = new MonoXLRInput # TODO: is this balanced?
+    tops = new XLRBalancedSystemAudioStereoOutput
+    subs = new XLRBalancedSystemAudioMonoOutput[2]
+    mixer2dsp = new XLRBalancedSystemAudioStereoInput
+    dsp2mixer = new RCASingleEndedSystemAudioStereoOutput
+    microphone_input = new XLRSingleEndedSystemAudioMonoInput
+    dmx = new XLRDMXOutput
     mems_microphone = new MEMSMicrophone
     rpi = new RPI # Ethernet included
     usbc_pd = new USBC_PD
     regulator_5v = new Regulator_5V
-    dmx = new DMXOut
     oled = new OLED
     mode_button = new Button
     output_gain_knob = new Potentiometer
