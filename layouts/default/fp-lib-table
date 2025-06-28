@@ -35,4 +35,11 @@
         (options "")
         (descr "atopile: part lib: Neutrik_NC3MAAH_1")
     )
+    (lib
+        (name "Espressif_Systems_ESP32_C3_WROOM_02_N4")
+        (type "KiCad")
+        (uri "${KIPRJMOD}/../../parts/Espressif_Systems_ESP32_C3_WROOM_02_N4")
+        (options "")
+        (descr "atopile: part lib: Espressif_Systems_ESP32_C3_WROOM_02_N4")
+    )
 )
