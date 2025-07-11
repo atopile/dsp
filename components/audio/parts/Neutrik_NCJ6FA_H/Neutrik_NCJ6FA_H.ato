@@ -7,9 +7,9 @@ import is_auto_generated
 component Neutrik_NCJ6FA_H_package:
     # This trait marks this file as auto-generated
     # If you want to manually change it, remove the trait
-    # trait is_auto_generated<system="ato_part", source="easyeda:C368458", date="2025-07-11T17:55:17.141432+00:00", checksum="df5805912e76d9b7e1d2b924b20dd639466cf7aa0457dd89874101939abc6c7c">
+    trait is_auto_generated<system="ato_part", source="easyeda:C368458", date="2025-06-28T02:40:18.273554+00:00", checksum="2ee32f018ae8bbb2d642fe63b60d77da8d02a3350a2723f442198d5aacfb70ce">
 
-    trait is_atomic_part<manufacturer="Neutrik", partnumber="NCJ6FA-H", footprint="CONN-TH_NCJ6FA-H.kicad_mod", symbol="NCJ6FA-H.kicad_sym", model="NCJ6FA-H.step">
+    trait is_atomic_part<manufacturer="Neutrik", partnumber="NCJ6FA-H", footprint="CONN-TH_NCJ6FA-H.kicad_mod", symbol="NCJ6FA-H.kicad_sym", model="14">
     trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C368458", manufacturer="Neutrik", partno="NCJ6FA-H">
     trait has_designator_prefix<prefix="PS">
 

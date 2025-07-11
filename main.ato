@@ -1,31 +1,53 @@
 #pragma experiment("BRIDGE_CONNECT")
 
-"""Brand new atopile project!"""
+
+from "atopile/rpi-cm5/cm5.ato" import CM5
+from "atopile/ti-tps54560x/ti-tps54560x.ato" import TPS54560x
+from "atopile/ti-tlv75901/ti-tlv75901.ato" import TLV75901_driver
+from "atopile/st-stusb4500/st-stusb4500.ato" import STUSB4500
+
+from "atopile/adi-adau145x/adau145x.ato" import Analog_Devices_ADAU145x_driver
+from "atopile/microphones/tdk_invensense_ics_43434.ato" import TDK_InvenSense_ICS_43434_driver
+from "atopile/ti-pcm1789/ti-pcm1789.ato" import Texas_Instruments_PCM1789_driver
+from "atopile/ti-pcm1865/ti-pcm1865.ato" import Texas_Instruments_PCM1865_driver
+
+from "atopile/buttons/buttons.ato" import ButtonPullup
+from "atopile/buttons/buttons.ato" import ButtonDown
+from "atopile/buttons/buttons.ato" import VerticalButton
+from "atopile/buttons/buttons.ato" import HorizontalButton
+
+from "ruben-iteng/connectors/qwiic.ato" import QwiicVertical_driver # TODO: replace with atopile/sparkfun-qwiic
 
 from "parts/Neutrik_NCJ6FA_H/Neutrik_NCJ6FA_H.ato" import Neutrik_NCJ6FA_H_package
 from "parts/HOOYA_DIN_327/HOOYA_DIN_327.ato" import HOOYA_DIN_327_package
 from "parts/SHOU_HAN_PJ_342/SHOU_HAN_PJ_342.ato" import SHOU_HAN_PJ_342_package
 
-import DifferentialPair
-import ElectricalSignal
+from "components/analog_audio_interface.ato" import AudioBalancedXLR3JackReceptacle
+from "components/analog_audio_interface.ato" import XLR3ReceptacleDMX
 
 module App:
-    dsp = new DSP
-    tops = new XLRBalancedSystemAudioStereoOutput
-    subs = new XLRBalancedSystemAudioMonoOutput[2]
-    mixer2dsp = new XLRBalancedSystemAudioStereoInput
-    dsp2mixer = new RCASingleEndedSystemAudioStereoOutput
-    microphone_input = new XLRSingleEndedSystemAudioMonoInput
-    dmx = new XLRDMXOutput
-    mems_microphone = new MEMSMicrophone
-    rpi = new RPI # Ethernet included
-    usbc_pd = new USBC_PD
-    regulator_5v = new Regulator_5V
-    oled = new OLED
+    rpi = new CM5
+
+    regulator_5v = new TPS54560x
+    regulator_3v3 = new TLV75901_driver
+    pd_controller = new STUSB4500
+    
+    dsp = new Analog_Devices_ADAU145x_driver
+    mems_microphone = new TDK_InvenSense_ICS_43434_driver
+    adc = new Texas_Instruments_PCM1865_driver
+    dac = new Texas_Instruments_PCM1789_driver
+
+    balanced_out_left_connector = new AudioBalancedXLR3JackReceptacle
+    balanced_out_right_connector = new AudioBalancedXLR3JackReceptacle
+    dmx_out_connector = new XLR3ReceptacleDMX
+
     mode_button = new Button
+    
+    i2c_connector = new QwiicVertical_driver
+    
+    oled = new OLED
     output_gain_knob = new Potentiometer
     i2s_connector = new I2SConnector
-    i2c_connector = new QwiicConnector
 
 module MonoXLRInput:
     input_connector = new XLR
@@ -77,9 +99,6 @@ module ADC:
     pass
 
 module I2S:
-    pass
-
-component DSP:
     pass
 
 component DAC:

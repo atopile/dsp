@@ -1,0 +1,66 @@
+#pragma experiment("TRAITS")
+import DifferentialPair
+import ElectricSignal
+import Electrical
+import has_single_electric_reference_shared
+import RS485HalfDuplex
+
+from "parts/Neutrik_NCJ6FA_H/Neutrik_NCJ6FA_H.ato" import Neutrik_NCJ6FA_H_package
+from "parts/HOOYA_DIN_323PP/HOOYA_DIN_323PP.ato" import HOOYA_DIN_323PP_package
+
+interface DMX from RS485HalfDuplex:
+    pass
+
+interface AudioChannel:
+    pass
+
+interface AudioBalanced:
+    audio = new AudioChannel
+    dp = new DifferentialPair
+    dp.p.reference ~ dp.n.reference
+
+interface AudioSingleEnded:
+    audio = new AudioChannel
+    line = new ElectricSignal
+
+module AudioBalancedXLR3JackReceptacle:
+    """
+    3 pole XLR female receptacle with 1/4inch (6.35mm) stereo jack, horizontal PCB mount
+    """
+    package = new Neutrik_NCJ6FA_H_package
+
+    balanced_audio = new AudioBalanced
+    ground = new Electrical
+
+    trait has_single_electric_reference_shared<gnd_only=True>
+
+    package.1 ~ ground
+    package.2 ~ balanced_audio.dp.p.line
+    package.3 ~ balanced_audio.dp.n.line
+    package.G ~ ground
+    package.T ~ balanced_audio.dp.p.line
+    package.R ~ balanced_audio.dp.n.line
+    package.S ~ ground
+
+module XLR3Receptacle:
+    """
+        XLR 3 Pin Female Socket Receptacle
+    """
+    signal pin1
+    signal pin2
+    signal pin3
+    signal gnd
+
+    package = new HOOYA_DIN_323PP_package
+    package.1 ~ pin1
+    package.2 ~ pin2
+    package.3 ~ pin3
+    package.G ~ gnd
+
+module XLR3ReceptacleDMX:
+    xlr3_receptacle = new XLR3Receptacle
+    dmx = new DMX
+    dmx.diff_pair.p.line ~ xlr3_receptacle.pin3
+    dmx.diff_pair.n.line ~ xlr3_receptacle.pin2
+    dmx.diff_pair.p.reference.gnd ~ xlr3_receptacle.pin1
+    dmx.diff_pair.n.reference.gnd ~ xlr3_receptacle.pin1
