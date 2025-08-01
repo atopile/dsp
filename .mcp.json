@@ -1,0 +1,13 @@
+{
+    "mcpServers": {
+        "atopile": {
+            "command": "/home/rubenzp/zonneplan/repos/atopile_projects/atopile/.venv/bin/ato",
+            "args": [
+                "mcp",
+                "start",
+                "--no-http"
+            ],
+            "env": {}
+        }
+    }
+}

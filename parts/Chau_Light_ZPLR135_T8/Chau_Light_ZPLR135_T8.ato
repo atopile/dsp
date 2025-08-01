@@ -1,0 +1,19 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component Chau_Light_ZPLR135_T8_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C277778", date="2025-07-11T22:49:54.685930+00:00", checksum="b444e078d789d9519859a713de872a826e12251a7ce3d0f4ff6362f6b261df0d">
+
+    trait is_atomic_part<manufacturer="Chau Light", partnumber="ZPLR135/T8", footprint="CONN-TH_ZPLR135-T8.kicad_mod", symbol="ZPLR135_T8.kicad_sym">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C277778", manufacturer="Chau Light", partno="ZPLR135/T8">
+    trait has_designator_prefix<prefix="U">
+
+    # pins
+    signal GND ~ pin 2
+    signal VCC ~ pin 3
+    signal VOUT ~ pin 1

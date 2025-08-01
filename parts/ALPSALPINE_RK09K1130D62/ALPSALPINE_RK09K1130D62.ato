@@ -1,0 +1,21 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component ALPSALPINE_RK09K1130D62_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    # trait is_auto_generated<system="ato_part", source="easyeda:C470399", date="2025-07-11T23:47:17.375725+00:00", checksum="e82a0703e9326dc7d17be364a6e5611aa41c6fdf0c0f99dcd06f6b7bb332a8b4">
+
+    trait is_atomic_part<manufacturer="ALPSALPINE", partnumber="RK09K1130D62", footprint="RES-TH_RK09K1130AAU.kicad_mod", symbol="RK09K1130D62.kicad_sym", model="RK09K1130-20000.STEP">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C470399", manufacturer="ALPSALPINE", partno="RK09K1130D62">
+    trait has_designator_prefix<prefix="RP">
+
+    # pins
+    pin 2
+    pin 3
+    pin 1
+    pin 4
+    pin 5

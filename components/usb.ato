@@ -1,0 +1,25 @@
+import USB2_0
+
+from "parts/SHOU_HAN_AF_90__WJDG/SHOU_HAN_AF_90__WJDG.ato" import SHOU_HAN_AF_90__WJDG_package
+
+from "components/hdmi.ato" import _ESDProtection
+
+module USB2_0ConnectorVertical:
+    package = new SHOU_HAN_AF_90__WJDG_package
+
+    usb = new USB2_0
+
+    package.Dneg ~ usb.usb_if.d.n.line
+    package.Dpos ~ usb.usb_if.d.p.line
+    package.GND ~ usb.usb_if.buspower.lv
+    package.SHLD ~ usb.usb_if.buspower.lv
+    package.VCC ~ usb.usb_if.buspower.hv
+
+module USB2_0ConnectorVerticalWithESDProtection:
+    connector = new USB2_0ConnectorVertical
+    esd_protection = new _ESDProtection
+
+    usb = new USB2_0
+    usb ~ connector.usb
+
+    usb.usb_if.d ~ esd_protection.data[0]

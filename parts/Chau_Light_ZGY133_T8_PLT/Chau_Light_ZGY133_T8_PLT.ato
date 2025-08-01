@@ -1,0 +1,19 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component Chau_Light_ZGY133_T8_PLT_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C277780", date="2025-07-11T22:49:40.672188+00:00", checksum="3c002296ccaf011fbce492845e857fcabd744a7dc9cde0ec41e7f20c987acbc1">
+
+    trait is_atomic_part<manufacturer="Chau Light", partnumber="ZGY133/T8(PLT)", footprint="OPTO-TH_ZGY133-T8-PLT.kicad_mod", symbol="ZGY133_T8(PLT).kicad_sym", model="OPTO-TH_ZGY133-T8-PLT.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C277780", manufacturer="Chau Light", partno="ZGY133/T8(PLT)">
+    trait has_designator_prefix<prefix="U">
+
+    # pins
+    signal GND ~ pin 1
+    signal VCC ~ pin 2
+    signal VIN ~ pin 3

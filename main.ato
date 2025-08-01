@@ -1,5 +1,12 @@
 #pragma experiment("BRIDGE_CONNECT")
-
+#pragma experiment("FOR_LOOP")
+import Potentiometer
+import ElectricPower
+import ElectricLogic
+import I2S
+import I2C
+import PDM
+import Resistor
 
 from "atopile/rpi-cm5/cm5.ato" import CM5
 from "atopile/ti-tps54560x/ti-tps54560x.ato" import TPS54560x
@@ -7,7 +14,8 @@ from "atopile/ti-tlv75901/ti-tlv75901.ato" import TLV75901_driver
 from "atopile/st-stusb4500/st-stusb4500.ato" import STUSB4500
 
 from "atopile/adi-adau145x/adau145x.ato" import Analog_Devices_ADAU145x_driver
-from "atopile/microphones/tdk_invensense_ics_43434.ato" import TDK_InvenSense_ICS_43434_driver
+from "atopile/adi-ad1938/ad1938.ato" import Analog_Devices_AD1938_driver
+from "atopile/microphones/tdk_mmict390200012.ato" import TDK_InvenSense_MMICT390200012
 from "atopile/ti-pcm1789/ti-pcm1789.ato" import Texas_Instruments_PCM1789_driver
 from "atopile/ti-pcm1865/ti-pcm1865.ato" import Texas_Instruments_PCM1865_driver
 
@@ -15,27 +23,35 @@ from "atopile/buttons/buttons.ato" import ButtonPullup
 from "atopile/buttons/buttons.ato" import ButtonDown
 from "atopile/buttons/buttons.ato" import VerticalButton
 from "atopile/buttons/buttons.ato" import HorizontalButton
+from "atopile/buttons/buttons.ato" import Button
+
+from "atopile/allvision_oled128x32/allvision_oled128x32.ato" import OLED12832
+
+from "atopile/pin-headers/pin-headers.ato" import Male_2_54mm_1x3P_TH
+from "atopile/saleae-header/saleae-header.ato" import SaleaeHeader
 
 from "ruben-iteng/connectors/qwiic.ato" import QwiicVertical_driver # TODO: replace with atopile/sparkfun-qwiic
 
-from "parts/Neutrik_NCJ6FA_H/Neutrik_NCJ6FA_H.ato" import Neutrik_NCJ6FA_H_package
-from "parts/HOOYA_DIN_327/HOOYA_DIN_327.ato" import HOOYA_DIN_327_package
-from "parts/SHOU_HAN_PJ_342/SHOU_HAN_PJ_342.ato" import SHOU_HAN_PJ_342_package
+from "components/audio.ato" import AudioBalancedXLR3JackReceptacle
+from "components/audio.ato" import XLR3ReceptacleDMX
+from "components/hdmi.ato" import HDMIConnectorVerticalWithESDProtection
+from "components/usb.ato" import USB2_0ConnectorVerticalWithESDProtection
 
-from "components/analog_audio_interface.ato" import AudioBalancedXLR3JackReceptacle
-from "components/analog_audio_interface.ato" import XLR3ReceptacleDMX
+from "components/potentiometer_with_rgb_led.ato" import PotentiometerWithRGBLED
 
 module App:
-    rpi = new CM5
+    # --- Components ---
+    cm5 = new CM5
+    internal_hdmi_connector = new HDMIConnectorVerticalWithESDProtection
+    internal_usb_connector = new USB2_0ConnectorVerticalWithESDProtection
 
     regulator_5v = new TPS54560x
     regulator_3v3 = new TLV75901_driver
     pd_controller = new STUSB4500
     
     dsp = new Analog_Devices_ADAU145x_driver
-    mems_microphone = new TDK_InvenSense_ICS_43434_driver
-    adc = new Texas_Instruments_PCM1865_driver
-    dac = new Texas_Instruments_PCM1789_driver
+    mems_microphone = new TDK_InvenSense_MMICT390200012[4]
+    codec= new Analog_Devices_AD1938_driver
 
     balanced_out_left_connector = new AudioBalancedXLR3JackReceptacle
     balanced_out_right_connector = new AudioBalancedXLR3JackReceptacle
@@ -44,66 +60,212 @@ module App:
     mode_button = new Button
     
     i2c_connector = new QwiicVertical_driver
+
+    oled = new OLED12832
+    dsp_knob = new PotentiometerWithRGBLED[6]
+    # level_shifter = new level shifter    
     
-    oled = new OLED
-    output_gain_knob = new Potentiometer
-    i2s_connector = new I2SConnector
+    #i2s_connector = new I2SConnector
+    spdif_out_connector = new Male_2_54mm_1x3P_TH[2]
 
-module MonoXLRInput:
-    input_connector = new XLR
-    output = new I2S
+    debug_headers = new SaleaeHeader[9]
 
-module StereoRCAOutput:
-    input = new I2S
-    output_connector_left = new RCA
-    output_connector_right = new RCA
+    # --- Power rails ---
+    power_20v = new ElectricPower
+    power_5v = new ElectricPower
+    power_5v.voltage = 5V +/- 5%
+    power_3v3 = new ElectricPower
+    power_3v3.voltage = 3.3V +/- 5%
 
-module StereoXLRInput:
-    input_connector_left = new XLR
-    input_connector_right = new XLR
-    output = new I2S
+    # --- Other ---
+    pd_controller.i2c.address = 0x28 # Why is this here? Should be in package
 
-module StereoXLROutput:
-    input = new I2S
-    output_connector_left = new XLR
-    output_connector_right = new XLR
+    # --- Internal interfaces ---
+    cm5_i2s = new I2S
+    cm5_i2s.sck ~ cm5.cm5.gpio[18]
+    cm5_i2s.ws ~ cm5.cm5.gpio[19]
+    cm5_i2s.sd ~ cm5.cm5.gpio[21]
+    cm5_i2s ~ dsp.model.i2s_ins[0]
+    #dsp.model.i2s_outs[0] ~ amplifier.i2s
 
-module MonoXLROutput:
-    input = new I2S
-    output_connector = new XLR
+    i2c = new I2C[2]
+    cm5.i2cs[0] ~ i2c[0]
+    cm5.i2cs[1] ~ i2c[1]
 
-module BalancedToI2S:
-    input = new XLRInterface
-    output = new I2S
+    # --- Connections ---
+    # Power supply connections
+    pd_controller.power_out ~ power_20v
+    power_20v ~> regulator_5v ~> power_5v
+    power_5v ~> regulator_3v3 ~> power_3v3
 
-    protection = new Protection
-    amp = new OpAmp
-    adc = new ADC
+    # Power for devices
+    power_5v ~ cm5.power_5v
+    power_5v ~ oled.power_5v
+    power_5v ~ internal_hdmi_connector.hdmi.power
+    for knob in dsp_knob:
+        power_5v ~ knob.led_power
 
-    #todo: do we need a buffer here?
-    input ~> protection ~> amp ~> adc ~> output
+    power_3v3 ~ dsp.power
+    power_3v3 ~ pd_controller.power_mcu
+    power_3v3 ~ oled.power_3v3
+    power_3v3 ~ i2c_connector.power
+    power_3v3 ~ codec.power
+    
+    for microphone in mems_microphone:
+        power_3v3 ~ microphone.power
 
-module I2SToBalanced:
-    input = new I2S
-    output = new XLRInterface
+    # dsp
 
-    protection = new Protection
-    amp = new OpAmp
-    adc = new DAC
+    dsp.model.aux_adc_inputs[0] ~ dsp_knob[0].potentiometer_wiper
+    dsp.model.aux_adc_inputs[1] ~ dsp_knob[1].potentiometer_wiper
+    dsp.model.aux_adc_inputs[2] ~ dsp_knob[2].potentiometer_wiper
+    dsp.model.aux_adc_inputs[3] ~ dsp_knob[3].potentiometer_wiper
+    dsp.model.aux_adc_inputs[4] ~ dsp_knob[4].potentiometer_wiper
+    dsp.model.aux_adc_inputs[5] ~ dsp_knob[5].potentiometer_wiper
+    for knob in dsp_knob:
+        knob.potentiometer_high ~ dsp.model.power_analog.hv
+        knob.potentiometer_low ~ dsp.model.power_analog.lv
+        knob.potentiometer_wiper.reference ~ dsp.model.power_analog
+    
+    # knob leds
+    #cm5.cm5.gpio[23] ~> # TODO: add level shifter
+    tmp_led_data_line = new ElectricLogic
+    tmp_led_data_line ~> dsp_knob[0] ~> dsp_knob[1] ~> dsp_knob[2] ~> dsp_knob[3] ~> dsp_knob[4] ~> dsp_knob[5]
 
-    #todo: do we need a buffer here?
-    input ~> protection ~> amp ~> adc ~> output
+    #cm5.cm5.hdmi0 ~ internal_hdmi_connector.hdmi
+    cm5.usb2 ~ internal_usb_connector.usb
 
-module ADC:
-    # PCM186x
-    pass
+    # i2c
+    i2c[0] ~ i2c_connector.i2c
+    i2c[0] ~ dsp.model.i2c
+    i2c[0] ~ pd_controller.i2c
+    i2c[0] ~ oled.i2c
 
-module I2S:
-    pass
+    # spi
+    cm5.spi0 ~ codec.model.spi
+    cm5.cm5.gpio[20] ~ codec.model.spi_cs # TODO: which pin?
 
-component DAC:
-    # TAD5242
-    pass
+    # i2s
+    dsp.model.i2s_ins[2] ~ cm5_i2s
+    dsp.model.i2s_ins[0] ~ codec.model.i2s_outs[0] # channel 0 on the codec is used for wordselect and clock
+    dsp.model.i2s_ins[1] ~ codec.model.i2s_outs[1] # data only
+    dsp.model.i2s_outs[0] ~ codec.model.i2s_ins[0] # channel 0 on the codec is used for wordselect and clock
+    dsp.model.i2s_outs[1] ~ codec.model.i2s_ins[1] # data only
+    dsp.model.i2s_outs[2] ~ codec.model.i2s_ins[2] # data only
+    dsp.model.i2s_outs[3] ~ codec.model.i2s_ins[3] # data only
 
-component Protection:
-    pass
+    # clock
+    dsp_clock_out_resistor = new Resistor # What purpose ??
+    dsp.model.pll_clock_out ~> dsp_clock_out_resistor ~> codec.model.pll_clock_in
+    #codec.master_clock ~ cm5_i2s.sck #TODO: where to connect?
+    
+    # reset
+    dsp.reset_disable ~ cm5.cm5.gpio[20]  # TODO: which pin?
+    codec.reset_disable ~ cm5.cm5.gpio[20]
+    
+    # pdm microphones
+    # using gpio 6 and 7 for pdm data
+    # each pdm channel has 1 mic on right-channel and 1 on left-channel
+    # using i2s_out[3] clock for pdm clock
+    dsp_pdm = new PDM[2]
+    dsp.model.gpios[6] ~ dsp_pdm[0].data
+    dsp.model.gpios[7] ~ dsp_pdm[1].data
+    for pdm in dsp_pdm:
+        dsp.model.i2s_outs[3].sck ~ pdm.clock
+    dsp_pdm[0] ~ mems_microphone[0].pdm
+    dsp_pdm[1] ~ mems_microphone[1].pdm
+    dsp_pdm[0] ~ mems_microphone[2].pdm
+    dsp_pdm[1] ~ mems_microphone[3].pdm
+    for microphone in mems_microphone[:2]:
+        power_3v3.hv ~ microphone.pdm.select.line
+    for microphone in mems_microphone[2:]:
+        power_3v3.lv ~ microphone.pdm.select.line
+
+    # SPDIF
+    dsp.model.spdif_in.line ~ spdif_out_connector[0].pins[0]
+    dsp.model.spdif_in.reference.hv ~ spdif_out_connector[0].pins[1]
+    dsp.model.spdif_in.reference.lv ~ spdif_out_connector[0].pins[2]
+    dsp.model.spdif_out.line ~ spdif_out_connector[1].pins[0]
+    dsp.model.spdif_out.reference.hv ~ spdif_out_connector[1].pins[1]
+    dsp.model.spdif_out.reference.lv ~ spdif_out_connector[1].pins[2]
+
+    # --- Debug headers ---
+    i2c[0].scl ~ debug_headers[0].channels[0]
+    i2c[0].sda ~ debug_headers[0].channels[1]
+    i2c[1].scl ~ debug_headers[0].channels[2]
+    i2c[1].sda ~ debug_headers[0].channels[3]
+    i2c[0].scl.reference.lv ~ debug_headers[0].gnd
+    
+    #cm5.cm5.hdi_a.pins[17] ~ debug_headers[1].channels[2].line # Ethernet sync_out
+
+    dsp.model.i2s_ins[0].sck ~ debug_headers[1].channels[0]
+    dsp.model.i2s_ins[0].ws ~ debug_headers[1].channels[1]
+    dsp.model.i2s_ins[0].sd ~ debug_headers[1].channels[2]
+    dsp.model.i2s_ins[0].sck.reference.lv ~ debug_headers[1].gnd
+    
+    dsp.model.i2s_ins[1].sck ~ debug_headers[2].channels[0]
+    dsp.model.i2s_ins[1].ws ~ debug_headers[2].channels[1]
+    dsp.model.i2s_ins[1].sd ~ debug_headers[2].channels[2]
+    dsp.model.i2s_ins[1].sck.reference.lv ~ debug_headers[2].gnd
+    
+    dsp.model.i2s_ins[2].sck ~ debug_headers[3].channels[0]
+    dsp.model.i2s_ins[2].ws ~ debug_headers[3].channels[1]
+    dsp.model.i2s_ins[2].sd ~ debug_headers[3].channels[2]
+    dsp.model.i2s_ins[2].sck.reference.lv ~ debug_headers[3].gnd
+    
+    dsp.model.i2s_ins[3].sck ~ debug_headers[4].channels[0]
+    dsp.model.i2s_ins[3].ws ~ debug_headers[4].channels[1]
+    dsp.model.i2s_ins[3].sd ~ debug_headers[4].channels[2]
+    dsp.model.i2s_ins[3].sck.reference.lv ~ debug_headers[4].gnd
+
+    dsp.model.i2s_outs[0].sck ~ debug_headers[5].channels[0]
+    dsp.model.i2s_outs[0].ws ~ debug_headers[5].channels[1]
+    dsp.model.i2s_outs[0].sd ~ debug_headers[5].channels[2]
+    dsp.model.i2s_outs[0].sck.reference.lv ~ debug_headers[5].gnd
+    
+    dsp.model.i2s_outs[1].sck ~ debug_headers[6].channels[0]
+    dsp.model.i2s_outs[1].ws ~ debug_headers[6].channels[1]
+    dsp.model.i2s_outs[1].sd ~ debug_headers[6].channels[2]
+    dsp.model.i2s_outs[1].sck.reference.lv ~ debug_headers[6].gnd
+    
+    dsp.model.i2s_outs[2].sck ~ debug_headers[7].channels[0]
+    dsp.model.i2s_outs[2].ws ~ debug_headers[7].channels[1]
+    dsp.model.i2s_outs[2].sd ~ debug_headers[7].channels[2]
+    dsp.model.i2s_outs[2].sck.reference.lv ~ debug_headers[7].gnd
+    
+    dsp.model.i2s_outs[3].sck ~ debug_headers[8].channels[0]
+    dsp.model.i2s_outs[3].ws ~ debug_headers[8].channels[1]
+    dsp.model.i2s_outs[3].sd ~ debug_headers[8].channels[2]
+    dsp.model.i2s_outs[3].sck.reference.lv ~ debug_headers[8].gnd
+
+    # --- Custom net names ---
+    power_20v.vcc.override_net_name = "20v_vcc"
+    power_5v.vcc.override_net_name = "5v_vcc"
+    power_3v3.vcc.override_net_name = "3v3_vcc"
+    power_3v3.gnd.override_net_name = "gnd"
+
+    i2c[0].scl.line.override_net_name = "i2c0_scl"
+    i2c[0].sda.line.override_net_name = "i2c0_sda"
+    i2c[1].scl.line.override_net_name = "i2c1_scl"
+    i2c[1].sda.line.override_net_name = "i2c1_sda"
+    cm5_i2s.sck.line.override_net_name = "i2s_sck"
+    cm5_i2s.ws.line.override_net_name = "i2s_ws"
+    cm5_i2s.sd.line.override_net_name = "i2s_sd"
+    cm5.uart0.base_uart.tx.line.override_net_name = "uart0_tx"
+    cm5.uart0.base_uart.rx.line.override_net_name = "uart0_rx"
+    cm5.cm5.hdi_a.pins[17].override_net_name = "eth_sync_out"
+    cm5.boot_mode_switch.input.line.override_net_name = "boot_mode"
+    cm5.power_button_switch.input.line.override_net_name = "power_button"
+
+    cm5.cm5.hdmi0.data[0].p.line.override_net_name = "hdmi0_data0_p"
+    cm5.cm5.hdmi0.data[0].n.line.override_net_name = "hdmi0_data0_n"
+    cm5.cm5.hdmi0.data[1].p.line.override_net_name = "hdmi0_data1_p"
+    cm5.cm5.hdmi0.data[1].n.line.override_net_name = "hdmi0_data1_n"
+    cm5.cm5.hdmi0.data[2].p.line.override_net_name = "hdmi0_data2_p"
+    cm5.cm5.hdmi0.data[2].n.line.override_net_name = "hdmi0_data2_n"
+    cm5.cm5.hdmi0.cec.line.override_net_name = "hdmi0_cec"
+    cm5.cm5.hdmi0.hotplug.line.override_net_name = "hdmi0_hotplug_detect"
+    cm5.cm5.hdmi0.i2c.scl.line.override_net_name = "hdmi0_i2c_scl"
+    cm5.cm5.hdmi0.i2c.sda.line.override_net_name = "hdmi0_i2c_sda"
+
+    dsp.reset_disable.line.override_net_name = "dsp_reset_disable"

@@ -1,0 +1,38 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component Lian_Xin_Technology_XDHF_1901_0150_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C19186143", date="2025-07-15T17:56:33.912963+00:00", checksum="5e8575c4539a72a5c6ab33c988bdf2c9d64bab7fb65ce567faeb6cc0373acd70">
+
+    trait is_atomic_part<manufacturer="Lian Xin Technology", partnumber="XDHF-1901-0150", footprint="HDMI-SMD_XDHF-1901-0150.kicad_mod", symbol="XDHF-1901-0150.kicad_sym">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C19186143", manufacturer="Lian Xin Technology", partno="XDHF-1901-0150">
+    trait has_designator_prefix<prefix="U">
+
+    # pins
+    signal CEC ~ pin 13
+    signal DDC_CECGround ~ pin 17
+    signal EH ~ pin 21
+    EH ~ pin 20
+    EH ~ pin 22
+    signal HotPlugDetect ~ pin 19
+    signal P5VPowerpos ~ pin 18
+    signal ReservedN_C_ ~ pin 14
+    signal SCL ~ pin 15
+    signal SDA ~ pin 16
+    signal TMDSClockShield ~ pin 11
+    signal TMDSClockneg ~ pin 12
+    signal TMDSClockpos ~ pin 10
+    signal TMDSData0Shield ~ pin 8
+    signal TMDSData0neg ~ pin 9
+    signal TMDSData0pos ~ pin 7
+    signal TMDSData1Shield ~ pin 5
+    signal TMDSData1neg ~ pin 6
+    signal TMDSData1pos ~ pin 4
+    signal TMDSData2Shield ~ pin 2
+    signal TMDSData2neg ~ pin 3
+    signal TMDSData2pos ~ pin 1

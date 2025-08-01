@@ -1,0 +1,154 @@
+(footprint "STMicroelectronics_STPS340U:SMB_L4.6-W3.6-LS5.3-RD"
+    (layer "F.Cu")
+    (descr "")
+    (version 20241229)
+    (generator "faebryk")
+    (generator_version "v5")
+    (tedit "5DC5F6A4")
+    (property "Reference" "REF**"
+        (at 0 -4 0)
+        (layer "F.SilkS")
+        (hide no)
+        (uuid "93c33855-bab8-4406-bb5b-2acd51d44d51")
+        (effects
+            (font
+                (size 1 1)
+                (thickness 0.15)
+            )
+        )
+    )
+    (property "Value" "SMB_L4.6-W3.6-LS5.3-RD"
+        (at 0 4 0)
+        (layer "F.Fab")
+        (hide no)
+        (uuid "694dbc7a-2bea-4c10-afbe-9cffd0bcb3d4")
+        (effects
+            (font
+                (size 1 1)
+                (thickness 0.15)
+            )
+        )
+    )
+    (property "checksum" "faae0805f20240a277e5d4383bf42e1f0142a06c7e28947fc491375b056bcb14"
+        (at 0 0 0)
+        (layer "User.9")
+        (hide no)
+        (uuid "330661de-c89f-4b06-b063-84ad5f39645d")
+        (effects
+            (font
+                (size 0.125 0.125)
+                (thickness 0.01875)
+            )
+            (hide yes)
+        )
+    )
+    (attr smd)
+    (fp_line
+        (start -1.02 -1.89)
+        (end -1.02 1.89)
+        (stroke
+            (width 0.15)
+            (type solid)
+        )
+        (layer "F.SilkS")
+        (uuid "33a48ee1-0775-46f8-beb3-61c3d5dd3cb7")
+    )
+    (fp_line
+        (start -2.74 -1.89)
+        (end 2.74 -1.89)
+        (stroke
+            (width 0.15)
+            (type solid)
+        )
+        (layer "F.SilkS")
+        (uuid "d6bcd4f2-382e-4411-8b2b-f37d93d0f0be")
+    )
+    (fp_line
+        (start -2.74 1.89)
+        (end 2.74 1.89)
+        (stroke
+            (width 0.15)
+            (type solid)
+        )
+        (layer "F.SilkS")
+        (uuid "a229a32c-0179-484c-91ad-bf9f9f19244c")
+    )
+    (fp_line
+        (start 2.74 -1.89)
+        (end 2.74 -1.3)
+        (stroke
+            (width 0.15)
+            (type solid)
+        )
+        (layer "F.SilkS")
+        (uuid "1d1128db-b378-4e89-9857-15e612f9f7ca")
+    )
+    (fp_line
+        (start 2.74 1.89)
+        (end 2.74 1.3)
+        (stroke
+            (width 0.15)
+            (type solid)
+        )
+        (layer "F.SilkS")
+        (uuid "260802ab-0999-4f42-b18c-28e5cdc77b16")
+    )
+    (fp_circle
+        (center -2.65 1.8)
+        (end -2.62 1.8)
+        (stroke
+            (width 0.06)
+            (type solid)
+        )
+        (fill no)
+        (layer "F.Fab")
+        (uuid "3e794370-8975-4e89-a85a-136888ba2362")
+    )
+    (fp_text user "%R"
+        (at 0 0 0)
+        (layer "F.Fab")
+        (uuid "77d3737a-7450-4345-8751-b28f2df1c859")
+        (effects
+            (font
+                (size 1 1)
+                (thickness 0.15)
+            )
+        )
+        (unlocked no)
+    )
+    (fp_text user "${REFERENCE}"
+        (at 0 -4 0)
+        (layer "F.SilkS")
+        (uuid "93c33855-bab8-4406-bb5b-2acd51d44d51")
+        (effects
+            (font
+                (size 1 1)
+                (thickness 0.15)
+            )
+        )
+        (unlocked no)
+    )
+    (pad "2" smd rect
+        (at 2.36 0 0)
+        (size 2.05 2.19)
+        (layers "F.Cu" "F.Paste" "F.Mask")
+        (uuid "17c43a95-87d3-4574-a3b9-ea364feca869")
+    )
+    (pad "1" smd rect
+        (at -2.36 0 0)
+        (size 2.05 2.19)
+        (layers "F.Cu" "F.Paste" "F.Mask")
+        (uuid "21992ea2-1550-4c35-a039-5fc32d50f1f8")
+    )
+    (model "${KIPRJMOD}/../../parts/STMicroelectronics_STPS340U/SMB_L4.6-W3.6-LS5.3-RD.step"
+        (offset
+            (xyz 0 0 0)
+        )
+        (scale
+            (xyz 1 1 1)
+        )
+        (rotate
+            (xyz 0 0 0)
+        )
+    )
+)
