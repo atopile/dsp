@@ -1,0 +1,258 @@
+(footprint "Chau_Light_ZGY133_T8_PLT:OPTO-TH_ZGY133-T8-PLT"
+    (layer "F.Cu")
+    (descr "")
+    (version 20241229)
+    (generator "faebryk")
+    (generator_version "v5")
+    (tedit "5DC5F6A4")
+    (property "Reference" "REF**"
+        (at 0 -5.3100000000000005 0)
+        (layer "F.SilkS")
+        (hide no)
+        (uuid "9c78f0e9-9434-459c-bf98-2ab88c7c33e9")
+        (effects
+            (font
+                (size 1 1)
+                (thickness 0.15)
+            )
+        )
+    )
+    (property "Value" "OPTO-TH_ZGY133-T8-PLT"
+        (at 0 5.3100000000000005 0)
+        (layer "F.Fab")
+        (hide no)
+        (uuid "0a4c8ca0-0f7f-43b1-905c-fa2ea954ba5d")
+        (effects
+            (font
+                (size 1 1)
+                (thickness 0.15)
+            )
+        )
+    )
+    (property "checksum" "5238546e59843633be2ca9dcf4372f874573d665e3ea4c07ef868f4677ed3ed9"
+        (at 0 0 0)
+        (layer "User.9")
+        (hide no)
+        (uuid "b2ab7ce6-3011-4ec0-a3f2-e92684333c11")
+        (effects
+            (font
+                (size 0.125 0.125)
+                (thickness 0.01875)
+            )
+            (hide yes)
+        )
+    )
+    (attr through_hole)
+    (fp_line
+        (start 5.08 -10.04)
+        (end 5.08 3.69)
+        (stroke
+            (width 0.25)
+            (type solid)
+        )
+        (layer "F.SilkS")
+        (uuid "2cc8e538-2f18-4ce0-9707-ca4c578eeb9c")
+    )
+    (fp_line
+        (start -5 3.69)
+        (end -5 -10.04)
+        (stroke
+            (width 0.25)
+            (type solid)
+        )
+        (layer "F.SilkS")
+        (uuid "b5060d75-b791-464c-87d6-5e70857b617a")
+    )
+    (fp_line
+        (start -5 -10.04)
+        (end 5.08 -10.04)
+        (stroke
+            (width 0.25)
+            (type solid)
+        )
+        (layer "F.SilkS")
+        (uuid "e3c48a29-daf7-4714-bd11-219797aeab5e")
+    )
+    (fp_line
+        (start -5 3.69)
+        (end 5 3.69)
+        (stroke
+            (width 0.25)
+            (type solid)
+        )
+        (layer "F.SilkS")
+        (uuid "856ac455-4b48-4250-82ad-e435274ea4fc")
+    )
+    (fp_circle
+        (center 2.54 -1.31)
+        (end 2.79 -1.31)
+        (stroke
+            (width 0.5)
+            (type solid)
+        )
+        (fill no)
+        (layer "F.Fab")
+        (uuid "e5d4c282-cdaa-41b2-9086-9aee66ac8d59")
+    )
+    (fp_circle
+        (center -2.54 -1.31)
+        (end -2.29 -1.31)
+        (stroke
+            (width 0.5)
+            (type solid)
+        )
+        (fill no)
+        (layer "F.Fab")
+        (uuid "2cd68b56-f6a7-4d81-9f46-b4e87dd6e088")
+    )
+    (fp_circle
+        (center 2.54 1.31)
+        (end 2.72 1.31)
+        (stroke
+            (width 0.36)
+            (type solid)
+        )
+        (fill no)
+        (layer "F.Fab")
+        (uuid "0247fa8a-f931-429b-b205-d6a2f0dab855")
+    )
+    (fp_circle
+        (center 0 1.31)
+        (end 0.18 1.31)
+        (stroke
+            (width 0.36)
+            (type solid)
+        )
+        (fill no)
+        (layer "F.Fab")
+        (uuid "b363f0ce-dd4b-4398-884b-179cdde391b0")
+    )
+    (fp_circle
+        (center -2.54 1.31)
+        (end -2.36 1.31)
+        (stroke
+            (width 0.36)
+            (type solid)
+        )
+        (fill no)
+        (layer "F.Fab")
+        (uuid "016e8960-5788-4ee0-9d72-f4363488c5e9")
+    )
+    (fp_circle
+        (center 2.8 -3.93)
+        (end 3.2 -3.93)
+        (stroke
+            (width 0.8)
+            (type solid)
+        )
+        (fill no)
+        (layer "F.Fab")
+        (uuid "8af68798-ddd9-464d-b92a-c2fc5c96fbce")
+    )
+    (fp_circle
+        (center -2.8 -3.93)
+        (end -2.4 -3.93)
+        (stroke
+            (width 0.8)
+            (type solid)
+        )
+        (fill no)
+        (layer "F.Fab")
+        (uuid "13a294a0-0fd9-4c8f-80f2-126ecfbbc324")
+    )
+    (fp_circle
+        (center -5.13 3.82)
+        (end -5.1 3.82)
+        (stroke
+            (width 0.06)
+            (type solid)
+        )
+        (fill no)
+        (layer "F.Fab")
+        (uuid "f1d50532-707f-4457-b47c-75020fa4e19f")
+    )
+    (fp_text user "%R"
+        (at 0 0 0)
+        (layer "F.Fab")
+        (uuid "67ec2e2e-05c5-4da2-a69f-a972c2d01e68")
+        (effects
+            (font
+                (size 1 1)
+                (thickness 0.15)
+            )
+        )
+        (unlocked no)
+    )
+    (fp_text user "${REFERENCE}"
+        (at 0 -5.3100000000000005 0)
+        (layer "F.SilkS")
+        (uuid "9c78f0e9-9434-459c-bf98-2ab88c7c33e9")
+        (effects
+            (font
+                (size 1 1)
+                (thickness 0.15)
+            )
+        )
+        (unlocked no)
+    )
+    (pad "4" thru_hole circle
+        (at 2.54 -1.31 0)
+        (size 1.7 1.7)
+        (drill 1.1999975999999999)
+        (layers "*.Cu" "*.Mask")
+        (uuid "e0a69e4b-1375-4ff6-8c14-9d945e4a0c96")
+    )
+    (pad "5" thru_hole circle
+        (at -2.54 -1.31 0)
+        (size 1.7 1.7)
+        (drill 1.1999975999999999)
+        (layers "*.Cu" "*.Mask")
+        (uuid "0745ff10-d491-457f-babf-0c0a93b74aa5")
+    )
+    (pad "3" thru_hole circle
+        (at 2.54 1.31 0)
+        (size 1.52 1.52)
+        (drill 0.9144)
+        (layers "*.Cu" "*.Mask")
+        (uuid "12cdd63e-f9d1-46a8-bdc9-64f1f006bc3e")
+    )
+    (pad "2" thru_hole circle
+        (at 0 1.31 0)
+        (size 1.52 1.52)
+        (drill 0.9144)
+        (layers "*.Cu" "*.Mask")
+        (uuid "08cfc4ff-eacf-4742-b87d-343d089c4b96")
+    )
+    (pad "1" thru_hole circle
+        (at -2.54 1.31 0)
+        (size 1.52 1.52)
+        (drill 0.9144)
+        (layers "*.Cu" "*.Mask")
+        (uuid "6bf9207d-4f6e-4929-950c-7ab43ca58df1")
+    )
+    (pad "" thru_hole circle
+        (at 2.8 -3.93 0)
+        (size 1.8 1.8)
+        (drill 1.8)
+        (layers "*.Cu" "*.Mask")
+        (uuid "9d7cee46-9adb-4b5e-8db9-9df40edec595")
+    )
+    (pad "" thru_hole circle
+        (at -2.8 -3.93 0)
+        (size 1.8 1.8)
+        (drill 1.8)
+        (layers "*.Cu" "*.Mask")
+        (uuid "ad818ed9-4fca-466b-8275-c0b4db7418f2")
+    )
+    (model "${KIPRJMOD}/../../parts/Chau_Light_ZGY133_T8_PLT/OPTO-TH_ZGY133-T8-PLT.step"
+        (offset
+            (xyz 0 3.1 0)
+        )
+        (scale
+            (xyz 1 1 1)
+        )
+        (rotate
+            (xyz 0 0 0)
+        )
+    )
+)

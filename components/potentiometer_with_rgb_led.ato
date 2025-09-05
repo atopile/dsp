@@ -1,0 +1,41 @@
+#pragma experiment("TRAITS")
+import Potentiometer
+import ElectricPower
+import ElectricLogic
+import ElectricSignal
+import Electrical
+import can_bridge_by_name
+
+from "parts/ALPSALPINE_RK09K1130D62/ALPSALPINE_RK09K1130D62.ato" import ALPSALPINE_RK09K1130D62_package
+from "atopile/addressable-leds/sk6805-ec20.ato" import SK6805EC20_driver
+
+module PotentiometerWithRGBLED:
+    """
+    Potentiometer with addressable RGB LED below the shaft
+    """
+    package = new ALPSALPINE_RK09K1130D62_package
+    # potentiometer = new Potentiometer
+    led = new SK6805EC20_driver
+
+    # --- External interfaces ---
+    potentiometer_high = new Electrical
+    potentiometer_low = new Electrical
+    potentiometer_wiper = new ElectricSignal
+    potentiometer_wiper.required = True
+
+    led_power = new ElectricPower
+    led_data_in = new ElectricLogic
+    led_data_in.required = True
+    led_data_out = new ElectricLogic
+
+    package.1 ~ potentiometer_high
+    package.2 ~ potentiometer_wiper.line
+    package.3 ~ potentiometer_low
+    package.4 ~ led_power.lv
+    package.5 ~ led_power.lv
+
+    led.power ~ led_power
+    led.data_in ~ led_data_in
+    led.data_out ~ led_data_out
+
+    trait can_bridge_by_name<input_name="led_data_in", output_name="led_data_out">

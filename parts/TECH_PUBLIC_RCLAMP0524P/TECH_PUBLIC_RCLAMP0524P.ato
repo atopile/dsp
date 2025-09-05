@@ -1,0 +1,28 @@
+#pragma experiment("TRAITS")
+import has_datasheet_defined
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component TECH_PUBLIC_RCLAMP0524P_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C907837", date="2025-07-15T17:44:36.628037+00:00", checksum="6e8dc528bb6ad11dbd4cfaa16e138c46b4a2093a473f6e09402d26520d530be9">
+
+    trait is_atomic_part<manufacturer="TECH PUBLIC", partnumber="RCLAMP0524P", footprint="DFN2510-10_L2.5-W1.0-P0.50-BL.kicad_mod", symbol="RCLAMP0524P_C907837.kicad_sym", model="DFN-10_L2.5-W1.0-H0.5-P0.50.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C907837", manufacturer="TECH PUBLIC", partno="RCLAMP0524P">
+    trait has_designator_prefix<prefix="D">
+    trait has_datasheet_defined<datasheet="https://lcsc.com/datasheet/lcsc_datasheet_2108131930_TECH-PUBLIC-RCLAMP0524P_C907837.pdf">
+
+    # pins
+    signal GND ~ pin 3
+    GND ~ pin 8
+    signal I_O1 ~ pin 1
+    I_O1 ~ pin 10
+    signal I_O2 ~ pin 2
+    I_O2 ~ pin 9
+    signal I_O3 ~ pin 4
+    I_O3 ~ pin 7
+    signal I_O4 ~ pin 5
+    I_O4 ~ pin 6

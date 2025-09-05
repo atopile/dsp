@@ -1,0 +1,78 @@
+#pragma experiment("FOR_LOOP")
+#pragma experiment("BRIDGE_CONNECT")
+import HDMI
+import Electrical
+import DifferentialPair
+import Resistor
+
+from "parts/Lian_Xin_Technology_XDHF_1901_0150/Lian_Xin_Technology_XDHF_1901_0150.ato" import Lian_Xin_Technology_XDHF_1901_0150_package
+from "parts/TECH_PUBLIC_RCLAMP0524P/TECH_PUBLIC_RCLAMP0524P.ato" import TECH_PUBLIC_RCLAMP0524P_package
+
+module _ESDProtection:
+    package = new TECH_PUBLIC_RCLAMP0524P_package
+
+    data = new DifferentialPair[2]
+    ground = new Electrical
+
+    package.GND ~ ground
+    package.I_O1 ~ data[0].p.line
+    package.I_O2 ~ data[0].n.line
+    package.I_O3 ~ data[1].p.line
+    package.I_O4 ~ data[1].n.line
+
+module HDMIConnectorVertical:
+    package = new Lian_Xin_Technology_XDHF_1901_0150_package
+
+    hdmi = new HDMI
+    shield = new Electrical
+
+    package.CEC ~ hdmi.cec.line
+    package.DDC_CECGround ~ hdmi.cec.reference.lv
+    package.EH ~ hdmi.power.lv
+    package.HotPlugDetect ~ hdmi.hotplug.line
+    package.P5VPowerpos ~ hdmi.power.hv
+    package.SCL ~ hdmi.i2c.scl.line
+    package.SDA ~ hdmi.i2c.sda.line
+    package.TMDSClockShield ~ hdmi.clock.p.reference.lv
+    package.TMDSClockneg ~ hdmi.clock.n.line
+    package.TMDSClockpos ~ hdmi.clock.p.line
+    package.TMDSData0Shield ~ hdmi.data[0].p.reference.lv
+    package.TMDSData0neg ~ hdmi.data[0].n.line
+    package.TMDSData0pos ~ hdmi.data[0].p.line
+    package.TMDSData1Shield ~ hdmi.data[1].p.reference.lv
+    package.TMDSData1neg ~ hdmi.data[1].n.line
+    package.TMDSData1pos ~ hdmi.data[1].p.line
+    package.TMDSData2Shield ~ hdmi.data[2].p.reference.lv
+    package.TMDSData2neg ~ hdmi.data[2].n.line
+    package.TMDSData2pos ~ hdmi.data[2].p.line
+
+module HDMIConnectorVerticalWithESDProtection:
+    connector = new HDMIConnectorVertical
+    esd_protection = new _ESDProtection[3]
+
+    hdmi = new HDMI
+
+    # --- I²C pull-up resistors ---
+    pullup_resistors = new Resistor[2]
+    for resistor in pullup_resistors:
+        resistor.value = 10k +/- 1%
+        resistor.package = "0402"
+    hdmi.i2c.scl.line ~> pullup_resistors[0] ~> hdmi.i2c.scl.reference.hv
+    hdmi.i2c.sda.line ~> pullup_resistors[1] ~> hdmi.i2c.sda.reference.hv
+
+    connector.hdmi ~ hdmi
+    connector.shield ~ hdmi.power.lv
+
+    for esdp in esd_protection:
+        esdp.ground ~ hdmi.power.lv
+
+    hdmi.data[2] ~ esd_protection[0].data[0]
+    hdmi.data[1] ~ esd_protection[0].data[1]
+    hdmi.data[0] ~ esd_protection[1].data[0]
+    hdmi.clock ~ esd_protection[1].data[1]
+
+    hdmi.i2c.scl ~ esd_protection[2].data[0].n
+    hdmi.i2c.sda ~ esd_protection[2].data[1].p
+
+    hdmi.cec ~ esd_protection[2].data[0].p
+    hdmi.hotplug ~ esd_protection[2].data[1].n

@@ -1,0 +1,23 @@
+#pragma experiment("TRAITS")
+import has_datasheet_defined
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component SHOU_HAN_AF_90__WJDG_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C456018", date="2025-07-15T18:36:13.217234+00:00", checksum="4466044a085e1216b326cbe0c1ed709ed27459fcf16b8da4a3a56b5469d896f6">
+
+    trait is_atomic_part<manufacturer="SHOU HAN", partnumber="AF 90° WJDG", footprint="USB-A-TH_AF-WJDG.kicad_mod", symbol="AF90°WJDG.kicad_sym", model="USB-A-TH_4P-L14.5-W14.0-H7.6-S2.71.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C456018", manufacturer="SHOU HAN", partno="AF 90° WJDG">
+    trait has_designator_prefix<prefix="USB">
+    trait has_datasheet_defined<datasheet="https://lcsc.com/datasheet/lcsc_datasheet_2411251528_SHOU-HAN-AF-90--WJDG_C456018.pdf">
+
+    # pins
+    signal Dneg ~ pin 2
+    signal Dpos ~ pin 3
+    signal GND ~ pin 4
+    signal SHLD ~ pin 5
+    signal VCC ~ pin 1
