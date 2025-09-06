@@ -1,0 +1,64 @@
+#pragma experiment("TRAITS")
+#pragma experiment("FOR_LOOP")
+#pragma experiment("BRIDGE_CONNECT")
+
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+import Capacitor
+import ElectricPower
+import Electrical
+import can_bridge_by_name
+
+
+component MW_IRM_30_5_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    # trait is_auto_generated<system="ato_part", source="easyeda:C6211074", date="2025-09-05T23:08:27.984499+00:00", checksum="f5f9447cf9887b81958c516dec225805eabe0b4180a48541eb99975435280011">
+
+    trait is_atomic_part<manufacturer="MW", partnumber="IRM-30-5", footprint="PWRM-TH_L69.5-W39.0_LD30-23B05R2.kicad_mod", symbol="IRM-30-5_C6211074.kicad_sym", model="PWRM-TH_L69.5-W39.0_LD30-23B05R2.STEP">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C6211074", manufacturer="MW", partno="IRM-30-5">
+    trait has_designator_prefix<prefix="U">
+
+    # pins
+    signal AC_N ~ pin 2
+    signal AL_L ~ pin 1
+    signal Vneg ~ pin 4
+    signal Vpos ~ pin 3
+
+
+module MW_IRM_30_5:
+    package = new MW_IRM_30_5_package
+
+    power_5v = new ElectricPower
+    power_ac = new ElectricPowerAC
+
+    assert power_5v.voltage is 5V +/- 2.5%
+
+    # Connections
+    power_ac.line ~ package.AL_L
+    power_ac.neutral ~ package.AC_N
+
+    power_5v.vcc ~ package.Vpos
+    power_5v.gnd ~ package.Vneg
+
+    decoupling_caps = new Capacitor[8]
+    for cap in decoupling_caps:
+        cap.capacitance = 22uF +/- 20%
+        cap.package = "0805"
+        assert cap.max_voltage >= power_5v.voltage * 2
+        power_5v.vcc ~> cap ~> power_5v.gnd
+
+    decoupling_caps_100nf = new Capacitor[3]
+    for cap in decoupling_caps_100nf:
+        cap.capacitance = 100nF +/- 20%
+        cap.package = "0402"
+        assert cap.max_voltage >= power_5v.voltage * 2
+        power_5v.vcc ~> cap ~> power_5v.gnd
+
+    trait can_bridge_by_name<input_name = "power_ac", output_name = "power_5v">
+
+interface ElectricPowerAC:
+    line = new Electrical
+    neutral = new Electrical

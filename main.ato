@@ -1,99 +1,146 @@
 #pragma experiment("BRIDGE_CONNECT")
+#pragma experiment("FOR_LOOP")
+#pragma experiment("TRAITS")
 
-"""Brand new atopile project!"""
+import ElectricPower
+import ElectricLogic
+import Resistor
+import I2C
+import can_bridge_by_name
 
-import DifferentialPair
+# Packages (unreleased) TODO: release these
+from "unreleased-packages/rj45-connectors/rj45-connectors.ato" import RJ45_Horizontal_TH_Magnetics_8Port
+from "unreleased-packages/realtek-rtl8305nb/realtek-rtl8305nb.ato" import Realtek_RTL8305NB
+from "unreleased-packages/rpi-cm5/cm5.ato" import CM5 # without rj45
+from "unreleased-packages/ti-tlv75901/ti-tlv75901.ato" import TLV75901_driver
+from "unreleased-packages/ti-tpsm863257/ti-tpsm863257.ato" import TPSM863257
+from "unreleased-packages/xlr-connectors/xlr-connectors.ato" import XLR_Male_PC_Mount, XLR_Female_PC_Mount
+
+
+# Packages
+from "atopile/usb-connectors/usb-connectors.ato" import USB2_0TypeCHorizontalConnector
+from "atopile/adi-adau145x/adau145x.ato" import Analog_Devices_ADAU145x_driver
+
+# Parts
+from "parts/MW_IRM_30_5/MW_IRM_30_5.ato" import MW_IRM_30_5, ElectricPowerAC
+from "parts/DIBO_DB2ERC_5_08_2P_BK/DIBO_DB2ERC_5_08_2P_BK.ato" import DIBO_DB2ERC_5_08_2P_BK_package                                                                                                                                                                                                                                                    
 
 module App:
-    dsp = new DSP
-    tops = new StereoXLROutput
-    subs = new MonoXLROutput[2]
-    mixer_output = new StereoXLRInput
-    mixer_input = new StereoRCAOutput
-    microphone_input = new MonoXLRInput # TODO: is this balanced?
-    mems_microphone = new MEMSMicrophone
-    rpi = new RPI # Ethernet included
-    usbc_pd = new USBC_PD
-    regulator_5v = new Regulator_5V
-    dmx = new DMXOut
-    oled = new OLED
-    mode_button = new Button
-    output_gain_knob = new Potentiometer
-    i2s_connector = new I2SConnector
-    i2c_connector = new QwiicConnector
 
-module MonoXLRInput:
-    input_connector = new XLR
-    output = new I2S
+    # --- Power supply ---
+    power_5v = new ElectricPower
+    power_3v3_digital = new ElectricPower
+    power_3v3_analog = new ElectricPower
+    connetor_ac = new DIBO_DB2ERC_5_08_2P_BK_package
 
-module StereoRCAOutput:
-    input = new I2S
-    output_connector_left = new RCA
-    output_connector_right = new RCA
+    regulator_ac_5v = new MW_IRM_30_5
+    regulator_3v3_analog = new TLV75901_driver
+    regulator_3v3_digital = new TPSM863257
 
-module StereoXLRInput:
-    input_connector_left = new XLR
-    input_connector_right = new XLR
-    output = new I2S
+    power_ac = new ElectricPowerAC
+    power_ac.line ~ connetor_ac.1
+    power_ac.neutral ~ connetor_ac.2
 
-module StereoXLROutput:
-    input = new I2S
-    output_connector_left = new XLR
-    output_connector_right = new XLR
+    power_ac ~> regulator_ac_5v ~> power_5v
+    power_5v ~> regulator_3v3_analog ~> power_3v3_analog
+    power_5v ~> regulator_3v3_digital ~> power_3v3_digital
 
-module MonoXLROutput:
-    input = new I2S
-    output_connector = new XLR
+    # --- Compute module ---
+    cm5 = new CM5
+    power_5v ~ cm5.power_5v
 
-module BalancedToI2S:
-    input = new XLRInterface
-    output = new I2S
+    # --- DSP ---
+    dsp = new Analog_Devices_ADAU145x_driver
+    power_3v3_digital ~ dsp.power
+    cm5.i2cs[0] ~ dsp.model.i2c
+    cm5.cm5.gpio[0] ~ dsp.reset_disable
 
-    protection = new Protection
-    amp = new OpAmp
-    adc = new ADC
+    # --- USB connector ---
+    usb_connector_horizontal = new USB2_0TypeCHorizontalConnector
+    power_5v ~ usb_connector_horizontal.usb.usb_if.buspower
+    cm5.usb2 ~ usb_connector_horizontal.usb
+    
+    # --- Ethernet ---
+    ports = new RJ45_Horizontal_TH_Magnetics_8Port
+    switches = new Realtek_RTL8305NB[3]
 
-    #todo: do we need a buffer here?
-    input ~> protection ~> amp ~> adc ~> output
+    ## Switch configuration
+    for switch in switches:
+        switch.power_3v3 ~ power_3v3_digital
 
-module I2SToBalanced:
-    input = new I2S
-    output = new XLRInterface
+    # I2C
+    i2c_resistor_jumpers = new I2CResistorJumper[3]
+    switches[0].i2c_mdio ~> i2c_resistor_jumpers[0] ~> cm5.i2cs[0]
+    switches[1].i2c_mdio ~> i2c_resistor_jumpers[1] ~> cm5.i2cs[1]
+    switches[2].i2c_mdio ~> i2c_resistor_jumpers[2] ~> cm5.i2cs[2]
 
-    protection = new Protection
-    amp = new OpAmp
-    adc = new DAC
+    i2c_pullups = new Resistor[6]
+    for i2c_pullup in i2c_pullups:
+        i2c_pullup.resistance = 10kohm +/- 1%
+        i2c_pullup.package = "0402"
 
-    #todo: do we need a buffer here?
-    input ~> protection ~> amp ~> adc ~> output
+    cm5.i2cs[0].scl.line ~> i2c_pullups[0] ~> cm5.i2cs[0].scl.reference.hv
+    cm5.i2cs[0].sda.line ~> i2c_pullups[1] ~> cm5.i2cs[0].sda.reference.hv
+    cm5.i2cs[1].scl.line ~> i2c_pullups[2] ~> cm5.i2cs[1].scl.reference.hv
+    cm5.i2cs[1].sda.line ~> i2c_pullups[3] ~> cm5.i2cs[1].sda.reference.hv
+    cm5.i2cs[2].scl.line ~> i2c_pullups[4] ~> cm5.i2cs[2].scl.reference.hv
+    cm5.i2cs[2].sda.line ~> i2c_pullups[5] ~> cm5.i2cs[2].sda.reference.hv
 
-module ADC:
-    # PCM186x
-    pass
+    # Reset
+    reset_resistor_jumpers = new LogicResistorJumper[3]
+    switches[0].reset ~> reset_resistor_jumpers[0] ~> cm5.cm5.gpio[0]
+    switches[1].reset ~> reset_resistor_jumpers[1] ~> cm5.cm5.gpio[1]
+    switches[2].reset ~> reset_resistor_jumpers[2] ~> cm5.cm5.gpio[2]
 
-module I2S:
-    pass
+    # Ports
+    ports.ethernet[0] ~ switches[0].ethernets[0]
+    ports.ethernet[2] ~ switches[0].ethernets[1]
+    ports.ethernet[4] ~ switches[0].ethernets[2]
+    ports.ethernet[6] ~ switches[0].ethernets[3]
+    ports.ethernet[1] ~ switches[1].ethernets[0]
+    ports.ethernet[3] ~ switches[1].ethernets[1]
+    ports.ethernet[5] ~ switches[1].ethernets[2]
+    ports.ethernet[7] ~ switches[1].ethernets[3]
 
-component RCA:
-    pass
+    # Internal Switch
+    switches[2].ethernets[0] ~ cm5.cm5.ethernet
+    switches[2].ethernets[1] ~ switches[0].ethernets[4]
+    switches[2].ethernets[2] ~ switches[0].ethernets[4]
 
-component XLR:
-    pass
+    # --- XLR Connectors ---
+    xlr_audio_input_connectors = new XLR_Female_PC_Mount[2]
+    xlr_audio_output_connectors = new XLR_Male_PC_Mount[8]
 
-component DSP:
-    pass
-
-component DAC:
-    # TAD5242
-    pass
-
-component Protection:
-    pass
-
-interface XLRInterface:
-    pass
-
-interface RCAInterface:
-    pass
+    # --- DMX Connectors ---
+    xlr_dmx_input_connector = new XLR_Male_PC_Mount
+    xlr_dmx_output_connector = new XLR_Female_PC_Mount
 
 
+module I2CResistorJumper:
+    i2c_in = new I2C
+    i2c_out = new I2C
+    resistors = new Resistor[2]
+
+    i2c_in.scl.line ~> resistors[0] ~> i2c_out.scl.line
+    i2c_in.sda.line ~> resistors[1] ~> i2c_out.sda.line
+
+    i2c_in.reference_shim ~ i2c_out.reference_shim
+
+    for resistor in resistors:
+        resistor.resistance = 0ohm
+        resistor.package = "0402"
+
+    trait can_bridge_by_name<input_name = "i2c_in", output_name = "i2c_out">
+
+module LogicResistorJumper:
+    logic_in = new ElectricLogic
+    logic_out = new ElectricLogic
+    resistor = new Resistor
+
+    logic_in.line ~> resistor ~> logic_out.line
+    logic_in.reference ~ logic_out.reference
+
+    resistor.resistance = 0ohm
+    resistor.package = "0402"
+    
+    trait can_bridge_by_name<input_name = "logic_in", output_name = "logic_out">
