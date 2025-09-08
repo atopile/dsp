@@ -30,3 +30,6 @@ dependencies:
 - type: registry
   identifier: atopile/adi-adau145x
   release: 0.1.5
+- type: registry
+  identifier: atopile/ti-tps54560x
+  release: 0.1.6

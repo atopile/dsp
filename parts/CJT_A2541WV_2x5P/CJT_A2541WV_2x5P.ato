@@ -1,0 +1,26 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component CJT_A2541WV_2x5P_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C225520", date="2025-09-06T02:42:13.907063+00:00", checksum="92e54ca44f054caa058807fb1e7986cfd6f0678dbe90d7dac275a543538e87eb">
+
+    trait is_atomic_part<manufacturer="CJT", partnumber="A2541WV-2x5P", footprint="HDR-TH_10P-P2.54-V-M-R2-C5-S2.54-1.kicad_mod", symbol="A2541WV-2X5P.kicad_sym", model="HDR-M-2.54_2x5.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C225520", manufacturer="CJT", partno="A2541WV-2x5P">
+    trait has_designator_prefix<prefix="U">
+
+    # pins
+    pin 1
+    pin 2
+    pin 3
+    pin 4
+    pin 5
+    pin 6
+    pin 7
+    pin 8
+    pin 9
+    pin 10
