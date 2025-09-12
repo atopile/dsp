@@ -1,0 +1,82 @@
+#pragma experiment("TRAITS")
+#pragma experiment("FOR_LOOP")
+#pragma experiment("BRIDGE_CONNECT")
+
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+import Regulator
+import Capacitor
+
+component Texas_Instruments_TPS7A4700RGWT_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C28286", date="2025-09-12T19:39:04.148554+00:00", checksum="bbe6ea5475b614902e6b8770f6c55092448bfc3cffbc873a88c9659a2bbf8607">
+
+    trait is_atomic_part<manufacturer="Texas Instruments", partnumber="TPS7A4700RGWT", footprint="VQFN-20_L5.0-W5.0-P0.65-TL-EP.kicad_mod", symbol="TPS7A4700RGWT.kicad_sym", model="VQFN-20_L5.0-W5.0-H1.0-P0.65.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C28286", manufacturer="Texas Instruments", partno="TPS7A4700RGWT">
+    trait has_designator_prefix<prefix="U">
+
+    # pins
+    signal EN ~ pin 13
+    signal EP ~ pin 21
+    signal GND ~ pin 7
+    signal IN ~ pin 15
+    IN ~ pin 16
+    signal NR ~ pin 14
+    signal OUT ~ pin 1
+    OUT ~ pin 20
+    signal P0P1V ~ pin 12
+    signal P0P2V ~ pin 11
+    signal P0P4V ~ pin 10
+    signal P0P8V ~ pin 9
+    signal P1P6V ~ pin 8
+    signal P3P2V ~ pin 6
+    signal P6P4V1 ~ pin 5
+    signal P6P4V2 ~ pin 4
+    signal SENSE_FB ~ pin 3
+
+
+component Texas_Instruments_TPS7A4700RGWT_18V from Regulator:
+    package = new Texas_Instruments_TPS7A4700RGWT_package
+    power_in.vcc ~ package.IN
+    power_in.gnd ~ package.GND
+    power_out.vcc ~ package.OUT
+    power_out.gnd ~ package.GND
+
+    # Configure for 18V output - Programming pins are ACTIVE LOW
+    # Target: 18V = 1.4V (reference) + 16.6V (from programming pins)
+    # Active low means: GND = voltage contribution, Open = 0V contribution
+    # Configuration: P0P2V=GND(200mV) + P0P4V=GND(400mV) + P0P8V=GND(800mV) + P3P2V=GND(3.2V) + P6P4V1=GND(6.4V) + P6P4V2=GND(6.4V)
+    # Total: 1.4V + 0.2V + 0.4V + 0.8V + 3.2V + 6.4V + 6.4V = 18.8V ≈ 18V
+    
+    # Connect voltage programming pins according to 18V configuration (active low)
+    package.P0P2V ~ package.GND  # 0P2V to GND (contributes 200mV)
+    package.P0P4V ~ package.GND  # 0P4V to GND (contributes 400mV)
+    package.P0P8V ~ package.GND  # 0P8V to GND (contributes 800mV)
+    package.P3P2V ~ package.GND  # 3P2V to GND (contributes 3.2V)
+    package.P6P4V1 ~ package.GND # 6P4V1 to GND (contributes 6.4V)
+    package.P6P4V2 ~ package.GND # 6P4V2 to GND (contributes 6.4V)
+    
+    # P0P1V and P1P6V left open (contribute 0V)
+    
+    # Enable and noise reduction
+    package.EN ~ power_in.vcc    # Enable the regulator
+    # NR and SENSE_FB can be left floating for basic operation
+    
+    # Set output voltage specification
+    assert power_out.voltage within 18V +/- 1%
+
+    # Capacitors
+    output_capacitor = new Capacitor[2]
+    for cap in output_capacitor:
+        cap.capacitance = 22uF +/- 20%
+        cap.package = "0805"
+        power_out.hv ~> cap ~> power_out.lv
+    
+    # Input capacitors
+    input_capacitor = new Capacitor
+    input_capacitor.capacitance = 10uF +/- 20%
+    input_capacitor.package = "0805"
+    power_in.hv ~> input_capacitor ~> power_in.lv

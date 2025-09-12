@@ -8,6 +8,9 @@ builds:
   default:
     entry: main.ato:App
     hide_designators: true
+  regulator_test:
+    entry: main.ato:RegulatorTest
+    hide_designators: true
 # This metadata is only required for publishing
 # Uncomment it and fill out the fields to publish your package
 # package:
@@ -21,15 +24,18 @@ builds:
 #   license: MIT license
 #   homepage: # fill me!
 dependencies:
-- type: registry
-  identifier: atopile/usb-connectors
-  release: 0.3.1
-- type: registry
-  identifier: atopile/rpi-cm5
-  release: 0.1.5
-- type: registry
-  identifier: atopile/adi-adau145x
-  release: 0.1.5
-- type: registry
-  identifier: atopile/ti-tps54560x
-  release: 0.1.6
+  - type: registry
+    identifier: atopile/usb-connectors
+    release: 0.3.1
+  - type: registry
+    identifier: atopile/rpi-cm5
+    release: 0.1.5
+  - type: registry
+    identifier: atopile/adi-adau145x
+    release: 0.1.5
+  - type: registry
+    identifier: atopile/ti-tps54560x
+    release: 0.1.6
+  - type: registry
+    identifier: atopile/ti-tlv75901
+    release: 0.3.0

@@ -7,7 +7,7 @@ import is_auto_generated
 component Murata_Electronics_GRM21BZ71A226ME15L_package:
     # This trait marks this file as auto-generated
     # If you want to manually change it, remove the trait
-    trait is_auto_generated<system="ato_part", source="easyeda:C907991", date="2025-09-06T01:03:20.460647+00:00", checksum="da9fab55e7f3ceeb2c3d934aad657cdece6051eae5bcf4571b9151d37f50bb12">
+    trait is_auto_generated<system="ato_part", source="easyeda:C907991", date="2025-09-12T19:27:07.213185+00:00", checksum="6f12acb631ac0570a4f8f0ca57d7c36ff4ff89a46f2cd17076b411cfb97f2aea">
 
     trait is_atomic_part<manufacturer="Murata Electronics", partnumber="GRM21BZ71A226ME15L", footprint="C0805.kicad_mod", symbol="GRM21BZ71A226ME15L.kicad_sym", model="C0805_L2.0-W1.3-H1.3.step">
     trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C907991", manufacturer="Murata Electronics", partno="GRM21BZ71A226ME15L">

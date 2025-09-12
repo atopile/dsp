@@ -7,7 +7,7 @@ import is_auto_generated
 component Sinhoo_SMTSO2515CTJ_package:
     # This trait marks this file as auto-generated
     # If you want to manually change it, remove the trait
-    trait is_auto_generated<system="ato_part", source="easyeda:C2915629", date="2025-09-05T23:51:16.060349+00:00", checksum="2d06b9d5170dd27ef3316116889710ad50b78ad1126ec47d13390d81b57347e9">
+    trait is_auto_generated<system="ato_part", source="easyeda:C2915629", date="2025-09-12T19:27:07.868805+00:00", checksum="d1cbdeba415a4b2b85591ef4cb2513b642bdb76ff067d07df288e933081c9939">
 
     trait is_atomic_part<manufacturer="Sinhoo", partnumber="SMTSO2515CTJ", footprint="SMD_BD5.6-D4.1.kicad_mod", symbol="SMTSO2515CTJ.kicad_sym", model="SMD_BD5.6-D4.1.STEP">
     trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C2915629", manufacturer="Sinhoo", partno="SMTSO2515CTJ">

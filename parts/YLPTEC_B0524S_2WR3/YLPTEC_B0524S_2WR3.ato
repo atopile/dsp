@@ -1,0 +1,37 @@
+#pragma experiment("TRAITS")
+#pragma experiment("BRIDGE_CONNECT")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+import Regulator
+import Capacitor
+
+component YLPTEC_B0524S_2WR3_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C5369477", date="2025-09-12T19:27:26.194140+00:00", checksum="aaed65dd52bc0279839d2ecb147b095770398c8001476c118559e0c409430b21">
+
+    trait is_atomic_part<manufacturer="YLPTEC", partnumber="B0524S-2WR3", footprint="PWRM-TH_IBXX05S-2WR3.kicad_mod", symbol="B0524S-2WR3_C5369477.kicad_sym", model="PWRM-TH_IBXX05S-2WR3.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C5369477", manufacturer="YLPTEC", partno="B0524S-2WR3">
+    trait has_designator_prefix<prefix="U">
+
+    # pins
+    signal VINneg ~ pin 2
+    signal VINpos ~ pin 1
+    signal VOUTneg ~ pin 4
+    signal VOUTpos ~ pin 6
+
+
+module YLPTEC_B0524S_2WR3 from Regulator:
+    package = new YLPTEC_B0524S_2WR3_package
+
+    power_in.vcc ~ package.VINpos
+    power_in.gnd ~ package.VINneg
+    power_out.vcc ~ package.VOUTpos
+    power_out.gnd ~ package.VOUTneg
+
+    output_capacitor = new Capacitor
+    output_capacitor.capacitance = 10uF +/- 20%
+    output_capacitor.package = "0805"
+    power_out.hv ~> output_capacitor ~> power_out.lv

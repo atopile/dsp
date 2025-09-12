@@ -77,9 +77,13 @@ module TPSM863257 from AdjustableRegulator:
 
     # --- Feedback voltage divider ---
     # For adjustable output voltage
-    assert feedback_divider.r_bottom.resistance within 1kohm to 100kohm
+    # Constrain bottom resistor to reasonable values for current draw
+    assert feedback_divider.r_bottom.resistance within 10kohm +/- 1%
     feedback_divider.r_top.package = "R0402"
     feedback_divider.r_bottom.package = "R0402"
+    
+    # Set max current through divider to minimize power consumption
+    assert feedback_divider.max_current within 50uA +/- 20%
 
     # Connect feedback divider
     power_out ~ feedback_divider.power
