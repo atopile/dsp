@@ -8,9 +8,6 @@ builds:
   default:
     entry: main.ato:App
     hide_designators: true
-  regulator_test:
-    entry: main.ato:RegulatorTest
-    hide_designators: true
 # This metadata is only required for publishing
 # Uncomment it and fill out the fields to publish your package
 # package:

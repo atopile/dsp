@@ -33,14 +33,6 @@ from "parts/YLPTEC_B0524S_2WR3/YLPTEC_B0524S_2WR3.ato" import YLPTEC_B0524S_2WR3
 from "parts/Texas_Instruments_TPS7A4700RGWT/Texas_Instruments_TPS7A4700RGWT.ato" import Texas_Instruments_TPS7A4700RGWT_18V
 
 
-module RegulatorTest:
-    regulator = new TLV75901_driver
-    power_5v = new ElectricPower
-    power_3v3 = new ElectricPower
-    power_5v ~> regulator ~> power_3v3
-
-    regulator.output_voltage = 3.3V +/- 4%
-
 module App:
 
     # --- Power supply ---
@@ -185,8 +177,6 @@ module App:
     cm5_i2s_master ~ dsp.model.i2s_ins[0]
     cm5_i2s_slave ~ dsp.model.i2s_outs[0]
 
-
-    
 
     # dsp.model.i2s_outs[1] ~ ad1938.model.
     reset_disable = new ElectricLogic
