@@ -36,3 +36,12 @@ dependencies:
   - type: registry
     identifier: atopile/ti-tlv75901
     release: 0.3.0
+  - type: registry
+    identifier: atopile/rj45-connectors
+    release: 0.1.2
+  - type: registry
+    identifier: atopile/adi-ad1938
+    release: 0.1.0
+  - type: registry
+    identifier: atopile/realtek-rtl8305nb
+    release: 0.1.2
