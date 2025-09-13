@@ -80,3 +80,44 @@ component Texas_Instruments_TPS7A4700RGWT_18V from Regulator:
     input_capacitor.capacitance = 10uF +/- 20%
     input_capacitor.package = "0805"
     power_in.hv ~> input_capacitor ~> power_in.lv
+
+
+component Texas_Instruments_TPS7A4700RGWT_3V3 from Regulator:
+    package = new Texas_Instruments_TPS7A4700RGWT_package
+    power_in.vcc ~ package.IN
+    power_in.gnd ~ package.GND
+    power_out.vcc ~ package.OUT
+    power_out.gnd ~ package.GND
+
+    # Configure for 3.3V output - Programming pins are ACTIVE LOW
+    # Target: 3.3V = 1.4V (reference) + 1.9V (from programming pins)
+    # Active low means: GND = voltage contribution, Open = 0V contribution
+    # Configuration: P0P1V=GND(100mV) + P0P2V=GND(200mV) + P1P6V=GND(1.6V)
+    # Total: 1.4V + 0.1V + 0.2V + 1.6V = 3.3V
+    
+    # Connect voltage programming pins according to 3.3V configuration (active low)
+    package.P0P1V ~ package.GND  # 0P1V to GND (contributes 100mV)
+    package.P0P2V ~ package.GND  # 0P2V to GND (contributes 200mV)
+    package.P1P6V ~ package.GND  # 1P6V to GND (contributes 1.6V)
+    
+    # P0P4V, P0P8V, P3P2V, P6P4V1, P6P4V2 left open (contribute 0V)
+    
+    # Enable and noise reduction
+    package.EN ~ power_in.vcc    # Enable the regulator
+    # NR and SENSE_FB can be left floating for basic operation
+    
+    # Set output voltage specification
+    assert power_out.voltage within 3.3V +/- 1%
+
+    # Capacitors
+    output_capacitor = new Capacitor[2]
+    for cap in output_capacitor:
+        cap.capacitance = 22uF +/- 20%
+        cap.package = "0805"
+        power_out.hv ~> cap ~> power_out.lv
+    
+    # Input capacitors
+    input_capacitor = new Capacitor
+    input_capacitor.capacitance = 10uF +/- 20%
+    input_capacitor.package = "0805"
+    power_in.hv ~> input_capacitor ~> power_in.lv

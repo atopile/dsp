@@ -36,6 +36,7 @@ from "parts/DIBO_DB2ERC_5_08_2P_BK/DIBO_DB2ERC_5_08_2P_BK.ato" import DIBO_DB2ER
 from "parts/CJT_A2541WV_2x5P/CJT_A2541WV_2x5P.ato" import CJT_A2541WV_2x5P_package    
 from "parts/YLPTEC_B0524S_2WR3/YLPTEC_B0524S_2WR3.ato" import YLPTEC_B0524S_2WR3
 from "parts/Texas_Instruments_TPS7A4700RGWT/Texas_Instruments_TPS7A4700RGWT.ato" import Texas_Instruments_TPS7A4700RGWT_18V
+from "parts/Texas_Instruments_TPS7A4700RGWT/Texas_Instruments_TPS7A4700RGWT.ato" import Texas_Instruments_TPS7A4700RGWT_3V3
 
 
 
@@ -50,7 +51,7 @@ module App:
     connetor_ac = new DIBO_DB2ERC_5_08_2P_BK_package
 
     regulator_ac_5v = new MW_IRM_30_5
-    regulator_3v3_analog = new TLV75901_driver
+    regulator_3v3_analog = new Texas_Instruments_TPS7A4700RGWT_3V3
     regulator_3v3_digital = new TPSM863257
     regulator_24v_isolated_pos = new YLPTEC_B0524S_2WR3
     regulator_24v_isolated_neg = new YLPTEC_B0524S_2WR3
@@ -91,21 +92,21 @@ module App:
     power_5v ~ cm5.power_5v
 
     # TODO: cm5 I2S interface
-    cm5_i2s_resistor_jumpers = new Resistor[6]
+    cm5_i2s_resistor_jumpers = new LogicResistorJumper[6]
 
     for resistor in cm5_i2s_resistor_jumpers:
         resistor.resistance = 0ohm
         resistor.package = "0402"
 
-    cm5_i2s_master = new I2S
-    cm5_i2s_master.sck.line ~> cm5_i2s_resistor_jumpers[0] ~> cm5.cm5.gpio[18].line
-    cm5_i2s_master.ws.line ~> cm5_i2s_resistor_jumpers[1] ~> cm5.cm5.gpio[19].line
-    cm5_i2s_master.sd.line ~> cm5_i2s_resistor_jumpers[2] ~> cm5.cm5.gpio[21].line
+    cm5_i2s_output = new I2S
+    cm5_i2s_output.sck ~> cm5_i2s_resistor_jumpers[0] ~> cm5.cm5.gpio[18]
+    cm5_i2s_output.ws ~> cm5_i2s_resistor_jumpers[1] ~> cm5.cm5.gpio[19]
+    cm5_i2s_output.sd ~> cm5_i2s_resistor_jumpers[2] ~> cm5.cm5.gpio[21]
 
-    cm5_i2s_slave = new I2S
-    cm5_i2s_slave.sck.line ~> cm5_i2s_resistor_jumpers[3] ~> cm5.cm5.gpio[18].line
-    cm5_i2s_slave.ws.line ~> cm5_i2s_resistor_jumpers[4] ~> cm5.cm5.gpio[19].line
-    cm5_i2s_slave.sd.line ~> cm5_i2s_resistor_jumpers[5] ~> cm5.cm5.gpio[21].line
+    cm5_i2s_input = new I2S
+    cm5_i2s_input.sck ~> cm5_i2s_resistor_jumpers[3] ~> cm5.cm5.gpio[18]
+    cm5_i2s_input.ws ~> cm5_i2s_resistor_jumpers[4] ~> cm5.cm5.gpio[19]
+    cm5_i2s_input.sd ~> cm5_i2s_resistor_jumpers[5] ~> cm5.cm5.gpio[20]
 
 
     # --- DSP ---
@@ -164,19 +165,19 @@ module App:
     switches[2].reset ~> reset_resistor_jumpers[2] ~> cm5.cm5.gpio[2]
 
     # Ports
-    ports.ethernet[0] ~ switches[0].ethernets[0]
-    ports.ethernet[2] ~ switches[0].ethernets[1]
-    ports.ethernet[1] ~ switches[0].ethernets[2]
-    ports.ethernet[5] ~ switches[0].ethernets[3]
-    ports.ethernet[4] ~ switches[1].ethernets[0] # 4
+    ports.ethernet[0] ~ switches[0].ethernets[3]
+    ports.ethernet[1] ~ switches[0].ethernets[1]
+    ports.ethernet[2] ~ switches[1].ethernets[3]
     ports.ethernet[3] ~ switches[1].ethernets[1]
-    ports.ethernet[6] ~ switches[1].ethernets[2] # 6
-    ports.ethernet[7] ~ switches[1].ethernets[3]
+    ports.ethernet[4] ~ switches[0].ethernets[4]
+    ports.ethernet[5] ~ switches[0].ethernets[2]
+    ports.ethernet[6] ~ switches[1].ethernets[2]
+    ports.ethernet[7] ~ switches[1].ethernets[0]
 
     # Internal Switch
-    # switches[2].ethernets[0] ~ cm5.cm5.ethernet
-    switches[2].ethernets[1] ~ switches[0].ethernets[4]
-    switches[2].ethernets[2] ~ switches[0].ethernets[4]
+    switches[2].ethernets[4] ~ cm5.cm5.ethernet
+    switches[2].ethernets[3] ~ switches[0].ethernets[0]
+    switches[2].ethernets[2] ~ switches[1].ethernets[4]
 
     # --- XLR Connectors ---
     xlr_audio_input_connectors = new XLR_Female_PC_Mount[2]
@@ -189,7 +190,6 @@ module App:
     # --- AD1938 ---
     ad1938 = new Analog_Devices_AD1938_driver
     power_3v3_analog ~ ad1938.power
-
 
     # --- Audio chain ---
     # CM5 <-> DSP
