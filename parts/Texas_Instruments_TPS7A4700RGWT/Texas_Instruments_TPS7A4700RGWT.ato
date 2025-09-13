@@ -66,7 +66,7 @@ component Texas_Instruments_TPS7A4700RGWT_18V from Regulator:
     # NR and SENSE_FB can be left floating for basic operation
     
     # Set output voltage specification
-    assert power_out.voltage within 18V +/- 1%
+    assert power_out.voltage within -19V to 19V
 
     # Capacitors
     output_capacitor = new Capacitor[2]

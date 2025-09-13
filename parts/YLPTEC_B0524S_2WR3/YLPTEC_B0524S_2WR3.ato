@@ -6,6 +6,7 @@ import is_atomic_part
 import is_auto_generated
 import Regulator
 import Capacitor
+import can_bridge_by_name
 
 component YLPTEC_B0524S_2WR3_package:
     # This trait marks this file as auto-generated
@@ -35,3 +36,5 @@ module YLPTEC_B0524S_2WR3 from Regulator:
     output_capacitor.capacitance = 10uF +/- 20%
     output_capacitor.package = "0805"
     power_out.hv ~> output_capacitor ~> power_out.lv
+
+    trait can_bridge_by_name<input_name="power_in", output_name="power_out">

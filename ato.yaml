@@ -21,27 +21,30 @@ builds:
 #   license: MIT license
 #   homepage: # fill me!
 dependencies:
-  - type: registry
-    identifier: atopile/usb-connectors
-    release: 0.3.1
-  - type: registry
-    identifier: atopile/rpi-cm5
-    release: 0.1.5
-  - type: registry
-    identifier: atopile/adi-adau145x
-    release: 0.1.5
-  - type: registry
-    identifier: atopile/ti-tps54560x
-    release: 0.1.6
-  - type: registry
-    identifier: atopile/ti-tlv75901
-    release: 0.3.0
-  - type: registry
-    identifier: atopile/rj45-connectors
-    release: 0.1.2
-  - type: registry
-    identifier: atopile/adi-ad1938
-    release: 0.1.0
-  - type: registry
-    identifier: atopile/realtek-rtl8305nb
-    release: 0.1.2
+- type: registry
+  identifier: atopile/usb-connectors
+  release: 0.3.1
+- type: registry
+  identifier: atopile/rpi-cm5
+  release: 0.1.5
+- type: registry
+  identifier: atopile/adi-adau145x
+  release: 0.1.5
+- type: registry
+  identifier: atopile/ti-tps54560x
+  release: 0.1.6
+- type: registry
+  identifier: atopile/ti-tlv75901
+  release: 0.3.0
+- type: registry
+  identifier: atopile/rj45-connectors
+  release: 0.1.2
+- type: registry
+  identifier: atopile/adi-ad1938
+  release: 0.1.0
+- type: registry
+  identifier: atopile/realtek-rtl8305nb
+  release: 0.1.2
+- type: registry
+  identifier: atopile/ti-drv135
+  release: 0.1.0
