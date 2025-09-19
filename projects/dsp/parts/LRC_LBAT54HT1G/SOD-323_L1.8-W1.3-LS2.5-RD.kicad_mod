@@ -1,0 +1,137 @@
+(footprint "LRC_LBAT54HT1G:SOD-323_L1.8-W1.3-LS2.5-RD"
+	(version 20241229)
+	(generator "faebryk_convert")
+	(generator_version "v5")
+	(layer "F.Cu")
+	(tedit "5DC5F6A4")
+	(uuid "d54ebc82-9a4e-4849-8fad-4d36621e59b5")
+	(property "Reference" "REF**"
+		(at 0 -4)
+		(layer "F.SilkS")
+		(uuid "f9fe5b79-f198-4660-8863-c7005b48430e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "SOD-323_L1.8-W1.3-LS2.5-RD"
+		(at 0 4)
+		(layer "F.Fab")
+		(uuid "cb5b19f4-0050-4311-9660-d057c227f38a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_circle
+		(center -1.22 0.65)
+		(end -1.19 0.65)
+		(stroke
+			(width 0.06)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(locked no)
+		(uuid "8d537570-8072-479f-ace6-b3c266204cf8")
+	)
+	(fp_line
+		(start 0.91 0.73)
+		(end 0.91 0.52)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "4c5f20b2-cb43-41f8-bc8f-606c78b82b33")
+	)
+	(fp_line
+		(start 0.91 -0.73)
+		(end 0.91 -0.53)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "d4d064ca-6b1e-4dab-95fc-e5ca63b137ac")
+	)
+	(fp_line
+		(start -0.85 -0.73)
+		(end 0.91 -0.73)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "306c6ac7-add5-4bd5-b3e5-3e26e3f494f0")
+	)
+	(fp_line
+		(start -0.85 0.73)
+		(end 0.91 0.73)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "6c32a5ff-75dc-4264-91ae-ffc7f055e02e")
+	)
+	(fp_line
+		(start -0.44 -0.73)
+		(end -0.44 0.73)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "46e2c030-f1da-4001-94e7-04a790f89e4b")
+	)
+	(fp_text user "%R"
+		(at 0 0)
+		(layer "F.Fab")
+		(uuid "3d395a1a-6ed1-42d8-bff1-99e230fe4957")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "2" smd rect
+		(at 1.17 0 0)
+		(size 1 0.75)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "fdeeab11-3705-400d-b2bd-e984833677cb")
+	)
+	(pad "1" smd rect
+		(at -1.17 0 0)
+		(size 1 0.75)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "7804c1a2-1646-4ce9-a972-98c13b16fbba")
+	)
+	(model "${KIPRJMOD}/../../parts/LRC_LBAT54HT1G/2.STEP"
+		(offset
+			(xyz 0 0 -0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(embedded_fonts no)
+)
