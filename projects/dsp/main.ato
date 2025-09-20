@@ -84,6 +84,7 @@ module App:
     # --- DSP ---
     dsp = new Analog_Devices_ADAU145x_driver
     power_stage.power_3v3_digital ~ dsp.power
+    power_stage.power_3v3_digital ~ dsp.model.power_digital
     cm5.i2cs[0] ~ dsp.model.i2c
     cm5_dsp_i2c_pullups = new Resistor[2]
     for pullup in cm5_dsp_i2c_pullups:
@@ -179,6 +180,7 @@ module App:
     # --- AD1938 ---
     ad1938 = new Analog_Devices_AD1938_driver
     power_stage.power_3v3_analog ~ ad1938.power
+    power_stage.power_3v3_analog ~ ad1938.model.power_analog
     ad1938.reset_disable ~ cm5.gpios[17]
 
     # --- Audio chain ---
