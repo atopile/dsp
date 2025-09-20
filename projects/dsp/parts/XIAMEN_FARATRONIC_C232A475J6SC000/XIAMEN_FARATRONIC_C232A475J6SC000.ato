@@ -1,0 +1,18 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component XIAMEN_FARATRONIC_C232A475J6SC000_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C2762343", date="2025-09-19T23:16:50.812526+00:00", checksum="fe9372b694145009943995db21ffe5606ce45aced03e3c9d3a4050221bbfce9d">
+
+    trait is_atomic_part<manufacturer="XIAMEN FARATRONIC", partnumber="C232A475J6SC000", footprint="CAP-TH_L17.5-W8.5-P15.00-D0.8.kicad_mod", symbol="C232A475J6SC000.kicad_sym", model="CAP-TH_L17.5-W8.5-H13.5-P15.0.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C2762343", manufacturer="XIAMEN FARATRONIC", partno="C232A475J6SC000">
+    trait has_designator_prefix<prefix="U">
+
+    # pins
+    pin 2
+    pin 1

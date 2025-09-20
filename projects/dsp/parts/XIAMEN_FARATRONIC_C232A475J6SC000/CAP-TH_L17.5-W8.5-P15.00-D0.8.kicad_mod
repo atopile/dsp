@@ -1,0 +1,149 @@
+(footprint "XIAMEN_FARATRONIC_C232A475J6SC000:CAP-TH_L17.5-W8.5-P15.00-D0.8"
+	(version 20241229)
+	(generator "faebryk_convert")
+	(generator_version "v5")
+	(layer "F.Cu")
+	(tedit "5DC5F6A4")
+	(uuid "dd45b1ae-894d-4975-9d84-86d539ecb1a6")
+	(property "Reference" "REF**"
+		(at 0 -4)
+		(layer "F.SilkS")
+		(uuid "14f79ed6-e300-4db8-9451-e196804671b2")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "CAP-TH_L17.5-W8.5-P15.00-D0.8"
+		(at 0 4)
+		(layer "F.Fab")
+		(uuid "bd4f4415-b42c-47d3-a162-a896e83ef5d9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_circle
+		(center -8.75 4.25)
+		(end -8.72 4.25)
+		(stroke
+			(width 0.06)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(locked no)
+		(uuid "e2013435-60dc-4787-a76c-5f1a0f134739")
+	)
+	(fp_circle
+		(center -7.5 0)
+		(end -7.3 0)
+		(stroke
+			(width 0.4)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(locked no)
+		(uuid "d560c721-1144-4976-b66b-87da9f53b749")
+	)
+	(fp_circle
+		(center 7.5 0)
+		(end 7.7 0)
+		(stroke
+			(width 0.4)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(locked no)
+		(uuid "ed5771b7-8f8f-46e2-bb5d-32313d62543f")
+	)
+	(fp_line
+		(start -8.8 -4.3)
+		(end 8.8 -4.3)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "bb9167fb-8939-4c90-829a-099e07293040")
+	)
+	(fp_line
+		(start -8.8 4.3)
+		(end 8.8 4.3)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "318e9dfa-aafe-4227-98ec-851e8ed023a2")
+	)
+	(fp_line
+		(start -8.8 -4.3)
+		(end -8.8 4.3)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "15768d8a-8bc0-4a40-85e4-cb296f27a258")
+	)
+	(fp_line
+		(start 8.8 -4.3)
+		(end 8.8 4.3)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "e16daa02-e918-4416-a1ca-3ed80047fba7")
+	)
+	(fp_text user "%R"
+		(at 0 0)
+		(layer "F.Fab")
+		(uuid "5b32c8fa-7272-42f0-9623-e08150a79888")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -7.5 0 0)
+		(size 1.8 1.8)
+		(drill 0.999998)
+		(layers "*.Cu" "*.Mask")
+		(uuid "c80ba252-66a9-4ff4-a6f0-cdb6b44bbec3")
+	)
+	(pad "2" thru_hole circle
+		(at 7.5 0 0)
+		(size 1.8 1.8)
+		(drill 0.999998)
+		(layers "*.Cu" "*.Mask")
+		(uuid "a3a55f7d-d593-4682-bb43-86f875f00ee8")
+	)
+	(model "${KIPRJMOD}/../../parts/XIAMEN_FARATRONIC_C232A475J6SC000/CAP-TH_L17.5-W8.5-H13.5-P15.0.step"
+		(offset
+			(xyz 0 -0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(embedded_fonts no)
+)

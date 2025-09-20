@@ -14,7 +14,7 @@ import Diode
 import ElectricSignal
 
 # Packages (unreleased) TODO: release these
-from "atopile/rpi-cm5/cm5.ato" import CM5 # without rj45
+from "atopile/rpi-cm5/rpi-cm5.ato" import RPI_CM5 # without rj45
 from "atopile/xlr-connectors/xlr-connectors.ato" import XLR_Male_PC_Mount
 from "atopile/xlr-connectors/xlr-connectors.ato" import XLR_Female_PC_Mount
 from "atopile/ti-tpsm863257/ti-tpsm863257.ato" import TPSM863257
@@ -38,11 +38,193 @@ from "parts/YLPTEC_B0524S_2WR3/YLPTEC_B0524S_2WR3.ato" import YLPTEC_B0524S_2WR3
 from "parts/Texas_Instruments_TPS7A4700RGWT/Texas_Instruments_TPS7A4700RGWT.ato" import Texas_Instruments_TPS7A4700RGWT_18V
 from "parts/Texas_Instruments_TPS7A4700RGWT/Texas_Instruments_TPS7A4700RGWT.ato" import Texas_Instruments_TPS7A4700RGWT_3V3
 
+interface SMI:
+    mdc = new ElectricLogic
+    mdio = new ElectricLogic
 
+    mdc.reference ~ mdio.reference
+
+module SMIBitbang:
+    gpios = new ElectricLogic[2]
+    smi = new SMI
+
+    gpios[0] ~ smi.mdc
+    gpios[1] ~ smi.mdio
+
+module I2CSMIDualFunction:
+    i2c = new I2C
+    smi = new SMI
+
+    i2c.scl ~ smi.mdc
+    i2c.sda ~ smi.mdio
+
+    trait can_bridge_by_name<input_name = "i2c", output_name = "smi">
 
 module App:
+    power_stage = new PowerStage
 
-    # --- Power supply ---
+    # --- Compute module ---
+    cm5 = new RPI_CM5
+    power_stage.power_5v ~ cm5.power_5v
+
+    # TODO: cm5 I2S interface
+    cm5_i2s_resistor_jumpers = new LogicResistorJumper[6]
+
+    cm5_i2s_output = new I2S
+    cm5_i2s_output.sck ~> cm5_i2s_resistor_jumpers[0] ~> cm5.i2s_output.sck
+    cm5_i2s_output.ws ~> cm5_i2s_resistor_jumpers[1] ~> cm5.i2s_output.ws
+    cm5_i2s_output.sd ~> cm5_i2s_resistor_jumpers[2] ~> cm5.i2s_output.sd
+
+    cm5_i2s_input = new I2S
+    cm5_i2s_input.sck ~> cm5_i2s_resistor_jumpers[3] ~> cm5.i2s_input.sck
+    cm5_i2s_input.ws ~> cm5_i2s_resistor_jumpers[4] ~> cm5.i2s_input.ws
+    cm5_i2s_input.sd ~> cm5_i2s_resistor_jumpers[5] ~> cm5.i2s_input.sd
+
+
+    # --- DSP ---
+    dsp = new Analog_Devices_ADAU145x_driver
+    power_stage.power_3v3_digital ~ dsp.power
+    cm5.i2cs[0] ~ dsp.model.i2c
+    cm5_dsp_i2c_pullups = new Resistor[2]
+    for pullup in cm5_dsp_i2c_pullups:
+        pullup.resistance = 10kohm +/- 1%
+        pullup.package = "0402"
+    cm5.i2cs[0].scl.line ~> cm5_dsp_i2c_pullups[0] ~> cm5.i2cs[0].scl.reference.hv
+    cm5.i2cs[0].sda.line ~> cm5_dsp_i2c_pullups[1] ~> cm5.i2cs[0].sda.reference.hv
+
+
+    cm5.gpios[24] ~ dsp.reset_disable
+
+    dsp_debug_connector = new USBI_Debug_Header
+    dsp_debug_connector.i2c ~ dsp.model.i2c
+    dsp_debug_connector.n_reset ~ dsp.reset_disable
+    dsp_debug_connector.power.lv ~ power_stage.power_3v3_digital.lv  # GND
+
+    # --- Balanced audio line drivers ---
+    balanced_audio_line_drivers = new TI_DRV135_driver[8]
+    for driver in balanced_audio_line_drivers:
+        power_stage.power_18v_pos ~ driver.pos_power
+        power_stage.power_18v_neg ~ driver.neg_power
+
+    # --- USB connector ---
+    usb_connector_horizontal = new USB2_0TypeCHorizontalConnector
+    power_stage.power_5v ~ usb_connector_horizontal.usb.usb_if.buspower
+    cm5.usb2 ~ usb_connector_horizontal.usb
+    
+    # --- Ethernet ---
+    ports = new RJ45_Horizontal_TH_Magnetics_8Port
+    switches = new Realtek_RTL8305NB[3]
+
+    ## Switch configuration
+    for switch in switches:
+        switch.power_3v3 ~ power_stage.power_3v3_digital
+
+    # I2C
+    cm5_smi_bitbang = new SMIBitbang[3]
+    cm5_smi_bitbang[0].gpios[0] ~ cm5.gpios[2]
+    cm5_smi_bitbang[0].gpios[1] ~ cm5.gpios[3]
+    cm5_smi_bitbang[1].gpios[0] ~ cm5.gpios[12]
+    cm5_smi_bitbang[1].gpios[1] ~ cm5.gpios[13]
+    cm5_smi_bitbang[2].gpios[0] ~ cm5.gpios[22]
+    cm5_smi_bitbang[2].gpios[1] ~ cm5.gpios[23]
+
+    smi_hack_switches = new I2CSMIDualFunction[3]
+    smi_resistor_jumpers = new SMIResistorJumper[3]
+
+    switches[0].i2c_mdio ~> smi_hack_switches[0] ~> smi_resistor_jumpers[0] ~> cm5_smi_bitbang[0].smi
+    switches[1].i2c_mdio ~> smi_hack_switches[1] ~> smi_resistor_jumpers[1] ~> cm5_smi_bitbang[1].smi
+    switches[2].i2c_mdio ~> smi_hack_switches[2] ~> smi_resistor_jumpers[2] ~> cm5_smi_bitbang[2].smi
+
+    smi_pullups = new Resistor[6]
+    for smi_pullup in smi_pullups:
+        smi_pullup.resistance = 1.5kohm +/- 1% #TODO: verify value for smi pullups
+        smi_pullup.package = "0402"
+
+    cm5.i2cs[1].scl.line ~> smi_pullups[0] ~> cm5.i2cs[1].scl.reference.hv
+    cm5.i2cs[1].sda.line ~> smi_pullups[1] ~> cm5.i2cs[1].sda.reference.hv
+    cm5.i2cs[2].scl.line ~> smi_pullups[2] ~> cm5.i2cs[2].scl.reference.hv
+    cm5.i2cs[2].sda.line ~> smi_pullups[3] ~> cm5.i2cs[2].sda.reference.hv
+    cm5.i2cs[3].scl.line ~> smi_pullups[4] ~> cm5.i2cs[3].scl.reference.hv
+    cm5.i2cs[3].sda.line ~> smi_pullups[5] ~> cm5.i2cs[3].sda.reference.hv
+
+    # Reset
+    reset_resistor_jumpers = new LogicResistorJumper[3]
+    switches[0].reset ~> reset_resistor_jumpers[0] ~> cm5.gpios[25]
+    switches[1].reset ~> reset_resistor_jumpers[1] ~> cm5.gpios[26]
+    switches[2].reset ~> reset_resistor_jumpers[2] ~> cm5.gpios[27]
+
+    # Ports
+    ports.ethernet[0] ~ switches[0].ethernets[3]
+    ports.ethernet[1] ~ switches[0].ethernets[1]
+    ports.ethernet[2] ~ switches[1].ethernets[3]
+    ports.ethernet[3] ~ switches[1].ethernets[1]
+    ports.ethernet[4] ~ switches[0].ethernets[4]
+    ports.ethernet[5] ~ switches[0].ethernets[2]
+    ports.ethernet[6] ~ switches[1].ethernets[2]
+    ports.ethernet[7] ~ switches[1].ethernets[0]
+
+    # Internal Switch
+    switches[2].ethernets[4] ~ cm5.ethernet
+    switches[2].ethernets[3] ~ switches[0].ethernets[0]
+    switches[2].ethernets[2] ~ switches[1].ethernets[4]
+
+    # --- XLR Connectors ---
+    xlr_audio_input_connectors = new XLR_Female_PC_Mount[2]
+    xlr_audio_output_connectors = new XLR_Male_PC_Mount[8]
+
+    # --- DMX Connectors ---
+    xlr_dmx_input_connector = new XLR_Male_PC_Mount
+    xlr_dmx_output_connector = new XLR_Female_PC_Mount
+
+    # --- AD1938 ---
+    ad1938 = new Analog_Devices_AD1938_driver
+    power_stage.power_3v3_analog ~ ad1938.power
+    ad1938.reset_disable ~ cm5.gpios[17]
+
+    # --- Audio chain ---
+    # CM5 <-> DSP
+    cm5_i2s_output ~ dsp.model.i2s_ins[0] # line for sending L/R I2S audio from CM5 to DSP
+    dsp.model.i2s_outs[0] ~ cm5_i2s_input # line for recording audio from DSP on CM5
+
+    # DSP <-> AD1938
+    dsp.model.i2s_outs[1].sd.line ~ ad1938.model.i2s_ins[0].sd.line # TDM 8 channel audio from DSP to AD1938
+    dsp.model.i2s_outs[1].ws.line ~ ad1938.model.i2s_ins[0].ws.line # TDM 8 channel audio from DSP to AD1938
+    dsp.model.i2s_outs[1].sck.line ~ ad1938.model.i2s_ins[0].sck.line # TDM 8 channel audio from DSP to AD1938
+    ad1938.model.i2s_outs[0].sd.line ~ dsp.model.i2s_ins[1].sd.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
+    ad1938.model.i2s_outs[0].ws.line ~ dsp.model.i2s_ins[1].ws.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
+    ad1938.model.i2s_outs[0].sck.line ~ dsp.model.i2s_ins[1].sck.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
+
+    # XLR Inputs to ADCs # TODO: Stuff DC block caps inline
+    input_dc_block_caps = new Capacitor[4]
+    for cap in input_dc_block_caps:
+        cap.lcsc_id = "C2762343"
+
+    ad1938.model.adc_channels[0].analog_left.p.line ~> input_dc_block_caps[0] ~> xlr_audio_input_connectors[0].audio.p.line
+    ad1938.model.adc_channels[0].analog_left.n.line ~> input_dc_block_caps[1] ~> xlr_audio_input_connectors[0].audio.n.line
+    ad1938.model.adc_channels[0].analog_right.p.line ~> input_dc_block_caps[2] ~> xlr_audio_input_connectors[1].audio.p.line
+    ad1938.model.adc_channels[0].analog_right.n.line ~> input_dc_block_caps[3] ~> xlr_audio_input_connectors[1].audio.n.line
+
+    # Single ended DAC output to line driver inputs
+    ad1938.model.dac_channels[0].analog_left.line ~ balanced_audio_line_drivers[0].audio_in.line
+    ad1938.model.dac_channels[0].analog_right.line ~ balanced_audio_line_drivers[1].audio_in.line
+    ad1938.model.dac_channels[1].analog_left.line ~ balanced_audio_line_drivers[2].audio_in.line
+    ad1938.model.dac_channels[1].analog_right.line ~ balanced_audio_line_drivers[3].audio_in.line
+    ad1938.model.dac_channels[2].analog_left.line ~ balanced_audio_line_drivers[4].audio_in.line
+    ad1938.model.dac_channels[2].analog_right.line ~ balanced_audio_line_drivers[5].audio_in.line
+    ad1938.model.dac_channels[3].analog_left.line ~ balanced_audio_line_drivers[6].audio_in.line
+    ad1938.model.dac_channels[3].analog_right.line ~ balanced_audio_line_drivers[7].audio_in.line
+
+    # Line drivers -> XLR Outputs to speaker amps
+    balanced_audio_line_drivers[0].audio_out ~ xlr_audio_output_connectors[0].audio
+    balanced_audio_line_drivers[1].audio_out ~ xlr_audio_output_connectors[1].audio
+    balanced_audio_line_drivers[2].audio_out ~ xlr_audio_output_connectors[2].audio
+    balanced_audio_line_drivers[3].audio_out ~ xlr_audio_output_connectors[3].audio
+    balanced_audio_line_drivers[4].audio_out ~ xlr_audio_output_connectors[4].audio
+    balanced_audio_line_drivers[5].audio_out ~ xlr_audio_output_connectors[5].audio
+    balanced_audio_line_drivers[6].audio_out ~ xlr_audio_output_connectors[6].audio
+    balanced_audio_line_drivers[7].audio_out ~ xlr_audio_output_connectors[7].audio
+
+module PowerStage:
     power_5v = new ElectricPower
     power_3v3_digital = new ElectricPower
     power_3v3_analog = new ElectricPower
@@ -66,7 +248,7 @@ module App:
     power_5v ~> regulator_3v3_analog ~> power_3v3_analog
     power_5v ~> regulator_3v3_digital ~> power_3v3_digital
 
-    regulator_3v3_digital.output_voltage = 3.3V +/- 10%
+    regulator_3v3_digital.output_voltage = 3.3V +/- 4%
     regulator_3v3_analog.output_voltage = 3.3V +/- 4%
 
     # Audio power supplies +/-18v with center referenced to gnd
@@ -75,181 +257,35 @@ module App:
     # Negative 18V rail
     power_5v ~> regulator_24v_isolated_neg ~> regulator_18v_neg ~> power_18v_neg
 
-    # Connect grounds across isolated supply rails to set +18V and -18V
-    # power_5v.gnd ~> regulator_24v_isolated_pos.power_out.lv
-    # power_5v.gnd ~> regulator_24v_isolated_neg.power_out.hv
-
     iso_resistor = new Resistor
-    iso_resistor.resistance = 10ohm +/- 1%
+    iso_resistor.resistance = 0ohm +/- 10mohm
     iso_resistor.package = "0402"
 
     power_5v.gnd ~> iso_resistor ~> power_18v_pos.gnd
     power_5v.gnd ~> iso_resistor ~> power_18v_neg.vcc
 
-
-    # --- Compute module ---
-    cm5 = new CM5
-    power_5v ~ cm5.power_5v
-
-    # TODO: cm5 I2S interface
-    cm5_i2s_resistor_jumpers = new LogicResistorJumper[6]
-
-    for resistor in cm5_i2s_resistor_jumpers:
-        resistor.resistance = 0ohm +/- 10mohm
-        resistor.package = "0402"
-
-    cm5_i2s_output = new I2S
-    cm5_i2s_output.sck ~> cm5_i2s_resistor_jumpers[0] ~> cm5.cm5.gpio[18]
-    cm5_i2s_output.ws ~> cm5_i2s_resistor_jumpers[1] ~> cm5.cm5.gpio[19]
-    cm5_i2s_output.sd ~> cm5_i2s_resistor_jumpers[2] ~> cm5.cm5.gpio[21]
-
-    cm5_i2s_input = new I2S
-    cm5_i2s_input.sck ~> cm5_i2s_resistor_jumpers[3] ~> cm5.cm5.gpio[18]
-    cm5_i2s_input.ws ~> cm5_i2s_resistor_jumpers[4] ~> cm5.cm5.gpio[19]
-    cm5_i2s_input.sd ~> cm5_i2s_resistor_jumpers[5] ~> cm5.cm5.gpio[20]
+    power_18v_pos.hv.override_net_name = "power_18v_pos"
+    power_18v_neg.lv.override_net_name = "power_18v_neg"
+    power_3v3_digital.hv.override_net_name = "power_3v3_digital"
+    power_3v3_analog.hv.override_net_name = "power_3v3_analog"
+    power_5v.hv.override_net_name = "power_5v"
 
 
-    # --- DSP ---
-    dsp = new Analog_Devices_ADAU145x_driver
-    power_3v3_digital ~ dsp.power
-    cm5.i2cs[0] ~ dsp.model.i2c
-    cm5.cm5.gpio[0] ~ dsp.reset_disable
-
-    dsp_debug_connector = new CJT_A2541WV_2x5P_package
-    dsp_debug_connector.2 ~ dsp.model.i2c.scl.line # SCL
-    dsp_debug_connector.4 ~ dsp.model.i2c.sda.line # SDA
-    dsp_debug_connector.5 ~ dsp.reset_disable.line # nRESET
-    dsp_debug_connector.9 ~ power_3v3_digital.gnd  # GND
-
-    # --- Balanced audio line drivers ---
-    balanced_audio_line_drivers = new TI_DRV135_driver[8]
-    for driver in balanced_audio_line_drivers:
-        power_18v_pos ~ driver.pos_power
-        power_18v_neg ~ driver.neg_power
-
-    # --- USB connector ---
-    usb_connector_horizontal = new USB2_0TypeCHorizontalConnector
-    power_5v ~ usb_connector_horizontal.usb.usb_if.buspower
-    cm5.usb2 ~ usb_connector_horizontal.usb
-    
-    # --- Ethernet ---
-    ports = new RJ45_Horizontal_TH_Magnetics_8Port
-    switches = new Realtek_RTL8305NB[3]
-
-    ## Switch configuration
-    for switch in switches:
-        switch.power_3v3 ~ power_3v3_digital
-
-    # I2C
-    i2c_resistor_jumpers = new I2CResistorJumper[3]
-    switches[0].i2c_mdio ~> i2c_resistor_jumpers[0] ~> cm5.i2cs[0]
-    switches[1].i2c_mdio ~> i2c_resistor_jumpers[1] ~> cm5.i2cs[1]
-    switches[2].i2c_mdio ~> i2c_resistor_jumpers[2] ~> cm5.i2cs[2]
-
-    i2c_pullups = new Resistor[6]
-    for i2c_pullup in i2c_pullups:
-        i2c_pullup.resistance = 10kohm +/- 1%
-        i2c_pullup.package = "0402"
-
-    cm5.i2cs[0].scl.line ~> i2c_pullups[0] ~> cm5.i2cs[0].scl.reference.hv
-    cm5.i2cs[0].sda.line ~> i2c_pullups[1] ~> cm5.i2cs[0].sda.reference.hv
-    cm5.i2cs[1].scl.line ~> i2c_pullups[2] ~> cm5.i2cs[1].scl.reference.hv
-    cm5.i2cs[1].sda.line ~> i2c_pullups[3] ~> cm5.i2cs[1].sda.reference.hv
-    cm5.i2cs[2].scl.line ~> i2c_pullups[4] ~> cm5.i2cs[2].scl.reference.hv
-    cm5.i2cs[2].sda.line ~> i2c_pullups[5] ~> cm5.i2cs[2].sda.reference.hv
-
-    # Reset
-    reset_resistor_jumpers = new LogicResistorJumper[3]
-    switches[0].reset ~> reset_resistor_jumpers[0] ~> cm5.cm5.gpio[0]
-    switches[1].reset ~> reset_resistor_jumpers[1] ~> cm5.cm5.gpio[1]
-    switches[2].reset ~> reset_resistor_jumpers[2] ~> cm5.cm5.gpio[2]
-
-    # Ports
-    ports.ethernet[0] ~ switches[0].ethernets[3]
-    ports.ethernet[1] ~ switches[0].ethernets[1]
-    ports.ethernet[2] ~ switches[1].ethernets[3]
-    ports.ethernet[3] ~ switches[1].ethernets[1]
-    ports.ethernet[4] ~ switches[0].ethernets[4]
-    ports.ethernet[5] ~ switches[0].ethernets[2]
-    ports.ethernet[6] ~ switches[1].ethernets[2]
-    ports.ethernet[7] ~ switches[1].ethernets[0]
-
-    # Internal Switch
-    switches[2].ethernets[4] ~ cm5.cm5.ethernet
-    switches[2].ethernets[3] ~ switches[0].ethernets[0]
-    switches[2].ethernets[2] ~ switches[1].ethernets[4]
-
-    # --- XLR Connectors ---
-    xlr_audio_input_connectors = new XLR_Female_PC_Mount[2]
-    xlr_audio_output_connectors = new XLR_Male_PC_Mount[8]
-
-    # --- DMX Connectors ---
-    xlr_dmx_input_connector = new XLR_Male_PC_Mount
-    xlr_dmx_output_connector = new XLR_Female_PC_Mount
-
-    # --- AD1938 ---
-    ad1938 = new Analog_Devices_AD1938_driver
-    power_3v3_analog ~ ad1938.power
-
-    # --- Audio chain ---
-    # CM5 <-> DSP
-    cm5_i2s_output ~ dsp.model.i2s_ins[0] # line for sending L/R I2S audio from CM5 to DSP
-    dsp.model.i2s_outs[0] ~ cm5_i2s_input # line for recording audio from DSP on CM5
-
-    # DSP <-> AD1938
-    dsp.model.i2s_outs[1].sd.line ~ ad1938.model.i2s_ins[0].sd.line # TDM 8 channel audio from DSP to AD1938
-    dsp.model.i2s_outs[1].ws.line ~ ad1938.model.i2s_ins[0].ws.line # TDM 8 channel audio from DSP to AD1938
-    dsp.model.i2s_outs[1].sck.line ~ ad1938.model.i2s_ins[0].sck.line # TDM 8 channel audio from DSP to AD1938
-    ad1938.model.i2s_outs[0].sd.line ~ dsp.model.i2s_ins[1].sd.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
-    ad1938.model.i2s_outs[0].ws.line ~ dsp.model.i2s_ins[1].ws.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
-    ad1938.model.i2s_outs[0].sck.line ~ dsp.model.i2s_ins[1].sck.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
-
-    cm5_i2s_output ~ dsp.model.i2s_ins[0]
-    cm5_i2s_input ~ dsp.model.i2s_outs[0]
-
-    # XLR Inputs to ADCs
-    ad1938.model.adc_channels[0].analog_left ~ xlr_audio_input_connectors[0].audio
-    ad1938.model.adc_channels[0].analog_right ~ xlr_audio_input_connectors[1].audio
-
-    # Single ended DAC output to line driver inputs
-    ad1938.model.dac_channels[0].analog_left.line ~ balanced_audio_line_drivers[0].audio_in.line
-    ad1938.model.dac_channels[0].analog_right.line ~ balanced_audio_line_drivers[1].audio_in.line
-    ad1938.model.dac_channels[1].analog_left.line ~ balanced_audio_line_drivers[2].audio_in.line
-    ad1938.model.dac_channels[1].analog_right.line ~ balanced_audio_line_drivers[3].audio_in.line
-    ad1938.model.dac_channels[2].analog_left.line ~ balanced_audio_line_drivers[4].audio_in.line
-    ad1938.model.dac_channels[2].analog_right.line ~ balanced_audio_line_drivers[5].audio_in.line
-    ad1938.model.dac_channels[3].analog_left.line ~ balanced_audio_line_drivers[6].audio_in.line
-    ad1938.model.dac_channels[3].analog_right.line ~ balanced_audio_line_drivers[7].audio_in.line
-
-    # Line drivers -> XLR Outputs to speaker amps
-    balanced_audio_line_drivers[0].audio_out ~ xlr_audio_output_connectors[0].audio
-    balanced_audio_line_drivers[1].audio_out ~ xlr_audio_output_connectors[1].audio
-    balanced_audio_line_drivers[2].audio_out ~ xlr_audio_output_connectors[2].audio
-    balanced_audio_line_drivers[3].audio_out ~ xlr_audio_output_connectors[3].audio
-    balanced_audio_line_drivers[4].audio_out ~ xlr_audio_output_connectors[4].audio
-    balanced_audio_line_drivers[5].audio_out ~ xlr_audio_output_connectors[5].audio
-    balanced_audio_line_drivers[6].audio_out ~ xlr_audio_output_connectors[6].audio
-    balanced_audio_line_drivers[7].audio_out ~ xlr_audio_output_connectors[7].audio
-
-    reset_disable = new ElectricLogic
-    reset_disable ~ ad1938.reset_disable
-
-
-module I2CResistorJumper:
-    i2c_in = new I2C
-    i2c_out = new I2C
+module SMIResistorJumper:
+    smi_in = new SMI
+    smi_out = new SMI
     resistors = new Resistor[2]
 
-    i2c_in.scl.line ~> resistors[0] ~> i2c_out.scl.line
-    i2c_in.sda.line ~> resistors[1] ~> i2c_out.sda.line
+    smi_in.mdc.line ~> resistors[0] ~> smi_out.mdc.line
+    smi_in.mdio.line ~> resistors[1] ~> smi_out.mdio.line
 
-    i2c_in.reference_shim ~ i2c_out.reference_shim
+    smi_in.mdio.reference ~ smi_out.mdio.reference
 
     for resistor in resistors:
         resistor.resistance = 0ohm +/- 10mohm
         resistor.package = "0402"
 
-    trait can_bridge_by_name<input_name = "i2c_in", output_name = "i2c_out">
+    trait can_bridge_by_name<input_name = "smi_in", output_name = "smi_out">
 
 module LogicResistorJumper:
     logic_in = new ElectricLogic
@@ -263,3 +299,16 @@ module LogicResistorJumper:
     resistor.package = "0402"
     
     trait can_bridge_by_name<input_name = "logic_in", output_name = "logic_out">
+
+module USBI_Debug_Header:
+    package = new CJT_A2541WV_2x5P_package
+
+    n_reset = new ElectricLogic
+    power = new ElectricPower
+
+    i2c = new I2C
+    package.1 ~ i2c.scl.line # SCL
+    package.3 ~ i2c.sda.line # SDA
+    package.6 ~ n_reset.line # nRESET
+    package.4 ~ power.hv  # VCC
+    package.10 ~ power.lv  # GND

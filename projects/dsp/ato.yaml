@@ -49,8 +49,8 @@ dependencies:
   identifier: atopile/xlr-connectors
   path: ../unreleased-packages/xlr-connectors
 - type: file
-  identifier: atopile/rpi-cm5
-  path: ../unreleased-packages/rpi-cm5
-- type: file
   identifier: atopile/ti-tpsm863257
   path: ../unreleased-packages/ti-tpsm863257
+- type: registry
+  identifier: atopile/rpi-cm5
+  release: 0.2.2
