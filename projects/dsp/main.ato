@@ -187,12 +187,18 @@ module App:
     dsp.model.i2s_outs[0] ~ cm5_i2s_input # line for recording audio from DSP on CM5
 
     # DSP <-> AD1938
-    dsp.model.i2s_outs[1].sd.line ~ ad1938.model.i2s_ins[0].sd.line # TDM 8 channel audio from DSP to AD1938
-    dsp.model.i2s_outs[1].ws.line ~ ad1938.model.i2s_ins[0].ws.line # TDM 8 channel audio from DSP to AD1938
-    dsp.model.i2s_outs[1].sck.line ~ ad1938.model.i2s_ins[0].sck.line # TDM 8 channel audio from DSP to AD1938
-    ad1938.model.i2s_outs[0].sd.line ~ dsp.model.i2s_ins[1].sd.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
-    ad1938.model.i2s_outs[0].ws.line ~ dsp.model.i2s_ins[1].ws.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
-    ad1938.model.i2s_outs[0].sck.line ~ dsp.model.i2s_ins[1].sck.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
+    # Using resistors instead of jumper module to keep digital and analog references disconnected
+    i2s_resistor_jumpers_dsp_ad1938 = new Resistor[6]
+    for resistor in i2s_resistor_jumpers_dsp_ad1938:
+        resistor.resistance = 10ohm +/- 5%
+        resistor.package = "0402"
+
+    dsp.model.i2s_outs[1].sd.line ~> i2s_resistor_jumpers_dsp_ad1938[0] ~> ad1938.model.i2s_ins[0].sd.line # TDM 8 channel audio from DSP to AD1938
+    dsp.model.i2s_outs[1].ws.line ~> i2s_resistor_jumpers_dsp_ad1938[1] ~> ad1938.model.i2s_ins[0].ws.line # TDM 8 channel audio from DSP to AD1938
+    dsp.model.i2s_outs[1].sck.line ~> i2s_resistor_jumpers_dsp_ad1938[2] ~> ad1938.model.i2s_ins[0].sck.line # TDM 8 channel audio from DSP to AD1938
+    ad1938.model.i2s_outs[0].sd.line ~> i2s_resistor_jumpers_dsp_ad1938[3] ~> dsp.model.i2s_ins[1].sd.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
+    ad1938.model.i2s_outs[0].ws.line ~> i2s_resistor_jumpers_dsp_ad1938[4] ~> dsp.model.i2s_ins[1].ws.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
+    ad1938.model.i2s_outs[0].sck.line ~> i2s_resistor_jumpers_dsp_ad1938[5] ~> dsp.model.i2s_ins[1].sck.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
 
     # XLR Inputs to ADCs # TODO: Stuff DC block caps inline
     input_dc_block_caps = new Capacitor[4]
@@ -261,14 +267,17 @@ module PowerStage:
     iso_resistor.resistance = 0ohm +/- 10mohm
     iso_resistor.package = "0402"
 
-    power_5v.gnd ~> iso_resistor ~> power_18v_pos.gnd
-    power_5v.gnd ~> iso_resistor ~> power_18v_neg.vcc
+    # power_5v.gnd ~> iso_resistor ~> power_18v_pos.gnd
+    # power_5v.gnd ~> iso_resistor ~> power_18v_neg.vcc
+    power_5v.gnd ~ power_18v_pos.gnd
+    power_5v.gnd ~ power_18v_neg.vcc
 
     power_18v_pos.hv.override_net_name = "power_18v_pos"
     power_18v_neg.lv.override_net_name = "power_18v_neg"
     power_3v3_digital.hv.override_net_name = "power_3v3_digital"
     power_3v3_analog.hv.override_net_name = "power_3v3_analog"
     power_5v.hv.override_net_name = "power_5v"
+    power_5v.lv.override_net_name = "GND"
 
 
 module SMIResistorJumper:

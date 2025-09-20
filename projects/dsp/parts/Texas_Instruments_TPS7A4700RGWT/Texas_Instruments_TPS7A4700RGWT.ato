@@ -44,6 +44,7 @@ component Texas_Instruments_TPS7A4700RGWT_18V from Regulator:
     power_in.gnd ~ package.GND
     power_out.vcc ~ package.OUT
     power_out.gnd ~ package.GND
+    package.EP ~ package.GND
 
     # Configure for 18V output - Programming pins are ACTIVE LOW
     # Target: 18V = 1.4V (reference) + 16.6V (from programming pins)
@@ -88,6 +89,7 @@ component Texas_Instruments_TPS7A4700RGWT_3V3 from Regulator:
     power_in.gnd ~ package.GND
     power_out.vcc ~ package.OUT
     power_out.gnd ~ package.GND
+    package.EP ~ package.GND
 
     # Configure for 3.3V output - Programming pins are ACTIVE LOW
     # Target: 3.3V = 1.4V (reference) + 1.9V (from programming pins)
