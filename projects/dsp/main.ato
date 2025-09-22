@@ -84,7 +84,6 @@ module App:
     # --- DSP ---
     dsp = new Analog_Devices_ADAU145x_driver
     power_stage.power_3v3_digital ~ dsp.power
-    power_stage.power_3v3_digital ~ dsp.model.power_digital
     cm5.i2cs[0] ~ dsp.model.i2c
     cm5_dsp_i2c_pullups = new Resistor[2]
     for pullup in cm5_dsp_i2c_pullups:
@@ -256,7 +255,7 @@ module PowerStage:
     power_5v ~> regulator_3v3_analog ~> power_3v3_analog
     power_5v ~> regulator_3v3_digital ~> power_3v3_digital
 
-    regulator_3v3_digital.output_voltage = 3.3V +/- 4%
+    regulator_3v3_digital.output_voltage = 3.3V +/- 10%
     regulator_3v3_analog.output_voltage = 3.3V +/- 4%
 
     # Audio power supplies +/-18v with center referenced to gnd
