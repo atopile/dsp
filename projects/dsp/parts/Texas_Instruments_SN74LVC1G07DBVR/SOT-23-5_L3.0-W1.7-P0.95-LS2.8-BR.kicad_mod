@@ -4,11 +4,11 @@
 	(generator_version "v5")
 	(layer "F.Cu")
 	(tedit "5DC5F6A4")
-	(uuid "d608bcbd-6fc6-46ea-bc9f-7727aa188d66")
+	(uuid "daf80204-83c6-4ee0-aaa4-652f09b36774")
 	(property "Reference" "REF**"
 		(at 0 -4.95)
 		(layer "F.SilkS")
-		(uuid "49d334c1-961e-469a-8bb5-565c76afc81c")
+		(uuid "30019625-9d6e-44e8-844d-775312038df2")
 		(effects
 			(font
 				(size 1 1)
@@ -19,7 +19,7 @@
 	(property "Value" "SOT-23-5_L3.0-W1.7-P0.95-LS2.8-BR"
 		(at 0 4.95)
 		(layer "F.Fab")
-		(uuid "88cb1a18-a3bd-433b-a041-9189248bb2ba")
+		(uuid "72b0164a-6f3b-4a34-86c7-b51018af42fb")
 		(effects
 			(font
 				(size 1 1)
@@ -37,7 +37,7 @@
 		)
 		(layer "F.Fab")
 		(locked no)
-		(uuid "70232d02-fcc3-4075-92b2-5b90215d3722")
+		(uuid "165d9d46-af79-4d27-a9b8-bb936c186ff7")
 	)
 	(fp_circle
 		(center 1.4 1.02)
@@ -48,7 +48,7 @@
 		)
 		(layer "Cmts.User")
 		(locked no)
-		(uuid "db713236-6bde-4f8b-bf13-e07213b8255f")
+		(uuid "9baef453-cf97-4cc2-8f5c-1124aeb08043")
 	)
 	(fp_line
 		(start 0.9 1.41)
@@ -60,7 +60,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "44dc34b5-3e70-418d-beea-d43f3fd9227e")
+		(uuid "9aa3e9dc-2770-4923-9b16-98e7b93bdbce")
 	)
 	(fp_line
 		(start 0.9 0.46)
@@ -72,7 +72,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "b8c0b4d9-9b84-45e1-9e59-4f54243bab54")
+		(uuid "8233a018-bc54-4f8a-abdf-a2f3565c835b")
 	)
 	(fp_line
 		(start 0.9 -0.49)
@@ -84,7 +84,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "78cbeeb5-82fb-456a-86d9-61a814bd9ed3")
+		(uuid "b65670ca-917e-41e1-98b8-64978cc18d4d")
 	)
 	(fp_line
 		(start 0.9 -1.55)
@@ -96,7 +96,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "f6fad01e-4dfe-486a-9209-e05b86b2cc16")
+		(uuid "ea4421ad-aad1-4085-a6f8-820d54a779cc")
 	)
 	(fp_line
 		(start -0.9 1.41)
@@ -108,7 +108,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "5b9e1f56-d4c9-4825-81bc-772e05eff005")
+		(uuid "f7879a26-7ee0-4c2c-bf59-29b5e180db45")
 	)
 	(fp_line
 		(start -0.9 -0.49)
@@ -120,7 +120,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "f248da22-eff0-46a7-8363-f12507fe9c9a")
+		(uuid "1d552cfb-2a44-4c47-be59-2205f8cfc067")
 	)
 	(fp_line
 		(start -0.9 -1.55)
@@ -132,7 +132,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "2edfb445-6a4e-4fe9-afcc-688ab27c2cb1")
+		(uuid "6425d972-185a-4815-91cd-fb22920c8f61")
 	)
 	(fp_line
 		(start -0.9 -1.55)
@@ -144,7 +144,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "80a52e70-6743-488c-b121-8f6c35ad9949")
+		(uuid "48cea64e-678d-4550-8e9a-d2d8198658ab")
 	)
 	(fp_line
 		(start -0.9 1.55)
@@ -156,12 +156,12 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "90824dc9-25fc-4e57-9bba-1a4afabecea3")
+		(uuid "52bd7037-9c09-4191-a944-1ee0e19b1319")
 	)
 	(fp_text user "%R"
 		(at 0 0)
 		(layer "F.Fab")
-		(uuid "912696dc-f5e4-4793-9902-f69e4698fac5")
+		(uuid "68ef7381-cd85-45ec-a0c0-ccb96b4f982c")
 		(effects
 			(font
 				(size 1 1)
@@ -173,31 +173,31 @@
 		(at -1.3 0.95 0)
 		(size 1.1 0.6)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "8c473b18-b4a7-4a02-ad98-98d56d5bc57c")
+		(uuid "675971c1-d0b5-452a-91fb-17024aae8033")
 	)
 	(pad "4" smd rect
 		(at -1.3 -0.95 0)
 		(size 1.1 0.6)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "695bcc9b-4569-461a-a408-9a4c50f63ed3")
+		(uuid "59602bff-dd45-4223-8893-93a4d40ef55f")
 	)
 	(pad "3" smd rect
 		(at 1.3 -0.95 0)
 		(size 1.1 0.6)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "064126f5-efe4-466b-950c-5e4bfb3a6152")
+		(uuid "bd442ffa-10ea-4883-8a82-b87cebff9847")
 	)
 	(pad "2" smd rect
 		(at 1.3 0 0)
 		(size 1.1 0.6)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "5165d3ef-fd93-4c2a-9be3-36e71257c238")
+		(uuid "768e620e-0e84-4b84-968c-aeae890ab118")
 	)
 	(pad "1" smd rect
 		(at 1.3 0.95 0)
 		(size 1.1 0.6)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "8dba69f1-2fe6-4f2a-b039-0ec2d5aa0d33")
+		(uuid "5869ff3b-bb5d-477f-ad4e-9c9cc4d6012b")
 	)
 	(model "${KIPRJMOD}/../../parts/Texas_Instruments_SN74LVC1G07DBVR/SOT-23-5_L2.9-W1.6-H1.1-LS2.8-P0.95.step"
 		(offset

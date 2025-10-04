@@ -4,11 +4,11 @@
 	(generator_version "v5")
 	(layer "F.Cu")
 	(tedit "5DC5F6A4")
-	(uuid "295416fb-6ad2-40f0-ab5a-8fa1234be945")
+	(uuid "ef7cdf4f-c18b-48da-bc94-e7a14a0148a8")
 	(property "Reference" "REF**"
 		(at 0 -5.5)
 		(layer "F.SilkS")
-		(uuid "ebe45311-5f45-4b68-b35b-79a7638bce1e")
+		(uuid "dcee36e0-6888-4227-8b65-8f392b5b5c4f")
 		(effects
 			(font
 				(size 1 1)
@@ -19,7 +19,7 @@
 	(property "Value" "SOT-89-3_L4.5-W2.5-P1.50-LS4.1-TR"
 		(at 0 5.5)
 		(layer "F.Fab")
-		(uuid "43911099-1e1b-4dc4-8e66-6ec5fb9d0d38")
+		(uuid "43f8286a-87f4-4a58-b47e-141db00f4a62")
 		(effects
 			(font
 				(size 1 1)
@@ -37,7 +37,7 @@
 		)
 		(layer "F.Fab")
 		(locked no)
-		(uuid "caf1e01d-c61d-4807-a3de-2d0c7c6945ef")
+		(uuid "deba1184-d80d-4f5b-98f7-39e2d23a5317")
 	)
 	(fp_circle
 		(center 1.41 -2.02)
@@ -48,7 +48,7 @@
 		)
 		(layer "Cmts.User")
 		(locked no)
-		(uuid "69485ee9-f5d3-410a-8aae-c4a1ab8e457d")
+		(uuid "36297a97-3970-4a62-b068-ae26a3fda156")
 	)
 	(fp_line
 		(start -1.85 -1.4)
@@ -60,7 +60,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "b882465e-45ed-4a57-a2a1-4f07b289e2f9")
+		(uuid "631482a0-4c19-4214-a018-549c8380d5fe")
 	)
 	(fp_line
 		(start -1.85 -2.3)
@@ -72,7 +72,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "569db963-b403-402d-8cf5-f89d6ddcca20")
+		(uuid "ac1cdfb4-97fd-4035-ad3a-f16c18e1db64")
 	)
 	(fp_line
 		(start 0.75 2.3)
@@ -84,7 +84,7 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "1f0d9cdd-3ad7-4b05-900f-a48b6004a1e7")
+		(uuid "50bd35bf-d8e7-4195-9456-2f78751adb03")
 	)
 	(fp_line
 		(start -1.85 2.3)
@@ -96,12 +96,12 @@
 		(layer "F.SilkS")
 		(layers "F.SilkS")
 		(locked no)
-		(uuid "355fdf6e-318c-4137-a4e0-50b79214c1b3")
+		(uuid "0452529f-cf88-4737-8131-e39dee6562a4")
 	)
 	(fp_text user "%R"
 		(at 0 0)
 		(layer "F.Fab")
-		(uuid "41282c22-6ca6-4633-b0a5-7e31ff66c4dd")
+		(uuid "f936da0d-54af-47fb-80ca-7c24225a3319")
 		(effects
 			(font
 				(size 1 1)
@@ -113,25 +113,25 @@
 		(at -1.25 0 -90)
 		(size 2 3.5)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "37b1db6b-ad8d-407a-9f1e-715049fecbc0")
+		(uuid "cd3409f3-53e9-40e1-a60d-4fc20e7f7283")
 	)
 	(pad "2" smd oval
 		(at 1.15 0 -90)
 		(size 0.7 2.1)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "3623663d-3f92-4764-a3be-77997d376c5f")
+		(uuid "0b3cf864-1b95-424c-ae64-cbe7f9e74dd2")
 	)
 	(pad "1" smd oval
 		(at 1.25 -1.5 -90)
 		(size 0.7 1.9)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "813ffe1c-a3f5-41e3-8b73-5ef76b528806")
+		(uuid "e7fac420-c80d-469e-8a48-b9c10469776c")
 	)
 	(pad "3" smd oval
 		(at 1.25 1.5 -90)
 		(size 0.7 1.9)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "225fa2c7-00c6-4279-9896-067e720dd70d")
+		(uuid "b3f85f16-c1a9-441a-8216-ddfe556f03a3")
 	)
 	(model "${KIPRJMOD}/../../parts/Nexperia_PBSS5350X_115/SOT-89-3_L4.3-W2.5-H1.6-LS4.1-P1.50.step"
 		(offset

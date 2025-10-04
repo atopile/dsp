@@ -4,11 +4,11 @@
 	(generator_version "v5")
 	(layer "F.Cu")
 	(tedit "5DC5F6A4")
-	(uuid "23a56bd4-907a-45ac-8004-2021450f0c7b")
+	(uuid "05d1d0c7-b007-4780-8f0b-e65c98f6d6a7")
 	(property "Reference" "REF**"
 		(at 0 -6.1)
 		(layer "F.SilkS")
-		(uuid "cdd3426e-78fd-4328-80fa-58dc209f6cbf")
+		(uuid "cfa19812-37ca-4df9-a388-b79e01090d40")
 		(effects
 			(font
 				(size 1 1)
@@ -19,7 +19,7 @@
 	(property "Value" "SMD_BD5.6-D4.1"
 		(at 0 6.1)
 		(layer "F.Fab")
-		(uuid "0af24534-7024-47c2-8c9d-de8677efd048")
+		(uuid "829be1fe-a39c-4b6a-b814-9592c1189668")
 		(effects
 			(font
 				(size 1 1)
@@ -37,7 +37,7 @@
 		)
 		(layer "F.Fab")
 		(locked no)
-		(uuid "738c8371-4aae-4168-ad61-74f8b19906cb")
+		(uuid "721d564b-78b4-491c-84f3-023ffe56de75")
 	)
 	(fp_circle
 		(center 0 0)
@@ -48,7 +48,7 @@
 		)
 		(layer "F.SilkS")
 		(locked no)
-		(uuid "77d0e4e3-77af-4a11-93ab-4bb80062c0aa")
+		(uuid "e52f57a4-f735-4808-bf9a-fb515919ed72")
 	)
 	(fp_circle
 		(center 0 0)
@@ -59,12 +59,12 @@
 		)
 		(layer "Cmts.User")
 		(locked no)
-		(uuid "96246c08-5118-463f-a896-0dbb33f13962")
+		(uuid "31edc3ad-f118-490d-82d8-2959070c40ac")
 	)
 	(fp_text user "%R"
 		(at 0 0)
 		(layer "F.Fab")
-		(uuid "31dcf0b1-95d7-407a-95b7-1fd06942ea92")
+		(uuid "f70c90d1-2653-4774-aaba-2198afd22096")
 		(effects
 			(font
 				(size 1 1)
@@ -76,32 +76,32 @@
 		(at 1.65 -2.1 0)
 		(size 0.01 0.01)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "2a95729b-b733-4c58-9088-02e4d3040e4d")
+		(uuid "c0f93bf7-c5cb-4835-bdda-63b74dd1c3d2")
 	)
 	(pad "1" smd custom
 		(at -2.1 -1.65 0)
 		(size 0.01 0.01)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "68c10e6a-2550-4448-bd19-95d24c4122e9")
+		(uuid "964885bd-68dc-4fc1-b09c-ac1d36c9f068")
 	)
 	(pad "4" smd custom
 		(at -1.65 2.1 0)
 		(size 0.01 0.01)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "7e4409fe-0a0a-4dcd-a01b-3b24abdf16f6")
+		(uuid "acf8a383-7fc4-496e-a52c-aa0926b8c711")
 	)
 	(pad "3" smd custom
 		(at 2.1 1.65 0)
 		(size 0.01 0.01)
 		(layers "F.Cu" "F.Paste" "F.Mask")
-		(uuid "7368cc80-a0e8-4a72-b484-91fdec9844c0")
+		(uuid "14c504e0-7c02-47dc-85b4-617fe472babb")
 	)
 	(pad "" thru_hole circle
 		(at 0 0)
 		(size 4.3 4.3)
 		(drill 4.3)
 		(layers "*.Cu" "*.Mask")
-		(uuid "de2468c0-227c-4008-9f38-828621c372e2")
+		(uuid "010703e4-63ec-46a1-84ac-68683b57ebea")
 	)
 	(model "${KIPRJMOD}/../../parts/Sinhoo_SMTSO2515CTJ/SMD_BD5.6-D4.1.STEP"
 		(offset

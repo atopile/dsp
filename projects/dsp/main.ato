@@ -28,6 +28,7 @@ from "atopile/adi-ad1938/adi-ad1938.ato" import Analog_Devices_AD1938_driver
 from "atopile/rj45-connectors/rj45-connectors.ato" import RJ45_Horizontal_TH_Magnetics_8Port
 from "atopile/realtek-rtl8305nb/realtek-rtl8305nb.ato" import Realtek_RTL8305NB
 from "atopile/ti-drv135/ti-drv135.ato" import TI_DRV135_driver
+from "atopile/logos/logos.ato" import atopile_logo_25x6mm
 
 # Parts
 from "parts/MW_IRM_30_5/MW_IRM_30_5.ato" import MW_IRM_30_5
@@ -230,6 +231,8 @@ module App:
     balanced_audio_line_drivers[5].audio_out ~ xlr_audio_output_connectors[5].audio
     balanced_audio_line_drivers[6].audio_out ~ xlr_audio_output_connectors[6].audio
     balanced_audio_line_drivers[7].audio_out ~ xlr_audio_output_connectors[7].audio
+
+    atopile_logo = new atopile_logo_25x6mm
 
 module PowerStage:
     power_5v = new ElectricPower

@@ -54,3 +54,6 @@ dependencies:
 - type: registry
   identifier: atopile/rpi-cm5
   release: 0.2.2
+- type: registry
+  identifier: atopile/logos
+  release: 0.1.5
