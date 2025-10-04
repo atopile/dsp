@@ -455,4 +455,11 @@
 		(options "")
 		(descr "atopile: part lib: XIAMEN_FARATRONIC_C232A475J6SC000")
 	)
+	(lib
+		(name "atopile_Logo_25x6mm")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/../../.ato/modules/atopile/logos/parts/atopile_Logo_25x6mm")
+		(options "")
+		(descr "atopile: part lib: atopile_Logo_25x6mm")
+	)
 )
