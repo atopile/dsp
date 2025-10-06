@@ -2,12 +2,14 @@
 #pragma experiment("FOR_LOOP")
 #pragma experiment("TRAITS")
 
+import Electrical
 import ElectricPower
 import ElectricLogic
 import Resistor
 import I2C
 import I2S
 import can_bridge_by_name
+import has_single_electric_reference_shared
 import DifferentialPair
 import Capacitor
 import Diode
@@ -36,6 +38,7 @@ from "parts/MW_IRM_30_5/MW_IRM_30_5.ato" import ElectricPowerAC
 from "parts/DIBO_DB2ERC_5_08_2P_BK/DIBO_DB2ERC_5_08_2P_BK.ato" import DIBO_DB2ERC_5_08_2P_BK_package
 from "parts/CJT_A2541WV_2x5P/CJT_A2541WV_2x5P.ato" import CJT_A2541WV_2x5P_package    
 from "parts/YLPTEC_B0524S_2WR3/YLPTEC_B0524S_2WR3.ato" import YLPTEC_B0524S_2WR3
+from "parts/Neutrik_NE8FAH_C5/Neutrik_NE8FAH_C5.ato" import Neutrik_NE8FAH_C5_package
 from "parts/Texas_Instruments_TPS7A4700RGWT/Texas_Instruments_TPS7A4700RGWT.ato" import Texas_Instruments_TPS7A4700RGWT_18V
 from "parts/Texas_Instruments_TPS7A4700RGWT/Texas_Instruments_TPS7A4700RGWT.ato" import Texas_Instruments_TPS7A4700RGWT_3V3
 
@@ -102,7 +105,7 @@ module App:
     dsp_debug_connector.power.lv ~ power_stage.power_3v3_digital.lv  # GND
 
     # --- Balanced audio line drivers ---
-    balanced_audio_line_drivers = new TI_DRV135_driver[8]
+    balanced_audio_line_drivers = new TI_DRV135_driver[14]
     for driver in balanced_audio_line_drivers:
         power_stage.power_18v_pos ~ driver.pos_power
         power_stage.power_18v_neg ~ driver.neg_power
@@ -171,17 +174,21 @@ module App:
 
     # --- XLR Connectors ---
     xlr_audio_input_connectors = new XLR_Female_PC_Mount[2]
-    xlr_audio_output_connectors = new XLR_Male_PC_Mount[8]
+    xlr_audio_output_connectors = new XLR_Male_PC_Mount[6]
+    ethercon_output_connectors = new EtherConAudioConnector[2]
+    for ethercon_output_connector in ethercon_output_connectors:
+        power_stage.power_3v3_digital.lv ~ ethercon_output_connector.gnd
 
     # --- DMX Connectors ---
     xlr_dmx_input_connector = new XLR_Male_PC_Mount
     xlr_dmx_output_connector = new XLR_Female_PC_Mount
 
     # --- AD1938 ---
-    ad1938 = new Analog_Devices_AD1938_driver
-    power_stage.power_3v3_analog ~ ad1938.power
-    power_stage.power_3v3_analog ~ ad1938.model.power_analog
-    ad1938.reset_disable ~ cm5.gpios[17]
+    ad1938s = new Analog_Devices_AD1938_driver[2]
+    for ad1938 in ad1938s:
+        power_stage.power_3v3_analog ~ ad1938.power
+        power_stage.power_3v3_analog ~ ad1938.model.power_analog
+        ad1938.reset_disable ~ cm5.gpios[17]
 
     # --- Audio chain ---
     # CM5 <-> DSP
@@ -190,37 +197,48 @@ module App:
 
     # DSP <-> AD1938
     # Using resistors instead of jumper module to keep digital and analog references disconnected
-    i2s_resistor_jumpers_dsp_ad1938 = new Resistor[6]
+    i2s_resistor_jumpers_dsp_ad1938 = new Resistor[9]
     for resistor in i2s_resistor_jumpers_dsp_ad1938:
         resistor.resistance = 10ohm +/- 5%
         resistor.package = "0402"
 
-    dsp.model.i2s_outs[1].sd.line ~> i2s_resistor_jumpers_dsp_ad1938[0] ~> ad1938.model.i2s_ins[0].sd.line # TDM 8 channel audio from DSP to AD1938
-    dsp.model.i2s_outs[1].ws.line ~> i2s_resistor_jumpers_dsp_ad1938[1] ~> ad1938.model.i2s_ins[0].ws.line # TDM 8 channel audio from DSP to AD1938
-    dsp.model.i2s_outs[1].sck.line ~> i2s_resistor_jumpers_dsp_ad1938[2] ~> ad1938.model.i2s_ins[0].sck.line # TDM 8 channel audio from DSP to AD1938
-    ad1938.model.i2s_outs[0].sd.line ~> i2s_resistor_jumpers_dsp_ad1938[3] ~> dsp.model.i2s_ins[1].sd.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
-    ad1938.model.i2s_outs[0].ws.line ~> i2s_resistor_jumpers_dsp_ad1938[4] ~> dsp.model.i2s_ins[1].ws.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
-    ad1938.model.i2s_outs[0].sck.line ~> i2s_resistor_jumpers_dsp_ad1938[5] ~> dsp.model.i2s_ins[1].sck.line # L/R I2S from CDJ to ADCs on AD1938 to DSP
+    dsp.model.i2s_outs[1].sd.line ~> i2s_resistor_jumpers_dsp_ad1938[0] ~> ad1938s[0].model.i2s_ins[0].sd.line # TDM 8 channel audio from DSP to AD1938 0
+    dsp.model.i2s_outs[1].ws.line ~> i2s_resistor_jumpers_dsp_ad1938[1] ~> ad1938s[0].model.i2s_ins[0].ws.line # TDM 8 channel audio from DSP to AD1938 0
+    dsp.model.i2s_outs[1].sck.line ~> i2s_resistor_jumpers_dsp_ad1938[2] ~> ad1938s[0].model.i2s_ins[0].sck.line # TDM 8 channel audio from DSP to AD1938 0
+    dsp.model.i2s_outs[2].sd.line ~> i2s_resistor_jumpers_dsp_ad1938[3] ~> ad1938s[1].model.i2s_ins[0].sd.line # TDM 8 channel audio from DSP to AD1938 1
+    dsp.model.i2s_outs[2].ws.line ~> i2s_resistor_jumpers_dsp_ad1938[4] ~> ad1938s[1].model.i2s_ins[0].ws.line # TDM 8 channel audio from DSP to AD1938 1
+    dsp.model.i2s_outs[2].sck.line ~> i2s_resistor_jumpers_dsp_ad1938[5] ~> ad1938s[1].model.i2s_ins[0].sck.line # TDM 8 channel audio from DSP to AD1938 1
+    ad1938s[0].model.i2s_outs[0].sd.line ~> i2s_resistor_jumpers_dsp_ad1938[6] ~> dsp.model.i2s_ins[1].sd.line # L/R I2S from CDJ to ADCs on AD1938 0 to DSP
+    ad1938s[0].model.i2s_outs[0].ws.line ~> i2s_resistor_jumpers_dsp_ad1938[7] ~> dsp.model.i2s_ins[1].ws.line # L/R I2S from CDJ to ADCs on AD1938 0 to DSP
+    ad1938s[0].model.i2s_outs[0].sck.line ~> i2s_resistor_jumpers_dsp_ad1938[8] ~> dsp.model.i2s_ins[1].sck.line # L/R I2S from CDJ to ADCs on AD1938 0 to DSP
 
     # XLR Inputs to ADCs # TODO: Stuff DC block caps inline
     input_dc_block_caps = new Capacitor[4]
     for cap in input_dc_block_caps:
         cap.lcsc_id = "C2762343"
 
-    ad1938.model.adc_channels[0].analog_left.p.line ~> input_dc_block_caps[0] ~> xlr_audio_input_connectors[0].audio.p.line
-    ad1938.model.adc_channels[0].analog_left.n.line ~> input_dc_block_caps[1] ~> xlr_audio_input_connectors[0].audio.n.line
-    ad1938.model.adc_channels[0].analog_right.p.line ~> input_dc_block_caps[2] ~> xlr_audio_input_connectors[1].audio.p.line
-    ad1938.model.adc_channels[0].analog_right.n.line ~> input_dc_block_caps[3] ~> xlr_audio_input_connectors[1].audio.n.line
+    ad1938s[0].model.adc_channels[0].analog_left.p.line ~> input_dc_block_caps[0] ~> xlr_audio_input_connectors[0].audio.p.line
+    ad1938s[0].model.adc_channels[0].analog_left.n.line ~> input_dc_block_caps[1] ~> xlr_audio_input_connectors[0].audio.n.line
+    ad1938s[0].model.adc_channels[0].analog_right.p.line ~> input_dc_block_caps[2] ~> xlr_audio_input_connectors[1].audio.p.line
+    ad1938s[0].model.adc_channels[0].analog_right.n.line ~> input_dc_block_caps[3] ~> xlr_audio_input_connectors[1].audio.n.line
 
     # Single ended DAC output to line driver inputs
-    ad1938.model.dac_channels[0].analog_left.line ~ balanced_audio_line_drivers[0].audio_in.line
-    ad1938.model.dac_channels[0].analog_right.line ~ balanced_audio_line_drivers[1].audio_in.line
-    ad1938.model.dac_channels[1].analog_left.line ~ balanced_audio_line_drivers[2].audio_in.line
-    ad1938.model.dac_channels[1].analog_right.line ~ balanced_audio_line_drivers[3].audio_in.line
-    ad1938.model.dac_channels[2].analog_left.line ~ balanced_audio_line_drivers[4].audio_in.line
-    ad1938.model.dac_channels[2].analog_right.line ~ balanced_audio_line_drivers[5].audio_in.line
-    ad1938.model.dac_channels[3].analog_left.line ~ balanced_audio_line_drivers[6].audio_in.line
-    ad1938.model.dac_channels[3].analog_right.line ~ balanced_audio_line_drivers[7].audio_in.line
+    ad1938s[0].model.dac_channels[0].analog_left.line ~ balanced_audio_line_drivers[0].audio_in.line
+    ad1938s[0].model.dac_channels[0].analog_right.line ~ balanced_audio_line_drivers[1].audio_in.line
+    ad1938s[0].model.dac_channels[1].analog_left.line ~ balanced_audio_line_drivers[2].audio_in.line
+    ad1938s[0].model.dac_channels[1].analog_right.line ~ balanced_audio_line_drivers[3].audio_in.line
+    ad1938s[0].model.dac_channels[2].analog_left.line ~ balanced_audio_line_drivers[4].audio_in.line
+    ad1938s[0].model.dac_channels[2].analog_right.line ~ balanced_audio_line_drivers[5].audio_in.line
+    # ad1938s[0].model.dac_channels[3].analog_left.line ~ balanced_audio_line_drivers[6].audio_in.line
+    # ad1938s[0].model.dac_channels[3].analog_right.line ~ balanced_audio_line_drivers[7].audio_in.line
+    ad1938s[1].model.dac_channels[0].analog_left.line ~ balanced_audio_line_drivers[6].audio_in.line
+    ad1938s[1].model.dac_channels[0].analog_right.line ~ balanced_audio_line_drivers[7].audio_in.line
+    ad1938s[1].model.dac_channels[1].analog_left.line ~ balanced_audio_line_drivers[8].audio_in.line
+    ad1938s[1].model.dac_channels[1].analog_right.line ~ balanced_audio_line_drivers[9].audio_in.line
+    ad1938s[1].model.dac_channels[2].analog_left.line ~ balanced_audio_line_drivers[10].audio_in.line
+    ad1938s[1].model.dac_channels[2].analog_right.line ~ balanced_audio_line_drivers[11].audio_in.line
+    ad1938s[1].model.dac_channels[3].analog_left.line ~ balanced_audio_line_drivers[12].audio_in.line
+    ad1938s[1].model.dac_channels[3].analog_right.line ~ balanced_audio_line_drivers[13].audio_in.line
 
     # Line drivers -> XLR Outputs to speaker amps
     balanced_audio_line_drivers[0].audio_out ~ xlr_audio_output_connectors[0].audio
@@ -229,8 +247,15 @@ module App:
     balanced_audio_line_drivers[3].audio_out ~ xlr_audio_output_connectors[3].audio
     balanced_audio_line_drivers[4].audio_out ~ xlr_audio_output_connectors[4].audio
     balanced_audio_line_drivers[5].audio_out ~ xlr_audio_output_connectors[5].audio
-    balanced_audio_line_drivers[6].audio_out ~ xlr_audio_output_connectors[6].audio
-    balanced_audio_line_drivers[7].audio_out ~ xlr_audio_output_connectors[7].audio
+    # Line drivers -> EtherCon Outputs to speaker amps
+    balanced_audio_line_drivers[6].audio_out ~ ethercon_output_connectors[0].balanced_audios[0]
+    balanced_audio_line_drivers[7].audio_out ~ ethercon_output_connectors[0].balanced_audios[1]
+    balanced_audio_line_drivers[8].audio_out ~ ethercon_output_connectors[0].balanced_audios[2]
+    balanced_audio_line_drivers[9].audio_out ~ ethercon_output_connectors[0].balanced_audios[3]
+    balanced_audio_line_drivers[10].audio_out ~ ethercon_output_connectors[1].balanced_audios[0]
+    balanced_audio_line_drivers[11].audio_out ~ ethercon_output_connectors[1].balanced_audios[1]
+    balanced_audio_line_drivers[12].audio_out ~ ethercon_output_connectors[1].balanced_audios[2]
+    balanced_audio_line_drivers[13].audio_out ~ ethercon_output_connectors[1].balanced_audios[3]
 
     atopile_logo = new atopile_logo_25x6mm
 
@@ -325,3 +350,22 @@ module USBI_Debug_Header:
     package.6 ~ n_reset.line # nRESET
     package.4 ~ power.hv  # VCC
     package.10 ~ power.lv  # GND
+
+module EtherConAudioConnector:
+    package = new Neutrik_NE8FAH_C5_package
+
+    gnd = new Electrical
+    gnd ~ package.9
+
+    balanced_audios = new DifferentialPair[4]
+    # witrh 1 on the left and 8 onb the right
+    balanced_audios[0].p.line ~ package.4
+    balanced_audios[0].n.line ~ package.5
+    balanced_audios[1].p.line ~ package.3
+    balanced_audios[1].n.line ~ package.6
+    balanced_audios[2].p.line ~ package.1
+    balanced_audios[2].n.line ~ package.2
+    balanced_audios[3].p.line ~ package.7
+    balanced_audios[3].n.line ~ package.8
+
+    trait has_single_electric_reference_shared

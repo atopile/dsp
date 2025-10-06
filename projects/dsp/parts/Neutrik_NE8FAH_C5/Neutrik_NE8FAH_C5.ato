@@ -1,0 +1,25 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component Neutrik_NE8FAH_C5_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    # trait is_auto_generated<system="ato_part", source="easyeda:C368528", date="2025-10-04T00:26:49.357851+00:00", checksum="d29f943db1465b897192470b0013a0513069b2079b3cbf7206153c1343e35f04">
+
+    trait is_atomic_part<manufacturer="Neutrik", partnumber="NE8FAH-C5", footprint="RJ45-TH_NE8FAH-C5.kicad_mod", symbol="NE8FAH-C5.kicad_sym", model="RJ45-TH_NE8FAH-C5.STEP">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C368528", manufacturer="Neutrik", partno="NE8FAH-C5">
+    trait has_designator_prefix<prefix="PS">
+
+    # pins
+    pin 8
+    pin 7
+    pin 6
+    pin 5
+    pin 4
+    pin 3
+    pin 2
+    pin 1
+    signal G ~ pin 9
