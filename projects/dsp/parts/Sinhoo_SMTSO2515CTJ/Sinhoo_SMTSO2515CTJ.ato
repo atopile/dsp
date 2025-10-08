@@ -16,6 +16,3 @@ component Sinhoo_SMTSO2515CTJ_package:
     # pins
     signal pad ~ pin 1
     pad ~ pin 2
-    pad ~ pin 3
-    pad ~ pin 4
-    pad ~ pin 5
