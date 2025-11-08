@@ -62,3 +62,4 @@ module MW_IRM_30_5:
 interface ElectricPowerAC:
     line = new Electrical
     neutral = new Electrical
+    earth = new Electrical

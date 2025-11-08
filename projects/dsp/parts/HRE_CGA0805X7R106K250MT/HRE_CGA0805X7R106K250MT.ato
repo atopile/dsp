@@ -1,0 +1,18 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component HRE_CGA0805X7R106K250MT_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C6119932", date="2025-11-07T22:47:31.125843+00:00", checksum="c5ca10bfccbdae58300d2bc483bd5fa3b6b5839cc3585cc348c21c6fa3e0ba60">
+
+    trait is_atomic_part<manufacturer="HRE", partnumber="CGA0805X7R106K250MT", footprint="C0805.kicad_mod", symbol="CGA0805X7R106K250MT.kicad_sym", model="C0805_L2.0-W1.3-H1.3.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C6119932", manufacturer="HRE", partno="CGA0805X7R106K250MT">
+    trait has_designator_prefix<prefix="C">
+
+    # pins
+    pin 1
+    pin 2

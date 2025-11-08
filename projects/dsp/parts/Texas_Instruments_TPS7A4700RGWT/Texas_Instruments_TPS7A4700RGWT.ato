@@ -64,7 +64,7 @@ component Texas_Instruments_TPS7A4700RGWT_18V from Regulator:
     
     # Enable and noise reduction
     package.EN ~ power_in.vcc    # Enable the regulator
-    # NR and SENSE_FB can be left floating for basic operation
+    package.SENSE_FB ~ package.OUT # Feedback connection
     
     # Set output voltage specification
     assert power_out.voltage within -19V to 19V
@@ -106,7 +106,7 @@ component Texas_Instruments_TPS7A4700RGWT_3V3 from Regulator:
     
     # Enable and noise reduction
     package.EN ~ power_in.vcc    # Enable the regulator
-    # NR and SENSE_FB can be left floating for basic operation
+    package.SENSE_FB ~ package.OUT # Feedback connection
     
     # Set output voltage specification
     assert power_out.voltage within 3.3V +/- 1%
