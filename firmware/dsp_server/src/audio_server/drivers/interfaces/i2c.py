@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from atexit import register
 from pathlib import Path
 
 import smbus2
