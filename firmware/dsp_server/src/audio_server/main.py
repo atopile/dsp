@@ -37,7 +37,7 @@ hostname = socket.gethostname()
 HOST_CONFIG = PER_HOST_DEFAULTS.get(hostname, {})
 
 
-def main(
+def setup(
     init: bool = True,
 ):
     # Device Tree
@@ -83,5 +83,15 @@ def main(
     # )
 
 
+def webserver(init: bool = True):
+    if init:
+        setup(init=True)
+
+    # run webserver that hosts simple html page (html/dsp_control.html) with volume slider and button to lock in volume
+    # on load makes get request to /volume to get current volume
+    # button press calls /volume/set (or similar) to set volume
+    # uses fastapi
+
+
 if __name__ == "__main__":
-    typer.run(main)
+    typer.run(setup)

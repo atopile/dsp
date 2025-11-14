@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from atexit import register
 from pathlib import Path
 
 import smbus2
@@ -128,7 +129,7 @@ class SMBusI2CBackend(I2CBackend):
 
         return data
 
-    def write(self, addr: int, data: bytes) -> None:
+    def write(self, addr: int, data: bytes, register_width_bytes=1) -> None:
         """Write data to I2C device using 16-bit register addressing.
 
         Args:
@@ -141,9 +142,9 @@ class SMBusI2CBackend(I2CBackend):
         if len(data) == 0:
             raise ValueError("Write data cannot be empty")
 
-        if len(data) > 30:  # 32 - 2 bytes for address
+        if len(data) > 30 * register_width_bytes:  # 32 - 2 bytes for address
             # Split large writes into chunks
-            self._write_large(addr, data)
+            self._write_large(addr, data, register_width_bytes=register_width_bytes)
             return
 
         try:
@@ -171,14 +172,19 @@ class SMBusI2CBackend(I2CBackend):
             )
             raise RuntimeError(f"I2C write failed: {e}") from e
 
-    def _write_large(self, addr: int, data: bytes) -> None:
+    def _write_large(self, addr: int, data: bytes, register_width_bytes=1) -> None:
         """Write large amounts of data using multiple transactions."""
         offset = 0
 
         while offset < len(data):
-            chunk_size = min(len(data) - offset, 30)  # 32 - 2 bytes for address
+            chunk_size = min(
+                len(data) - offset, 30 * register_width_bytes
+            )  # 32 - 2 bytes for address
             chunk = data[offset : offset + chunk_size]
-            self.write(addr + offset, chunk)
+            register_offset = int(offset / register_width_bytes)
+            self.write(
+                addr + register_offset, chunk, register_width_bytes=register_width_bytes
+            )
             offset += chunk_size
 
     def close(self) -> None:

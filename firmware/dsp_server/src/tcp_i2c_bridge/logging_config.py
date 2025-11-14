@@ -27,6 +27,17 @@ class CustomConsoleRenderer:
             level = level[0].upper()
         event = str(event_dict.pop("event", ""))
 
+        # Extract file information
+        filename = event_dict.pop("filename", None)
+        lineno = event_dict.pop("lineno", None)
+        file_info = ""
+        if filename:
+            # Show just the filename, not the full path
+            file_info = f"{Path(filename).name}"
+            if lineno:
+                file_info += f":{lineno}"
+            file_info += " "
+
         exception = event_dict.pop("exception", None)
         stack = event_dict.pop("stack", None)
 
@@ -36,7 +47,7 @@ class CustomConsoleRenderer:
         # Key-value pairs
         kv_str = " ".join(f"{k}={v}" for k, v in sorted(event_dict.items()))
 
-        log_line = f"{level} {event}"
+        log_line = f"{level} {file_info}{event}"
         if kv_str:
             log_line += f" {kv_str}"
 
@@ -78,6 +89,12 @@ def setup_logging(
         structlog.contextvars.merge_contextvars,
         structlog.processors.add_log_level,
         structlog.processors.TimeStamper(fmt="iso"),
+        structlog.processors.CallsiteParameterAdder(
+            parameters=[
+                structlog.processors.CallsiteParameter.FILENAME,
+                structlog.processors.CallsiteParameter.LINENO,
+            ]
+        ),
         structlog.processors.StackInfoRenderer(),
         structlog.processors.format_exc_info,
     ]

@@ -609,18 +609,22 @@ class AD1938:
         self.gpio_enable.activate()
         time.sleep(0.5)
 
+        self.test_read()
+
         if reset:
             self.configure_pll(self.config.pll_input_dlrclk)
-            self.set_sample_rate(self.config.sample_rate)
             if self.config.tdm:
                 self.set_tdm()
+            self.set_sample_rate(self.config.sample_rate)
+
+        self.test_read()
 
     def test_read(self):
         base_addr = PLLAndClockControl0.ADDR
         end_addr = ADCControl2.ADDR
         logger.info(f"Reading registers {base_addr:02X} to {end_addr:02X}")
         for addr in range(base_addr, end_addr + 1):
-            logger.info(f"Register {addr:02X}: {self.read_register(addr)}")
+            logger.info(f"Register {addr:02X}: {self.read_register(addr):02X}")
 
     def configure_pll(self, pll_input_dlrclk: bool):
         if not pll_input_dlrclk:
@@ -636,6 +640,8 @@ class AD1938:
             raise ValueError(f"Invalid sample rate: {sample_rate}")
 
         _96 = sample_rate == 96000
+        if _96:
+            print("Setting 96 kHz")
 
         # Sample rate
         dac_ctrl0 = DACControl0(self)

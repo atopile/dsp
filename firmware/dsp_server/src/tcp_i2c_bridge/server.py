@@ -28,6 +28,16 @@ from tcp_i2c_bridge.protocol_dumper import ProtocolDumper
 logger = structlog.get_logger()
 
 
+def adau1452_register_width(addr: int):
+    if addr >= 0x0000 and addr <= 0x4FFF:
+        return 4
+    if addr >= 0x6000 and addr <= 0xAFFF:
+        return 4
+    if addr >= 0xC000 and addr <= 0xDFFF:
+        return 4
+    return 2
+
+
 class TCPClientHandler:
     """Handle individual TCP client connections."""
 
@@ -237,7 +247,11 @@ class TCPClientHandler:
 
         try:
             # Perform I2C write
-            self.i2c_backend.write(request.Address, request.Data)
+            self.i2c_backend.write(
+                request.Address,
+                request.Data,
+                register_width_bytes=adau1452_register_width(request.Address),
+            )
 
             # Dump I2C layer
             await self.protocol_dumper.dump_i2c_transaction(
@@ -257,6 +271,10 @@ class TCPClientHandler:
             )
 
         except Exception as e:
+            import traceback
+
+            traceback.print_exc()
+
             logger.error(
                 "Write request failed",
                 client=self.client_id,

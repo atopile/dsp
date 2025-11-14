@@ -17,7 +17,7 @@ which uv || {
 }
 
 # PYTHON -------------------------------------------------------------------
-cd nonos_server
+cd dsp_server
 if [ ! -d .venv_pi ]; then
     uv venv .venv_pi
 fi
