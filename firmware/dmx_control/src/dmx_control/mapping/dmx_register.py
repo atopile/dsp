@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from enum import StrEnum, auto
 
 
 class DMXError(Exception):
@@ -19,7 +18,7 @@ class Description:
 @dataclass
 class DMXFunction:
     description: Description
-    value_range: tuple[int, int]
+    value_range: tuple[int, int] = (0, 255)
 
     def __post_init__(self):
         if not 0 <= self.value_range[0] <= 255 and 0 <= self.value_range[1] <= 255:
@@ -48,8 +47,8 @@ class DMXEnum(DMXValue):
 
 @dataclass
 class DMXBool(DMXEnum):
-    true_value: int
-    false_value: int
+    true_value: int = 255
+    false_value: int = 0
 
 
 @dataclass

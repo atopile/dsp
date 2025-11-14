@@ -1,36 +1,13 @@
-from dmx_control.register.dmx_register import (
+from dmx_control.mapping.dmx_register import (
     DMXBrightness,
-    DMXEnum,
     DMXFunction,
     DMXRegister,
-    DMXValue,
     Description,
 )
+from dmx_control.mapping.device import DMXDevice
 
 
-class Interface:
-    pass
-
-
-class Device:
-    def __init__(self, name: str, interface: Interface):
-        self.name = name
-
-
-class DMXDevice(Device):
-    def __init__(
-        self,
-        name: str,
-        base_channel: int,
-        interface: Interface,
-        registers: list[DMXRegister],
-    ):
-        super().__init__(name, interface)
-        self.base_channel = base_channel
-        self.registers = registers
-
-
-class LEDBar140W40LED:
+class LEDBar140W40LED(DMXDevice):
     """
     140W 40LED Bar
     In 13 channel mode
@@ -44,7 +21,6 @@ class LEDBar140W40LED:
                     description=Description(
                         function="Master brightness", notes="0%-100%"
                     ),
-                    value_range=(0, 255),
                 ),
             ],
         ),
@@ -54,15 +30,12 @@ class LEDBar140W40LED:
                 functions=[
                     DMXFunction(
                         description=Description(function=f"Red_{i}", notes="0%-100%"),
-                        value_range=(0, 255),
                     ),
                     DMXFunction(
                         description=Description(function=f"Green_{i}", notes="0%-100%"),
-                        value_range=(0, 255),
                     ),
                     DMXFunction(
                         description=Description(function=f"Blue_{i}", notes="0%-100%"),
-                        value_range=(0, 255),
                     ),
                 ],
             )
