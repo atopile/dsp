@@ -1,8 +1,12 @@
 import logging
 import socket
 from dataclasses import dataclass
+from pathlib import Path
 
 import typer
+import uvicorn
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 from audio_server.drivers.ad1938 import AD1938
 from audio_server.drivers.adau1452 import ADAU1452
@@ -10,6 +14,7 @@ from audio_server.drivers.cm5 import CM5
 from audio_server.drivers.interfaces.i2c import I2CPeripheral
 from audio_server.drivers.interfaces.spi import SPIPeripheral
 from audio_server.drivers.rtl8305 import Realtek_RTL8305
+from audio_server.dsp_control import DSPControl
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -38,8 +43,9 @@ HOST_CONFIG = PER_HOST_DEFAULTS.get(hostname, {})
 
 
 def setup(
-    init: bool = True,
+    init: bool = typer.Option(True, help="Initialize hardware on startup"),
 ):
+    """Setup and initialize DSP hardware."""
     # Device Tree
     cm5 = CM5()
     dsp = ADAU1452(
@@ -67,6 +73,7 @@ def setup(
     # Init
 
     if init:
+        logger.info("Initializing hardware...")
         dsp.enable()
         for codec in codecs:
             codec.enable(reset=True)
@@ -74,24 +81,47 @@ def setup(
             codec.invert_output_polarity()
         for eth in eths:
             eth.enable()
+        logger.info("Hardware initialization complete")
 
-    print("DONE INIT")
-
-    # signal.signal(
-    #     signal.SIGINT,
-    #     lambda signum, frame: signal_handler([buttons], signum, frame),
-    # )
+    dsp_control = DSPControl(dsp)
+    return dsp_control
 
 
-def webserver(init: bool = True):
-    if init:
-        setup(init=True)
+def webserver(
+    init: bool = typer.Option(False, help="Initialize hardware on startup"),
+    host: str = typer.Option("0.0.0.0", help="Host address to bind to"),
+    port: int = typer.Option(8000, help="Port to bind to"),
+):
+    """Run DSP control webserver with volume control interface."""
+    dsp_control = setup(init=init)
 
-    # run webserver that hosts simple html page (html/dsp_control.html) with volume slider and button to lock in volume
-    # on load makes get request to /volume to get current volume
-    # button press calls /volume/set (or similar) to set volume
-    # uses fastapi
+    app = FastAPI(title="DSP Control")
 
+    @app.get("/")
+    async def read_root():
+        html_file = Path(__file__).parent / "html" / "dsp_control.html"
+        with open(html_file) as f:
+            return HTMLResponse(content=f.read())
+
+    @app.get("/api/volume")
+    async def get_volume():
+        """Get current volume in dB"""
+        volume = dsp_control.get_volume()
+        return {"volume_db": volume}
+
+    @app.post("/api/volume")
+    async def set_volume(volume_db: float):
+        """Set volume in dB"""
+        dsp_control.set_volume(volume_db)
+        return {"status": "ok", "volume_db": volume_db}
+
+    logger.info(f"Starting webserver on {host}:{port}")
+    uvicorn.run(app, host=host, port=port)
+
+
+app = typer.Typer(help="DSP Audio Server Control")
+app.command()(setup)
+app.command()(webserver)
 
 if __name__ == "__main__":
-    typer.run(setup)
+    app()

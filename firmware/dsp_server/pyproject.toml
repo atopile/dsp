@@ -13,6 +13,8 @@ dependencies = [
     "gpiod>=2.3.0",
     "dbus-next>=0.2.0",
     "spidev>=3.5",
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
 ]
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -30,7 +32,7 @@ dev = [
 
 [project.scripts]
 tcp-i2c-bridge = "tcp_i2c_bridge.cli:main"
-audio-server = "audio_server.main:main"
+audio-server = "audio_server.main:app"
 
 [build-system]
 requires = ["hatchling"]

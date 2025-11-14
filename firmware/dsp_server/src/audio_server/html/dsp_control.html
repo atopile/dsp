@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>DSP Volume Control</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .status {
+            text-align: center;
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .status.connected {
+            color: #48bb78;
+        }
+
+        .status.error {
+            color: #f56565;
+        }
+
+        .volume-display {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .volume-value {
+            font-size: 64px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .volume-label {
+            font-size: 16px;
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .slider-container {
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #a0aec0;
+            font-weight: 600;
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 8px;
+            background: #e2e8f0;
+            outline: none;
+            margin: 20px 0;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:active {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.7);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        input[type="range"]::-moz-range-thumb:active {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.7);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #edf2f7;
+            color: #4a5568;
+        }
+
+        .btn-secondary:active {
+            transform: translateY(2px);
+            background: #e2e8f0;
+        }
+
+        .preset-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-preset {
+            padding: 12px;
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4a5568;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-preset:active {
+            transform: scale(0.95);
+            background: #edf2f7;
+            border-color: #cbd5e0;
+        }
+
+        @media (max-width: 400px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            .volume-value {
+                font-size: 52px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid #e2e8f0;
+            border-radius: 50%;
+            border-top-color: #667eea;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>DSP Volume Control</h1>
+            <div class="status" id="status">Connecting...</div>
+
+            <div class="volume-display">
+                <div class="volume-value" id="volumeValue">0</div>
+                <div class="volume-label">dB</div>
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-labels">
+                    <span>-80 dB</span>
+                    <span>0 dB</span>
+                </div>
+                <input type="range" id="volumeSlider" min="-80" max="0" value="0" step="0.5">
+            </div>
+
+            <div class="button-group">
+                <button class="btn-primary" id="setButton">Set Volume</button>
+                <button class="btn-secondary" id="refreshButton">Refresh</button>
+            </div>
+
+            <div class="preset-buttons">
+                <button class="btn-preset" data-volume="-10">-10 dB</button>
+                <button class="btn-preset" data-volume="-20">-20 dB</button>
+                <button class="btn-preset" data-volume="-30">-30 dB</button>
+                <button class="btn-preset" data-volume="-40">-40 dB</button>
+                <button class="btn-preset" data-volume="-50">-50 dB</button>
+                <button class="btn-preset" data-volume="-80">Mute</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeValue = document.getElementById('volumeValue');
+        const setButton = document.getElementById('setButton');
+        const refreshButton = document.getElementById('refreshButton');
+        const status = document.getElementById('status');
+        const presetButtons = document.querySelectorAll('.btn-preset');
+
+        let currentVolume = 0;
+
+        // Update display when slider moves
+        volumeSlider.addEventListener('input', (e) => {
+            volumeValue.textContent = parseFloat(e.target.value).toFixed(1);
+        });
+
+        // Fetch current volume from DSP
+        async function getVolume() {
+            try {
+                const response = await fetch('/api/volume');
+                if (!response.ok) throw new Error('Failed to fetch volume');
+                
+                const data = await response.json();
+                currentVolume = data.volume_db;
+                volumeSlider.value = currentVolume;
+                volumeValue.textContent = currentVolume.toFixed(1);
+                
+                status.textContent = 'Connected';
+                status.className = 'status connected';
+                return true;
+            } catch (error) {
+                console.error('Error fetching volume:', error);
+                status.textContent = 'Connection Error';
+                status.className = 'status error';
+                return false;
+            }
+        }
+
+        // Set volume on DSP
+        async function setVolume(volume) {
+            try {
+                setButton.disabled = true;
+                setButton.innerHTML = 'Setting<span class="loading"></span>';
+                
+                const response = await fetch('/api/volume', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ volume_db: parseFloat(volume) }),
+                });
+                
+                if (!response.ok) throw new Error('Failed to set volume');
+                
+                const data = await response.json();
+                currentVolume = data.volume_db;
+                
+                status.textContent = 'Volume Updated';
+                status.className = 'status connected';
+                
+                // Haptic feedback on iOS
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(10);
+                }
+                
+                setTimeout(() => {
+                    status.textContent = 'Connected';
+                }, 2000);
+                
+                return true;
+            } catch (error) {
+                console.error('Error setting volume:', error);
+                status.textContent = 'Failed to Set Volume';
+                status.className = 'status error';
+                return false;
+            } finally {
+                setButton.disabled = false;
+                setButton.textContent = 'Set Volume';
+            }
+        }
+
+        // Event Listeners
+        setButton.addEventListener('click', () => {
+            setVolume(volumeSlider.value);
+        });
+
+        refreshButton.addEventListener('click', () => {
+            getVolume();
+        });
+
+        presetButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const volume = button.getAttribute('data-volume');
+                volumeSlider.value = volume;
+                volumeValue.textContent = parseFloat(volume).toFixed(1);
+                setVolume(volume);
+            });
+        });
+
+        // Load current volume on page load
+        window.addEventListener('load', () => {
+            getVolume();
+        });
+
+        // Prevent zoom on double tap (iOS)
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (event) => {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>
+
