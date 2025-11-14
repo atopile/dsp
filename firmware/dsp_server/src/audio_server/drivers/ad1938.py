@@ -611,11 +611,10 @@ class AD1938:
 
         self.test_read()
 
-        if reset:
-            self.configure_pll(self.config.pll_input_dlrclk)
-            if self.config.tdm:
-                self.set_tdm()
-            self.set_sample_rate(self.config.sample_rate)
+        self.configure_pll(self.config.pll_input_dlrclk)
+        if self.config.tdm:
+            self.set_tdm()
+        self.set_sample_rate(self.config.sample_rate)
 
         self.test_read()
 

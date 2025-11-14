@@ -75,8 +75,8 @@ def setup(
     if init:
         logger.info("Initializing hardware...")
         dsp.enable()
-        for codec in codecs:
-            codec.enable(reset=True)
+        for i, codec in enumerate(codecs):
+            codec.enable(reset=i == 0)
             # TODO remove this, just a bugfix for hardware issue
             codec.invert_output_polarity()
         for eth in eths:
