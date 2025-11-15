@@ -38,6 +38,10 @@ class _Register(IntEnum):
     START_ADDRESS = 0xF404
     CORE_STATUS = 0xF405
 
+    # SIGMASTUDIO
+    SIGMA_PARAM_VALUE = 0x6000
+    SIGMA_PARAM_ADDRESS = 0x6005
+
 
 def register_width(addr: int):
     if addr >= 0x0000 and addr <= 0x4FFF:
@@ -80,6 +84,81 @@ class ADAU1452:
     def set_serial_byte(self, index: int, data: str) -> None:
         assert 0 <= index <= 7
         self.write_reg(_Register.SERIAL_BYTE(index, 0), data)
+
+    @staticmethod
+    def _float_to_bytes(value: float) -> bytes:
+        """Convert float to 8.24 fixed-point format (4 bytes).
+
+        The ADAU1452 uses 8.24 fixed-point format where:
+        - 8 bits for integer part (sign + 7 integer bits)
+        - 24 bits for fractional part
+        - Scale factor: 2^24 = 16777216
+
+        Args:
+            value: Float value to convert (range: -128.0 to +127.999999940)
+
+        Returns:
+            4 bytes in big-endian format
+        """
+        # Convert float to 8.24 fixed-point integer
+        fixed_point = int(value * (2**24))
+
+        # Convert to 4 bytes (big-endian, signed)
+        return fixed_point.to_bytes(4, byteorder="big", signed=True)
+
+    @staticmethod
+    def _bytes_to_float(data: bytes) -> float:
+        """Convert 8.24 fixed-point format (4 bytes) to float.
+
+        The ADAU1452 uses 8.24 fixed-point format where:
+        - 8 bits for integer part (sign + 7 integer bits)
+        - 24 bits for fractional part
+        - Scale factor: 2^24 = 16777216
+
+        Args:
+            data: 4 bytes in big-endian format
+
+        Returns:
+            Float value
+        """
+        # Convert 4 bytes to signed integer
+        fixed_point = int.from_bytes(data, byteorder="big", signed=True)
+
+        # Convert to float by dividing by scale factor
+        return fixed_point / (2**24)
+
+    def read_float_parameter(self, addr: int) -> float:
+        """Read a float parameter from DSP memory.
+
+        Args:
+            addr: Parameter address in DSP memory (e.g., 0x0377)
+
+        Returns:
+            Float value in 8.24 fixed-point format
+        """
+        # Read 4 bytes directly from the parameter address
+        data = bytes(self.read_reg(addr, length=4))
+        return self._bytes_to_float(data)
+
+    def set_float_parameter(self, addr: int, value: float) -> None:
+        # 2025-11-14T16:01:13.558973 192.168.1.113:51640 WRITE addr=0x6000 len=4 data=0019999a
+        # 2025-11-14T16:01:13.560586 192.168.1.113:51640 WRITE addr=0x6005 len=8 data=0000037700000001
+
+        assert 0 <= value <= 128
+        hex_val = self._float_to_bytes(value).hex()
+        self.write_reg(_Register.SIGMA_PARAM_VALUE, hex_val)
+
+        _MAGIC = b"\x00\x00\x00\x01"
+        addr_bytes = addr.to_bytes(4, "big") + _MAGIC
+        self.write_reg(_Register.SIGMA_PARAM_ADDRESS, addr_bytes.hex())
+
+        # 2025-11-14T16:05:07.767365 192.168.1.113:51640 WRITE addr=0x0376 len=4 data=00000000
+        # 2025-11-14T16:05:10.104636 192.168.1.113:51640 WRITE addr=0x0376 len=4 data=00000001
+
+        # Mute & Unmute 0x376
+        # for some reason mute works differently than float / volume slider
+        # SafeloadWrite vs BlockWrite
+        pass
 
     def enable(self):
         self.gpio_enable.deactivate()

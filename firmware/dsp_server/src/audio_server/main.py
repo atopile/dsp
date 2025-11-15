@@ -7,6 +7,7 @@ import typer
 import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
+from pydantic import BaseModel
 
 from audio_server.drivers.ad1938 import AD1938
 from audio_server.drivers.adau1452 import ADAU1452
@@ -97,6 +98,9 @@ def webserver(
 
     app = FastAPI(title="DSP Control")
 
+    class VolumeRequest(BaseModel):
+        volume_db: float
+
     @app.get("/")
     async def read_root():
         html_file = Path(__file__).parent / "html" / "dsp_control.html"
@@ -106,14 +110,16 @@ def webserver(
     @app.get("/api/volume")
     async def get_volume():
         """Get current volume in dB"""
-        volume = dsp_control.get_volume()
+        volume = dsp_control.get_volume_db()
         return {"volume_db": volume}
 
     @app.post("/api/volume")
-    async def set_volume(volume_db: float):
+    async def set_volume(request: VolumeRequest):
         """Set volume in dB"""
-        dsp_control.set_volume(volume_db)
-        return {"status": "ok", "volume_db": volume_db}
+        logger.info(f"Received volume request: {request.volume_db} dB")
+        dsp_control.set_volume(request.volume_db)
+        logger.info(f"Volume set successfully to {request.volume_db} dB")
+        return {"status": "ok", "volume_db": request.volume_db}
 
     logger.info(f"Starting webserver on {host}:{port}")
     uvicorn.run(app, host=host, port=port)
