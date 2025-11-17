@@ -5,8 +5,8 @@ from audio_server.drivers.adau1452 import ADAU1452
 
 
 class Params:
-    GAIN_L = 0x0377
-    GAIN_R = 0x0378
+    GAIN_L = 0x03B8
+    GAIN_R = 0x03B9
     MUTE = 0x0376
 
 
@@ -44,3 +44,6 @@ class DSPControl:
             dif_iter -= 1
 
         print("Done setting volume")
+
+    def set_mute(self, mute: bool):
+        self.adau1452.set_bool_parameter(Params.MUTE, mute)
