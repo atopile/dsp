@@ -186,7 +186,7 @@ module App:
     xlr_audio_output_connectors = new XLR3_Male_PC_Mount[6]
     ethercon_output_connectors = new EtherConAudioConnector[2]
     for ethercon_output_connector in ethercon_output_connectors:
-        power_stage.power_3v3_digital.lv ~ ethercon_output_connector.gnd
+        power_stage.power_ac.earth ~ ethercon_output_connector.gnd
 
     for xlr_audio_input_connector in xlr_audio_input_connectors:
         xlr_audio_input_connector.shield ~ power_stage.power_ac.earth
@@ -196,6 +196,9 @@ module App:
     # --- DMX Connectors ---
     xlr_dmx_input_connector = new XLR3_Male_PC_Mount
     xlr_dmx_output_connector = new XLR3_Female_PC_Mount
+
+    xlr_dmx_input_connector.shield ~ power_stage.power_ac.earth
+    xlr_dmx_output_connector.shield ~ power_stage.power_ac.earth
 
     # --- AD1938 ---
     ad1938s = new Analog_Devices_AD1938_driver[2]
@@ -302,6 +305,9 @@ module App:
     dmx_rs485_driver.rs485_bus.n ~ xlr_dmx_output_connector.dmx.n
     dmx_rs485_driver.rs485_bus.p ~ xlr_dmx_input_connector.dmx.p
     dmx_rs485_driver.rs485_bus.n ~ xlr_dmx_input_connector.dmx.n
+
+    dmx_rs485_driver.rs485_bus.p.line.override_net_name = "dmx_rs485_P"
+    dmx_rs485_driver.rs485_bus.n.line.override_net_name = "dmx_rs485_N"
 
 module PowerStage:
     power_5v = new ElectricPower

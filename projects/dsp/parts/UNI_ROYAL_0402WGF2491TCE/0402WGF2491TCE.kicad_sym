@@ -1,8 +1,8 @@
 (kicad_symbol_lib
 	(version 20241229)
 	(generator "faebryk_convert")
-	(symbol "LBAT54HT1G"
-		(property "Reference" "D"
+	(symbol "0402WGF2491TCE"
+		(property "Reference" "R"
 			(id 0)
 			(at 0 5.08 0)
 			(effects
@@ -11,7 +11,7 @@
 				)
 			)
 		)
-		(property "Value" "LBAT54HT1G"
+		(property "Value" "0402WGF2491TCE"
 			(id 1)
 			(at 0 -5.08 0)
 			(effects
@@ -20,7 +20,7 @@
 				)
 			)
 		)
-		(property "Footprint" "C12744:SOD-323_L1.8-W1.3-LS2.5-RD"
+		(property "Footprint" "C25884:R0402"
 			(id 2)
 			(at 0 -7.62 0)
 			(effects
@@ -29,7 +29,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://lcsc.com/product-detail/Schottky-Barrier-Diodes-SBD_LBAT54HT1G_C12744.html"
+		(property "Datasheet" "https://lcsc.com/product-detail/Chip-Resistor-Surface-Mount-UniOhm_2-49KR-2491-1_C25884.html"
 			(id 3)
 			(at 0 -10.16 0)
 			(effects
@@ -38,7 +38,7 @@
 				)
 			)
 		)
-		(property "LCSC Part" "C12744"
+		(property "LCSC Part" "C25884"
 			(id 5)
 			(at 0 -12.7 0)
 			(effects
@@ -49,8 +49,10 @@
 		)
 		(in_bom yes)
 		(on_board yes)
-		(symbol "LBAT54HT1G_0_1"
-			(polyline
+		(symbol "0402WGF2491TCE_0_1"
+			(rectangle
+				(start -2.54 1.02)
+				(end 2.54 -1.02)
 				(stroke
 					(width 0)
 					(type default)
@@ -59,27 +61,11 @@
 				(fill
 					(type background)
 				)
-				(pts
-					(xy 1.27 1.52) (xy -1.27 -0) (xy 1.27 -1.78) (xy 1.27 1.52)
-				)
 			)
-			(polyline
-				(stroke
-					(width 0)
-					(type default)
-					(color 0 0 0 0)
-				)
-				(fill
-					(type none)
-				)
-				(pts
-					(xy -2.03 1.52) (xy -2.03 1.78) (xy -1.52 1.78) (xy -1.52 -2.03) (xy -1.02 -2.03) (xy -1.02 -1.78)
-				)
-			)
-			(pin unspecified line
+			(pin input line
 				(at 5.08 -0 180)
-				(length 3.81)
-				(name "A"
+				(length 2.54)
+				(name "2"
 					(effects
 						(font
 							(size 1.27 1.27)
@@ -94,10 +80,10 @@
 					)
 				)
 			)
-			(pin unspecified line
+			(pin input line
 				(at -5.08 -0 0)
-				(length 3.81)
-				(name "K"
+				(length 2.54)
+				(name "1"
 					(effects
 						(font
 							(size 1.27 1.27)
