@@ -1,0 +1,20 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component Samsung_Electro_Mechanics_CL21A226MQQNNNE_package:
+    """22uF (226) ±20% 6.3V"""
+
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C5674", date="2025-10-04T00:05:03.153276+00:00", checksum="b7b6748e83336fbde9d270e6ccbd80d65e93c223b2002a725eb2412a900e871a">
+
+    trait is_atomic_part<manufacturer="Samsung Electro-Mechanics", partnumber="CL21A226MQQNNNE", footprint="C0805.kicad_mod", symbol="CL21A226MQQNNNE.kicad_sym", model="C0805_L2.0-W1.3-H1.3.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C5674", manufacturer="Samsung Electro-Mechanics", partno="CL21A226MQQNNNE">
+    trait has_designator_prefix<prefix="C">
+
+    # pins
+    pin 1
+    pin 2

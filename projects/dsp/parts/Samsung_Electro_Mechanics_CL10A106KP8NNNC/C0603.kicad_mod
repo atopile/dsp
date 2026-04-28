@@ -1,0 +1,197 @@
+(footprint "Samsung_Electro_Mechanics_CL10A106KP8NNNC:C0603"
+	(version 20241229)
+	(generator "faebryk_convert")
+	(generator_version "v5")
+	(layer "F.Cu")
+	(tedit "5DC5F6A4")
+	(uuid "eae92c98-97bc-4ce9-9a67-53a8ce088c75")
+	(property "Reference" "REF**"
+		(at 0 -4)
+		(layer "F.SilkS")
+		(uuid "fcb88313-8126-487d-a692-c13ea9cb853d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "C0603"
+		(at 0 4)
+		(layer "F.Fab")
+		(uuid "a4eeeb05-89d7-483f-8452-420af444a24d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_circle
+		(center -0.8 0.4)
+		(end -0.77 0.4)
+		(stroke
+			(width 0.06)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(locked no)
+		(uuid "7ef96ecb-329e-45dc-9f2f-d05d78f63f18")
+	)
+	(fp_line
+		(start -0.28 0.71)
+		(end -1.08 0.71)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "b700a7fd-92d6-4738-a602-d97be0100a5f")
+	)
+	(fp_line
+		(start 0.28 0.71)
+		(end 1.08 0.71)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "0b3b9515-5056-4f32-83cb-76c401a5067c")
+	)
+	(fp_line
+		(start -0.28 -0.71)
+		(end -1.08 -0.71)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "5dc3f5bc-85b2-4dbc-80a8-6e03233d6d45")
+	)
+	(fp_line
+		(start 0.28 -0.71)
+		(end 1.08 -0.71)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "9686aee1-65dd-4678-96c6-0a77e2b30179")
+	)
+	(fp_line
+		(start -1.39 0.4)
+		(end -1.39 -0.4)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "95cc4fc8-7172-457e-bc0e-b837b5f785de")
+	)
+	(fp_line
+		(start 1.39 -0.4)
+		(end 1.39 0.4)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(layers "F.SilkS")
+		(locked no)
+		(uuid "5df721e4-4bd4-4285-93b5-e1033ca652e0")
+	)
+	(fp_arc
+		(start 1.39 -0.4)
+		(mid 1.2992031 -0.6192031)
+		(end 1.08 -0.71)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(locked no)
+		(uuid "95e2f065-13ee-414b-86ed-be8dd13e0031")
+	)
+	(fp_arc
+		(start 1.08 0.71)
+		(mid 1.2992031 0.6192031)
+		(end 1.39 0.4)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(locked no)
+		(uuid "19c21b91-035c-41e9-a5fb-5ab90229ba80")
+	)
+	(fp_arc
+		(start -1.39 0.4)
+		(mid -1.2992031 0.6192031)
+		(end -1.08 0.71)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(locked no)
+		(uuid "9b1cef8f-d101-4373-9baf-f4937e92f6b1")
+	)
+	(fp_arc
+		(start -1.08 -0.71)
+		(mid -1.2992031 -0.6192031)
+		(end -1.39 -0.4)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(locked no)
+		(uuid "43228340-e884-4124-aa64-c4cedc3a2f78")
+	)
+	(fp_text user "%R"
+		(at 0 0)
+		(layer "F.Fab")
+		(uuid "ff184905-ac81-4292-a95d-00db252cbe03")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "2" smd rect
+		(at 0.7 0 0)
+		(size 0.8 0.9)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "4766edec-f855-4f99-be26-9928abe752db")
+	)
+	(pad "1" smd rect
+		(at -0.7 0 0)
+		(size 0.8 0.9)
+		(layers "F.Cu" "F.Paste" "F.Mask")
+		(uuid "472bf7fb-413c-459c-9de2-993781a5201a")
+	)
+	(model "${KIPRJMOD}/../../parts/Samsung_Electro_Mechanics_CL10A106KP8NNNC/C0603_L1.6-W0.8-H0.8.step"
+		(offset
+			(xyz 0 0 -0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(embedded_fonts no)
+)

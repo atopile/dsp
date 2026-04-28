@@ -1,0 +1,226 @@
+(footprint "PWRM-TH_L69.5-W39.0_LD30-23B05R2"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -8.5 0)
+		(layer "F.SilkS")
+		(uuid "5a0f1dc3-e6f7-4690-b14b-7585c2cea8c7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "PWRM-TH_L69.5-W39.0_LD30-23B05R2"
+		(at 0 8.5 0)
+		(layer "F.Fab")
+		(uuid "023d31dc-49ba-4c66-b924-bca20bedb3aa")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0303941e-beb7-41c1-b57a-c3a072c7b032")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "7b2d02d3-b035-4d67-87f1-1f42dd8d58f1")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "checksum" "2eaf03daf567d7cd04dfd41042dfa29daecc012043806b00e7dded6ef5d3f11b"
+		(at 0 0 0)
+		(layer "User.9")
+		(hide yes)
+		(uuid "32ee5219-7ad1-4688-a92b-b34c23b0798f")
+		(effects
+			(font
+				(size 0.125 0.125)
+				(thickness 0.01875)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -34.75 -9)
+		(end -34.75 30)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "3585393b-ed9c-4ee9-a3b9-44c953338ba9")
+	)
+	(fp_line
+		(start -34.75 30)
+		(end 34.75 30)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "1742f8e5-8fb7-46c1-9d07-e10677277087")
+	)
+	(fp_line
+		(start 34.75 -9)
+		(end -34.75 -9)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "c4bedc5b-2948-4190-8b9d-50fb2e922836")
+	)
+	(fp_line
+		(start 34.75 30)
+		(end 34.75 -9)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9afa1781-0439-402e-8460-d175c26da077")
+	)
+	(fp_circle
+		(center -34.75 -9)
+		(end -34.72 -9)
+		(stroke
+			(width 0.06)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "85569deb-7a90-47d1-9e0b-1dfc3838f414")
+	)
+	(fp_circle
+		(center -30.75 -4.5)
+		(end -30.49 -4.5)
+		(stroke
+			(width 0.52)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "6ebc534b-ab01-4432-b578-d71c2ff3d23e")
+	)
+	(fp_circle
+		(center -30.75 1)
+		(end -30.49 1)
+		(stroke
+			(width 0.52)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "b63e3c94-c39f-48b0-9b4d-9fa7fb26f5bd")
+	)
+	(fp_circle
+		(center 30.75 -4.5)
+		(end 31.01 -4.5)
+		(stroke
+			(width 0.52)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "67af3e12-4b2b-4816-be92-ca1091d72918")
+	)
+	(fp_circle
+		(center 30.75 4.5)
+		(end 31.01 4.5)
+		(stroke
+			(width 0.52)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "9e8fb910-abc3-4597-9239-5e06b44f669d")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 -8.5 0)
+		(layer "F.SilkS")
+		(uuid "5a0f1dc3-e6f7-4690-b14b-7585c2cea8c7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "8e9b66b8-936a-4545-8c83-1b8debacf9fd")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -30.75 -4.5)
+		(size 2.2 2.2)
+		(drill 1.500022)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "8b6d91f8-387b-4e37-90cb-416d6fb52862")
+	)
+	(pad "2" thru_hole circle
+		(at -30.75 1)
+		(size 2.2 2.2)
+		(drill 1.500022)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "b7488b0e-f763-4e05-be97-edef0b77d3ca")
+	)
+	(pad "3" thru_hole circle
+		(at 30.75 4.5)
+		(size 2.2 2.2)
+		(drill 1.500022)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "9107c188-1795-47cc-887e-0d85c18b933a")
+	)
+	(pad "4" thru_hole circle
+		(at 30.75 -4.5)
+		(size 2.2 2.2)
+		(drill 1.500022)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "20ace147-1c5d-418c-bec3-4409996b9b05")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/../../parts/MW_IRM_30_5/PWRM-TH_L69.5-W39.0_LD30-23B05R2.STEP"
+		(offset
+			(xyz 0 -13 15.5)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
+		)
+	)
+)

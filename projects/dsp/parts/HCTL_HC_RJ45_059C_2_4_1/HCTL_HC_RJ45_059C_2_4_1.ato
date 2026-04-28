@@ -1,0 +1,118 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component HCTL_HC_RJ45_059C_2_4_1_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    # trait is_auto_generated<system="ato_part", source="easyeda:C5296839", date="2025-09-05T18:38:07.648057+00:00", checksum="07124b6454995258d5cc6c7c5922b9b6fb0c02ec22fcf147e42ca0fe2f0f8dcd">
+
+    trait is_atomic_part<manufacturer="HCTL", partnumber="HC-RJ45-059C-2*4-1", footprint="RJ45-TH_HC-RJ45-059C-2X4-1.kicad_mod", symbol="HC-RJ45-059C-2*4-1.kicad_sym", model="RJ45-TH_HC-RJ45-059C-2X4-1.STEP">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C5296839", manufacturer="HCTL", partno="HC-RJ45-059C-2*4-1">
+    trait has_designator_prefix<prefix="U">
+
+    # pins
+    pin 8
+    pin 7
+    pin 6
+    pin 5
+    pin 4
+    pin 3
+    pin 2
+    pin 1
+    pin 20
+    pin 19
+    pin 18
+    pin 17
+    pin 16
+    pin 15
+    pin 14
+    pin 13
+    pin 32
+    pin 31
+    pin 30
+    pin 29
+    pin 28
+    pin 27
+    pin 26
+    pin 25
+    pin 44
+    pin 43
+    pin 42
+    pin 41
+    pin 40
+    pin 39
+    pin 38
+    pin 37
+    pin 56
+    pin 55
+    pin 54
+    pin 53
+    pin 52
+    pin 51
+    pin 50
+    pin 49
+    pin 68
+    pin 67
+    pin 66
+    pin 65
+    pin 64
+    pin 63
+    pin 62
+    pin 61
+    pin 80
+    pin 79
+    pin 78
+    pin 77
+    pin 76
+    pin 75
+    pin 74
+    pin 73
+    pin 92
+    pin 91
+    pin 90
+    pin 89
+    pin 88
+    pin 87
+    pin 86
+    pin 85
+    pin 9
+    pin 21
+    pin 33
+    pin 45
+    pin 60
+    pin 72
+    pin 84
+    pin 96
+    pin 10
+    pin 22
+    pin 34
+    pin 46
+    pin 59
+    pin 71
+    pin 83
+    pin 95
+    pin 11
+    pin 23
+    pin 35
+    pin 47
+    pin 58
+    pin 70
+    pin 82
+    pin 94
+    pin 12
+    pin 24
+    pin 36
+    pin 48
+    pin 57
+    pin 69
+    pin 81
+    pin 93
+    signal SHELL ~ pin 98
+    SHELL ~ pin 97
+    SHELL ~ pin 101
+    SHELL ~ pin 100
+    SHELL ~ pin 99
+    SHELL ~ pin 102

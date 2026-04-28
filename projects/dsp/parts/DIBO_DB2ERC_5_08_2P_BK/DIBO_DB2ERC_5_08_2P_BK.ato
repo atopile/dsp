@@ -1,0 +1,18 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component DIBO_DB2ERC_5_08_2P_BK_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    # trait is_auto_generated<system="ato_part", source="easyeda:C430456", date="2025-09-06T00:18:58.851013+00:00", checksum="310dce80efaa78446de6e901c30cf142bd48932ba41d57e6053d68ac22b63d1b">
+
+    trait is_atomic_part<manufacturer="DIBO", partnumber="DB2ERC-5.08-2P-BK", footprint="CONN-TH_2P-P5.08_DB2ERC-5.08-2P-BK.kicad_mod", symbol="DB2ERC-5.08-2P-BK.kicad_sym", model="CONN-TH_2P-P5.08_DB2ERC-5.08-2P-BK.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C430456", manufacturer="DIBO", partno="DB2ERC-5.08-2P-BK">
+    trait has_designator_prefix<prefix="CN">
+
+    # pins
+    pin 1
+    pin 2

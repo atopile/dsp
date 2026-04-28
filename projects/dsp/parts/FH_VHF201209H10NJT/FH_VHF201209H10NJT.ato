@@ -1,0 +1,18 @@
+#pragma experiment("TRAITS")
+import has_designator_prefix
+import has_part_picked
+import is_atomic_part
+import is_auto_generated
+
+component FH_VHF201209H10NJT_package:
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+    trait is_auto_generated<system="ato_part", source="easyeda:C98987", date="2025-10-03T23:43:30.249265+00:00", checksum="103355ddab37a28000a2f313e7c29846749495a7b0eeca489880c2894f4a4ee4">
+
+    trait is_atomic_part<manufacturer="FH", partnumber="VHF201209H10NJT", footprint="L0805.kicad_mod", symbol="VHF201209H10NJ.kicad_sym", model="R0805_L2.0-W1.3-H0.6.step">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C98987", manufacturer="FH", partno="VHF201209H10NJT">
+    trait has_designator_prefix<prefix="L">
+
+    # pins
+    pin 2
+    pin 1

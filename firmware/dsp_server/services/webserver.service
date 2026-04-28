@@ -1,0 +1,23 @@
+[Unit]
+Description=DSP Web Control Server
+After=network.target audioserver.service
+Requires=audioserver.service
+
+[Service]
+Type=simple
+#User=atopile
+WorkingDirectory=/home/atopile/dsp_server
+ExecStart=/home/atopile/dsp_server/.venv_pi/bin/audio-server webserver --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+Environment="PIPEWIRE_REMOTE=/run/user/1000/pipewire-0"
+
+# Graceful shutdown
+TimeoutStopSec=30
+KillMode=mixed
+
+[Install]
+WantedBy=default.target
+

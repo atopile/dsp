@@ -1,0 +1,18 @@
+[Unit]
+Description=DSP Audio Server Setup
+After=network.target pipewire.service
+Wants=network.target pipewire.socket
+
+[Service]
+Type=oneshot
+#User=atopile
+WorkingDirectory=/home/atopile/dsp_server
+ExecStart=/home/atopile/dsp_server/.venv_pi/bin/audio-server setup
+RemainAfterExit=yes
+StandardOutput=journal
+StandardError=journal
+Environment="PIPEWIRE_REMOTE=/run/user/1000/pipewire-0"
+
+[Install]
+WantedBy=default.target
+
