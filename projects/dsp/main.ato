@@ -9,7 +9,7 @@ import Resistor
 import I2C
 import I2S
 import can_bridge_by_name
-import has_single_electric_reference_shared
+import has_single_electric_reference
 import DifferentialPair
 import Capacitor
 import Diode
@@ -24,12 +24,12 @@ from "atopile/ti-tpsm863257/ti-tpsm863257.ato" import TPSM863257
 
 # Packages
 from "atopile/usb-connectors/usb-connectors.ato" import USB2_0TypeCHorizontalConnector
-from "atopile/adi-adau145x/adau145x.ato" import Analog_Devices_ADAU145x_driver
-from "atopile/ti-tlv75901/ti-tlv75901.ato" import TLV75901_driver
+from "atopile/adi-adau145x/adi-adau145x.ato" import ADI_ADAU145x
+from "atopile/ti-tlv75901/ti-tlv75901.ato" import TI_TLV75901
 from "atopile/adi-ad1938/adi-ad1938.ato" import Analog_Devices_AD1938_driver
 from "atopile/rj45-connectors/rj45-connectors.ato" import RJ45_Horizontal_TH_Magnetics_8Port
 from "atopile/realtek-rtl8305nb/realtek-rtl8305nb.ato" import Realtek_RTL8305NB
-from "atopile/ti-drv135/ti-drv135.ato" import TI_DRV135_driver
+from "atopile/ti-drv135/ti-drv135.ato" import TI_DRV135
 from "atopile/logos/logos.ato" import atopile_logo_25x6mm
 from "atopile/maxlinear-sp3485/maxlinear-sp3485.ato" import MaxLinear_SP3485
 
@@ -87,7 +87,7 @@ module App:
 
 
     # --- DSP ---
-    dsp = new Analog_Devices_ADAU145x_driver
+    dsp = new ADI_ADAU145x
     power_stage.power_3v3_digital ~ dsp.power
     cm5.i2cs[0] ~ dsp.model.i2c
     cm5_dsp_i2c_pullups = new Resistor[2]
@@ -97,7 +97,7 @@ module App:
     cm5.i2cs[0].scl.line ~> cm5_dsp_i2c_pullups[0] ~> cm5.i2cs[0].scl.reference.hv
     cm5.i2cs[0].sda.line ~> cm5_dsp_i2c_pullups[1] ~> cm5.i2cs[0].sda.reference.hv
 
-    dsp.model.selfboot_enable ~ dsp.power.lv
+    dsp.model.selfboot_enable.line ~ dsp.power.lv
 
     cm5.gpios[24] ~ dsp.reset_disable
 
@@ -107,10 +107,11 @@ module App:
     dsp_debug_connector.power.lv ~ power_stage.power_3v3_digital.lv  # GND
 
     # --- Balanced audio line drivers ---
-    balanced_audio_line_drivers = new TI_DRV135_driver[14]
+    balanced_audio_line_drivers = new TI_DRV135[14]
     for driver in balanced_audio_line_drivers:
-        power_stage.power_18v_pos ~ driver.pos_power
-        power_stage.power_18v_neg ~ driver.neg_power
+        power_stage.power_18v_pos ~ driver.positive_power
+        power_stage.power_18v_neg ~ driver.negative_power
+        driver.output_force ~ driver.output_sense
 
     # --- USB connector ---
     usb_connector_horizontal = new USB2_0TypeCHorizontalConnector
@@ -141,12 +142,17 @@ module App:
     cm5_smi_bitbang[2].gpios[0] ~ cm5.gpios[22]
     cm5_smi_bitbang[2].gpios[1] ~ cm5.gpios[23]
 
-    smi_hack_switches = new I2CSMIDualFunction[3]
     smi_resistor_jumpers = new SMIResistorJumper[3]
 
-    switches[0].i2c_mdio ~> smi_hack_switches[0] ~> smi_resistor_jumpers[0] ~> cm5_smi_bitbang[0].smi
-    switches[1].i2c_mdio ~> smi_hack_switches[1] ~> smi_resistor_jumpers[1] ~> cm5_smi_bitbang[1].smi
-    switches[2].i2c_mdio ~> smi_hack_switches[2] ~> smi_resistor_jumpers[2] ~> cm5_smi_bitbang[2].smi
+    switches[0].mdio.mdc ~ smi_resistor_jumpers[0].smi_in.mdc
+    switches[0].mdio.mdio ~ smi_resistor_jumpers[0].smi_in.mdio
+    smi_resistor_jumpers[0].smi_out ~ cm5_smi_bitbang[0].smi
+    switches[1].mdio.mdc ~ smi_resistor_jumpers[1].smi_in.mdc
+    switches[1].mdio.mdio ~ smi_resistor_jumpers[1].smi_in.mdio
+    smi_resistor_jumpers[1].smi_out ~ cm5_smi_bitbang[1].smi
+    switches[2].mdio.mdc ~ smi_resistor_jumpers[2].smi_in.mdc
+    switches[2].mdio.mdio ~ smi_resistor_jumpers[2].smi_in.mdio
+    smi_resistor_jumpers[2].smi_out ~ cm5_smi_bitbang[2].smi
 
     smi_pullups = new Resistor[6]
     for smi_pullup in smi_pullups:
@@ -256,39 +262,39 @@ module App:
     ad1938s[0].model.adc_channels[0].analog_right.n.line ~> input_dc_block_caps[3] ~> xlr_audio_input_connectors[1].balanced_audio.n.line
 
     # Single ended DAC output to line driver inputs
-    ad1938s[0].model.dac_channels[0].analog_left.line ~ balanced_audio_line_drivers[0].audio_in.line
-    ad1938s[0].model.dac_channels[0].analog_right.line ~ balanced_audio_line_drivers[1].audio_in.line
-    ad1938s[0].model.dac_channels[1].analog_left.line ~ balanced_audio_line_drivers[2].audio_in.line
-    ad1938s[0].model.dac_channels[1].analog_right.line ~ balanced_audio_line_drivers[3].audio_in.line
-    ad1938s[0].model.dac_channels[2].analog_left.line ~ balanced_audio_line_drivers[4].audio_in.line
-    ad1938s[0].model.dac_channels[2].analog_right.line ~ balanced_audio_line_drivers[5].audio_in.line
-    # ad1938s[0].model.dac_channels[3].analog_left.line ~ balanced_audio_line_drivers[6].audio_in.line
-    # ad1938s[0].model.dac_channels[3].analog_right.line ~ balanced_audio_line_drivers[7].audio_in.line
-    ad1938s[1].model.dac_channels[0].analog_left.line ~ balanced_audio_line_drivers[6].audio_in.line
-    ad1938s[1].model.dac_channels[0].analog_right.line ~ balanced_audio_line_drivers[7].audio_in.line
-    ad1938s[1].model.dac_channels[1].analog_left.line ~ balanced_audio_line_drivers[8].audio_in.line
-    ad1938s[1].model.dac_channels[1].analog_right.line ~ balanced_audio_line_drivers[9].audio_in.line
-    ad1938s[1].model.dac_channels[2].analog_left.line ~ balanced_audio_line_drivers[10].audio_in.line
-    ad1938s[1].model.dac_channels[2].analog_right.line ~ balanced_audio_line_drivers[11].audio_in.line
-    ad1938s[1].model.dac_channels[3].analog_left.line ~ balanced_audio_line_drivers[12].audio_in.line
-    ad1938s[1].model.dac_channels[3].analog_right.line ~ balanced_audio_line_drivers[13].audio_in.line
+    ad1938s[0].model.dac_channels[0].analog_left.line ~ balanced_audio_line_drivers[0].input_signal.line
+    ad1938s[0].model.dac_channels[0].analog_right.line ~ balanced_audio_line_drivers[1].input_signal.line
+    ad1938s[0].model.dac_channels[1].analog_left.line ~ balanced_audio_line_drivers[2].input_signal.line
+    ad1938s[0].model.dac_channels[1].analog_right.line ~ balanced_audio_line_drivers[3].input_signal.line
+    ad1938s[0].model.dac_channels[2].analog_left.line ~ balanced_audio_line_drivers[4].input_signal.line
+    ad1938s[0].model.dac_channels[2].analog_right.line ~ balanced_audio_line_drivers[5].input_signal.line
+    # ad1938s[0].model.dac_channels[3].analog_left.line ~ balanced_audio_line_drivers[6].input_signal.line
+    # ad1938s[0].model.dac_channels[3].analog_right.line ~ balanced_audio_line_drivers[7].input_signal.line
+    ad1938s[1].model.dac_channels[0].analog_left.line ~ balanced_audio_line_drivers[6].input_signal.line
+    ad1938s[1].model.dac_channels[0].analog_right.line ~ balanced_audio_line_drivers[7].input_signal.line
+    ad1938s[1].model.dac_channels[1].analog_left.line ~ balanced_audio_line_drivers[8].input_signal.line
+    ad1938s[1].model.dac_channels[1].analog_right.line ~ balanced_audio_line_drivers[9].input_signal.line
+    ad1938s[1].model.dac_channels[2].analog_left.line ~ balanced_audio_line_drivers[10].input_signal.line
+    ad1938s[1].model.dac_channels[2].analog_right.line ~ balanced_audio_line_drivers[11].input_signal.line
+    ad1938s[1].model.dac_channels[3].analog_left.line ~ balanced_audio_line_drivers[12].input_signal.line
+    ad1938s[1].model.dac_channels[3].analog_right.line ~ balanced_audio_line_drivers[13].input_signal.line
 
     # Line drivers -> XLR Outputs to speaker amps
-    balanced_audio_line_drivers[0].audio_out ~ xlr_audio_output_connectors[0].balanced_audio
-    balanced_audio_line_drivers[1].audio_out ~ xlr_audio_output_connectors[1].balanced_audio
-    balanced_audio_line_drivers[2].audio_out ~ xlr_audio_output_connectors[2].balanced_audio
-    balanced_audio_line_drivers[3].audio_out ~ xlr_audio_output_connectors[3].balanced_audio
-    balanced_audio_line_drivers[4].audio_out ~ xlr_audio_output_connectors[4].balanced_audio
-    balanced_audio_line_drivers[5].audio_out ~ xlr_audio_output_connectors[5].balanced_audio
+    balanced_audio_line_drivers[0].output_force ~ xlr_audio_output_connectors[0].balanced_audio
+    balanced_audio_line_drivers[1].output_force ~ xlr_audio_output_connectors[1].balanced_audio
+    balanced_audio_line_drivers[2].output_force ~ xlr_audio_output_connectors[2].balanced_audio
+    balanced_audio_line_drivers[3].output_force ~ xlr_audio_output_connectors[3].balanced_audio
+    balanced_audio_line_drivers[4].output_force ~ xlr_audio_output_connectors[4].balanced_audio
+    balanced_audio_line_drivers[5].output_force ~ xlr_audio_output_connectors[5].balanced_audio
     # Line drivers -> EtherCon Outputs to speaker amps
-    balanced_audio_line_drivers[6].audio_out ~ ethercon_output_connectors[0].balanced_audios[0]
-    balanced_audio_line_drivers[7].audio_out ~ ethercon_output_connectors[0].balanced_audios[1]
-    balanced_audio_line_drivers[8].audio_out ~ ethercon_output_connectors[0].balanced_audios[2]
-    balanced_audio_line_drivers[9].audio_out ~ ethercon_output_connectors[0].balanced_audios[3]
-    balanced_audio_line_drivers[10].audio_out ~ ethercon_output_connectors[1].balanced_audios[0]
-    balanced_audio_line_drivers[11].audio_out ~ ethercon_output_connectors[1].balanced_audios[1]
-    balanced_audio_line_drivers[12].audio_out ~ ethercon_output_connectors[1].balanced_audios[2]
-    balanced_audio_line_drivers[13].audio_out ~ ethercon_output_connectors[1].balanced_audios[3]
+    balanced_audio_line_drivers[6].output_force ~ ethercon_output_connectors[0].balanced_audios[0]
+    balanced_audio_line_drivers[7].output_force ~ ethercon_output_connectors[0].balanced_audios[1]
+    balanced_audio_line_drivers[8].output_force ~ ethercon_output_connectors[0].balanced_audios[2]
+    balanced_audio_line_drivers[9].output_force ~ ethercon_output_connectors[0].balanced_audios[3]
+    balanced_audio_line_drivers[10].output_force ~ ethercon_output_connectors[1].balanced_audios[0]
+    balanced_audio_line_drivers[11].output_force ~ ethercon_output_connectors[1].balanced_audios[1]
+    balanced_audio_line_drivers[12].output_force ~ ethercon_output_connectors[1].balanced_audios[2]
+    balanced_audio_line_drivers[13].output_force ~ ethercon_output_connectors[1].balanced_audios[3]
 
     atopile_logo = new atopile_logo_25x6mm
 
@@ -297,9 +303,7 @@ module App:
     dmx_rs485_driver.power ~ power_stage.power_3v3_digital
     dmx_rs485_driver.driver_enable ~ cm5.gpios[16]
     dmx_rs485_driver.n_receiver_enable ~ cm5.gpios[4]
-    # TODO: Change this to directly connect UART BASE interfaces
-    dmx_rs485_driver.uart_tx ~ cm5.uart0.base_uart.tx # TX from the CM5
-    dmx_rs485_driver.uart_rx ~ cm5.uart0.base_uart.rx # RX from the CM5
+    dmx_rs485_driver.uart ~ cm5.uart0.base_uart
     
     dmx_rs485_driver.rs485_bus.p ~ xlr_dmx_output_connector.dmx.p
     dmx_rs485_driver.rs485_bus.n ~ xlr_dmx_output_connector.dmx.n
@@ -329,12 +333,15 @@ module PowerStage:
     power_ac.line ~ connetor_ac.1
     power_ac.neutral ~ connetor_ac.2
 
-    power_ac ~> regulator_ac_5v ~> power_5v
-    power_5v ~> regulator_3v3_analog ~> power_3v3_analog
-    power_5v ~> regulator_3v3_digital ~> power_3v3_digital
+    power_ac ~ regulator_ac_5v.power_ac
+    regulator_ac_5v.power_5v ~ power_5v
+    power_5v ~ regulator_3v3_analog.power_in
+    regulator_3v3_analog.power_out ~ power_3v3_analog
+    power_5v ~ regulator_3v3_digital.power_in
+    regulator_3v3_digital.power_out ~ power_3v3_digital
 
     regulator_3v3_digital.output_voltage = 3.3V +/- 10%
-    regulator_3v3_analog.output_voltage = 3.3V +/- 4%
+    # regulator_3v3_analog (TPS7A4700_3V3) hardcodes 3.3V +/- 1% via internal assert
 
     # Audio power supplies +/-18v with center referenced to gnd
     # Postive 18V rail
@@ -346,10 +353,10 @@ module PowerStage:
     # iso_resistor = new Resistor
     # iso_resistor.resistance = 0ohm +/- 10mohm
     # iso_resistor.package = "0402"
-    # power_5v.gnd ~> iso_resistor ~> power_18v_pos.gnd
-    # power_5v.gnd ~> iso_resistor ~> power_18v_neg.vcc
-    power_5v.gnd ~ power_18v_pos.gnd
-    power_5v.gnd ~ power_18v_neg.vcc
+    # power_5v.lv ~> iso_resistor ~> power_18v_pos.lv
+    # power_5v.lv ~> iso_resistor ~> power_18v_neg.hv
+    power_5v.lv ~ power_18v_pos.lv
+    power_5v.lv ~ power_18v_neg.hv
 
     power_18v_pos.hv.override_net_name = "power_18v_pos"
     power_18v_neg.lv.override_net_name = "power_18v_neg"
@@ -418,4 +425,4 @@ module EtherConAudioConnector:
     balanced_audios[3].p.line ~ package.7
     balanced_audios[3].n.line ~ package.8
 
-    trait has_single_electric_reference_shared
+    trait has_single_electric_reference<ground_only = True>

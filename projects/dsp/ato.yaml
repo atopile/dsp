@@ -1,63 +1,50 @@
-requires-atopile: 0.12.3
-
+requires-atopile: ^0.15.7
 paths:
   src: ./
   layout: ./layouts
-
 builds:
   default:
     entry: main.ato:App
     hide_designators: true
-    exclude_checks: [PCB.requires_drc_check]
-# This metadata is only required for publishing
-# Uncomment it and fill out the fields to publish your package
-# package:
-#   identifier: # fill me!/dsp
-#   repository: # fill me!
-#   version: "0.1.0"  # recommended first version
-#   authors:
-#     - name: atopile
-#       email: pepper@atopile.io
-#   summary: # fill me!
-#   license: MIT license
-#   homepage: # fill me!
+    exclude_checks:
+    - PCB.requires_drc_check
 dependencies:
-- type: registry
+- type: file
   identifier: atopile/usb-connectors
-  release: 0.4.0
-- type: registry
+  path: ../../../packages/packages/usb-connectors
+- type: file
   identifier: atopile/adi-adau145x
-  release: 0.2.0
-- type: registry
+  path: ../../../packages/packages/adi-adau145x
+- type: file
   identifier: atopile/ti-tps54560x
-  release: 0.1.7
-- type: registry
+  path: ../../../packages/packages/ti-tps54560x
+- type: file
   identifier: atopile/ti-tlv75901
-  release: 0.4.0
-- type: registry
+  path: ../../../packages/packages/ti-tlv75901
+- type: file
   identifier: atopile/rj45-connectors
-  release: 0.2.0
-- type: registry
+  path: ../../../packages/packages/rj45-connectors
+- type: file
   identifier: atopile/adi-ad1938
-  release: 0.2.0
-# - type: registry
-#   identifier: atopile/realtek-rtl8305nb
-#   release: 0.1.5
+  path: ../../../packages/packages/adi-ad1938
 - type: file
   identifier: atopile/ti-drv135
-  path: ../unreleased-packages/ti-drv135
+  path: ../../../packages/packages/ti-drv135
 - type: file
   identifier: atopile/xlr-connectors
-  path: ../unreleased-packages/xlr-connectors
+  path: ../../../packages/packages/xlr-connectors
 - type: file
   identifier: atopile/ti-tpsm863257
-  path: ../unreleased-packages/ti-tpsm863257
-- type: registry
+  path: ../../../packages/packages/ti-tpsm863257
+- type: file
   identifier: atopile/rpi-cm5
-  release: 0.3.0
-- type: registry
+  path: ../../../packages/packages/rpi-cm5
+- type: file
   identifier: atopile/logos
-  release: 0.2.0
-- type: registry
+  path: ../../../packages/packages/logos
+- type: file
   identifier: atopile/maxlinear-sp3485
-  release: 0.2.0
+  path: ../../../packages/packages/maxlinear-sp3485
+- type: file
+  identifier: atopile/realtek-rtl8305nb
+  path: ../../../packages/packages/realtek-rtl8305nb

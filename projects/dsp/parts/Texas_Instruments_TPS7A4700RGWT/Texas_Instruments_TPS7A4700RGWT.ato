@@ -40,10 +40,10 @@ component Texas_Instruments_TPS7A4700RGWT_package:
 
 component Texas_Instruments_TPS7A4700RGWT_18V from Regulator:
     package = new Texas_Instruments_TPS7A4700RGWT_package
-    power_in.vcc ~ package.IN
-    power_in.gnd ~ package.GND
-    power_out.vcc ~ package.OUT
-    power_out.gnd ~ package.GND
+    power_in.hv ~ package.IN
+    power_in.lv ~ package.GND
+    power_out.hv ~ package.OUT
+    power_out.lv ~ package.GND
     package.EP ~ package.GND
 
     # Configure for 18V output - Programming pins are ACTIVE LOW
@@ -63,7 +63,7 @@ component Texas_Instruments_TPS7A4700RGWT_18V from Regulator:
     # P0P1V and P1P6V left open (contribute 0V)
     
     # Enable and noise reduction
-    package.EN ~ power_in.vcc    # Enable the regulator
+    package.EN ~ power_in.hv    # Enable the regulator
     package.SENSE_FB ~ package.OUT # Feedback connection
     
     # Set output voltage specification
@@ -85,10 +85,10 @@ component Texas_Instruments_TPS7A4700RGWT_18V from Regulator:
 
 component Texas_Instruments_TPS7A4700RGWT_3V3 from Regulator:
     package = new Texas_Instruments_TPS7A4700RGWT_package
-    power_in.vcc ~ package.IN
-    power_in.gnd ~ package.GND
-    power_out.vcc ~ package.OUT
-    power_out.gnd ~ package.GND
+    power_in.hv ~ package.IN
+    power_in.lv ~ package.GND
+    power_out.hv ~ package.OUT
+    power_out.lv ~ package.GND
     package.EP ~ package.GND
 
     # Configure for 3.3V output - Programming pins are ACTIVE LOW
@@ -105,7 +105,7 @@ component Texas_Instruments_TPS7A4700RGWT_3V3 from Regulator:
     # P0P4V, P0P8V, P3P2V, P6P4V1, P6P4V2 left open (contribute 0V)
     
     # Enable and noise reduction
-    package.EN ~ power_in.vcc    # Enable the regulator
+    package.EN ~ power_in.hv    # Enable the regulator
     package.SENSE_FB ~ package.OUT # Feedback connection
     
     # Set output voltage specification

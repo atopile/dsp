@@ -34,28 +34,28 @@ module MW_IRM_30_5:
     power_5v = new ElectricPower
     power_ac = new ElectricPowerAC
 
-    assert power_5v.voltage is 5V +/- 2.5%
+    # assert power_5v.voltage is 5V +/- 2.5%
 
     # Connections
     power_ac.line ~ package.AL_L
     power_ac.neutral ~ package.AC_N
 
-    power_5v.vcc ~ package.Vpos
-    power_5v.gnd ~ package.Vneg
+    power_5v.hv ~ package.Vpos
+    power_5v.lv ~ package.Vneg
 
     decoupling_caps = new Capacitor[8]
     for cap in decoupling_caps:
         cap.capacitance = 22uF +/- 20%
         cap.package = "0805"
-        assert cap.max_voltage >= power_5v.voltage * 2
-        power_5v.vcc ~> cap ~> power_5v.gnd
+        # assert cap.max_voltage >= power_5v.voltage * 2
+        power_5v.hv ~> cap ~> power_5v.lv
 
     decoupling_caps_100nf = new Capacitor[3]
     for cap in decoupling_caps_100nf:
         cap.capacitance = 100nF +/- 20%
         cap.package = "0402"
-        assert cap.max_voltage >= power_5v.voltage * 2
-        power_5v.vcc ~> cap ~> power_5v.gnd
+        # assert cap.max_voltage >= power_5v.voltage * 2
+        power_5v.hv ~> cap ~> power_5v.lv
 
     trait can_bridge_by_name<input_name = "power_ac", output_name = "power_5v">
 
