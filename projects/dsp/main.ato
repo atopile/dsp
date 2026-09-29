@@ -1,219 +1,745 @@
-.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
-.PARTS := .ELEC::PARTS
-.PWR:  @STD::Import { .uri &= "power.ato" }
-.VCM:  @STD::Import { .uri &= "vendor/rpi-cm5/rpi-cm5.ato" }
-.VDSP: @STD::Import { .uri &= "vendor/adi-adau145x/adi-adau145x.ato" }
-.VCOD: @STD::Import { .uri &= "vendor/adi-ad1938/adi-ad1938.ato" }
-.VSW:  @STD::Import { .uri &= "vendor/realtek-rtl8305nb/realtek-rtl8305nb.ato" }
-.VRS:  @STD::Import { .uri &= "vendor/maxlinear-sp3485/maxlinear-sp3485.ato" }
-.VDRV: @STD::Import { .uri &= "vendor/ti-drv135/ti-drv135.ato" }
-
-.PANEL: @STD::Import { .uri &= "vendor/panel-connectors/panel-connectors.ato" }
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.PWR: @STD::Import { .uri &= "power.ato" }
+.AUDIOCHANNEL: @STD::Import { .uri &= "circuits/AudioChannel.ato" }
+.CODEC: @STD::Import { .uri &= "circuits/Codec.ato" }
+.CONTROL: @STD::Import { .uri &= "circuits/Control.ato" }
+.DSP: @STD::Import { .uri &= "circuits/Dsp.ato" }
+.ETHERNETPORTS: @STD::Import { .uri &= "circuits/EthernetPorts.ato" }
+.ETHERNETSWITCH: @STD::Import { .uri &= "circuits/EthernetSwitch.ato" }
+.HOST: @STD::Import { .uri &= "circuits/Host.ato" }
+.PANEL: @STD::Import { .uri &= "circuits/Panel.ato" }
+.USB: @STD::Import { .uri &= "circuits/Usb.ato" }
 
 .DspBoard: @type {
-    /// Networked audio DSP: a compute module drives an ADAU1452 SigmaDSP
-    /// and two AD1938 codecs, with fourteen balanced audio outputs, three
-    /// RTL8305NB Ethernet switches, and SP3485-driven DMX512 I/O — modeled on
-    /// atopile's public DSP design.
+    /// DSP v1 circuit and routed placement, with the completed external-5V supply.
     .jlc_stackup: ELEC::JLCPCB::JLC041612_3313
     @trait(_): ELEC::PCB::is_pcb
-
-    # --- Subsystems ---
     .power: PWR::PowerSupply
-    .cm: VCM::RPI_CM5
-    .dsp: VDSP::ADI_ADAU145x
-    .codecs: [2]VCOD::Analog_Devices_AD1938
-    .eth_switches: [3]VSW::Realtek_RTL8305NB
-    .dmx_phy: VRS::MaxLinear_SP3485
 
-    # --- Power distribution ---
-    .power.power_5v ~ .cm.power_5v
-    .power.power_3v3d ~ .dsp.power
-    @for(.eth_switches, { power.power_3v3d ~ .obj.power_3v3 })
-    .power.power_3v3d ~ .dmx_phy.power
-    @for(.codecs, {
-        power.power_3v3a ~ .obj.power
-        power.power_3v3a ~ .obj.power_analog
-    })
+    .control: CONTROL::Control
+    .dsp: DSP::Dsp
+    .ethernet_ports: ETHERNETPORTS::EthernetPorts
+    .host: HOST::Host
+    .panel: PANEL::Panel
+    .usb: USB::Usb
+    .line_drivers: [14]AUDIOCHANNEL::AudioChannel
+    .codecs: [2]CODEC::Codec
+    .switches: [3]ETHERNETSWITCH::EthernetSwitch
 
-    # --- Control plane ---
-    # CM -> DSP: register access over I2C, with pull-ups on the bus
-    .cm.i2cs[0] ~ .dsp.i2c
-    .i2c_pullups: [2]ELEC::Stuff::Resistor
-    @for(.i2c_pullups, {
-        .pullup := .obj
-        .pullup.resistance &= 2.2kohm +/- 1%
-    })
-    @trait(_, .i2c_pullups[0]): PARTS::has_package_requirements { .size &= "0402" }
-    @trait(_, .i2c_pullups[1]): PARTS::has_package_requirements { .size &= "0402" }
-    .cm.i2cs[0].scl.line ~> .i2c_pullups[0] ~> .power.power_3v3d.hv
-    .cm.i2cs[0].sda.line ~> .i2c_pullups[1] ~> .power.power_3v3d.hv
-
-    # CM -> codec: register access over SPI
-    @for(.codecs, { cm.spis[0] ~ .obj.spi })
-    .cm.spi0_cs[0] ~ .codecs[0].spi_cs
-    .cm.spi0_cs[1] ~ .codecs[1].spi_cs
-
-    # Resets and strapping
-    .cm.gpios[0] ~ .dsp.reset_disable
-    @for(.codecs, { cm.gpios[1] ~ .obj.reset_disable })
-    @for(.eth_switches, { cm.gpios[2] ~ .obj.reset })
-    .dsp.selfboot_enable.line ~ .power.power_3v3d.lv  # boot from host, not flash
-
-    # --- Audio path ---
-    # CM <-> DSP: playback down, capture back (serial port 0)
-    .cm.i2s_output ~ .dsp.i2s_ins[0]
-    .dsp.i2s_outs[0] ~ .cm.i2s_input
-
-    # DSP CLKOUT provides the codec master clock
-    @for(.codecs, { dsp.pll_clock_out ~ .obj.pll_clock_in })
-
-    # DSP -> codec: series-damped I2S lines across the digital/analog split
-    .i2s_series_resistors: [6]ELEC::Stuff::Resistor
-    @for(.i2s_series_resistors, {
-        .damper := .obj
-        .damper.resistance &= 10ohm +/- 5%
-    })
-    @trait(_, .i2s_series_resistors[0]): PARTS::has_package_requirements { .size &= "0402" }
-    @trait(_, .i2s_series_resistors[1]): PARTS::has_package_requirements { .size &= "0402" }
-    @trait(_, .i2s_series_resistors[2]): PARTS::has_package_requirements { .size &= "0402" }
-    @trait(_, .i2s_series_resistors[3]): PARTS::has_package_requirements { .size &= "0402" }
-    @trait(_, .i2s_series_resistors[4]): PARTS::has_package_requirements { .size &= "0402" }
-    @trait(_, .i2s_series_resistors[5]): PARTS::has_package_requirements { .size &= "0402" }
-    .dsp.i2s_outs[1].sck.line ~> .i2s_series_resistors[0] ~> .codecs[0].i2s_in.sck.line
-    .dsp.i2s_outs[1].ws.line ~> .i2s_series_resistors[1] ~> .codecs[0].i2s_in.ws.line
-    .dsp.i2s_outs[1].sd.line ~> .i2s_series_resistors[2] ~> .codecs[0].i2s_in.sd.line
-    .dsp.i2s_outs[2].sck.line ~> .i2s_series_resistors[3] ~> .codecs[1].i2s_in.sck.line
-    .dsp.i2s_outs[2].ws.line ~> .i2s_series_resistors[4] ~> .codecs[1].i2s_in.ws.line
-    .dsp.i2s_outs[2].sd.line ~> .i2s_series_resistors[5] ~> .codecs[1].i2s_in.sd.line
-    .codecs[0].i2s_out ~ .dsp.i2s_ins[1]
-
-    # Balanced XLR inputs -> DC-blocked ADC inputs
-    .xlr_in: [2]PANEL::AudioInput
-    .input_dc_block_caps: [4]ELEC::Stuff::Capacitor
-    @for(.input_dc_block_caps, {
-        .blocker := .obj
-        .blocker.capacitance &= 10uF +/- 20%
-    })
-    @trait(_, .input_dc_block_caps[0]): PARTS::has_package_requirements { .size &= "0805" }
-    @trait(_, .input_dc_block_caps[1]): PARTS::has_package_requirements { .size &= "0805" }
-    @trait(_, .input_dc_block_caps[2]): PARTS::has_package_requirements { .size &= "0805" }
-    @trait(_, .input_dc_block_caps[3]): PARTS::has_package_requirements { .size &= "0805" }
-    .xlr_in[0].signal.p.line ~> .input_dc_block_caps[0] ~> .codecs[0].adc_in[0].p.line
-    .xlr_in[0].signal.n.line ~> .input_dc_block_caps[1] ~> .codecs[0].adc_in[0].n.line
-    .xlr_in[1].signal.p.line ~> .input_dc_block_caps[2] ~> .codecs[0].adc_in[1].p.line
-    .xlr_in[1].signal.n.line ~> .input_dc_block_caps[3] ~> .codecs[0].adc_in[1].n.line
-
-    # Fourteen analog outputs: six XLR and two four-channel EtherCON ports.
-    .line_drivers: [14]VDRV::TI_DRV135
-    .xlr_out: [6]PANEL::AudioOutput
-    .ethercon_out: [2]PANEL::EtherConAudioOutput
-    @for(.line_drivers, { .obj.output_force ~ .obj.output_sense })
-    .power.audio_banks[0].positive.power_out ~ .line_drivers[0].positive_power
-    .power.audio_banks[0].negative.power_out ~ .line_drivers[0].negative_power
-    .codecs[0].dac_out[0] ~ .line_drivers[0].input_signal
-    .line_drivers[0].output_force ~ .xlr_out[0].signal
-    .power.audio_banks[0].positive.power_out ~ .line_drivers[1].positive_power
-    .power.audio_banks[0].negative.power_out ~ .line_drivers[1].negative_power
-    .codecs[0].dac_out[1] ~ .line_drivers[1].input_signal
-    .line_drivers[1].output_force ~ .xlr_out[1].signal
-    .power.audio_banks[0].positive.power_out ~ .line_drivers[2].positive_power
-    .power.audio_banks[0].negative.power_out ~ .line_drivers[2].negative_power
-    .codecs[0].dac_out[2] ~ .line_drivers[2].input_signal
-    .line_drivers[2].output_force ~ .xlr_out[2].signal
-    .power.audio_banks[0].positive.power_out ~ .line_drivers[3].positive_power
-    .power.audio_banks[0].negative.power_out ~ .line_drivers[3].negative_power
-    .codecs[0].dac_out[3] ~ .line_drivers[3].input_signal
-    .line_drivers[3].output_force ~ .xlr_out[3].signal
-    .power.audio_banks[0].positive.power_out ~ .line_drivers[4].positive_power
-    .power.audio_banks[0].negative.power_out ~ .line_drivers[4].negative_power
-    .codecs[0].dac_out[4] ~ .line_drivers[4].input_signal
-    .line_drivers[4].output_force ~ .xlr_out[4].signal
-    .power.audio_banks[0].positive.power_out ~ .line_drivers[5].positive_power
-    .power.audio_banks[0].negative.power_out ~ .line_drivers[5].negative_power
-    .codecs[0].dac_out[5] ~ .line_drivers[5].input_signal
-    .line_drivers[5].output_force ~ .xlr_out[5].signal
-    .power.audio_banks[1].positive.power_out ~ .line_drivers[6].positive_power
-    .power.audio_banks[1].negative.power_out ~ .line_drivers[6].negative_power
-    .codecs[1].dac_out[0] ~ .line_drivers[6].input_signal
-    .line_drivers[6].output_force ~ .ethercon_out[0].signals[0]
-    .power.audio_banks[1].positive.power_out ~ .line_drivers[7].positive_power
-    .power.audio_banks[1].negative.power_out ~ .line_drivers[7].negative_power
-    .codecs[1].dac_out[1] ~ .line_drivers[7].input_signal
-    .line_drivers[7].output_force ~ .ethercon_out[0].signals[1]
-    .power.audio_banks[1].positive.power_out ~ .line_drivers[8].positive_power
-    .power.audio_banks[1].negative.power_out ~ .line_drivers[8].negative_power
-    .codecs[1].dac_out[2] ~ .line_drivers[8].input_signal
-    .line_drivers[8].output_force ~ .ethercon_out[0].signals[2]
-    .power.audio_banks[1].positive.power_out ~ .line_drivers[9].positive_power
-    .power.audio_banks[1].negative.power_out ~ .line_drivers[9].negative_power
-    .codecs[1].dac_out[3] ~ .line_drivers[9].input_signal
-    .line_drivers[9].output_force ~ .ethercon_out[0].signals[3]
-    .power.audio_banks[2].positive.power_out ~ .line_drivers[10].positive_power
-    .power.audio_banks[2].negative.power_out ~ .line_drivers[10].negative_power
-    .codecs[1].dac_out[4] ~ .line_drivers[10].input_signal
-    .line_drivers[10].output_force ~ .ethercon_out[1].signals[0]
-    .power.audio_banks[2].positive.power_out ~ .line_drivers[11].positive_power
-    .power.audio_banks[2].negative.power_out ~ .line_drivers[11].negative_power
-    .codecs[1].dac_out[5] ~ .line_drivers[11].input_signal
-    .line_drivers[11].output_force ~ .ethercon_out[1].signals[1]
-    .power.audio_banks[2].positive.power_out ~ .line_drivers[12].positive_power
-    .power.audio_banks[2].negative.power_out ~ .line_drivers[12].negative_power
-    .codecs[1].dac_out[6] ~ .line_drivers[12].input_signal
-    .line_drivers[12].output_force ~ .ethercon_out[1].signals[2]
-    .power.audio_banks[2].positive.power_out ~ .line_drivers[13].positive_power
-    .power.audio_banks[2].negative.power_out ~ .line_drivers[13].negative_power
-    .codecs[1].dac_out[7] ~ .line_drivers[13].input_signal
-    .line_drivers[13].output_force ~ .ethercon_out[1].signals[3]
-
-    # Original three-switch network: two four-port edges plus a CM5 uplink.
-    .ports: PANEL::EthernetPorts
-    .ports.ethernet[0] ~ .eth_switches[0].ethernets[3]
-    .ports.ethernet[1] ~ .eth_switches[0].ethernets[1]
-    .ports.ethernet[2] ~ .eth_switches[1].ethernets[3]
-    .ports.ethernet[3] ~ .eth_switches[1].ethernets[1]
-    .ports.ethernet[4] ~ .eth_switches[0].ethernets[4]
-    .ports.ethernet[5] ~ .eth_switches[0].ethernets[2]
-    .ports.ethernet[6] ~ .eth_switches[1].ethernets[2]
-    .ports.ethernet[7] ~ .eth_switches[1].ethernets[0]
-    .cm.ethernet ~ .eth_switches[2].ethernets[4]
-    .eth_switches[2].ethernets[3] ~ .eth_switches[0].ethernets[0]
-    .eth_switches[2].ethernets[2] ~ .eth_switches[1].ethernets[4]
-    .cm.gpios[3] ~ .eth_switches[0].mdc
-    .cm.gpios[4] ~ .eth_switches[0].mdio
-    .cm.gpios[6] ~ .eth_switches[1].mdc
-    .cm.gpios[7] ~ .eth_switches[1].mdio
-    .cm.gpios[8] ~ .eth_switches[2].mdc
-    .cm.gpios[9] ~ .eth_switches[2].mdio
-
-    .xlr_dmx_in: PANEL::DmxInput
-    .xlr_dmx_out: PANEL::DmxOutput
-    .cm.uart0 ~ .dmx_phy.uart
-    .cm.gpios[5] ~ .dmx_phy.driver_enable
-    .cm.gpios[10] ~ .dmx_phy.n_receiver_enable
-    .dmx_phy.rs485_bus ~ .xlr_dmx_in.signal ~ .xlr_dmx_out.signal
-    .dmx_phy.power.lv ~ .xlr_dmx_in.common ~ .xlr_dmx_out.common
-
-    .debug: PANEL::DebugHeader
-    .debug.i2c ~ .cm.i2cs[0]
-    .debug.reset ~ .dsp.reset_disable
-    .debug.ground ~ .power.power_5v.lv
-    .usb: PANEL::UsbDeviceConnector
-    .usb.data_p ~ .cm.usb_p
-    .usb.data_n ~ .cm.usb_n
-    .usb.ground ~ .power.power_5v.lv
-
-    # Panel shields remain separate from circuit common.
-    @for(.xlr_in, { .obj.shield ~ power.earth })
-    @for(.xlr_out, { .obj.shield ~ power.earth })
-    @for(.ethercon_out, { .obj.shield ~ power.earth })
-    .xlr_dmx_in.shield ~ .xlr_dmx_out.shield ~ .ports.shield ~ .usb.shield ~ .power.earth
-
-    # Net names for the interesting nets
-    @trait(_, .power.power_5v.hv): ELEC::has_net_name { .name &= "P5V" }
-    @trait(_, .power.power_5v.lv): ELEC::has_net_name { .name &= "GND" }
-    @trait(_, .power.power_3v3d.hv): ELEC::has_net_name { .name &= "P3V3_DIG" }
-    @trait(_, .power.power_3v3a.hv): ELEC::has_net_name { .name &= "P3V3_ANA" }
-    @trait(_, .dmx_phy.rs485_bus.p.line): ELEC::has_net_name { .name &= "DMX_P" }
-    @trait(_, .dmx_phy.rs485_bus.n.line): ELEC::has_net_name { .name &= "DMX_N" }
+    # Preserve the v1 net names and inter-block connections.
+    @trait(_, .panel.net_xlr_audio_output_connectors_1_1): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[1]-dmx-GND" }
+    @trait(_, .panel.net_xlr_audio_output_connectors_2_1): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[2]-dmx-GND" }
+    @trait(_, .panel.net_xlr_audio_output_connectors_4_1): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[4]-dmx-GND" }
+    @trait(_, .panel.net_xlr_audio_output_connectors_0_1): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[0]-dmx-GND" }
+    @trait(_, .panel.net_xlr_audio_output_connectors_5_1): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[5]-dmx-GND" }
+    @trait(_, .panel.net_xlr_audio_output_connectors_3_1): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[3]-dmx-GND" }
+    @trait(_, .ethernet_ports.net_ic_55): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_P3_P" }
+    @trait(_, .switches[2].net_ic_RXIN0): ELEC::has_net_name { .name &= "switches[2]-ethernets[0]-ETH_P0_N" }
+    .ethernet_ports.net_ic_61 ~ .switches[0].net_ic_RXIP2
+    @trait(_, .ethernet_ports.net_ic_61): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_P0_P" }
+    @trait(_, .ethernet_ports.net_led_activity_resistors_2_1): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_LED_SPEED" }
+    .ethernet_ports.net_ic_3 ~ .switches[0].net_ic_TXOP3
+    @trait(_, .ethernet_ports.net_ic_3): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_P1_P" }
+    @trait(_, .ethernet_ports.net_ic_43): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_P3_P" }
+    @trait(_, .switches[0].net_ic_IBREF): ELEC::has_net_name { .name &= "footprint-IBREF-0" }
+    @trait(_, .switches[2].net_ic_XI): ELEC::has_net_name { .name &= "crystal-XI-2" }
+    .ethernet_ports.net_ic_85 ~ .switches[1].net_ic_RXIP0
+    @trait(_, .ethernet_ports.net_ic_85): ELEC::has_net_name { .name &= "switches[1]-ethernets[0]-ETH_P0_P" }
+    @trait(_, .ethernet_ports.net_ic_92): ELEC::has_net_name { .name &= "ethernets[0]-ETH_P3_N" }
+    .ethernet_ports.net_led_link_resistors_2_1 ~ .switches[1].net_ic_P3LED
+    @trait(_, .ethernet_ports.net_led_link_resistors_2_1): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_LED_LINK" }
+    @trait(_, .ethernet_ports.net_ic_20): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_P3_N" }
+    .ethernet_ports.net_ic_37 ~ .switches[1].net_ic_RXIP1
+    @trait(_, .ethernet_ports.net_ic_37): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_P0_P" }
+    @trait(_, .ethernet_ports.net_ic_7): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_P3_P" }
+    .ethernet_ports.net_ic_54 ~ .switches[0].net_ic_TXON4
+    @trait(_, .ethernet_ports.net_ic_54): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_P1_N" }
+    .ethernet_ports.net_ic_6 ~ .switches[0].net_ic_TXON3
+    @trait(_, .ethernet_ports.net_ic_6): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_P1_N" }
+    @trait(_, .ethernet_ports.net_led_activity_resistors_4_1): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_LED_SPEED" }
+    @trait(_, .switches[1].net_ic_XO): ELEC::has_net_name { .name &= "crystal-XO-1" }
+    @trait(_, .switches[2].net_ic_TXOP1): ELEC::has_net_name { .name &= "switches[2]-ethernets[1]-ETH_P1_P" }
+    .ethernet_ports.net_led_link_resistors_1_1 ~ .switches[0].net_ic_P1LED
+    @trait(_, .ethernet_ports.net_led_link_resistors_1_1): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_LED_LINK" }
+    .ethernet_ports.net_ic_18 ~ .switches[0].net_ic_TXON1
+    @trait(_, .ethernet_ports.net_ic_18): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_P1_N" }
+    .ethernet_ports.net_ic_51 ~ .switches[0].net_ic_TXOP4
+    @trait(_, .ethernet_ports.net_ic_51): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_P1_P" }
+    @trait(_, .ethernet_ports.net_led_activity_resistors_0_1): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_LED_SPEED" }
+    @trait(_, .ethernet_ports.net_ic_40): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_P2_P" }
+    .ethernet_ports.net_led_link_resistors_6_1 ~ .switches[1].net_ic_P2LED_DIS_RST_BLNK
+    @trait(_, .ethernet_ports.net_led_link_resistors_6_1): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_LED_LINK" }
+    .ethernet_ports.net_ic_63 ~ .switches[0].net_ic_TXOP2
+    @trait(_, .ethernet_ports.net_ic_63): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_P1_P" }
+    .ethernet_ports.net_led_link_resistors_0_1 ~ .switches[0].net_ic_P3LED
+    @trait(_, .ethernet_ports.net_led_link_resistors_0_1): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_LED_LINK" }
+    .ethernet_ports.net_ic_27 ~ .switches[1].net_ic_TXOP3
+    @trait(_, .ethernet_ports.net_ic_27): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_P1_P" }
+    @trait(_, .switches[2].net_ic_RXIP1): ELEC::has_net_name { .name &= "switches[2]-ethernets[1]-ETH_P0_P" }
+    @trait(_, .switches[2].net_ic_XO): ELEC::has_net_name { .name &= "crystal-XO-2" }
+    .ethernet_ports.net_ic_30 ~ .switches[1].net_ic_TXON3
+    @trait(_, .ethernet_ports.net_ic_30): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_P1_N" }
+    @trait(_, .ethernet_ports.net_ic_79): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_P3_P" }
+    .ethernet_ports.net_ic_78 ~ .switches[1].net_ic_TXON2
+    @trait(_, .ethernet_ports.net_ic_78): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_P1_N" }
+    @trait(_, .ethernet_ports.net_ic_89): ELEC::has_net_name { .name &= "ethernets[0]-ETH_P2_N" }
+    @trait(_, .ethernet_ports.net_ic_17): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_P2_N" }
+    .switches[1].net_ic_RXIN4 ~ .switches[2].net_ic_RXIN2
+    @trait(_, .switches[1].net_ic_RXIN4): ELEC::has_net_name { .name &= "switches[2]-ethernets[2]-ETH_P0_N" }
+    .control.net_reset_resistor_jumpers_2__resistor_1 ~ .switches[2].net_ic_RESETB
+    @trait(_, .control.net_reset_resistor_jumpers_2__resistor_1): ELEC::has_net_name { .name &= "switches[2]-reset-RESETB" }
+    @trait(_, .ethernet_ports.net_led_activity_resistors_7_1): ELEC::has_net_name { .name &= "ethernets[0]-ETH_LED_SPEED" }
+    .switches[0].net_ic_TXON0 ~ .switches[2].net_ic_TXON3
+    @trait(_, .switches[0].net_ic_TXON0): ELEC::has_net_name { .name &= "switches[2]-ethernets[3]-ETH_P1_N" }
+    @trait(_, .ethernet_ports.net_ic_56): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_P3_N" }
+    .switches[1].net_ic_RXIP4 ~ .switches[2].net_ic_RXIP2
+    @trait(_, .switches[1].net_ic_RXIP4): ELEC::has_net_name { .name &= "switches[2]-ethernets[2]-ETH_P0_P" }
+    @trait(_, .ethernet_ports.net_ic_31): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_P3_P" }
+    @trait(_, .panel.net_dsp_debug_connector_4): ELEC::has_net_name { .name &= "power-VCC" }
+    .ethernet_ports.net_led_link_resistors_5_1 ~ .switches[0].net_ic_P2LED_DIS_RST_BLNK
+    @trait(_, .ethernet_ports.net_led_link_resistors_5_1): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_LED_LINK" }
+    @trait(_, .switches[1].net_ic_IBREF): ELEC::has_net_name { .name &= "footprint-IBREF-1" }
+    .switches[1].net_ic_P4LED ~ .switches[2].net_ic_P2LED_DIS_RST_BLNK
+    @trait(_, .switches[1].net_ic_P4LED): ELEC::has_net_name { .name &= "switches[2]-ethernets[2]-ETH_LED_LINK" }
+    .ethernet_ports.net_ic_86 ~ .switches[1].net_ic_RXIN0
+    @trait(_, .ethernet_ports.net_ic_86): ELEC::has_net_name { .name &= "switches[1]-ethernets[0]-ETH_P0_N" }
+    .ethernet_ports.net_ic_66 ~ .switches[0].net_ic_TXON2
+    @trait(_, .ethernet_ports.net_ic_66): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_P1_N" }
+    @trait(_, .switches[2].net_ic_P1LED): ELEC::has_net_name { .name &= "switches[2]-ethernets[1]-ETH_LED_LINK" }
+    .ethernet_ports.net_ic_42 ~ .switches[1].net_ic_TXON1
+    @trait(_, .ethernet_ports.net_ic_42): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_P1_N" }
+    .switches[1].net_ic_TXON4 ~ .switches[2].net_ic_TXON2
+    @trait(_, .switches[1].net_ic_TXON4): ELEC::has_net_name { .name &= "switches[2]-ethernets[2]-ETH_P1_N" }
+    .ethernet_ports.net_ic_75 ~ .switches[1].net_ic_TXOP2
+    @trait(_, .ethernet_ports.net_ic_75): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_P1_P" }
+    .ethernet_ports.net_ic_39 ~ .switches[1].net_ic_TXOP1
+    @trait(_, .ethernet_ports.net_ic_39): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_P1_P" }
+    .ethernet_ports.net_ic_1 ~ .switches[0].net_ic_RXIP3
+    @trait(_, .ethernet_ports.net_ic_1): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_P0_P" }
+    .ethernet_ports.net_led_link_resistors_3_1 ~ .switches[1].net_ic_P1LED
+    @trait(_, .ethernet_ports.net_led_link_resistors_3_1): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_LED_LINK" }
+    @trait(_, .ethernet_ports.net_led_activity_resistors_5_1): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_LED_SPEED" }
+    @trait(_, .usb.net_connector_SBU1): ELEC::has_net_name { .name &= "sbu[0]-line" }
+    @trait(_, .usb.net_connector_SBU2): ELEC::has_net_name { .name &= "sbu[1]-line" }
+    @trait(_, .ethernet_ports.net_ic_67): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_P3_P" }
+    @trait(_, .switches[0].net_ic_XO): ELEC::has_net_name { .name &= "crystal-XO-0" }
+    @trait(_, .switches[2].net_ic_TXON1): ELEC::has_net_name { .name &= "switches[2]-ethernets[1]-ETH_P1_N" }
+    @trait(_, .ethernet_ports.net_ic_52): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_P2_P" }
+    @trait(_, .ethernet_ports.net_ic_41): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_P2_N" }
+    @trait(_, .switches[2].net_ic_IBREF): ELEC::has_net_name { .name &= "footprint-IBREF-2" }
+    @trait(_, .ethernet_ports.net_ic_28): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_P2_P" }
+    .ethernet_ports.net_ic_90 ~ .switches[1].net_ic_TXON0
+    @trait(_, .ethernet_ports.net_ic_90): ELEC::has_net_name { .name &= "switches[1]-ethernets[0]-ETH_P1_N" }
+    .ethernet_ports.net_led_link_resistors_7_1 ~ .switches[1].net_ic_P0LED_DIS_EEE
+    @trait(_, .ethernet_ports.net_led_link_resistors_7_1): ELEC::has_net_name { .name &= "switches[1]-ethernets[0]-ETH_LED_LINK" }
+    @trait(_, .ethernet_ports.net_ic_8): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_P3_N" }
+    @trait(_, .switches[2].net_ic_AVDDL_1): ELEC::has_net_name { .name &= "switches[2]-_power_1v2-VCC" }
+    @trait(_, .switches[1].net_ic_AVDDL_1): ELEC::has_net_name { .name &= "switches[1]-_power_1v2-VCC" }
+    @trait(_, .ethernet_ports.net_ic_68): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_P3_N" }
+    @trait(_, .usb.net_cc_resistors_0_1): ELEC::has_net_name { .name &= "cc[0]-line" }
+    .ethernet_ports.net_led_link_resistors_4_1 ~ .switches[0].net_ic_P4LED
+    @trait(_, .ethernet_ports.net_led_link_resistors_4_1): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_LED_LINK" }
+    .ethernet_ports.net_ic_50 ~ .switches[0].net_ic_RXIN4
+    @trait(_, .ethernet_ports.net_ic_50): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_P0_N" }
+    @trait(_, .switches[2].net_ic_LDIND_DIS_LD): ELEC::has_net_name { .name &= "switches[2]-loop_indication-LDIND_DIS_LD" }
+    @trait(_, .ethernet_ports.net_led_activity_resistors_3_1): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_LED_SPEED" }
+    @trait(_, .switches[2].net_ic_TXON0): ELEC::has_net_name { .name &= "switches[2]-ethernets[0]-ETH_P1_N" }
+    .ethernet_ports.net_ic_2 ~ .switches[0].net_ic_RXIN3
+    @trait(_, .ethernet_ports.net_ic_2): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_P0_N" }
+    .ethernet_ports.net_ic_49 ~ .switches[0].net_ic_RXIP4
+    @trait(_, .ethernet_ports.net_ic_49): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_P0_P" }
+    @trait(_, .ethernet_ports.net_ic_32): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_P3_N" }
+    .ethernet_ports.net_ic_62 ~ .switches[0].net_ic_RXIN2
+    @trait(_, .ethernet_ports.net_ic_62): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_P0_N" }
+    @trait(_, .ethernet_ports.net_ic_44): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_P3_N" }
+    .ethernet_ports.net_ic_74 ~ .switches[1].net_ic_RXIN2
+    @trait(_, .ethernet_ports.net_ic_74): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_P0_N" }
+    .ethernet_ports.net_ic_87 ~ .switches[1].net_ic_TXOP0
+    @trait(_, .ethernet_ports.net_ic_87): ELEC::has_net_name { .name &= "switches[1]-ethernets[0]-ETH_P1_P" }
+    .ethernet_ports.net_ic_14 ~ .switches[0].net_ic_RXIN1
+    @trait(_, .ethernet_ports.net_ic_14): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_P0_N" }
+    .control.net_reset_resistor_jumpers_1__resistor_1 ~ .switches[1].net_ic_RESETB
+    @trait(_, .control.net_reset_resistor_jumpers_1__resistor_1): ELEC::has_net_name { .name &= "switches[1]-reset-RESETB" }
+    @trait(_, .ethernet_ports.net_ic_76): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_P2_P" }
+    .ethernet_ports.net_ic_15 ~ .switches[0].net_ic_TXOP1
+    @trait(_, .ethernet_ports.net_ic_15): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_P1_P" }
+    @trait(_, .ethernet_ports.net_ic_64): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_P2_P" }
+    @trait(_, .usb.net_cc_resistors_1_1): ELEC::has_net_name { .name &= "cc[1]-line" }
+    @trait(_, .ethernet_ports.net_led_activity_resistors_6_1): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_LED_SPEED" }
+    .switches[0].net_ic_RXIN0 ~ .switches[2].net_ic_RXIN3
+    @trait(_, .switches[0].net_ic_RXIN0): ELEC::has_net_name { .name &= "switches[2]-ethernets[3]-ETH_P0_N" }
+    .ethernet_ports.net_ic_13 ~ .switches[0].net_ic_RXIP1
+    @trait(_, .ethernet_ports.net_ic_13): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_P0_P" }
+    @trait(_, .ethernet_ports.net_led_activity_resistors_1_1): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_LED_SPEED" }
+    @trait(_, .ethernet_ports.net_ic_53): ELEC::has_net_name { .name &= "switches[0]-ethernets[4]-ETH_P2_N" }
+    @trait(_, .switches[2].net_ic_RXIP0): ELEC::has_net_name { .name &= "switches[2]-ethernets[0]-ETH_P0_P" }
+    .switches[0].net_ic_RXIP0 ~ .switches[2].net_ic_RXIP3
+    @trait(_, .switches[0].net_ic_RXIP0): ELEC::has_net_name { .name &= "switches[2]-ethernets[3]-ETH_P0_P" }
+    @trait(_, .switches[1].net_ic_LDIND_DIS_LD): ELEC::has_net_name { .name &= "switches[1]-loop_indication-LDIND_DIS_LD" }
+    @trait(_, .switches[0].net_ic_XI): ELEC::has_net_name { .name &= "crystal-XI-0" }
+    @trait(_, .ethernet_ports.net_ic_29): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_P2_N" }
+    @trait(_, .switches[0].net_ic_LDIND_DIS_LD): ELEC::has_net_name { .name &= "switches[0]-loop_indication-LDIND_DIS_LD" }
+    .switches[0].net_ic_P0LED_DIS_EEE ~ .switches[2].net_ic_P3LED
+    @trait(_, .switches[0].net_ic_P0LED_DIS_EEE): ELEC::has_net_name { .name &= "switches[2]-ethernets[3]-ETH_LED_LINK" }
+    @trait(_, .ethernet_ports.net_ic_19): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_P3_P" }
+    .ethernet_ports.net_ic_38 ~ .switches[1].net_ic_RXIN1
+    @trait(_, .ethernet_ports.net_ic_38): ELEC::has_net_name { .name &= "switches[1]-ethernets[1]-ETH_P0_N" }
+    @trait(_, .ethernet_ports.net_ic_80): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_P3_N" }
+    .ethernet_ports.net_ic_25 ~ .switches[1].net_ic_RXIP3
+    @trait(_, .ethernet_ports.net_ic_25): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_P0_P" }
+    .switches[1].net_ic_TXOP4 ~ .switches[2].net_ic_TXOP2
+    @trait(_, .switches[1].net_ic_TXOP4): ELEC::has_net_name { .name &= "switches[2]-ethernets[2]-ETH_P1_P" }
+    @trait(_, .switches[2].net_ic_TXOP0): ELEC::has_net_name { .name &= "switches[2]-ethernets[0]-ETH_P1_P" }
+    .control.net_reset_resistor_jumpers_0__resistor_1 ~ .switches[0].net_ic_RESETB
+    @trait(_, .control.net_reset_resistor_jumpers_0__resistor_1): ELEC::has_net_name { .name &= "switches[0]-reset-RESETB" }
+    @trait(_, .switches[2].net_ic_P0LED_DIS_EEE): ELEC::has_net_name { .name &= "switches[2]-ethernets[0]-ETH_LED_LINK" }
+    @trait(_, .ethernet_ports.net_ic_5): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_P2_N" }
+    @trait(_, .ethernet_ports.net_ic_4): ELEC::has_net_name { .name &= "switches[0]-ethernets[3]-ETH_P2_P" }
+    @trait(_, .ethernet_ports.net_ic_88): ELEC::has_net_name { .name &= "ethernets[0]-ETH_P2_P" }
+    .ethernet_ports.net_ic_73 ~ .switches[1].net_ic_RXIP2
+    @trait(_, .ethernet_ports.net_ic_73): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_P0_P" }
+    .ethernet_ports.net_ic_26 ~ .switches[1].net_ic_RXIN3
+    @trait(_, .ethernet_ports.net_ic_26): ELEC::has_net_name { .name &= "switches[1]-ethernets[3]-ETH_P0_N" }
+    @trait(_, .switches[1].net_ic_XI): ELEC::has_net_name { .name &= "crystal-XI-1" }
+    @trait(_, .ethernet_ports.net_ic_16): ELEC::has_net_name { .name &= "switches[0]-ethernets[1]-ETH_P2_P" }
+    @trait(_, .ethernet_ports.net_ic_77): ELEC::has_net_name { .name &= "switches[1]-ethernets[2]-ETH_P2_N" }
+    @trait(_, .switches[2].net_ic_RXIN1): ELEC::has_net_name { .name &= "switches[2]-ethernets[1]-ETH_P0_N" }
+    @trait(_, .switches[0].net_ic_AVDDL_1): ELEC::has_net_name { .name &= "switches[0]-_power_1v2-VCC" }
+    @trait(_, .ethernet_ports.net_ic_91): ELEC::has_net_name { .name &= "ethernets[0]-ETH_P3_P" }
+    @trait(_, .ethernet_ports.net_ic_65): ELEC::has_net_name { .name &= "switches[0]-ethernets[2]-ETH_P2_N" }
+    .switches[0].net_ic_TXOP0 ~ .switches[2].net_ic_TXOP3
+    @trait(_, .switches[0].net_ic_TXOP0): ELEC::has_net_name { .name &= "switches[2]-ethernets[3]-ETH_P1_P" }
+    @trait(_, .line_drivers[0].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-0_P" }
+    @trait(_, .line_drivers[4].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-8_P" }
+    @trait(_, .line_drivers[1].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-5_P" }
+    @trait(_, .line_drivers[2].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-6_P" }
+    @trait(_, .line_drivers[6].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-10_N" }
+    @trait(_, .ethernet_ports.net_ic_LED_Ypos_12): ELEC::has_net_name { .name &= "LED_Ypos0" }
+    @trait(_, .line_drivers[7].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-11" }
+    @trait(_, .ethernet_ports.net_ic_LED_Gpos_83): ELEC::has_net_name { .name &= "LED_Gpos6" }
+    @trait(_, .line_drivers[7].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-11_N" }
+    .line_drivers[4].net_decoupling_capacitors_1_2 ~ .panel.net_xlr_audio_output_connectors_4_3
+    @trait(_, .line_drivers[4].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[4]-dmx-audio_out_N" }
+    @trait(_, .line_drivers[0].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-0" }
+    .line_drivers[0].net_decoupling_capacitors_1_2 ~ .panel.net_xlr_audio_output_connectors_0_3
+    @trait(_, .line_drivers[0].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[0]-dmx-audio_out_N" }
+    .line_drivers[0].net_decoupling_capacitors_0_2 ~ .panel.net_xlr_audio_output_connectors_0_2
+    @trait(_, .line_drivers[0].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[0]-dmx-audio_out_P" }
+    @trait(_, .line_drivers[7].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-11_P" }
+    @trait(_, .line_drivers[5].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-9_N" }
+    @trait(_, .line_drivers[4].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-8_N" }
+    .line_drivers[1].net_decoupling_capacitors_0_2 ~ .panel.net_xlr_audio_output_connectors_1_2
+    @trait(_, .line_drivers[1].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[1]-dmx-audio_out_P" }
+    @trait(_, .line_drivers[3].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-7_P" }
+    @trait(_, .line_drivers[0].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-0_N" }
+    @trait(_, .line_drivers[2].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-6_N" }
+    @trait(_, .line_drivers[1].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-5_N" }
+    @trait(_, .line_drivers[0].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-0_N" }
+    @trait(_, .line_drivers[7].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-11_P" }
+    @trait(_, .line_drivers[7].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-11_N" }
+    @trait(_, .line_drivers[5].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-9" }
+    @trait(_, .line_drivers[6].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-10" }
+    @trait(_, .line_drivers[0].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-0_P" }
+    @trait(_, .line_drivers[5].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-9_P" }
+    .line_drivers[2].net_decoupling_capacitors_1_2 ~ .panel.net_xlr_audio_output_connectors_2_3
+    @trait(_, .line_drivers[2].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[2]-dmx-audio_out_N" }
+    @trait(_, .line_drivers[4].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-8" }
+    @trait(_, .line_drivers[3].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-7" }
+    @trait(_, .line_drivers[1].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-5" }
+    @trait(_, .line_drivers[2].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-6" }
+    .line_drivers[3].net_decoupling_capacitors_0_2 ~ .panel.net_xlr_audio_output_connectors_3_2
+    @trait(_, .line_drivers[3].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[3]-dmx-audio_out_P" }
+    @trait(_, .line_drivers[5].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-9_P" }
+    @trait(_, .line_drivers[3].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-7_P" }
+    @trait(_, .line_drivers[2].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-6_N" }
+    @trait(_, .line_drivers[3].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-7_N" }
+    .line_drivers[1].net_decoupling_capacitors_1_2 ~ .panel.net_xlr_audio_output_connectors_1_3
+    @trait(_, .line_drivers[1].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[1]-dmx-audio_out_N" }
+    @trait(_, .line_drivers[1].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-5_P" }
+    @trait(_, .line_drivers[6].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-10_P" }
+    .line_drivers[4].net_decoupling_capacitors_0_2 ~ .panel.net_xlr_audio_output_connectors_4_2
+    @trait(_, .line_drivers[4].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[4]-dmx-audio_out_P" }
+    @trait(_, .line_drivers[6].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-10_P" }
+    @trait(_, .line_drivers[4].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-8_P" }
+    @trait(_, .line_drivers[3].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-7_N" }
+    @trait(_, .line_drivers[1].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-5_N" }
+    @trait(_, .line_drivers[2].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-6_P" }
+    .line_drivers[5].net_decoupling_capacitors_0_2 ~ .panel.net_xlr_audio_output_connectors_5_2
+    @trait(_, .line_drivers[5].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[5]-dmx-audio_out_P" }
+    @trait(_, .line_drivers[5].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-9_N" }
+    .line_drivers[5].net_decoupling_capacitors_1_2 ~ .panel.net_xlr_audio_output_connectors_5_3
+    @trait(_, .line_drivers[5].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[5]-dmx-audio_out_N" }
+    @trait(_, .line_drivers[4].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-8_N" }
+    @trait(_, .line_drivers[6].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-10_N" }
+    .line_drivers[2].net_decoupling_capacitors_0_2 ~ .panel.net_xlr_audio_output_connectors_2_2
+    @trait(_, .line_drivers[2].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[2]-dmx-audio_out_P" }
+    .line_drivers[3].net_decoupling_capacitors_1_2 ~ .panel.net_xlr_audio_output_connectors_3_3
+    @trait(_, .line_drivers[3].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "xlr_audio_output_connectors[3]-dmx-audio_out_N" }
+    @trait(_, .host.net_cm5_USB3_1_RX_N): ELEC::has_net_name { .name &= "pins[56]_N" }
+    @trait(_, .host.net_cm5_GND_150): ELEC::has_net_name { .name &= "pins[49]" }
+    @trait(_, .host.net_cm5_CAM_GPIO1): ELEC::has_net_name { .name &= "pins[99]" }
+    @trait(_, .host.net_cm5_USB3_0_RX_N): ELEC::has_net_name { .name &= "pins[27]" }
+    @trait(_, .host.net_cm5_MIPI1_D0_N): ELEC::has_net_name { .name &= "cm5-pins[74]-1" }
+    @trait(_, .host.net_cm5_Ethernet_Pair2_P): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_P2_P" }
+    @trait(_, .host.net_cm5_HDMI0_SCL): ELEC::has_net_name { .name &= "hdmis[0]-SCL" }
+    @trait(_, .host.net_cm5_MIPI1_D3_N): ELEC::has_net_name { .name &= "cm5-pins[93]" }
+    @trait(_, .host.net_cm5_MIPI1_D2_N): ELEC::has_net_name { .name &= "cm5-pins[92]" }
+    @trait(_, .host.net_cm5_MIPI0_D0_P): ELEC::has_net_name { .name &= "pins[16]" }
+    .host.net_cm5_USB_P ~ .usb.net_connector_Dp1
+    @trait(_, .host.net_cm5_USB_P): ELEC::has_net_name { .name &= "usb-USB_D_P" }
+    @trait(_, .host.net_cm5_HDMI0_TX1_P): ELEC::has_net_name { .name &= "hdmis[0]-HDMI_D1_P" }
+    @trait(_, .host.net_cm5_HDMI1_SCL): ELEC::has_net_name { .name &= "hdmis[1]-SCL" }
+    @trait(_, .host.net_cm5_PCIE_PWR_EN): ELEC::has_net_name { .name &= "pins[5]" }
+    @trait(_, .host.net_cm5_SD_PWR_ON): ELEC::has_net_name { .name &= "cm5-pins[74]-0" }
+    .control.net_cm5_i2s_resistor_jumpers_0__resistor_2 ~ .host.net_cm5_GPIO18
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_0__resistor_2): ELEC::has_net_name { .name &= "logic_out-SCK" }
+    @trait(_, .host.net_cm5_Ethernet_Pair3_P): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_P3_P" }
+    @trait(_, .host.net_cm5_USB3_0_TX_P): ELEC::has_net_name { .name &= "pins[41]_P" }
+    @trait(_, .host.net_cm5_MIPI0_D2_P): ELEC::has_net_name { .name &= "pins[34]" }
+    @trait(_, .host.net_cm5_SD_DAT4): ELEC::has_net_name { .name &= "pins[67]" }
+    @trait(_, .host.net_cm5_PCIe_CLK_N): ELEC::has_net_name { .name &= "pins[11]" }
+    @trait(_, .host.net_cm5_CC2): ELEC::has_net_name { .name &= "usb_cc[1]-pins[95]" }
+    @trait(_, .host.net_cm5_USB3_1_DP): ELEC::has_net_name { .name &= "usb3[1]-USB_D_P" }
+    @trait(_, .host.net_cm5_SD_CMD): ELEC::has_net_name { .name &= "pins[61]" }
+    @trait(_, .host.net_cm5_Fan_PWM): ELEC::has_net_name { .name &= "pins[18]" }
+    @trait(_, .host.net_cm5_PCIe_TX_N): ELEC::has_net_name { .name &= "cm5-pins[23]" }
+    @trait(_, .host.net_cm5_HDMI0_CLK_P): ELEC::has_net_name { .name &= "pins[87]_P" }
+    @trait(_, .host.net_cm5_HDMI0_SDA): ELEC::has_net_name { .name &= "hdmis[0]-SDA" }
+    @trait(_, .host.net_cm5_MIPI1_D3_P): ELEC::has_net_name { .name &= "cm5-pins[95]" }
+    @trait(_, .host.net_cm5_PCIe_RX_N): ELEC::has_net_name { .name &= "cm5-pins[17]" }
+    @trait(_, .host.net_cm5_HDMI1_CLK_N): ELEC::has_net_name { .name &= "pins[65]_N" }
+    @trait(_, .host.net_cm5_MIPI0_D3_P): ELEC::has_net_name { .name &= "cm5-pins[40]" }
+    @trait(_, .host.net_cm5_HDMI0_TX2_P): ELEC::has_net_name { .name &= "hdmis[0]-HDMI_D2_P" }
+    @trait(_, .host.net_cm5_SD_DAT0): ELEC::has_net_name { .name &= "pins[62]" }
+    @trait(_, .host.net_cm5_LED_nPWR): ELEC::has_net_name { .name &= "power_led-pins[94]" }
+    @trait(_, .host.net_cm5_HDMI0_CEC): ELEC::has_net_name { .name &= "pins[50]" }
+    @trait(_, .host.net_cm5_PCIE_nWAKE): ELEC::has_net_name { .name &= "pins[3]" }
+    @trait(_, .host.net_cm5_HDMI1_TX1_P): ELEC::has_net_name { .name &= "hdmis[1]-HDMI_D1_P" }
+    @trait(_, .host.net_cm5_VBAT): ELEC::has_net_name { .name &= "pins[75]" }
+    .host.net_cm5_Ethernet_Pair0_N ~ .switches[2].net_ic_RXIN4
+    @trait(_, .host.net_cm5_Ethernet_Pair0_N): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_P0_N" }
+    @trait(_, .host.net_cm5_PCIe_nRST): ELEC::has_net_name { .name &= "pins[8]" }
+    @trait(_, .host.net_cm5_GND_138): ELEC::has_net_name { .name &= "pins[37]_N" }
+    .host.net_cm5_Ethernet_Pair1_P ~ .switches[2].net_ic_TXOP4
+    @trait(_, .host.net_cm5_Ethernet_Pair1_P): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_P1_P" }
+    .control.net_cm5_i2s_resistor_jumpers_1__resistor_2 ~ .host.net_cm5_GPIO19
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_1__resistor_2): ELEC::has_net_name { .name &= "logic_out-WS" }
+    .host.net_cm5_Ethernet_Pair1_N ~ .switches[2].net_ic_TXON4
+    @trait(_, .host.net_cm5_Ethernet_Pair1_N): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_P1_N" }
+    @trait(_, .host.net_cm5_MIPI1_C_P): ELEC::has_net_name { .name &= "cm5-pins[88]-1" }
+    @trait(_, .host.net_cm5_PWR_Button): ELEC::has_net_name { .name &= "pins[91]" }
+    @trait(_, .host.net_cm5_HDMI0_TX1_N): ELEC::has_net_name { .name &= "hdmis[0]-HDMI_D1_N" }
+    .host.net_cm5_Ethernet_Pair0_P ~ .switches[2].net_ic_RXIP4
+    @trait(_, .host.net_cm5_Ethernet_Pair0_P): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_P0_P" }
+    @trait(_, .host.net_cm5_Ethernet_SYNC_OUT): ELEC::has_net_name { .name &= "ethernet_sync-pins[17]" }
+    @trait(_, .host.net_cm5_HDMI0_CLK_N): ELEC::has_net_name { .name &= "pins[89]_N" }
+    @trait(_, .host.net_cm5_SD_CLK): ELEC::has_net_name { .name &= "pins[56]" }
+    @trait(_, .host.net_cm5_SD_VDD_OVERRIDE): ELEC::has_net_name { .name &= "pins[72]" }
+    @trait(_, .host.net_cm5_HDMI1_SDA): ELEC::has_net_name { .name &= "hdmis[1]-SDA" }
+    @trait(_, .host.net_cm5_HDMI1_TX0_N): ELEC::has_net_name { .name &= "hdmis[1]-HDMI_D0_N" }
+    @trait(_, .host.net_cm5_PMIC_Enable): ELEC::has_net_name { .name &= "pins[98]" }
+    @trait(_, .host.net_cm5_GPIO5): ELEC::has_net_name { .name &= "pins[33]" }
+    @trait(_, .host.net_cm5_HDMI1_TX2_P): ELEC::has_net_name { .name &= "hdmis[1]-HDMI_D2_P" }
+    @trait(_, .host.net_cm5_USB3_0_DM): ELEC::has_net_name { .name &= "usb3[0]-USB_D_N" }
+    @trait(_, .host.net_cm5_Ethernet_Pair2_N): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_P2_N" }
+    @trait(_, .host.net_cm5_MIPI1_C_N): ELEC::has_net_name { .name &= "pins[86]" }
+    .host.net_cm5_Ethernet_nLED3 ~ .switches[2].net_ic_P4LED
+    @trait(_, .host.net_cm5_Ethernet_nLED3): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_LED_LINK" }
+    @trait(_, .host.net_cm5_SD_DAT7): ELEC::has_net_name { .name &= "pins[69]" }
+    @trait(_, .host.net_cm5_Fan_Tacho): ELEC::has_net_name { .name &= "fan_tacho-pins[15]" }
+    @trait(_, .host.net_cm5_MIPI0_D0_N): ELEC::has_net_name { .name &= "pins[14]" }
+    @trait(_, .host.net_cm5_MIPI1_D2_P): ELEC::has_net_name { .name &= "cm5-pins[94]" }
+    @trait(_, .host.net_cm5_PCIe_TX_P): ELEC::has_net_name { .name &= "pins[21]" }
+    @trait(_, .host.net_cm5_BT_nDisable): ELEC::has_net_name { .name &= "pins[90]" }
+    @trait(_, .host.net_cm5_CM5_3_3VOutput_84): ELEC::has_net_name { .name &= "power_3v3-VCC" }
+    @trait(_, .host.net_cm5_USB3_0_RX_P): ELEC::has_net_name { .name &= "pins[29]_P" }
+    @trait(_, .host.net_cm5_USB_OTG_ID): ELEC::has_net_name { .name &= "pins[0]" }
+    @trait(_, .host.net_cm5_HDMI1_TX1_N): ELEC::has_net_name { .name &= "hdmis[1]-HDMI_D1_N" }
+    @trait(_, .host.net_cm5_nRPIBOOT): ELEC::has_net_name { .name &= "boot_mode-pins[92]" }
+    @trait(_, .host.net_cm5_MIPI0_D2_N): ELEC::has_net_name { .name &= "pins[32]" }
+    @trait(_, .host.net_cm5_USB3_1_TX_N): ELEC::has_net_name { .name &= "pins[68]_N" }
+    @trait(_, .host.net_cm5_SDA0): ELEC::has_net_name { .name &= "pins[81]" }
+    @trait(_, .host.net_cm5_USB3_1_RX_P): ELEC::has_net_name { .name &= "pins[58]_P" }
+    @trait(_, .host.net_cm5_Ethernet_nLED2): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_LED_SPEED" }
+    @trait(_, .host.net_cm5_PCIe_CLK_P): ELEC::has_net_name { .name &= "pins[9]" }
+    @trait(_, .host.net_cm5_MIPI0_D1_N): ELEC::has_net_name { .name &= "cm5-pins[20]" }
+    @trait(_, .host.net_cm5_HDMI0_TX0_P): ELEC::has_net_name { .name &= "hdmis[0]-HDMI_D0_P" }
+    @trait(_, .host.net_cm5_HDMI1_CEC): ELEC::has_net_name { .name &= "pins[48]" }
+    @trait(_, .host.net_cm5_HDMI1_CLK_P): ELEC::has_net_name { .name &= "pins[63]_P" }
+    @trait(_, .host.net_cm5_SD_DAT2): ELEC::has_net_name { .name &= "pins[68]" }
+    @trait(_, .host.net_cm5_HDMI1_HOTPLUG): ELEC::has_net_name { .name &= "pins[42]" }
+    @trait(_, .host.net_cm5_SCL0): ELEC::has_net_name { .name &= "pins[79]" }
+    @trait(_, .host.net_cm5_MIPI1_D1_N): ELEC::has_net_name { .name &= "pins[80]" }
+    @trait(_, .host.net_cm5_PCIe_CLK_nREQ): ELEC::has_net_name { .name &= "pins[1]" }
+    @trait(_, .host.net_cm5_HDMI1_TX2_N): ELEC::has_net_name { .name &= "hdmis[1]-HDMI_D2_N" }
+    @trait(_, .host.net_cm5_USB3_0_DP): ELEC::has_net_name { .name &= "usb3[0]-USB_D_P" }
+    @trait(_, .host.net_cm5_SD_DAT6): ELEC::has_net_name { .name &= "pins[71]" }
+    @trait(_, .host.net_cm5_MIPI1_D0_P): ELEC::has_net_name { .name &= "pins[76]" }
+    @trait(_, .host.net_cm5_CC1): ELEC::has_net_name { .name &= "usb_cc[0]-pins[93]" }
+    @trait(_, .host.net_cm5_USB3_1_DM): ELEC::has_net_name { .name &= "usb3[1]-USB_D_N" }
+    @trait(_, .host.net_cm5_GPIO6): ELEC::has_net_name { .name &= "pins[29]" }
+    @trait(_, .host.net_cm5_EEPROM_nWP): ELEC::has_net_name { .name &= "pins[19]" }
+    @trait(_, .host.net_cm5_LED_nACT): ELEC::has_net_name { .name &= "activity_led-pins[20]" }
+    .control.net_cm5_i2s_resistor_jumpers_5__resistor_2 ~ .host.net_cm5_GPIO20
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_5__resistor_2): ELEC::has_net_name { .name &= "cm5_i2s_resistor_jumpers[5]-logic_out-SD" }
+    @trait(_, .host.net_cm5_HDMI0_TX2_N): ELEC::has_net_name { .name &= "hdmis[0]-HDMI_D2_N" }
+    @trait(_, .host.net_cm5_MIPI0_D3_N): ELEC::has_net_name { .name &= "cm5-pins[38]" }
+    @trait(_, .host.net_cm5_MIPI0_D1_P): ELEC::has_net_name { .name &= "pins[22]" }
+    @trait(_, .host.net_cm5_HDMI1_TX0_P): ELEC::has_net_name { .name &= "hdmis[1]-HDMI_D0_P" }
+    .host.net_cm5_USB_N ~ .usb.net_connector_Dn1
+    @trait(_, .host.net_cm5_USB_N): ELEC::has_net_name { .name &= "usb-USB_D_N" }
+    @trait(_, .host.net_cm5_CAM_GPIO0): ELEC::has_net_name { .name &= "pins[96]" }
+    @trait(_, .host.net_cm5_HDMI0_HOTPLUG): ELEC::has_net_name { .name &= "pins[52]" }
+    @trait(_, .host.net_cm5_MIPI1_D1_P): ELEC::has_net_name { .name &= "pins[82]" }
+    @trait(_, .host.net_cm5_USB3_0_TX_N): ELEC::has_net_name { .name &= "pins[39]_N" }
+    @trait(_, .host.net_cm5_Ethernet_Pair3_N): ELEC::has_net_name { .name &= "switches[2]-ethernets[4]-ETH_P3_N" }
+    @trait(_, .host.net_cm5_VBUS_EN): ELEC::has_net_name { .name &= "pins[10]" }
+    @trait(_, .host.net_cm5_SD_DAT5): ELEC::has_net_name { .name &= "pins[63]" }
+    @trait(_, .host.net_cm5_WL_nDisable): ELEC::has_net_name { .name &= "cm5-pins[88]-0" }
+    @trait(_, .host.net_cm5_HDMI0_TX0_N): ELEC::has_net_name { .name &= "hdmis[0]-HDMI_D0_N" }
+    @trait(_, .host.net_cm5_CM5_1_8VOutput_88): ELEC::has_net_name { .name &= "power_1v8-VCC" }
+    @trait(_, .host.net_cm5_USB3_1_TX_P): ELEC::has_net_name { .name &= "pins[70]_P" }
+    .control.net_cm5_i2s_resistor_jumpers_2__resistor_2 ~ .host.net_cm5_GPIO21
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_2__resistor_2): ELEC::has_net_name { .name &= "cm5_i2s_resistor_jumpers[2]-logic_out-SD" }
+    @trait(_, .host.net_cm5_SD_DAT1): ELEC::has_net_name { .name &= "pins[66]" }
+    @trait(_, .host.net_cm5_PCIe_RX_P): ELEC::has_net_name { .name &= "cm5-pins[15]" }
+    @trait(_, .host.net_cm5_MIPI0_C_N): ELEC::has_net_name { .name &= "pins[26]" }
+    @trait(_, .host.net_cm5_SD_DAT3): ELEC::has_net_name { .name &= "pins[60]" }
+    @trait(_, .host.net_cm5_MIPI0_C_P): ELEC::has_net_name { .name &= "pins[28]" }
+    @trait(_, .panel.net_dsp_debug_connector_8): ELEC::has_net_name { .name &= "_8" }
+    .host.power_5v ~ .usb.power_5v ~ .power.power_5v.hv
+    @trait(_, .host.power_5v): ELEC::has_net_name { .name &= "power_5v" }
+    @trait(_, .panel.net_dsp_debug_connector_5): ELEC::has_net_name { .name &= "_5" }
+    @trait(_, .panel.net_dsp_debug_connector_7): ELEC::has_net_name { .name &= "_7" }
+    @trait(_, .panel.net_dsp_debug_connector_9): ELEC::has_net_name { .name &= "_9" }
+    @trait(_, .panel.net_dsp_debug_connector_2): ELEC::has_net_name { .name &= "_2" }
+    .control.net_smi_pullups_4_1 ~ .host.net_cm5_GPIO23
+    @trait(_, .control.net_smi_pullups_4_1): ELEC::has_net_name { .name &= "smi_resistor_jumpers[2]-smi_out-SCL" }
+    .control.net_smi_resistor_jumpers_1__resistors_1_1 ~ .switches[1].net_ic_SDA_MDIO
+    @trait(_, .control.net_smi_resistor_jumpers_1__resistors_1_1): ELEC::has_net_name { .name &= "switches[1]-i2c_mdio-SDA" }
+    .control.net_smi_pullups_5_1 ~ .host.net_cm5_GPIO22
+    @trait(_, .control.net_smi_pullups_5_1): ELEC::has_net_name { .name &= "smi_resistor_jumpers[2]-smi_out-SDA" }
+    .control.net_smi_pullups_1_1 ~ .host.net_cm5_GPIO2
+    @trait(_, .control.net_smi_pullups_1_1): ELEC::has_net_name { .name &= "smi_resistor_jumpers[0]-smi_out-SDA" }
+    .control.net_smi_pullups_0_1 ~ .host.net_cm5_GPIO3
+    @trait(_, .control.net_smi_pullups_0_1): ELEC::has_net_name { .name &= "smi_resistor_jumpers[0]-smi_out-SCL" }
+    .control.net_smi_resistor_jumpers_0__resistors_1_1 ~ .switches[0].net_ic_SDA_MDIO
+    @trait(_, .control.net_smi_resistor_jumpers_0__resistors_1_1): ELEC::has_net_name { .name &= "switches[0]-i2c_mdio-SDA" }
+    .control.net_smi_resistor_jumpers_2__resistors_0_1 ~ .switches[2].net_ic_SCL_MDC
+    @trait(_, .control.net_smi_resistor_jumpers_2__resistors_0_1): ELEC::has_net_name { .name &= "switches[2]-i2c_mdio-SCL" }
+    .control.net_reset_resistor_jumpers_0__resistor_2 ~ .host.net_cm5_GPIO25
+    @trait(_, .control.net_reset_resistor_jumpers_0__resistor_2): ELEC::has_net_name { .name &= "logic_out-pins[40]" }
+    .control.net_reset_resistor_jumpers_2__resistor_2 ~ .host.net_cm5_GPIO27
+    @trait(_, .control.net_reset_resistor_jumpers_2__resistor_2): ELEC::has_net_name { .name &= "pins[47]" }
+    .control.net_smi_pullups_2_1 ~ .host.net_cm5_GPIO13
+    @trait(_, .control.net_smi_pullups_2_1): ELEC::has_net_name { .name &= "smi_resistor_jumpers[1]-smi_out-SCL" }
+    .control.net_smi_resistor_jumpers_2__resistors_1_1 ~ .switches[2].net_ic_SDA_MDIO
+    @trait(_, .control.net_smi_resistor_jumpers_2__resistors_1_1): ELEC::has_net_name { .name &= "switches[2]-i2c_mdio-SDA" }
+    .control.net_reset_resistor_jumpers_1__resistor_2 ~ .host.net_cm5_GPIO26
+    @trait(_, .control.net_reset_resistor_jumpers_1__resistor_2): ELEC::has_net_name { .name &= "logic_out-pins[23]" }
+    .control.net_smi_resistor_jumpers_0__resistors_0_1 ~ .switches[0].net_ic_SCL_MDC
+    @trait(_, .control.net_smi_resistor_jumpers_0__resistors_0_1): ELEC::has_net_name { .name &= "switches[0]-i2c_mdio-SCL" }
+    .control.net_smi_pullups_3_1 ~ .host.net_cm5_GPIO12
+    @trait(_, .control.net_smi_pullups_3_1): ELEC::has_net_name { .name &= "smi_resistor_jumpers[1]-smi_out-SDA" }
+    .control.net_smi_resistor_jumpers_1__resistors_0_1 ~ .switches[1].net_ic_SCL_MDC
+    @trait(_, .control.net_smi_resistor_jumpers_1__resistors_0_1): ELEC::has_net_name { .name &= "switches[1]-i2c_mdio-SCL" }
+    @trait(_, .line_drivers[9].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-13_P" }
+    .codecs[0].net_ic_ADC1RN ~ .control.net_input_dc_block_caps_2_1
+    @trait(_, .codecs[0].net_ic_ADC1RN): ELEC::has_net_name { .name &= "adc_channels[0]-analog_right-ADC1RN-0_P" }
+    .line_drivers[9].net_decoupling_capacitors_0_2 ~ .panel.net_ethercon_output_connectors_0_7
+    @trait(_, .line_drivers[9].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[0]-balanced_audios[3]-audio_out_P" }
+    .codecs[0].net_ic_OL3 ~ .line_drivers[4].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[0].net_ic_OL3): ELEC::has_net_name { .name &= "dac_channels[2]-analog_left-OL3-0" }
+    @trait(_, .line_drivers[8].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-12_N" }
+    .codecs[0].net_ic_DBCLK ~ .control.net_i2s_resistor_jumpers_dsp_ad1938_2_2
+    @trait(_, .codecs[0].net_ic_DBCLK): ELEC::has_net_name { .name &= "model-i2s_ins[0]-SCK-0" }
+    .line_drivers[7].net_decoupling_capacitors_1_2 ~ .panel.net_ethercon_output_connectors_0_6
+    @trait(_, .line_drivers[7].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[0]-balanced_audios[1]-audio_out_N" }
+    .codecs[0].net_ic_ABCLK ~ .control.net_i2s_resistor_jumpers_dsp_ad1938_8_1
+    @trait(_, .codecs[0].net_ic_ABCLK): ELEC::has_net_name { .name &= "model-i2s_outs[0]-SCK-0" }
+    @trait(_, .line_drivers[13].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-4" }
+    @trait(_, .codecs[1].net_ic_ADC1RP): ELEC::has_net_name { .name &= "adc_channels[0]-analog_right-ADC1RP-1_N" }
+    @trait(_, .line_drivers[12].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-3_N" }
+    @trait(_, .line_drivers[11].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-2" }
+    .codecs[0].net_ic_DLRCLK ~ .control.net_i2s_resistor_jumpers_dsp_ad1938_1_2
+    @trait(_, .codecs[0].net_ic_DLRCLK): ELEC::has_net_name { .name &= "model-i2s_ins[0]-WS-0" }
+    .line_drivers[0].positive_supply ~ .line_drivers[10].positive_supply ~ .line_drivers[11].positive_supply ~ .line_drivers[12].positive_supply ~ .line_drivers[13].positive_supply ~ .line_drivers[1].positive_supply ~ .line_drivers[2].positive_supply ~ .line_drivers[3].positive_supply ~ .line_drivers[4].positive_supply ~ .line_drivers[5].positive_supply ~ .line_drivers[6].positive_supply ~ .line_drivers[7].positive_supply ~ .line_drivers[8].positive_supply ~ .line_drivers[9].positive_supply ~ .power.power_18v_pos.hv
+    @trait(_, .line_drivers[0].positive_supply): ELEC::has_net_name { .name &= "power_18v_pos" }
+    @trait(_, .codecs[0].net_ic_DSDATA4): ELEC::has_net_name { .name &= "model-i2s_ins[3]-SD-0" }
+    .line_drivers[13].net_decoupling_capacitors_0_2 ~ .panel.net_ethercon_output_connectors_1_7
+    @trait(_, .line_drivers[13].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[1]-balanced_audios[3]-audio_out_P" }
+    .line_drivers[10].net_decoupling_capacitors_1_2 ~ .panel.net_ethercon_output_connectors_1_5
+    @trait(_, .line_drivers[10].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[1]-balanced_audios[0]-audio_out_N" }
+    @trait(_, .codecs[1].net_ic_FILTR): ELEC::has_net_name { .name &= "ad1938s[1]-FILTR" }
+    .line_drivers[6].net_decoupling_capacitors_0_2 ~ .panel.net_ethercon_output_connectors_0_4
+    @trait(_, .line_drivers[6].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[0]-balanced_audios[0]-audio_out_P" }
+    @trait(_, .line_drivers[12].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-3_P" }
+    .codecs[1].net_ic_DSDATA1 ~ .control.net_i2s_resistor_jumpers_dsp_ad1938_3_2
+    @trait(_, .codecs[1].net_ic_DSDATA1): ELEC::has_net_name { .name &= "model-i2s_ins[0]-SD-1" }
+    .codecs[0].power_3v3_analog ~ .codecs[1].power_3v3_analog ~ .power.power_3v3a.hv
+    @trait(_, .codecs[0].power_3v3_analog): ELEC::has_net_name { .name &= "power_3v3_analog" }
+    @trait(_, .line_drivers[9].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-13_P" }
+    @trait(_, .codecs[1].net_ic_ADC2RP): ELEC::has_net_name { .name &= "adc_channels[1]-analog_right-ADC2RP-1_N" }
+    .codecs[0].net_ic_ADC1LP ~ .control.net_input_dc_block_caps_1_1
+    @trait(_, .codecs[0].net_ic_ADC1LP): ELEC::has_net_name { .name &= "adc_channels[0]-analog_left-ADC1LP-0_N" }
+    @trait(_, .codecs[0].net_ic_ADC2RP): ELEC::has_net_name { .name &= "adc_channels[1]-analog_right-ADC2RP-0_N" }
+    @trait(_, .line_drivers[13].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-4_N" }
+    .line_drivers[6].net_decoupling_capacitors_1_2 ~ .panel.net_ethercon_output_connectors_0_5
+    @trait(_, .line_drivers[6].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[0]-balanced_audios[0]-audio_out_N" }
+    @trait(_, .line_drivers[13].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-4_P" }
+    @trait(_, .codecs[0].net_ic_ASDATA2): ELEC::has_net_name { .name &= "model-i2s_outs[1]-SD-0" }
+    @trait(_, .codecs[1].net_ic_CM): ELEC::has_net_name { .name &= "ad1938s[1]-CM" }
+    @trait(_, .codecs[1].net_ic_MCLKI_XI): ELEC::has_net_name { .name &= "ad1938s[1]-pll_clock_in-MCLKI_XI" }
+    @trait(_, .line_drivers[11].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-2_N" }
+    @trait(_, .line_drivers[9].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-13_N" }
+    @trait(_, .codecs[0].net_ic_DSDATA3): ELEC::has_net_name { .name &= "model-i2s_ins[2]-SD-0" }
+    @trait(_, .line_drivers[10].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-1_P" }
+    @trait(_, .codecs[0].net_ic_MCLKO_XO): ELEC::has_net_name { .name &= "ad1938s[0]-MCLKO_XO" }
+    .codecs[1].net_ic_OR4 ~ .line_drivers[13].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[1].net_ic_OR4): ELEC::has_net_name { .name &= "dac_channels[3]-analog_right-OR4-1" }
+    .line_drivers[0].negative_supply ~ .line_drivers[10].negative_supply ~ .line_drivers[11].negative_supply ~ .line_drivers[12].negative_supply ~ .line_drivers[13].negative_supply ~ .line_drivers[1].negative_supply ~ .line_drivers[2].negative_supply ~ .line_drivers[3].negative_supply ~ .line_drivers[4].negative_supply ~ .line_drivers[5].negative_supply ~ .line_drivers[6].negative_supply ~ .line_drivers[7].negative_supply ~ .line_drivers[8].negative_supply ~ .line_drivers[9].negative_supply ~ .power.power_18v_neg.lv
+    @trait(_, .line_drivers[0].negative_supply): ELEC::has_net_name { .name &= "power_18v_neg" }
+    @trait(_, .line_drivers[12].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-3" }
+    .line_drivers[12].net_decoupling_capacitors_1_2 ~ .panel.net_ethercon_output_connectors_1_2
+    @trait(_, .line_drivers[12].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[1]-balanced_audios[2]-audio_out_N" }
+    @trait(_, .line_drivers[13].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-4_P" }
+    .codecs[0].net_ic_ALRCLK ~ .control.net_i2s_resistor_jumpers_dsp_ad1938_7_1
+    @trait(_, .codecs[0].net_ic_ALRCLK): ELEC::has_net_name { .name &= "model-i2s_outs[0]-WS-0" }
+    @trait(_, .codecs[1].net_ic_ADC1RN): ELEC::has_net_name { .name &= "adc_channels[0]-analog_right-ADC1RN-1_P" }
+    .codecs[0].net_ic_nPDh_RST ~ .codecs[1].net_ic_nPDh_RST ~ .host.net_cm5_GPIO17
+    @trait(_, .codecs[0].net_ic_nPDh_RST): ELEC::has_net_name { .name &= "RTS" }
+    @trait(_, .line_drivers[8].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-12_P" }
+    @trait(_, .codecs[1].net_ic_ASDATA2): ELEC::has_net_name { .name &= "model-i2s_outs[1]-SD-1" }
+    .codecs[1].net_ic_OR2 ~ .line_drivers[9].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[1].net_ic_OR2): ELEC::has_net_name { .name &= "dac_channels[1]-analog_right-OR2-1" }
+    @trait(_, .line_drivers[11].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-2_P" }
+    @trait(_, .codecs[1].net_ic_MCLKO_XO): ELEC::has_net_name { .name &= "ad1938s[1]-MCLKO_XO" }
+    @trait(_, .line_drivers[10].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-1" }
+    @trait(_, .line_drivers[9].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-13" }
+    .line_drivers[8].net_decoupling_capacitors_1_2 ~ .panel.net_ethercon_output_connectors_0_2
+    @trait(_, .line_drivers[8].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[0]-balanced_audios[2]-audio_out_N" }
+    @trait(_, .codecs[0].net_ic_OL4): ELEC::has_net_name { .name &= "dac_channels[3]-analog_left-OL4-0" }
+    @trait(_, .codecs[1].net_ic_DSDATA3): ELEC::has_net_name { .name &= "model-i2s_ins[2]-SD-1" }
+    @trait(_, .codecs[1].net_ic_ADC2RN): ELEC::has_net_name { .name &= "adc_channels[1]-analog_right-ADC2RN-1_P" }
+    .codecs[0].net_ic_ADC1RP ~ .control.net_input_dc_block_caps_3_1
+    @trait(_, .codecs[0].net_ic_ADC1RP): ELEC::has_net_name { .name &= "adc_channels[0]-analog_right-ADC1RP-0_N" }
+    .line_drivers[12].net_decoupling_capacitors_0_2 ~ .panel.net_ethercon_output_connectors_1_1
+    @trait(_, .line_drivers[12].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[1]-balanced_audios[2]-audio_out_P" }
+    @trait(_, .codecs[1].net_ic_ADC1LP): ELEC::has_net_name { .name &= "adc_channels[0]-analog_left-ADC1LP-1_N" }
+    .line_drivers[9].net_decoupling_capacitors_1_2 ~ .panel.net_ethercon_output_connectors_0_8
+    @trait(_, .line_drivers[9].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[0]-balanced_audios[3]-audio_out_N" }
+    .line_drivers[13].net_decoupling_capacitors_1_2 ~ .panel.net_ethercon_output_connectors_1_8
+    @trait(_, .line_drivers[13].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[1]-balanced_audios[3]-audio_out_N" }
+    @trait(_, .codecs[0].net_ic_MCLKI_XI): ELEC::has_net_name { .name &= "ad1938s[0]-pll_clock_in-MCLKI_XI" }
+    @trait(_, .codecs[0].net_ic_LF): ELEC::has_net_name { .name &= "ad1938s[0]-LF" }
+    @trait(_, .codecs[1].net_ic_ASDATA1): ELEC::has_net_name { .name &= "model-i2s_outs[0]-SD-1" }
+    .line_drivers[11].net_decoupling_capacitors_1_2 ~ .panel.net_ethercon_output_connectors_1_6
+    @trait(_, .line_drivers[11].net_decoupling_capacitors_1_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[1]-balanced_audios[1]-audio_out_N" }
+    @trait(_, .line_drivers[8].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-12_P" }
+    .codecs[1].net_ic_OL1 ~ .line_drivers[6].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[1].net_ic_OL1): ELEC::has_net_name { .name &= "dac_channels[0]-analog_left-OL1-1" }
+    @trait(_, .line_drivers[12].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-3_N" }
+    @trait(_, .line_drivers[10].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-1_N" }
+    .codecs[1].net_ic_DLRCLK ~ .control.net_i2s_resistor_jumpers_dsp_ad1938_4_2
+    @trait(_, .codecs[1].net_ic_DLRCLK): ELEC::has_net_name { .name &= "model-i2s_ins[0]-WS-1" }
+    @trait(_, .line_drivers[9].net_ic_VOneg): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-13_N" }
+    @trait(_, .codecs[0].net_ic_ADC2RN): ELEC::has_net_name { .name &= "adc_channels[1]-analog_right-ADC2RN-0_P" }
+    @trait(_, .codecs[1].net_ic_ADC2LP): ELEC::has_net_name { .name &= "adc_channels[1]-analog_left-ADC2LP-1_N" }
+    .codecs[1].net_ic_OL3 ~ .line_drivers[10].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[1].net_ic_OL3): ELEC::has_net_name { .name &= "dac_channels[2]-analog_left-OL3-1" }
+    .line_drivers[8].net_decoupling_capacitors_0_2 ~ .panel.net_ethercon_output_connectors_0_1
+    @trait(_, .line_drivers[8].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[0]-balanced_audios[2]-audio_out_P" }
+    .codecs[0].net_ic_OR3 ~ .line_drivers[5].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[0].net_ic_OR3): ELEC::has_net_name { .name &= "dac_channels[2]-analog_right-OR3-0" }
+    @trait(_, .line_drivers[11].net_ic_VOpos): ELEC::has_net_name { .name &= "line_driver_ic-output_force-anode-2_P" }
+    @trait(_, .line_drivers[10].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-1_N" }
+    .codecs[1].net_ic_DBCLK ~ .control.net_i2s_resistor_jumpers_dsp_ad1938_5_2
+    @trait(_, .codecs[1].net_ic_DBCLK): ELEC::has_net_name { .name &= "model-i2s_ins[0]-SCK-1" }
+    .line_drivers[11].net_decoupling_capacitors_0_2 ~ .panel.net_ethercon_output_connectors_1_3
+    @trait(_, .line_drivers[11].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[1]-balanced_audios[1]-audio_out_P" }
+    .codecs[0].net_ic_OL2 ~ .line_drivers[2].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[0].net_ic_OL2): ELEC::has_net_name { .name &= "dac_channels[1]-analog_left-OL2-0" }
+    @trait(_, .line_drivers[8].net_ic_VIN): ELEC::has_net_name { .name &= "line_driver_ic-input_signal-VIN-12" }
+    @trait(_, .codecs[1].net_pll_filter_c1_1): ELEC::has_net_name { .name &= "ad1938s[1]-net" }
+    @trait(_, .line_drivers[12].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-3_P" }
+    .codecs[0].net_ic_DSDATA1 ~ .control.net_i2s_resistor_jumpers_dsp_ad1938_0_2
+    @trait(_, .codecs[0].net_ic_DSDATA1): ELEC::has_net_name { .name &= "model-i2s_ins[0]-SD-0" }
+    @trait(_, .codecs[1].net_ic_LF): ELEC::has_net_name { .name &= "ad1938s[1]-LF" }
+    @trait(_, .codecs[0].net_ic_ADC2LP): ELEC::has_net_name { .name &= "adc_channels[1]-analog_left-ADC2LP-0_N" }
+    @trait(_, .codecs[0].net_ic_FILTR): ELEC::has_net_name { .name &= "ad1938s[0]-FILTR" }
+    @trait(_, .line_drivers[8].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-12_N" }
+    .codecs[0].net_ic_ASDATA1 ~ .control.net_i2s_resistor_jumpers_dsp_ad1938_6_1
+    @trait(_, .codecs[0].net_ic_ASDATA1): ELEC::has_net_name { .name &= "model-i2s_outs[0]-SD-0" }
+    @trait(_, .codecs[1].net_ic_ADC1LN): ELEC::has_net_name { .name &= "adc_channels[0]-analog_left-ADC1LN-1_P" }
+    @trait(_, .line_drivers[13].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-4_N" }
+    .codecs[0].net_ic_OL1 ~ .line_drivers[0].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[0].net_ic_OL1): ELEC::has_net_name { .name &= "dac_channels[0]-analog_left-OL1-0" }
+    @trait(_, .codecs[0].net_ic_ADC2LN): ELEC::has_net_name { .name &= "adc_channels[1]-analog_left-ADC2LN-0_P" }
+    .codecs[1].net_ic_OR3 ~ .line_drivers[11].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[1].net_ic_OR3): ELEC::has_net_name { .name &= "dac_channels[2]-analog_right-OR3-1" }
+    @trait(_, .codecs[1].net_ic_ABCLK): ELEC::has_net_name { .name &= "model-i2s_outs[0]-SCK-1" }
+    .codecs[1].net_ic_OL2 ~ .line_drivers[8].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[1].net_ic_OL2): ELEC::has_net_name { .name &= "dac_channels[1]-analog_left-OL2-1" }
+    @trait(_, .codecs[0].net_ic_DSDATA2): ELEC::has_net_name { .name &= "model-i2s_ins[1]-SD-0" }
+    .line_drivers[10].net_decoupling_capacitors_0_2 ~ .panel.net_ethercon_output_connectors_1_4
+    @trait(_, .line_drivers[10].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[1]-balanced_audios[0]-audio_out_P" }
+    .codecs[0].net_ic_OR2 ~ .line_drivers[3].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[0].net_ic_OR2): ELEC::has_net_name { .name &= "dac_channels[1]-analog_right-OR2-0" }
+    .codecs[0].net_ic_ADC1LN ~ .control.net_input_dc_block_caps_0_1
+    @trait(_, .codecs[0].net_ic_ADC1LN): ELEC::has_net_name { .name &= "adc_channels[0]-analog_left-ADC1LN-0_P" }
+    @trait(_, .codecs[0].net_ic_OR4): ELEC::has_net_name { .name &= "dac_channels[3]-analog_right-OR4-0" }
+    @trait(_, .codecs[1].net_ic_DSDATA2): ELEC::has_net_name { .name &= "model-i2s_ins[1]-SD-1" }
+    .codecs[0].net_ic_OR1 ~ .line_drivers[1].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[0].net_ic_OR1): ELEC::has_net_name { .name &= "dac_channels[0]-analog_right-OR1-0" }
+    .codecs[1].net_ic_OL4 ~ .line_drivers[12].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[1].net_ic_OL4): ELEC::has_net_name { .name &= "dac_channels[3]-analog_left-OL4-1" }
+    @trait(_, .codecs[0].net_ic_CM): ELEC::has_net_name { .name &= "ad1938s[0]-CM" }
+    .line_drivers[7].net_decoupling_capacitors_0_2 ~ .panel.net_ethercon_output_connectors_0_3
+    @trait(_, .line_drivers[7].net_decoupling_capacitors_0_2): ELEC::has_net_name { .name &= "ethercon_output_connectors[0]-balanced_audios[1]-audio_out_P" }
+    @trait(_, .codecs[1].net_ic_ADC2LN): ELEC::has_net_name { .name &= "adc_channels[1]-analog_left-ADC2LN-1_P" }
+    @trait(_, .codecs[1].net_ic_ALRCLK): ELEC::has_net_name { .name &= "model-i2s_outs[0]-WS-1" }
+    @trait(_, .codecs[0].net_pll_filter_c1_1): ELEC::has_net_name { .name &= "ad1938s[0]-net" }
+    @trait(_, .codecs[1].net_ic_DSDATA4): ELEC::has_net_name { .name &= "model-i2s_ins[3]-SD-1" }
+    @trait(_, .line_drivers[11].net_ic_SENSEneg): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEneg-2_N" }
+    @trait(_, .line_drivers[10].net_ic_SENSEpos): ELEC::has_net_name { .name &= "line_driver_ic-output_sense-SENSEpos-1_P" }
+    .codecs[1].net_ic_OR1 ~ .line_drivers[7].net_input_decoupling_capacitor_1
+    @trait(_, .codecs[1].net_ic_OR1): ELEC::has_net_name { .name &= "dac_channels[0]-analog_right-OR1-1" }
+    @trait(_, .dsp.net_ic_LRCLK_IN2_MP12): ELEC::has_net_name { .name &= "i2s_ins[2]-WS" }
+    @trait(_, .dsp.net_ic_AUXADC5): ELEC::has_net_name { .name &= "AUXADC5" }
+    @trait(_, .dsp.net_ic_MP7): ELEC::has_net_name { .name &= "MP7" }
+    @trait(_, .dsp.net_ic_AUXADC3): ELEC::has_net_name { .name &= "AUXADC3" }
+    @trait(_, .dsp.net_ic_SDATA_IN3): ELEC::has_net_name { .name &= "model-i2s_ins[3]-SD-2" }
+    .control.net_i2s_resistor_jumpers_dsp_ad1938_2_1 ~ .dsp.net_ic_BCLK_OUT1
+    @trait(_, .control.net_i2s_resistor_jumpers_dsp_ad1938_2_1): ELEC::has_net_name { .name &= "i2s_outs[1]-SCK" }
+    @trait(_, .dsp.net_ic_MOSI_M_MP1): ELEC::has_net_name { .name &= "spi_master-MOSI" }
+    @trait(_, .dsp.net_ic_LRCLK_OUT3_MP9): ELEC::has_net_name { .name &= "i2s_outs[3]-WS" }
+    @trait(_, .dsp.net_ic_THD_M): ELEC::has_net_name { .name &= "THD_M" }
+    .control.net_i2s_resistor_jumpers_dsp_ad1938_6_2 ~ .dsp.net_ic_SDATA_IN1
+    @trait(_, .control.net_i2s_resistor_jumpers_dsp_ad1938_6_2): ELEC::has_net_name { .name &= "model-i2s_ins[1]-SD-2" }
+    .control.net_i2s_resistor_jumpers_dsp_ad1938_0_1 ~ .dsp.net_ic_SDATA_OUT1
+    @trait(_, .control.net_i2s_resistor_jumpers_dsp_ad1938_0_1): ELEC::has_net_name { .name &= "model-i2s_outs[1]-SD-2" }
+    @trait(_, .dsp.net_oscillator_driver_c_load_0_1): ELEC::has_net_name { .name &= "nOE" }
+    .control.net_i2s_resistor_jumpers_dsp_ad1938_8_2 ~ .dsp.net_ic_BCLK_IN1
+    @trait(_, .control.net_i2s_resistor_jumpers_dsp_ad1938_8_2): ELEC::has_net_name { .name &= "i2s_ins[1]-SCK" }
+    .control.net_i2s_resistor_jumpers_dsp_ad1938_5_1 ~ .dsp.net_ic_BCLK_OUT2
+    @trait(_, .control.net_i2s_resistor_jumpers_dsp_ad1938_5_1): ELEC::has_net_name { .name &= "i2s_outs[2]-SCK" }
+    @trait(_, .dsp.net_ic_SDATA_IN2): ELEC::has_net_name { .name &= "model-i2s_ins[2]-SD-2" }
+    .control.net_i2s_resistor_jumpers_dsp_ad1938_4_1 ~ .dsp.net_ic_LRCLK_OUT2_MP8
+    @trait(_, .control.net_i2s_resistor_jumpers_dsp_ad1938_4_1): ELEC::has_net_name { .name &= "i2s_outs[2]-WS" }
+    .control.net_cm5_i2s_resistor_jumpers_0__resistor_1 ~ .dsp.net_ic_BCLK_IN0
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_0__resistor_1): ELEC::has_net_name { .name &= "model-i2s_ins[0]-SCK-2" }
+    @trait(_, .dsp.net_ic_CLKOUT): ELEC::has_net_name { .name &= "CLKOUT" }
+    @trait(_, .dsp.net_ic_SPDIFIN): ELEC::has_net_name { .name &= "SPDIFIN" }
+    @trait(_, .dsp.net_ic_PLLFILT): ELEC::has_net_name { .name &= "PLLFILT" }
+    .control.net_i2s_resistor_jumpers_dsp_ad1938_7_2 ~ .dsp.net_ic_LRCLK_IN1_MP11
+    @trait(_, .control.net_i2s_resistor_jumpers_dsp_ad1938_7_2): ELEC::has_net_name { .name &= "i2s_ins[1]-WS" }
+    .dsp.net_ic_nRESET ~ .host.net_cm5_GPIO24 ~ .panel.net_dsp_debug_connector_6
+    @trait(_, .dsp.net_ic_nRESET): ELEC::has_net_name { .name &= "nRESET" }
+    .control.net_cm5_i2s_resistor_jumpers_4__resistor_1 ~ .dsp.net_ic_LRCLK_OUT0_MP4
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_4__resistor_1): ELEC::has_net_name { .name &= "model-i2s_outs[0]-WS-2" }
+    @trait(_, .dsp.net_ic_THD_P): ELEC::has_net_name { .name &= "THD_P" }
+    @trait(_, .dsp.net_ic_BCLK_OUT3): ELEC::has_net_name { .name &= "i2s_outs[3]-SCK" }
+    @trait(_, .dsp.net_ic_MP6): ELEC::has_net_name { .name &= "MP6" }
+    @trait(_, .dsp.net_pll_filter_c1_1): ELEC::has_net_name { .name &= "c1-net" }
+    @trait(_, .dsp.net_ic_AUXADC2): ELEC::has_net_name { .name &= "AUXADC2" }
+    .control.net_cm5_i2s_resistor_jumpers_2__resistor_1 ~ .dsp.net_ic_SDATA_IN0
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_2__resistor_1): ELEC::has_net_name { .name &= "model-i2s_ins[0]-SD-2" }
+    .control.net_cm5_i2s_resistor_jumpers_3__resistor_1 ~ .dsp.net_ic_BCLK_OUT0
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_3__resistor_1): ELEC::has_net_name { .name &= "model-i2s_outs[0]-SCK-2" }
+    @trait(_, .dsp.net_ic_XTALOUT): ELEC::has_net_name { .name &= "XTALOUT" }
+    @trait(_, .dsp.net_ic_SDA_M_MISO_M_MP3): ELEC::has_net_name { .name &= "spi_master-MISO" }
+    @trait(_, .dsp.net_ic_BCLK_IN3): ELEC::has_net_name { .name &= "i2s_ins[3]-SCK" }
+    @trait(_, .dsp.net_ic_AUXADC0): ELEC::has_net_name { .name &= "AUXADC0" }
+    @trait(_, .dsp.net_bjt_pnp_2): ELEC::has_net_name { .name &= "collector" }
+    .control.net_i2s_resistor_jumpers_dsp_ad1938_3_1 ~ .dsp.net_ic_SDATA_OUT2
+    @trait(_, .control.net_i2s_resistor_jumpers_dsp_ad1938_3_1): ELEC::has_net_name { .name &= "i2s_outs[2]-SD" }
+    @trait(_, .dsp.net_ic_SDATA_OUT3): ELEC::has_net_name { .name &= "i2s_outs[3]-SD" }
+    @trait(_, .dsp.net_ic_BCLK_IN2): ELEC::has_net_name { .name &= "i2s_ins[2]-SCK" }
+    @trait(_, .dsp.net_ic_SS_M_MP0): ELEC::has_net_name { .name &= "SS_M_MP0" }
+    @trait(_, .dsp.net_ic_AUXADC1): ELEC::has_net_name { .name &= "AUXADC1" }
+    @trait(_, .dsp.net_ic_AUXADC4): ELEC::has_net_name { .name &= "AUXADC4" }
+    .control.net_cm5_dsp_i2c_pullups_0_1 ~ .dsp.net_ic_SCLK_SCL ~ .host.net_cm5_ID_SC ~ .panel.net_dsp_debug_connector_1
+    @trait(_, .control.net_cm5_dsp_i2c_pullups_0_1): ELEC::has_net_name { .name &= "spi-SCL" }
+    .control.net_cm5_i2s_resistor_jumpers_1__resistor_1 ~ .dsp.net_ic_LRCLK_IN0_MP10
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_1__resistor_1): ELEC::has_net_name { .name &= "model-i2s_ins[0]-WS-2" }
+    @trait(_, .dsp.net_ic_LRCLK_IN3_MP13): ELEC::has_net_name { .name &= "i2s_ins[3]-WS" }
+    .control.net_i2s_resistor_jumpers_dsp_ad1938_1_1 ~ .dsp.net_ic_LRCLK_OUT1_MP5
+    @trait(_, .control.net_i2s_resistor_jumpers_dsp_ad1938_1_1): ELEC::has_net_name { .name &= "i2s_outs[1]-WS" }
+    @trait(_, .dsp.net_ic_SPDIFOUT): ELEC::has_net_name { .name &= "SPDIFOUT" }
+    @trait(_, .dsp.net_ic_VDRIVE): ELEC::has_net_name { .name &= "VDRIVE" }
+    .control.net_cm5_i2s_resistor_jumpers_5__resistor_1 ~ .dsp.net_ic_SDATA_OUT0
+    @trait(_, .control.net_cm5_i2s_resistor_jumpers_5__resistor_1): ELEC::has_net_name { .name &= "model-i2s_outs[0]-SD-2" }
+    @trait(_, .dsp.net_ic_XTALIN_MCLK): ELEC::has_net_name { .name &= "XTALIN_MCLK" }
+    @trait(_, .dsp.net_ic_DVDD_20): ELEC::has_net_name { .name &= "power_digital-VCC" }
+    .control.power_3v3_digital ~ .dsp.power_3v3_digital ~ .host.power_3v3_digital ~ .switches[0].power_3v3_digital ~ .switches[1].power_3v3_digital ~ .switches[2].power_3v3_digital ~ .power.power_3v3d.hv
+    @trait(_, .control.power_3v3_digital): ELEC::has_net_name { .name &= "power_3v3_digital" }
+    .control.net_cm5_dsp_i2c_pullups_1_1 ~ .dsp.net_ic_MISO_SDA ~ .host.net_cm5_ID_SD ~ .panel.net_dsp_debug_connector_3
+    @trait(_, .control.net_cm5_dsp_i2c_pullups_1_1): ELEC::has_net_name { .name &= "spi-SDA" }
+    @trait(_, .dsp.net_ic_SCL_M_SCLK_M_MP2): ELEC::has_net_name { .name &= "spi_master-SCL" }
+    .codecs[0].net_ic_CIN ~ .control.net_cm5_spi_resistor_jumpers_1_2
+    @trait(_, .codecs[0].net_ic_CIN): ELEC::has_net_name { .name &= "model-spi-MOSI-0" }
+    .control.net_cm5_spi_resistor_jumpers_2_1 ~ .host.net_cm5_GPIO9
+    @trait(_, .control.net_cm5_spi_resistor_jumpers_2_1): ELEC::has_net_name { .name &= "spis[0]-MISO" }
+    .control.net_cm5_spi_resistor_jumpers_3_1 ~ .host.net_cm5_GPIO8
+    @trait(_, .control.net_cm5_spi_resistor_jumpers_3_1): ELEC::has_net_name { .name &= "spi0_cs[0]-pins[38]" }
+    .codecs[1].net_ic_COUT ~ .control.net_cm5_spi_resistor_jumpers_6_2
+    @trait(_, .codecs[1].net_ic_COUT): ELEC::has_net_name { .name &= "model-spi-MISO-1" }
+    .codecs[1].net_ic_nCLATCH ~ .control.net_cm5_spi_resistor_jumpers_7_2
+    @trait(_, .codecs[1].net_ic_nCLATCH): ELEC::has_net_name { .name &= "model-spi_cs-nCLATCH-1" }
+    .control.net_cm5_spi_resistor_jumpers_0_1 ~ .host.net_cm5_GPIO11
+    @trait(_, .control.net_cm5_spi_resistor_jumpers_0_1): ELEC::has_net_name { .name &= "spis[0]-SCLK" }
+    .codecs[0].net_ic_CCLK ~ .control.net_cm5_spi_resistor_jumpers_0_2
+    @trait(_, .codecs[0].net_ic_CCLK): ELEC::has_net_name { .name &= "model-spi-SCLK-0" }
+    .codecs[1].net_ic_CIN ~ .control.net_cm5_spi_resistor_jumpers_5_2
+    @trait(_, .codecs[1].net_ic_CIN): ELEC::has_net_name { .name &= "model-spi-MOSI-1" }
+    .codecs[1].net_ic_CCLK ~ .control.net_cm5_spi_resistor_jumpers_4_2
+    @trait(_, .codecs[1].net_ic_CCLK): ELEC::has_net_name { .name &= "model-spi-SCLK-1" }
+    .codecs[0].net_ic_COUT ~ .control.net_cm5_spi_resistor_jumpers_2_2
+    @trait(_, .codecs[0].net_ic_COUT): ELEC::has_net_name { .name &= "model-spi-MISO-0" }
+    .control.net_cm5_spi_resistor_jumpers_1_1 ~ .host.net_cm5_GPIO10
+    @trait(_, .control.net_cm5_spi_resistor_jumpers_1_1): ELEC::has_net_name { .name &= "spis[0]-MOSI" }
+    .codecs[0].net_ic_nCLATCH ~ .control.net_cm5_spi_resistor_jumpers_3_2
+    @trait(_, .codecs[0].net_ic_nCLATCH): ELEC::has_net_name { .name &= "model-spi_cs-nCLATCH-0" }
+    .control.net_cm5_spi_resistor_jumpers_7_1 ~ .host.net_cm5_GPIO7
+    @trait(_, .control.net_cm5_spi_resistor_jumpers_7_1): ELEC::has_net_name { .name &= "pins[36]" }
+    @trait(_, .ethernet_ports.net_ic_LED_Ypos_93): ELEC::has_net_name { .name &= "LED_Ypos7" }
+    @trait(_, .ethernet_ports.net_ic_LED_Ypos_57): ELEC::has_net_name { .name &= "LED_Ypos4" }
+    @trait(_, .ethernet_ports.net_ic_LED_Ypos_48): ELEC::has_net_name { .name &= "LED_Ypos3" }
+    @trait(_, .ethernet_ports.net_ic_LED_Gpos_95): ELEC::has_net_name { .name &= "LED_Gpos7" }
+    @trait(_, .ethernet_ports.net_ic_LED_Gpos_34): ELEC::has_net_name { .name &= "LED_Gpos2" }
+    @trait(_, .ethernet_ports.net_ic_LED_Ypos_36): ELEC::has_net_name { .name &= "LED_Ypos2" }
+    @trait(_, .ethernet_ports.net_ic_LED_Gpos_46): ELEC::has_net_name { .name &= "LED_Gpos3" }
+    @trait(_, .ethernet_ports.net_ic_LED_Gpos_59): ELEC::has_net_name { .name &= "LED_Gpos4" }
+    @trait(_, .ethernet_ports.net_ic_LED_Ypos_69): ELEC::has_net_name { .name &= "LED_Ypos5" }
+    @trait(_, .ethernet_ports.net_ic_LED_Ypos_24): ELEC::has_net_name { .name &= "LED_Ypos1" }
+    @trait(_, .ethernet_ports.net_ic_LED_Gpos_22): ELEC::has_net_name { .name &= "LED_Gpos1" }
+    @trait(_, .ethernet_ports.net_ic_LED_Ypos_81): ELEC::has_net_name { .name &= "LED_Ypos6" }
+    @trait(_, .ethernet_ports.net_ic_LED_Gpos_10): ELEC::has_net_name { .name &= "LED_Gpos0" }
+    @trait(_, .ethernet_ports.net_ic_LED_Gpos_71): ELEC::has_net_name { .name &= "LED_Gpos5" }
+    .control.net_input_dc_block_caps_2_2 ~ .panel.net_xlr_audio_input_connectors_1_2
+    @trait(_, .control.net_input_dc_block_caps_2_2): ELEC::has_net_name { .name &= "xlr_audio_input_connectors[1]-dmx-T_P" }
+    .control.net_input_dc_block_caps_0_2 ~ .panel.net_xlr_audio_input_connectors_0_2
+    @trait(_, .control.net_input_dc_block_caps_0_2): ELEC::has_net_name { .name &= "xlr_audio_input_connectors[0]-dmx-T_P" }
+    .control.net_input_dc_block_caps_3_2 ~ .panel.net_xlr_audio_input_connectors_1_3
+    @trait(_, .control.net_input_dc_block_caps_3_2): ELEC::has_net_name { .name &= "xlr_audio_input_connectors[1]-dmx-R_N" }
+    .control.net_input_dc_block_caps_1_2 ~ .panel.net_xlr_audio_input_connectors_0_3
+    @trait(_, .control.net_input_dc_block_caps_1_2): ELEC::has_net_name { .name &= "xlr_audio_input_connectors[0]-dmx-R_N" }
+    .control.net_dmx_rs485_driver_DE ~ .host.net_cm5_GPIO16
+    @trait(_, .control.net_dmx_rs485_driver_DE): ELEC::has_net_name { .name &= "CTS" }
+    .control.net_dmx_rs485_driver_DI ~ .host.net_cm5_GPIO14
+    @trait(_, .control.net_dmx_rs485_driver_DI): ELEC::has_net_name { .name &= "TX" }
+    .control.net_dmx_rs485_driver_RO ~ .host.net_cm5_GPIO15
+    @trait(_, .control.net_dmx_rs485_driver_RO): ELEC::has_net_name { .name &= "RX" }
+    .control.net_dmx_rs485_driver_A ~ .panel.net_xlr_dmx_input_connector_3
+    @trait(_, .control.net_dmx_rs485_driver_A): ELEC::has_net_name { .name &= "dmx_rs485_P" }
+    .control.net_dmx_rs485_driver_B ~ .panel.net_xlr_dmx_input_connector_2
+    @trait(_, .control.net_dmx_rs485_driver_B): ELEC::has_net_name { .name &= "dmx_rs485_N" }
+    @trait(_, .usb.net_bypass_fuse_resistor_1): ELEC::has_net_name { .name &= "power_vbus-VCC" }
+    .control.net_dmx_rs485_driver_nRE ~ .host.net_cm5_GPIO4
+    @trait(_, .control.net_dmx_rs485_driver_nRE): ELEC::has_net_name { .name &= "nRE" }
+    .codecs[0].ground ~ .codecs[1].ground ~ .control.ground ~ .dsp.ground ~ .ethernet_ports.ground ~ .host.ground ~ .line_drivers[0].ground ~ .line_drivers[10].ground ~ .line_drivers[11].ground ~ .line_drivers[12].ground ~ .line_drivers[13].ground ~ .line_drivers[1].ground ~ .line_drivers[2].ground ~ .line_drivers[3].ground ~ .line_drivers[4].ground ~ .line_drivers[5].ground ~ .line_drivers[6].ground ~ .line_drivers[7].ground ~ .line_drivers[8].ground ~ .line_drivers[9].ground ~ .panel.ground ~ .switches[0].ground ~ .switches[1].ground ~ .switches[2].ground ~ .usb.ground ~ .power.power_5v.lv
+    @trait(_, .codecs[0].ground): ELEC::has_net_name { .name &= "GND" }
+    @trait(_, .panel.net_xlr_audio_input_connectors_1_1): ELEC::has_net_name { .name &= "xlr_audio_input_connectors[1]-dmx-GND" }
+    @trait(_, .panel.net_xlr_audio_input_connectors_0_1): ELEC::has_net_name { .name &= "xlr_audio_input_connectors[0]-dmx-GND" }
+    @trait(_, .panel.net_ethercon_output_connectors_0_G): ELEC::has_net_name { .name &= "shield" }
 }

@@ -1,0 +1,151 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.C107095: @STD::Import { .org &= "jlc"; .project &= "C107095"; .version &= "0.1.0" }
+.C11702: @STD::Import { .org &= "jlc"; .project &= "C11702"; .version &= "0.1.0" }
+.C1525: @STD::Import { .org &= "jlc"; .project &= "C1525"; .version &= "0.1.0" }
+.C1549: @STD::Import { .org &= "jlc"; .project &= "C1549"; .version &= "0.1.0" }
+.C15850: @STD::Import { .org &= "jlc"; .project &= "C15850"; .version &= "0.1.0" }
+.C1594: @STD::Import { .org &= "jlc"; .project &= "C1594"; .version &= "0.1.0" }
+.C21189: @STD::Import { .org &= "jlc"; .project &= "C21189"; .version &= "0.1.0" }
+.C23159: @STD::Import { .org &= "jlc"; .project &= "C23159"; .version &= "0.1.0" }
+.C25076: @STD::Import { .org &= "jlc"; .project &= "C25076"; .version &= "0.1.0" }
+.C362472: @STD::Import { .org &= "jlc"; .project &= "C362472"; .version &= "0.1.0" }
+.C403699: @STD::Import { .org &= "jlc"; .project &= "C403699"; .version &= "0.1.0" }
+.C426844: @STD::Import { .org &= "jlc"; .project &= "C426844"; .version &= "0.1.0" }
+
+.Dsp: @type {
+    /// Original DSP circuit, with its component and pad connectivity preserved.
+    .bjt_pnp: C426844::Nexperia_PBSS5350X_115
+    .bulk_decoupling_power_caps_0: C15850::Samsung_Electro_Mechanics_CL21A106KAYNNNE
+    .bulk_decoupling_power_caps_1: C15850::Samsung_Electro_Mechanics_CL21A106KAYNNNE
+    .bulk_decoupling_power_caps_2: C15850::Samsung_Electro_Mechanics_CL21A106KAYNNNE
+    .bulk_decoupling_power_caps_3: C15850::Samsung_Electro_Mechanics_CL21A106KAYNNNE
+    .decoupling_power_analog_capacitors_0: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_power_digital_capacitors_0: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_power_digital_capacitors_1: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_power_digital_capacitors_2: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_power_digital_capacitors_3: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_power_io_capacitors_0: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_power_io_capacitors_1: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_power_io_capacitors_2: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_power_io_capacitors_3: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_power_pll_capacitors_0: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .ic: C403699::Analog_Devices_ADAU1452WBCPZ
+    .oscillator_driver_c_load_0: C1549::FH_0402CG180J500NT
+    .oscillator_driver_c_load_1: C1549::FH_0402CG180J500NT
+    .oscillator_driver_r_damp: C25076::UNI_ROYAL_0402WGF1000TCE
+    .oscillator_driver_xtal_xtal: C362472::Yajingxin_TXM12_288M0004322FBCDO00T
+    .output_debug_resistor: C21189::UNI_ROYAL_0603WAF0000T5E
+    .pll_filter_c1: C107095::YAGEO_CC0603KRX7R9BB562
+    .pll_filter_c2: C1594::FH_0603B151K500NT
+    .pll_filter_r: C23159::UNI_ROYAL_0603WAF4301T5E
+    .vdrive_min_load_res: C11702::UNI_ROYAL_0402WGF1001TCE
+
+    .ground: ELEC::Interfaces::Electrical
+    .ground ~ .bulk_decoupling_power_caps_0.'2' ~ .bulk_decoupling_power_caps_1.'2' ~ .bulk_decoupling_power_caps_2.'2' ~ .bulk_decoupling_power_caps_3.'2' ~ .decoupling_power_analog_capacitors_0.'2' ~ .decoupling_power_digital_capacitors_0.'2' ~ .decoupling_power_digital_capacitors_1.'2' ~ .decoupling_power_digital_capacitors_2.'2' ~ .decoupling_power_digital_capacitors_3.'2' ~ .decoupling_power_io_capacitors_0.'2' ~ .decoupling_power_io_capacitors_1.'2' ~ .decoupling_power_io_capacitors_2.'2' ~ .decoupling_power_io_capacitors_3.'2' ~ .decoupling_power_pll_capacitors_0.'2' ~ .ic.'1' ~ .ic.'14' ~ .ic.'17' ~ .ic.'19' ~ .ic.'25' ~ .ic.'32' ~ .ic.'33' ~ .ic.'34' ~ .ic.'36' ~ .ic.'37' ~ .ic.'54' ~ .ic.'55' ~ .ic.'6' ~ .ic.'72' ~ .ic.'73' ~ .oscillator_driver_c_load_0.'2' ~ .oscillator_driver_c_load_1.'2' ~ .oscillator_driver_xtal_xtal.'2' ~ .oscillator_driver_xtal_xtal.'4'
+    .net_bjt_pnp_2: ELEC::Interfaces::Electrical
+    .net_bjt_pnp_2 ~ .bjt_pnp.'2' ~ .output_debug_resistor.'1'
+    .net_ic_AUXADC0: ELEC::Interfaces::Electrical
+    .net_ic_AUXADC0 ~ .ic.'8'
+    .net_ic_AUXADC1: ELEC::Interfaces::Electrical
+    .net_ic_AUXADC1 ~ .ic.'9'
+    .net_ic_AUXADC2: ELEC::Interfaces::Electrical
+    .net_ic_AUXADC2 ~ .ic.'10'
+    .net_ic_AUXADC3: ELEC::Interfaces::Electrical
+    .net_ic_AUXADC3 ~ .ic.'11'
+    .net_ic_AUXADC4: ELEC::Interfaces::Electrical
+    .net_ic_AUXADC4 ~ .ic.'12'
+    .net_ic_AUXADC5: ELEC::Interfaces::Electrical
+    .net_ic_AUXADC5 ~ .ic.'13'
+    .net_ic_BCLK_IN0: ELEC::Interfaces::Electrical
+    .net_ic_BCLK_IN0 ~ .ic.'57'
+    .net_ic_BCLK_IN1: ELEC::Interfaces::Electrical
+    .net_ic_BCLK_IN1 ~ .ic.'60'
+    .net_ic_BCLK_IN2: ELEC::Interfaces::Electrical
+    .net_ic_BCLK_IN2 ~ .ic.'65'
+    .net_ic_BCLK_IN3: ELEC::Interfaces::Electrical
+    .net_ic_BCLK_IN3 ~ .ic.'68'
+    .net_ic_BCLK_OUT0: ELEC::Interfaces::Electrical
+    .net_ic_BCLK_OUT0 ~ .ic.'40'
+    .net_ic_BCLK_OUT1: ELEC::Interfaces::Electrical
+    .net_ic_BCLK_OUT1 ~ .ic.'43'
+    .net_ic_BCLK_OUT2: ELEC::Interfaces::Electrical
+    .net_ic_BCLK_OUT2 ~ .ic.'48'
+    .net_ic_BCLK_OUT3: ELEC::Interfaces::Electrical
+    .net_ic_BCLK_OUT3 ~ .ic.'51'
+    .net_ic_CLKOUT: ELEC::Interfaces::Electrical
+    .net_ic_CLKOUT ~ .ic.'23'
+    .net_ic_DVDD_20: ELEC::Interfaces::Electrical
+    .net_ic_DVDD_20 ~ .bulk_decoupling_power_caps_2.'1' ~ .decoupling_power_digital_capacitors_0.'1' ~ .decoupling_power_digital_capacitors_1.'1' ~ .decoupling_power_digital_capacitors_2.'1' ~ .decoupling_power_digital_capacitors_3.'1' ~ .ic.'20' ~ .ic.'35' ~ .ic.'53' ~ .ic.'71' ~ .output_debug_resistor.'2'
+    .net_ic_LRCLK_IN0_MP10: ELEC::Interfaces::Electrical
+    .net_ic_LRCLK_IN0_MP10 ~ .ic.'58'
+    .net_ic_LRCLK_IN1_MP11: ELEC::Interfaces::Electrical
+    .net_ic_LRCLK_IN1_MP11 ~ .ic.'61'
+    .net_ic_LRCLK_IN2_MP12: ELEC::Interfaces::Electrical
+    .net_ic_LRCLK_IN2_MP12 ~ .ic.'66'
+    .net_ic_LRCLK_IN3_MP13: ELEC::Interfaces::Electrical
+    .net_ic_LRCLK_IN3_MP13 ~ .ic.'69'
+    .net_ic_LRCLK_OUT0_MP4: ELEC::Interfaces::Electrical
+    .net_ic_LRCLK_OUT0_MP4 ~ .ic.'39'
+    .net_ic_LRCLK_OUT1_MP5: ELEC::Interfaces::Electrical
+    .net_ic_LRCLK_OUT1_MP5 ~ .ic.'42'
+    .net_ic_LRCLK_OUT2_MP8: ELEC::Interfaces::Electrical
+    .net_ic_LRCLK_OUT2_MP8 ~ .ic.'47'
+    .net_ic_LRCLK_OUT3_MP9: ELEC::Interfaces::Electrical
+    .net_ic_LRCLK_OUT3_MP9 ~ .ic.'50'
+    .net_ic_MISO_SDA: ELEC::Interfaces::Electrical
+    .net_ic_MISO_SDA ~ .ic.'30'
+    .net_ic_MOSI_M_MP1: ELEC::Interfaces::Electrical
+    .net_ic_MOSI_M_MP1 ~ .ic.'27'
+    .net_ic_MP6: ELEC::Interfaces::Electrical
+    .net_ic_MP6 ~ .ic.'45'
+    .net_ic_MP7: ELEC::Interfaces::Electrical
+    .net_ic_MP7 ~ .ic.'46'
+    .net_ic_PLLFILT: ELEC::Interfaces::Electrical
+    .net_ic_PLLFILT ~ .ic.'16' ~ .pll_filter_c2.'1' ~ .pll_filter_r.'1'
+    .net_ic_SCLK_SCL: ELEC::Interfaces::Electrical
+    .net_ic_SCLK_SCL ~ .ic.'31'
+    .net_ic_SCL_M_SCLK_M_MP2: ELEC::Interfaces::Electrical
+    .net_ic_SCL_M_SCLK_M_MP2 ~ .ic.'28'
+    .net_ic_SDATA_IN0: ELEC::Interfaces::Electrical
+    .net_ic_SDATA_IN0 ~ .ic.'59'
+    .net_ic_SDATA_IN1: ELEC::Interfaces::Electrical
+    .net_ic_SDATA_IN1 ~ .ic.'62'
+    .net_ic_SDATA_IN2: ELEC::Interfaces::Electrical
+    .net_ic_SDATA_IN2 ~ .ic.'67'
+    .net_ic_SDATA_IN3: ELEC::Interfaces::Electrical
+    .net_ic_SDATA_IN3 ~ .ic.'70'
+    .net_ic_SDATA_OUT0: ELEC::Interfaces::Electrical
+    .net_ic_SDATA_OUT0 ~ .ic.'41'
+    .net_ic_SDATA_OUT1: ELEC::Interfaces::Electrical
+    .net_ic_SDATA_OUT1 ~ .ic.'44'
+    .net_ic_SDATA_OUT2: ELEC::Interfaces::Electrical
+    .net_ic_SDATA_OUT2 ~ .ic.'49'
+    .net_ic_SDATA_OUT3: ELEC::Interfaces::Electrical
+    .net_ic_SDATA_OUT3 ~ .ic.'52'
+    .net_ic_SDA_M_MISO_M_MP3: ELEC::Interfaces::Electrical
+    .net_ic_SDA_M_MISO_M_MP3 ~ .ic.'29'
+    .net_ic_SPDIFIN: ELEC::Interfaces::Electrical
+    .net_ic_SPDIFIN ~ .ic.'4'
+    .net_ic_SPDIFOUT: ELEC::Interfaces::Electrical
+    .net_ic_SPDIFOUT ~ .ic.'5'
+    .net_ic_SS_M_MP0: ELEC::Interfaces::Electrical
+    .net_ic_SS_M_MP0 ~ .ic.'26'
+    .net_ic_THD_M: ELEC::Interfaces::Electrical
+    .net_ic_THD_M ~ .ic.'63'
+    .net_ic_THD_P: ELEC::Interfaces::Electrical
+    .net_ic_THD_P ~ .ic.'64'
+    .net_ic_VDRIVE: ELEC::Interfaces::Electrical
+    .net_ic_VDRIVE ~ .bjt_pnp.'3' ~ .ic.'3' ~ .vdrive_min_load_res.'2'
+    .net_ic_XTALIN_MCLK: ELEC::Interfaces::Electrical
+    .net_ic_XTALIN_MCLK ~ .ic.'21' ~ .oscillator_driver_r_damp.'1'
+    .net_ic_XTALOUT: ELEC::Interfaces::Electrical
+    .net_ic_XTALOUT ~ .ic.'22' ~ .oscillator_driver_c_load_1.'1' ~ .oscillator_driver_xtal_xtal.'3'
+    .net_ic_nRESET: ELEC::Interfaces::Electrical
+    .net_ic_nRESET ~ .ic.'24'
+    .net_oscillator_driver_c_load_0_1: ELEC::Interfaces::Electrical
+    .net_oscillator_driver_c_load_0_1 ~ .oscillator_driver_c_load_0.'1' ~ .oscillator_driver_r_damp.'2' ~ .oscillator_driver_xtal_xtal.'1'
+    .net_pll_filter_c1_1: ELEC::Interfaces::Electrical
+    .net_pll_filter_c1_1 ~ .pll_filter_c1.'1' ~ .pll_filter_r.'2'
+    .power_3v3_digital: ELEC::Interfaces::Electrical
+    .power_3v3_digital ~ .bjt_pnp.'1' ~ .bulk_decoupling_power_caps_0.'1' ~ .bulk_decoupling_power_caps_1.'1' ~ .bulk_decoupling_power_caps_3.'1' ~ .decoupling_power_analog_capacitors_0.'1' ~ .decoupling_power_io_capacitors_0.'1' ~ .decoupling_power_io_capacitors_1.'1' ~ .decoupling_power_io_capacitors_2.'1' ~ .decoupling_power_io_capacitors_3.'1' ~ .decoupling_power_pll_capacitors_0.'1' ~ .ic.'15' ~ .ic.'18' ~ .ic.'2' ~ .ic.'38' ~ .ic.'56' ~ .ic.'7' ~ .pll_filter_c1.'2' ~ .pll_filter_c2.'2' ~ .vdrive_min_load_res.'1'
+}

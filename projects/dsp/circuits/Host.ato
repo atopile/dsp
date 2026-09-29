@@ -1,0 +1,303 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.C2915629: @STD::Import { .org &= "jlc"; .project &= "C2915629"; .version &= "0.1.0" }
+.C42394220: @STD::Import { .org &= "jlc"; .project &= "C42394220"; .version &= "0.1.0" }
+
+.Host: @type {
+    /// Original DSP circuit, with its component and pad connectivity preserved.
+    .cm5: C42394220::Raspberry_Pi_CM5104032_Compute_Module_CM5_4GB_RAM_32GB_eMMC_Wireless
+    .studs_0: C2915629::Sinhoo_SMTSO2515CTJ
+    .studs_1: C2915629::Sinhoo_SMTSO2515CTJ
+    .studs_2: C2915629::Sinhoo_SMTSO2515CTJ
+    .studs_3: C2915629::Sinhoo_SMTSO2515CTJ
+
+    .ground: ELEC::Interfaces::Electrical
+    .ground ~ .cm5.'1' ~ .cm5.'107' ~ .cm5.'108' ~ .cm5.'113' ~ .cm5.'114' ~ .cm5.'119' ~ .cm5.'120' ~ .cm5.'125' ~ .cm5.'126' ~ .cm5.'13' ~ .cm5.'131' ~ .cm5.'132' ~ .cm5.'137' ~ .cm5.'14' ~ .cm5.'144' ~ .cm5.'155' ~ .cm5.'156' ~ .cm5.'161' ~ .cm5.'162' ~ .cm5.'167' ~ .cm5.'168' ~ .cm5.'173' ~ .cm5.'174' ~ .cm5.'179' ~ .cm5.'180' ~ .cm5.'185' ~ .cm5.'186' ~ .cm5.'191' ~ .cm5.'192' ~ .cm5.'197' ~ .cm5.'198' ~ .cm5.'2' ~ .cm5.'22' ~ .cm5.'23' ~ .cm5.'32' ~ .cm5.'33' ~ .cm5.'42' ~ .cm5.'43' ~ .cm5.'52' ~ .cm5.'53' ~ .cm5.'59' ~ .cm5.'60' ~ .cm5.'65' ~ .cm5.'66' ~ .cm5.'7' ~ .cm5.'71' ~ .cm5.'74' ~ .cm5.'8' ~ .cm5.'98' ~ .studs_0.'1' ~ .studs_1.'1' ~ .studs_2.'1' ~ .studs_3.'1'
+    .net_cm5_BT_nDisable: ELEC::Interfaces::Electrical
+    .net_cm5_BT_nDisable ~ .cm5.'91'
+    .net_cm5_CAM_GPIO0: ELEC::Interfaces::Electrical
+    .net_cm5_CAM_GPIO0 ~ .cm5.'97'
+    .net_cm5_CAM_GPIO1: ELEC::Interfaces::Electrical
+    .net_cm5_CAM_GPIO1 ~ .cm5.'100'
+    .net_cm5_CC1: ELEC::Interfaces::Electrical
+    .net_cm5_CC1 ~ .cm5.'94'
+    .net_cm5_CC2: ELEC::Interfaces::Electrical
+    .net_cm5_CC2 ~ .cm5.'96'
+    .net_cm5_CM5_1_8VOutput_88: ELEC::Interfaces::Electrical
+    .net_cm5_CM5_1_8VOutput_88 ~ .cm5.'88' ~ .cm5.'90'
+    .net_cm5_CM5_3_3VOutput_84: ELEC::Interfaces::Electrical
+    .net_cm5_CM5_3_3VOutput_84 ~ .cm5.'84' ~ .cm5.'86'
+    .net_cm5_EEPROM_nWP: ELEC::Interfaces::Electrical
+    .net_cm5_EEPROM_nWP ~ .cm5.'20'
+    .net_cm5_Ethernet_Pair0_N: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_Pair0_N ~ .cm5.'10'
+    .net_cm5_Ethernet_Pair0_P: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_Pair0_P ~ .cm5.'12'
+    .net_cm5_Ethernet_Pair1_N: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_Pair1_N ~ .cm5.'6'
+    .net_cm5_Ethernet_Pair1_P: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_Pair1_P ~ .cm5.'4'
+    .net_cm5_Ethernet_Pair2_N: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_Pair2_N ~ .cm5.'9'
+    .net_cm5_Ethernet_Pair2_P: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_Pair2_P ~ .cm5.'11'
+    .net_cm5_Ethernet_Pair3_N: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_Pair3_N ~ .cm5.'5'
+    .net_cm5_Ethernet_Pair3_P: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_Pair3_P ~ .cm5.'3'
+    .net_cm5_Ethernet_SYNC_OUT: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_SYNC_OUT ~ .cm5.'18'
+    .net_cm5_Ethernet_nLED2: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_nLED2 ~ .cm5.'17'
+    .net_cm5_Ethernet_nLED3: ELEC::Interfaces::Electrical
+    .net_cm5_Ethernet_nLED3 ~ .cm5.'15'
+    .net_cm5_Fan_PWM: ELEC::Interfaces::Electrical
+    .net_cm5_Fan_PWM ~ .cm5.'19'
+    .net_cm5_Fan_Tacho: ELEC::Interfaces::Electrical
+    .net_cm5_Fan_Tacho ~ .cm5.'16'
+    .net_cm5_GND_138: ELEC::Interfaces::Electrical
+    .net_cm5_GND_138 ~ .cm5.'138'
+    .net_cm5_GND_150: ELEC::Interfaces::Electrical
+    .net_cm5_GND_150 ~ .cm5.'150'
+    .net_cm5_GPIO10: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO10 ~ .cm5.'44'
+    .net_cm5_GPIO11: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO11 ~ .cm5.'38'
+    .net_cm5_GPIO12: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO12 ~ .cm5.'31'
+    .net_cm5_GPIO13: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO13 ~ .cm5.'28'
+    .net_cm5_GPIO14: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO14 ~ .cm5.'55'
+    .net_cm5_GPIO15: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO15 ~ .cm5.'51'
+    .net_cm5_GPIO16: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO16 ~ .cm5.'29'
+    .net_cm5_GPIO17: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO17 ~ .cm5.'50'
+    .net_cm5_GPIO18: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO18 ~ .cm5.'49'
+    .net_cm5_GPIO19: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO19 ~ .cm5.'26'
+    .net_cm5_GPIO2: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO2 ~ .cm5.'58'
+    .net_cm5_GPIO20: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO20 ~ .cm5.'27'
+    .net_cm5_GPIO21: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO21 ~ .cm5.'25'
+    .net_cm5_GPIO22: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO22 ~ .cm5.'46'
+    .net_cm5_GPIO23: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO23 ~ .cm5.'47'
+    .net_cm5_GPIO24: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO24 ~ .cm5.'45'
+    .net_cm5_GPIO25: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO25 ~ .cm5.'41'
+    .net_cm5_GPIO26: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO26 ~ .cm5.'24'
+    .net_cm5_GPIO27: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO27 ~ .cm5.'48'
+    .net_cm5_GPIO3: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO3 ~ .cm5.'56'
+    .net_cm5_GPIO4: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO4 ~ .cm5.'54'
+    .net_cm5_GPIO5: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO5 ~ .cm5.'34'
+    .net_cm5_GPIO6: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO6 ~ .cm5.'30'
+    .net_cm5_GPIO7: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO7 ~ .cm5.'37'
+    .net_cm5_GPIO8: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO8 ~ .cm5.'39'
+    .net_cm5_GPIO9: ELEC::Interfaces::Electrical
+    .net_cm5_GPIO9 ~ .cm5.'40'
+    .net_cm5_HDMI0_CEC: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_CEC ~ .cm5.'151'
+    .net_cm5_HDMI0_CLK_N: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_CLK_N ~ .cm5.'190'
+    .net_cm5_HDMI0_CLK_P: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_CLK_P ~ .cm5.'188'
+    .net_cm5_HDMI0_HOTPLUG: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_HOTPLUG ~ .cm5.'153'
+    .net_cm5_HDMI0_SCL: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_SCL ~ .cm5.'200'
+    .net_cm5_HDMI0_SDA: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_SDA ~ .cm5.'199'
+    .net_cm5_HDMI0_TX0_N: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_TX0_N ~ .cm5.'184'
+    .net_cm5_HDMI0_TX0_P: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_TX0_P ~ .cm5.'182'
+    .net_cm5_HDMI0_TX1_N: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_TX1_N ~ .cm5.'178'
+    .net_cm5_HDMI0_TX1_P: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_TX1_P ~ .cm5.'176'
+    .net_cm5_HDMI0_TX2_N: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_TX2_N ~ .cm5.'172'
+    .net_cm5_HDMI0_TX2_P: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI0_TX2_P ~ .cm5.'170'
+    .net_cm5_HDMI1_CEC: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_CEC ~ .cm5.'149'
+    .net_cm5_HDMI1_CLK_N: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_CLK_N ~ .cm5.'166'
+    .net_cm5_HDMI1_CLK_P: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_CLK_P ~ .cm5.'164'
+    .net_cm5_HDMI1_HOTPLUG: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_HOTPLUG ~ .cm5.'143'
+    .net_cm5_HDMI1_SCL: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_SCL ~ .cm5.'147'
+    .net_cm5_HDMI1_SDA: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_SDA ~ .cm5.'145'
+    .net_cm5_HDMI1_TX0_N: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_TX0_N ~ .cm5.'160'
+    .net_cm5_HDMI1_TX0_P: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_TX0_P ~ .cm5.'158'
+    .net_cm5_HDMI1_TX1_N: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_TX1_N ~ .cm5.'154'
+    .net_cm5_HDMI1_TX1_P: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_TX1_P ~ .cm5.'152'
+    .net_cm5_HDMI1_TX2_N: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_TX2_N ~ .cm5.'148'
+    .net_cm5_HDMI1_TX2_P: ELEC::Interfaces::Electrical
+    .net_cm5_HDMI1_TX2_P ~ .cm5.'146'
+    .net_cm5_ID_SC: ELEC::Interfaces::Electrical
+    .net_cm5_ID_SC ~ .cm5.'35'
+    .net_cm5_ID_SD: ELEC::Interfaces::Electrical
+    .net_cm5_ID_SD ~ .cm5.'36'
+    .net_cm5_LED_nACT: ELEC::Interfaces::Electrical
+    .net_cm5_LED_nACT ~ .cm5.'21'
+    .net_cm5_LED_nPWR: ELEC::Interfaces::Electrical
+    .net_cm5_LED_nPWR ~ .cm5.'95'
+    .net_cm5_MIPI0_C_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_C_N ~ .cm5.'127'
+    .net_cm5_MIPI0_C_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_C_P ~ .cm5.'129'
+    .net_cm5_MIPI0_D0_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_D0_N ~ .cm5.'115'
+    .net_cm5_MIPI0_D0_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_D0_P ~ .cm5.'117'
+    .net_cm5_MIPI0_D1_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_D1_N ~ .cm5.'121'
+    .net_cm5_MIPI0_D1_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_D1_P ~ .cm5.'123'
+    .net_cm5_MIPI0_D2_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_D2_N ~ .cm5.'133'
+    .net_cm5_MIPI0_D2_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_D2_P ~ .cm5.'135'
+    .net_cm5_MIPI0_D3_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_D3_N ~ .cm5.'139'
+    .net_cm5_MIPI0_D3_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI0_D3_P ~ .cm5.'141'
+    .net_cm5_MIPI1_C_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_C_N ~ .cm5.'187'
+    .net_cm5_MIPI1_C_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_C_P ~ .cm5.'189'
+    .net_cm5_MIPI1_D0_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_D0_N ~ .cm5.'175'
+    .net_cm5_MIPI1_D0_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_D0_P ~ .cm5.'177'
+    .net_cm5_MIPI1_D1_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_D1_N ~ .cm5.'181'
+    .net_cm5_MIPI1_D1_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_D1_P ~ .cm5.'183'
+    .net_cm5_MIPI1_D2_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_D2_N ~ .cm5.'193'
+    .net_cm5_MIPI1_D2_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_D2_P ~ .cm5.'195'
+    .net_cm5_MIPI1_D3_N: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_D3_N ~ .cm5.'194'
+    .net_cm5_MIPI1_D3_P: ELEC::Interfaces::Electrical
+    .net_cm5_MIPI1_D3_P ~ .cm5.'196'
+    .net_cm5_PCIE_PWR_EN: ELEC::Interfaces::Electrical
+    .net_cm5_PCIE_PWR_EN ~ .cm5.'106'
+    .net_cm5_PCIE_nWAKE: ELEC::Interfaces::Electrical
+    .net_cm5_PCIE_nWAKE ~ .cm5.'104'
+    .net_cm5_PCIe_CLK_N: ELEC::Interfaces::Electrical
+    .net_cm5_PCIe_CLK_N ~ .cm5.'112'
+    .net_cm5_PCIe_CLK_P: ELEC::Interfaces::Electrical
+    .net_cm5_PCIe_CLK_P ~ .cm5.'110'
+    .net_cm5_PCIe_CLK_nREQ: ELEC::Interfaces::Electrical
+    .net_cm5_PCIe_CLK_nREQ ~ .cm5.'102'
+    .net_cm5_PCIe_RX_N: ELEC::Interfaces::Electrical
+    .net_cm5_PCIe_RX_N ~ .cm5.'118'
+    .net_cm5_PCIe_RX_P: ELEC::Interfaces::Electrical
+    .net_cm5_PCIe_RX_P ~ .cm5.'116'
+    .net_cm5_PCIe_TX_N: ELEC::Interfaces::Electrical
+    .net_cm5_PCIe_TX_N ~ .cm5.'124'
+    .net_cm5_PCIe_TX_P: ELEC::Interfaces::Electrical
+    .net_cm5_PCIe_TX_P ~ .cm5.'122'
+    .net_cm5_PCIe_nRST: ELEC::Interfaces::Electrical
+    .net_cm5_PCIe_nRST ~ .cm5.'109'
+    .net_cm5_PMIC_Enable: ELEC::Interfaces::Electrical
+    .net_cm5_PMIC_Enable ~ .cm5.'99'
+    .net_cm5_PWR_Button: ELEC::Interfaces::Electrical
+    .net_cm5_PWR_Button ~ .cm5.'92'
+    .net_cm5_SCL0: ELEC::Interfaces::Electrical
+    .net_cm5_SCL0 ~ .cm5.'80'
+    .net_cm5_SDA0: ELEC::Interfaces::Electrical
+    .net_cm5_SDA0 ~ .cm5.'82'
+    .net_cm5_SD_CLK: ELEC::Interfaces::Electrical
+    .net_cm5_SD_CLK ~ .cm5.'57'
+    .net_cm5_SD_CMD: ELEC::Interfaces::Electrical
+    .net_cm5_SD_CMD ~ .cm5.'62'
+    .net_cm5_SD_DAT0: ELEC::Interfaces::Electrical
+    .net_cm5_SD_DAT0 ~ .cm5.'63'
+    .net_cm5_SD_DAT1: ELEC::Interfaces::Electrical
+    .net_cm5_SD_DAT1 ~ .cm5.'67'
+    .net_cm5_SD_DAT2: ELEC::Interfaces::Electrical
+    .net_cm5_SD_DAT2 ~ .cm5.'69'
+    .net_cm5_SD_DAT3: ELEC::Interfaces::Electrical
+    .net_cm5_SD_DAT3 ~ .cm5.'61'
+    .net_cm5_SD_DAT4: ELEC::Interfaces::Electrical
+    .net_cm5_SD_DAT4 ~ .cm5.'68'
+    .net_cm5_SD_DAT5: ELEC::Interfaces::Electrical
+    .net_cm5_SD_DAT5 ~ .cm5.'64'
+    .net_cm5_SD_DAT6: ELEC::Interfaces::Electrical
+    .net_cm5_SD_DAT6 ~ .cm5.'72'
+    .net_cm5_SD_DAT7: ELEC::Interfaces::Electrical
+    .net_cm5_SD_DAT7 ~ .cm5.'70'
+    .net_cm5_SD_PWR_ON: ELEC::Interfaces::Electrical
+    .net_cm5_SD_PWR_ON ~ .cm5.'75'
+    .net_cm5_SD_VDD_OVERRIDE: ELEC::Interfaces::Electrical
+    .net_cm5_SD_VDD_OVERRIDE ~ .cm5.'73'
+    .net_cm5_USB3_0_DM: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_0_DM ~ .cm5.'136'
+    .net_cm5_USB3_0_DP: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_0_DP ~ .cm5.'134'
+    .net_cm5_USB3_0_RX_N: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_0_RX_N ~ .cm5.'128'
+    .net_cm5_USB3_0_RX_P: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_0_RX_P ~ .cm5.'130'
+    .net_cm5_USB3_0_TX_N: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_0_TX_N ~ .cm5.'140'
+    .net_cm5_USB3_0_TX_P: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_0_TX_P ~ .cm5.'142'
+    .net_cm5_USB3_1_DM: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_1_DM ~ .cm5.'165'
+    .net_cm5_USB3_1_DP: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_1_DP ~ .cm5.'163'
+    .net_cm5_USB3_1_RX_N: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_1_RX_N ~ .cm5.'157'
+    .net_cm5_USB3_1_RX_P: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_1_RX_P ~ .cm5.'159'
+    .net_cm5_USB3_1_TX_N: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_1_TX_N ~ .cm5.'169'
+    .net_cm5_USB3_1_TX_P: ELEC::Interfaces::Electrical
+    .net_cm5_USB3_1_TX_P ~ .cm5.'171'
+    .net_cm5_USB_N: ELEC::Interfaces::Electrical
+    .net_cm5_USB_N ~ .cm5.'103'
+    .net_cm5_USB_OTG_ID: ELEC::Interfaces::Electrical
+    .net_cm5_USB_OTG_ID ~ .cm5.'101'
+    .net_cm5_USB_P: ELEC::Interfaces::Electrical
+    .net_cm5_USB_P ~ .cm5.'105'
+    .net_cm5_VBAT: ELEC::Interfaces::Electrical
+    .net_cm5_VBAT ~ .cm5.'76'
+    .net_cm5_VBUS_EN: ELEC::Interfaces::Electrical
+    .net_cm5_VBUS_EN ~ .cm5.'111'
+    .net_cm5_WL_nDisable: ELEC::Interfaces::Electrical
+    .net_cm5_WL_nDisable ~ .cm5.'89'
+    .net_cm5_nRPIBOOT: ELEC::Interfaces::Electrical
+    .net_cm5_nRPIBOOT ~ .cm5.'93'
+    .power_3v3_digital: ELEC::Interfaces::Electrical
+    .power_3v3_digital ~ .cm5.'78'
+    .power_5v: ELEC::Interfaces::Electrical
+    .power_5v ~ .cm5.'77' ~ .cm5.'79' ~ .cm5.'81' ~ .cm5.'83' ~ .cm5.'85' ~ .cm5.'87'
+}

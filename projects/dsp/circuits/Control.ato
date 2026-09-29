@@ -1,0 +1,214 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.C1525: @STD::Import { .org &= "jlc"; .project &= "C1525"; .version &= "0.1.0" }
+.C17168: @STD::Import { .org &= "jlc"; .project &= "C17168"; .version &= "0.1.0" }
+.C25077: @STD::Import { .org &= "jlc"; .project &= "C25077"; .version &= "0.1.0" }
+.C25092: @STD::Import { .org &= "jlc"; .project &= "C25092"; .version &= "0.1.0" }
+.C25744: @STD::Import { .org &= "jlc"; .project &= "C25744"; .version &= "0.1.0" }
+.C25867: @STD::Import { .org &= "jlc"; .project &= "C25867"; .version &= "0.1.0" }
+.C2762343: @STD::Import { .org &= "jlc"; .project &= "C2762343"; .version &= "0.1.0" }
+.C8963: @STD::Import { .org &= "jlc"; .project &= "C8963"; .version &= "0.1.0" }
+
+.Control: @type {
+    /// Original DSP circuit, with its component and pad connectivity preserved.
+    .cm5_dsp_i2c_pullups_0: C25744::UNI_ROYAL_0402WGF1002TCE
+    .cm5_dsp_i2c_pullups_1: C25744::UNI_ROYAL_0402WGF1002TCE
+    .cm5_i2s_resistor_jumpers_0__resistor: C17168::UNI_ROYAL_0402WGF0000TCE
+    .cm5_i2s_resistor_jumpers_1__resistor: C17168::UNI_ROYAL_0402WGF0000TCE
+    .cm5_i2s_resistor_jumpers_2__resistor: C17168::UNI_ROYAL_0402WGF0000TCE
+    .cm5_i2s_resistor_jumpers_3__resistor: C17168::UNI_ROYAL_0402WGF0000TCE
+    .cm5_i2s_resistor_jumpers_4__resistor: C17168::UNI_ROYAL_0402WGF0000TCE
+    .cm5_i2s_resistor_jumpers_5__resistor: C17168::UNI_ROYAL_0402WGF0000TCE
+    .cm5_spi_resistor_jumpers_0: C25092::UNI_ROYAL_0402WGF220JTCE
+    .cm5_spi_resistor_jumpers_1: C25092::UNI_ROYAL_0402WGF220JTCE
+    .cm5_spi_resistor_jumpers_2: C25092::UNI_ROYAL_0402WGF220JTCE
+    .cm5_spi_resistor_jumpers_3: C25092::UNI_ROYAL_0402WGF220JTCE
+    .cm5_spi_resistor_jumpers_4: C25092::UNI_ROYAL_0402WGF220JTCE
+    .cm5_spi_resistor_jumpers_5: C25092::UNI_ROYAL_0402WGF220JTCE
+    .cm5_spi_resistor_jumpers_6: C25092::UNI_ROYAL_0402WGF220JTCE
+    .cm5_spi_resistor_jumpers_7: C25092::UNI_ROYAL_0402WGF220JTCE
+    .dmx_rs485_driver: C8963::MaxLinear_SP3485EN_L_TR
+    .dmx_rs485_driver_vcc_decoupling: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .i2s_resistor_jumpers_dsp_ad1938_0: C25077::UNI_ROYAL_0402WGF100JTCE
+    .i2s_resistor_jumpers_dsp_ad1938_1: C25077::UNI_ROYAL_0402WGF100JTCE
+    .i2s_resistor_jumpers_dsp_ad1938_2: C25077::UNI_ROYAL_0402WGF100JTCE
+    .i2s_resistor_jumpers_dsp_ad1938_3: C25077::UNI_ROYAL_0402WGF100JTCE
+    .i2s_resistor_jumpers_dsp_ad1938_4: C25077::UNI_ROYAL_0402WGF100JTCE
+    .i2s_resistor_jumpers_dsp_ad1938_5: C25077::UNI_ROYAL_0402WGF100JTCE
+    .i2s_resistor_jumpers_dsp_ad1938_6: C25077::UNI_ROYAL_0402WGF100JTCE
+    .i2s_resistor_jumpers_dsp_ad1938_7: C25077::UNI_ROYAL_0402WGF100JTCE
+    .i2s_resistor_jumpers_dsp_ad1938_8: C25077::UNI_ROYAL_0402WGF100JTCE
+    .input_dc_block_caps_0: C2762343::XIAMEN_FARATRONIC_C232A475J6SC000
+    .input_dc_block_caps_1: C2762343::XIAMEN_FARATRONIC_C232A475J6SC000
+    .input_dc_block_caps_2: C2762343::XIAMEN_FARATRONIC_C232A475J6SC000
+    .input_dc_block_caps_3: C2762343::XIAMEN_FARATRONIC_C232A475J6SC000
+    .reset_resistor_jumpers_0__resistor: C17168::UNI_ROYAL_0402WGF0000TCE
+    .reset_resistor_jumpers_1__resistor: C17168::UNI_ROYAL_0402WGF0000TCE
+    .reset_resistor_jumpers_2__resistor: C17168::UNI_ROYAL_0402WGF0000TCE
+    .smi_pullups_0: C25867::UNI_ROYAL_0402WGF1501TCE
+    .smi_pullups_1: C25867::UNI_ROYAL_0402WGF1501TCE
+    .smi_pullups_2: C25867::UNI_ROYAL_0402WGF1501TCE
+    .smi_pullups_3: C25867::UNI_ROYAL_0402WGF1501TCE
+    .smi_pullups_4: C25867::UNI_ROYAL_0402WGF1501TCE
+    .smi_pullups_5: C25867::UNI_ROYAL_0402WGF1501TCE
+    .smi_resistor_jumpers_0__resistors_0: C17168::UNI_ROYAL_0402WGF0000TCE
+    .smi_resistor_jumpers_0__resistors_1: C17168::UNI_ROYAL_0402WGF0000TCE
+    .smi_resistor_jumpers_1__resistors_0: C17168::UNI_ROYAL_0402WGF0000TCE
+    .smi_resistor_jumpers_1__resistors_1: C17168::UNI_ROYAL_0402WGF0000TCE
+    .smi_resistor_jumpers_2__resistors_0: C17168::UNI_ROYAL_0402WGF0000TCE
+    .smi_resistor_jumpers_2__resistors_1: C17168::UNI_ROYAL_0402WGF0000TCE
+
+    .ground: ELEC::Interfaces::Electrical
+    .ground ~ .dmx_rs485_driver.'5' ~ .dmx_rs485_driver_vcc_decoupling.'2'
+    .net_cm5_dsp_i2c_pullups_0_1: ELEC::Interfaces::Electrical
+    .net_cm5_dsp_i2c_pullups_0_1 ~ .cm5_dsp_i2c_pullups_0.'1'
+    .net_cm5_dsp_i2c_pullups_1_1: ELEC::Interfaces::Electrical
+    .net_cm5_dsp_i2c_pullups_1_1 ~ .cm5_dsp_i2c_pullups_1.'1'
+    .net_cm5_i2s_resistor_jumpers_0__resistor_1: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_0__resistor_1 ~ .cm5_i2s_resistor_jumpers_0__resistor.'1'
+    .net_cm5_i2s_resistor_jumpers_0__resistor_2: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_0__resistor_2 ~ .cm5_i2s_resistor_jumpers_0__resistor.'2' ~ .cm5_i2s_resistor_jumpers_3__resistor.'2'
+    .net_cm5_i2s_resistor_jumpers_1__resistor_1: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_1__resistor_1 ~ .cm5_i2s_resistor_jumpers_1__resistor.'1'
+    .net_cm5_i2s_resistor_jumpers_1__resistor_2: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_1__resistor_2 ~ .cm5_i2s_resistor_jumpers_1__resistor.'2' ~ .cm5_i2s_resistor_jumpers_4__resistor.'2'
+    .net_cm5_i2s_resistor_jumpers_2__resistor_1: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_2__resistor_1 ~ .cm5_i2s_resistor_jumpers_2__resistor.'1'
+    .net_cm5_i2s_resistor_jumpers_2__resistor_2: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_2__resistor_2 ~ .cm5_i2s_resistor_jumpers_2__resistor.'2'
+    .net_cm5_i2s_resistor_jumpers_3__resistor_1: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_3__resistor_1 ~ .cm5_i2s_resistor_jumpers_3__resistor.'1'
+    .net_cm5_i2s_resistor_jumpers_4__resistor_1: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_4__resistor_1 ~ .cm5_i2s_resistor_jumpers_4__resistor.'1'
+    .net_cm5_i2s_resistor_jumpers_5__resistor_1: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_5__resistor_1 ~ .cm5_i2s_resistor_jumpers_5__resistor.'1'
+    .net_cm5_i2s_resistor_jumpers_5__resistor_2: ELEC::Interfaces::Electrical
+    .net_cm5_i2s_resistor_jumpers_5__resistor_2 ~ .cm5_i2s_resistor_jumpers_5__resistor.'2'
+    .net_cm5_spi_resistor_jumpers_0_1: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_0_1 ~ .cm5_spi_resistor_jumpers_0.'1' ~ .cm5_spi_resistor_jumpers_4.'1'
+    .net_cm5_spi_resistor_jumpers_0_2: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_0_2 ~ .cm5_spi_resistor_jumpers_0.'2'
+    .net_cm5_spi_resistor_jumpers_1_1: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_1_1 ~ .cm5_spi_resistor_jumpers_1.'1' ~ .cm5_spi_resistor_jumpers_5.'1'
+    .net_cm5_spi_resistor_jumpers_1_2: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_1_2 ~ .cm5_spi_resistor_jumpers_1.'2'
+    .net_cm5_spi_resistor_jumpers_2_1: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_2_1 ~ .cm5_spi_resistor_jumpers_2.'1' ~ .cm5_spi_resistor_jumpers_6.'1'
+    .net_cm5_spi_resistor_jumpers_2_2: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_2_2 ~ .cm5_spi_resistor_jumpers_2.'2'
+    .net_cm5_spi_resistor_jumpers_3_1: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_3_1 ~ .cm5_spi_resistor_jumpers_3.'1'
+    .net_cm5_spi_resistor_jumpers_3_2: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_3_2 ~ .cm5_spi_resistor_jumpers_3.'2'
+    .net_cm5_spi_resistor_jumpers_4_2: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_4_2 ~ .cm5_spi_resistor_jumpers_4.'2'
+    .net_cm5_spi_resistor_jumpers_5_2: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_5_2 ~ .cm5_spi_resistor_jumpers_5.'2'
+    .net_cm5_spi_resistor_jumpers_6_2: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_6_2 ~ .cm5_spi_resistor_jumpers_6.'2'
+    .net_cm5_spi_resistor_jumpers_7_1: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_7_1 ~ .cm5_spi_resistor_jumpers_7.'1'
+    .net_cm5_spi_resistor_jumpers_7_2: ELEC::Interfaces::Electrical
+    .net_cm5_spi_resistor_jumpers_7_2 ~ .cm5_spi_resistor_jumpers_7.'2'
+    .net_dmx_rs485_driver_A: ELEC::Interfaces::Electrical
+    .net_dmx_rs485_driver_A ~ .dmx_rs485_driver.'6'
+    .net_dmx_rs485_driver_B: ELEC::Interfaces::Electrical
+    .net_dmx_rs485_driver_B ~ .dmx_rs485_driver.'7'
+    .net_dmx_rs485_driver_DE: ELEC::Interfaces::Electrical
+    .net_dmx_rs485_driver_DE ~ .dmx_rs485_driver.'3'
+    .net_dmx_rs485_driver_DI: ELEC::Interfaces::Electrical
+    .net_dmx_rs485_driver_DI ~ .dmx_rs485_driver.'4'
+    .net_dmx_rs485_driver_RO: ELEC::Interfaces::Electrical
+    .net_dmx_rs485_driver_RO ~ .dmx_rs485_driver.'1'
+    .net_dmx_rs485_driver_nRE: ELEC::Interfaces::Electrical
+    .net_dmx_rs485_driver_nRE ~ .dmx_rs485_driver.'2'
+    .net_i2s_resistor_jumpers_dsp_ad1938_0_1: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_0_1 ~ .i2s_resistor_jumpers_dsp_ad1938_0.'1'
+    .net_i2s_resistor_jumpers_dsp_ad1938_0_2: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_0_2 ~ .i2s_resistor_jumpers_dsp_ad1938_0.'2'
+    .net_i2s_resistor_jumpers_dsp_ad1938_1_1: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_1_1 ~ .i2s_resistor_jumpers_dsp_ad1938_1.'1'
+    .net_i2s_resistor_jumpers_dsp_ad1938_1_2: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_1_2 ~ .i2s_resistor_jumpers_dsp_ad1938_1.'2'
+    .net_i2s_resistor_jumpers_dsp_ad1938_2_1: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_2_1 ~ .i2s_resistor_jumpers_dsp_ad1938_2.'1'
+    .net_i2s_resistor_jumpers_dsp_ad1938_2_2: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_2_2 ~ .i2s_resistor_jumpers_dsp_ad1938_2.'2'
+    .net_i2s_resistor_jumpers_dsp_ad1938_3_1: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_3_1 ~ .i2s_resistor_jumpers_dsp_ad1938_3.'1'
+    .net_i2s_resistor_jumpers_dsp_ad1938_3_2: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_3_2 ~ .i2s_resistor_jumpers_dsp_ad1938_3.'2'
+    .net_i2s_resistor_jumpers_dsp_ad1938_4_1: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_4_1 ~ .i2s_resistor_jumpers_dsp_ad1938_4.'1'
+    .net_i2s_resistor_jumpers_dsp_ad1938_4_2: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_4_2 ~ .i2s_resistor_jumpers_dsp_ad1938_4.'2'
+    .net_i2s_resistor_jumpers_dsp_ad1938_5_1: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_5_1 ~ .i2s_resistor_jumpers_dsp_ad1938_5.'1'
+    .net_i2s_resistor_jumpers_dsp_ad1938_5_2: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_5_2 ~ .i2s_resistor_jumpers_dsp_ad1938_5.'2'
+    .net_i2s_resistor_jumpers_dsp_ad1938_6_1: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_6_1 ~ .i2s_resistor_jumpers_dsp_ad1938_6.'1'
+    .net_i2s_resistor_jumpers_dsp_ad1938_6_2: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_6_2 ~ .i2s_resistor_jumpers_dsp_ad1938_6.'2'
+    .net_i2s_resistor_jumpers_dsp_ad1938_7_1: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_7_1 ~ .i2s_resistor_jumpers_dsp_ad1938_7.'1'
+    .net_i2s_resistor_jumpers_dsp_ad1938_7_2: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_7_2 ~ .i2s_resistor_jumpers_dsp_ad1938_7.'2'
+    .net_i2s_resistor_jumpers_dsp_ad1938_8_1: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_8_1 ~ .i2s_resistor_jumpers_dsp_ad1938_8.'1'
+    .net_i2s_resistor_jumpers_dsp_ad1938_8_2: ELEC::Interfaces::Electrical
+    .net_i2s_resistor_jumpers_dsp_ad1938_8_2 ~ .i2s_resistor_jumpers_dsp_ad1938_8.'2'
+    .net_input_dc_block_caps_0_1: ELEC::Interfaces::Electrical
+    .net_input_dc_block_caps_0_1 ~ .input_dc_block_caps_0.'1'
+    .net_input_dc_block_caps_0_2: ELEC::Interfaces::Electrical
+    .net_input_dc_block_caps_0_2 ~ .input_dc_block_caps_0.'2'
+    .net_input_dc_block_caps_1_1: ELEC::Interfaces::Electrical
+    .net_input_dc_block_caps_1_1 ~ .input_dc_block_caps_1.'1'
+    .net_input_dc_block_caps_1_2: ELEC::Interfaces::Electrical
+    .net_input_dc_block_caps_1_2 ~ .input_dc_block_caps_1.'2'
+    .net_input_dc_block_caps_2_1: ELEC::Interfaces::Electrical
+    .net_input_dc_block_caps_2_1 ~ .input_dc_block_caps_2.'1'
+    .net_input_dc_block_caps_2_2: ELEC::Interfaces::Electrical
+    .net_input_dc_block_caps_2_2 ~ .input_dc_block_caps_2.'2'
+    .net_input_dc_block_caps_3_1: ELEC::Interfaces::Electrical
+    .net_input_dc_block_caps_3_1 ~ .input_dc_block_caps_3.'1'
+    .net_input_dc_block_caps_3_2: ELEC::Interfaces::Electrical
+    .net_input_dc_block_caps_3_2 ~ .input_dc_block_caps_3.'2'
+    .net_reset_resistor_jumpers_0__resistor_1: ELEC::Interfaces::Electrical
+    .net_reset_resistor_jumpers_0__resistor_1 ~ .reset_resistor_jumpers_0__resistor.'1'
+    .net_reset_resistor_jumpers_0__resistor_2: ELEC::Interfaces::Electrical
+    .net_reset_resistor_jumpers_0__resistor_2 ~ .reset_resistor_jumpers_0__resistor.'2'
+    .net_reset_resistor_jumpers_1__resistor_1: ELEC::Interfaces::Electrical
+    .net_reset_resistor_jumpers_1__resistor_1 ~ .reset_resistor_jumpers_1__resistor.'1'
+    .net_reset_resistor_jumpers_1__resistor_2: ELEC::Interfaces::Electrical
+    .net_reset_resistor_jumpers_1__resistor_2 ~ .reset_resistor_jumpers_1__resistor.'2'
+    .net_reset_resistor_jumpers_2__resistor_1: ELEC::Interfaces::Electrical
+    .net_reset_resistor_jumpers_2__resistor_1 ~ .reset_resistor_jumpers_2__resistor.'1'
+    .net_reset_resistor_jumpers_2__resistor_2: ELEC::Interfaces::Electrical
+    .net_reset_resistor_jumpers_2__resistor_2 ~ .reset_resistor_jumpers_2__resistor.'2'
+    .net_smi_pullups_0_1: ELEC::Interfaces::Electrical
+    .net_smi_pullups_0_1 ~ .smi_pullups_0.'1' ~ .smi_resistor_jumpers_0__resistors_1.'2'
+    .net_smi_pullups_1_1: ELEC::Interfaces::Electrical
+    .net_smi_pullups_1_1 ~ .smi_pullups_1.'1' ~ .smi_resistor_jumpers_0__resistors_0.'2'
+    .net_smi_pullups_2_1: ELEC::Interfaces::Electrical
+    .net_smi_pullups_2_1 ~ .smi_pullups_2.'1' ~ .smi_resistor_jumpers_1__resistors_1.'2'
+    .net_smi_pullups_3_1: ELEC::Interfaces::Electrical
+    .net_smi_pullups_3_1 ~ .smi_pullups_3.'1' ~ .smi_resistor_jumpers_1__resistors_0.'2'
+    .net_smi_pullups_4_1: ELEC::Interfaces::Electrical
+    .net_smi_pullups_4_1 ~ .smi_pullups_4.'1' ~ .smi_resistor_jumpers_2__resistors_1.'2'
+    .net_smi_pullups_5_1: ELEC::Interfaces::Electrical
+    .net_smi_pullups_5_1 ~ .smi_pullups_5.'1' ~ .smi_resistor_jumpers_2__resistors_0.'2'
+    .net_smi_resistor_jumpers_0__resistors_0_1: ELEC::Interfaces::Electrical
+    .net_smi_resistor_jumpers_0__resistors_0_1 ~ .smi_resistor_jumpers_0__resistors_0.'1'
+    .net_smi_resistor_jumpers_0__resistors_1_1: ELEC::Interfaces::Electrical
+    .net_smi_resistor_jumpers_0__resistors_1_1 ~ .smi_resistor_jumpers_0__resistors_1.'1'
+    .net_smi_resistor_jumpers_1__resistors_0_1: ELEC::Interfaces::Electrical
+    .net_smi_resistor_jumpers_1__resistors_0_1 ~ .smi_resistor_jumpers_1__resistors_0.'1'
+    .net_smi_resistor_jumpers_1__resistors_1_1: ELEC::Interfaces::Electrical
+    .net_smi_resistor_jumpers_1__resistors_1_1 ~ .smi_resistor_jumpers_1__resistors_1.'1'
+    .net_smi_resistor_jumpers_2__resistors_0_1: ELEC::Interfaces::Electrical
+    .net_smi_resistor_jumpers_2__resistors_0_1 ~ .smi_resistor_jumpers_2__resistors_0.'1'
+    .net_smi_resistor_jumpers_2__resistors_1_1: ELEC::Interfaces::Electrical
+    .net_smi_resistor_jumpers_2__resistors_1_1 ~ .smi_resistor_jumpers_2__resistors_1.'1'
+    .power_3v3_digital: ELEC::Interfaces::Electrical
+    .power_3v3_digital ~ .cm5_dsp_i2c_pullups_0.'2' ~ .cm5_dsp_i2c_pullups_1.'2' ~ .dmx_rs485_driver.'8' ~ .dmx_rs485_driver_vcc_decoupling.'1' ~ .smi_pullups_0.'2' ~ .smi_pullups_1.'2' ~ .smi_pullups_2.'2' ~ .smi_pullups_3.'2' ~ .smi_pullups_4.'2' ~ .smi_pullups_5.'2'
+}

@@ -9,8 +9,8 @@ pinned to version `0.1.0`; their sources are fetched by the normal build.
 | External 5 V input | DB2ERC-5.08-2P-BK, pin 1 +5 V, pin 2 GND | `jlc/C430456` |
 | Digital 3.3 V | TPSM863257 buck module | `jlc/C19190416` |
 | Analog 3.3 V | Existing TLV75901, now with calculated feedback | Existing vendored part |
-| Six floating 24 V supplies | B0524S-2WR3 | `jlc/C5369477` |
-| Six 18 V post-regulators | TPS7A4700 | `jlc/C28286` |
+| Two floating 24 V supplies | B0524S-2WR3 | `jlc/C5369477` |
+| Two 18 V post-regulators | TPS7A4700 | `jlc/C28286` |
 
 The 5 V input must remain within 4.75–5.25 V at the board, including cable drop.
 Size the external supply for the CM5 plus the actual peripheral load; the legacy
@@ -36,12 +36,7 @@ This meets the datasheet's 10% minimum load and >5x resistor-power guidance.
 The +/-15% output envelope is the datasheet's nominal-input characterization,
 not a verified bound over input, load and temperature corners.
 
-Three independent bipolar banks supply 6/4/4 line drivers. At 5.5 mA quiescent
-current per driver, the largest bank uses 33 mA per rail before output loading.
-The banks are intended for high-impedance audio loads; simultaneous full-level
-600-ohm drive is not qualified.
-
-Allow at most 60 mA external load per 18 V rail in each bank, reserving the rest of each
+Allow at most 60 mA external load per 18 V rail, reserving the rest of each
 83 mA converter rating for preload and regulator current. This is a design
 budget, not a load-summing check. Each post-regulator has a 10 uF input capacitor,
 44 uF nominal output capacitance and 1 uF noise-reduction capacitor. All capacitors
@@ -68,3 +63,13 @@ converter's input ground is wired to its secondary ground inside the driver.
   part `jlc/C5369477@0.1.0` as `YLPTEC_B0524S_2WR3.datasheet.pdf`.
 - [Raspberry Pi CM5 datasheet](https://datasheets.raspberrypi.com/cm5/cm5-datasheet.pdf),
   power input, ground contacts and GPIO_VREF connection.
+
+## Full v1 circuit load
+
+The three-bank expansion has been reverted. The original single bipolar supply
+arrangement is retained with the previously completed regulator circuits.
+Fourteen DRV135s can consume about 77 mA quiescent per rail at 5.5 mA each,
+exceeding the 60 mA external-load budget above. Full-channel operation therefore
+still needs a power-capacity decision; the restored layout is not power-qualified.
+The original copper is preserved, including the power region. New support parts
+and changed regulator programming require routing reconciliation before fabrication.

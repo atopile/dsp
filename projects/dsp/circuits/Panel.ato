@@ -1,0 +1,129 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.C225520: @STD::Import { .org &= "jlc"; .project &= "C225520"; .version &= "0.1.0" }
+.C368458: @STD::Import { .org &= "jlc"; .project &= "C368458"; .version &= "0.1.0" }
+.C368463: @STD::Import { .org &= "jlc"; .project &= "C368463"; .version &= "0.1.0" }
+.C368528: @STD::Import { .org &= "jlc"; .project &= "C368528"; .version &= "0.1.0" }
+
+.Panel: @type {
+    /// Original DSP circuit, with its component and pad connectivity preserved.
+    .dsp_debug_connector: C225520::CJT_A2541WV_2x5P
+    .ethercon_output_connectors_0: C368528::Neutrik_NE8FAH_C5
+    .ethercon_output_connectors_1: C368528::Neutrik_NE8FAH_C5
+    .xlr_audio_input_connectors_0: C368458::Neutrik_NCJ6FA_H
+    .xlr_audio_input_connectors_1: C368458::Neutrik_NCJ6FA_H
+    .xlr_audio_output_connectors_0: C368463::Neutrik_NC3MAAH
+    .xlr_audio_output_connectors_1: C368463::Neutrik_NC3MAAH
+    .xlr_audio_output_connectors_2: C368463::Neutrik_NC3MAAH
+    .xlr_audio_output_connectors_3: C368463::Neutrik_NC3MAAH
+    .xlr_audio_output_connectors_4: C368463::Neutrik_NC3MAAH
+    .xlr_audio_output_connectors_5: C368463::Neutrik_NC3MAAH
+    .xlr_dmx_input_connector: C368463::Neutrik_NC3MAAH
+    .xlr_dmx_output_connector: C368458::Neutrik_NCJ6FA_H
+
+    .ground: ELEC::Interfaces::Electrical
+    .ground ~ .dsp_debug_connector.'10' ~ .xlr_dmx_input_connector.'1' ~ .xlr_dmx_output_connector.'1' ~ .xlr_dmx_output_connector.'4'
+    .net_dsp_debug_connector_1: ELEC::Interfaces::Electrical
+    .net_dsp_debug_connector_1 ~ .dsp_debug_connector.'1'
+    .net_dsp_debug_connector_2: ELEC::Interfaces::Electrical
+    .net_dsp_debug_connector_2 ~ .dsp_debug_connector.'2'
+    .net_dsp_debug_connector_3: ELEC::Interfaces::Electrical
+    .net_dsp_debug_connector_3 ~ .dsp_debug_connector.'3'
+    .net_dsp_debug_connector_4: ELEC::Interfaces::Electrical
+    .net_dsp_debug_connector_4 ~ .dsp_debug_connector.'4'
+    .net_dsp_debug_connector_5: ELEC::Interfaces::Electrical
+    .net_dsp_debug_connector_5 ~ .dsp_debug_connector.'5'
+    .net_dsp_debug_connector_6: ELEC::Interfaces::Electrical
+    .net_dsp_debug_connector_6 ~ .dsp_debug_connector.'6'
+    .net_dsp_debug_connector_7: ELEC::Interfaces::Electrical
+    .net_dsp_debug_connector_7 ~ .dsp_debug_connector.'7'
+    .net_dsp_debug_connector_8: ELEC::Interfaces::Electrical
+    .net_dsp_debug_connector_8 ~ .dsp_debug_connector.'8'
+    .net_dsp_debug_connector_9: ELEC::Interfaces::Electrical
+    .net_dsp_debug_connector_9 ~ .dsp_debug_connector.'9'
+    .net_ethercon_output_connectors_0_1: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_0_1 ~ .ethercon_output_connectors_0.'1'
+    .net_ethercon_output_connectors_0_2: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_0_2 ~ .ethercon_output_connectors_0.'2'
+    .net_ethercon_output_connectors_0_3: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_0_3 ~ .ethercon_output_connectors_0.'3'
+    .net_ethercon_output_connectors_0_4: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_0_4 ~ .ethercon_output_connectors_0.'4'
+    .net_ethercon_output_connectors_0_5: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_0_5 ~ .ethercon_output_connectors_0.'5'
+    .net_ethercon_output_connectors_0_6: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_0_6 ~ .ethercon_output_connectors_0.'6'
+    .net_ethercon_output_connectors_0_7: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_0_7 ~ .ethercon_output_connectors_0.'7'
+    .net_ethercon_output_connectors_0_8: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_0_8 ~ .ethercon_output_connectors_0.'8'
+    .net_ethercon_output_connectors_0_G: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_0_G ~ .ethercon_output_connectors_0.'9' ~ .ethercon_output_connectors_1.'9' ~ .xlr_audio_input_connectors_0.'8' ~ .xlr_audio_input_connectors_1.'8' ~ .xlr_audio_output_connectors_0.'4' ~ .xlr_audio_output_connectors_1.'4' ~ .xlr_audio_output_connectors_2.'4' ~ .xlr_audio_output_connectors_3.'4' ~ .xlr_audio_output_connectors_4.'4' ~ .xlr_audio_output_connectors_5.'4' ~ .xlr_dmx_input_connector.'4' ~ .xlr_dmx_output_connector.'8'
+    .net_ethercon_output_connectors_1_1: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_1_1 ~ .ethercon_output_connectors_1.'1'
+    .net_ethercon_output_connectors_1_2: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_1_2 ~ .ethercon_output_connectors_1.'2'
+    .net_ethercon_output_connectors_1_3: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_1_3 ~ .ethercon_output_connectors_1.'3'
+    .net_ethercon_output_connectors_1_4: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_1_4 ~ .ethercon_output_connectors_1.'4'
+    .net_ethercon_output_connectors_1_5: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_1_5 ~ .ethercon_output_connectors_1.'5'
+    .net_ethercon_output_connectors_1_6: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_1_6 ~ .ethercon_output_connectors_1.'6'
+    .net_ethercon_output_connectors_1_7: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_1_7 ~ .ethercon_output_connectors_1.'7'
+    .net_ethercon_output_connectors_1_8: ELEC::Interfaces::Electrical
+    .net_ethercon_output_connectors_1_8 ~ .ethercon_output_connectors_1.'8'
+    .net_xlr_audio_input_connectors_0_1: ELEC::Interfaces::Electrical
+    .net_xlr_audio_input_connectors_0_1 ~ .xlr_audio_input_connectors_0.'1' ~ .xlr_audio_input_connectors_0.'4'
+    .net_xlr_audio_input_connectors_0_2: ELEC::Interfaces::Electrical
+    .net_xlr_audio_input_connectors_0_2 ~ .xlr_audio_input_connectors_0.'2' ~ .xlr_audio_input_connectors_0.'6' ~ .xlr_audio_input_connectors_0.'7'
+    .net_xlr_audio_input_connectors_0_3: ELEC::Interfaces::Electrical
+    .net_xlr_audio_input_connectors_0_3 ~ .xlr_audio_input_connectors_0.'3' ~ .xlr_audio_input_connectors_0.'5'
+    .net_xlr_audio_input_connectors_1_1: ELEC::Interfaces::Electrical
+    .net_xlr_audio_input_connectors_1_1 ~ .xlr_audio_input_connectors_1.'1' ~ .xlr_audio_input_connectors_1.'4'
+    .net_xlr_audio_input_connectors_1_2: ELEC::Interfaces::Electrical
+    .net_xlr_audio_input_connectors_1_2 ~ .xlr_audio_input_connectors_1.'2' ~ .xlr_audio_input_connectors_1.'6' ~ .xlr_audio_input_connectors_1.'7'
+    .net_xlr_audio_input_connectors_1_3: ELEC::Interfaces::Electrical
+    .net_xlr_audio_input_connectors_1_3 ~ .xlr_audio_input_connectors_1.'3' ~ .xlr_audio_input_connectors_1.'5'
+    .net_xlr_audio_output_connectors_0_1: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_0_1 ~ .xlr_audio_output_connectors_0.'1'
+    .net_xlr_audio_output_connectors_0_2: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_0_2 ~ .xlr_audio_output_connectors_0.'2'
+    .net_xlr_audio_output_connectors_0_3: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_0_3 ~ .xlr_audio_output_connectors_0.'3'
+    .net_xlr_audio_output_connectors_1_1: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_1_1 ~ .xlr_audio_output_connectors_1.'1'
+    .net_xlr_audio_output_connectors_1_2: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_1_2 ~ .xlr_audio_output_connectors_1.'2'
+    .net_xlr_audio_output_connectors_1_3: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_1_3 ~ .xlr_audio_output_connectors_1.'3'
+    .net_xlr_audio_output_connectors_2_1: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_2_1 ~ .xlr_audio_output_connectors_2.'1'
+    .net_xlr_audio_output_connectors_2_2: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_2_2 ~ .xlr_audio_output_connectors_2.'2'
+    .net_xlr_audio_output_connectors_2_3: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_2_3 ~ .xlr_audio_output_connectors_2.'3'
+    .net_xlr_audio_output_connectors_3_1: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_3_1 ~ .xlr_audio_output_connectors_3.'1'
+    .net_xlr_audio_output_connectors_3_2: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_3_2 ~ .xlr_audio_output_connectors_3.'2'
+    .net_xlr_audio_output_connectors_3_3: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_3_3 ~ .xlr_audio_output_connectors_3.'3'
+    .net_xlr_audio_output_connectors_4_1: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_4_1 ~ .xlr_audio_output_connectors_4.'1'
+    .net_xlr_audio_output_connectors_4_2: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_4_2 ~ .xlr_audio_output_connectors_4.'2'
+    .net_xlr_audio_output_connectors_4_3: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_4_3 ~ .xlr_audio_output_connectors_4.'3'
+    .net_xlr_audio_output_connectors_5_1: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_5_1 ~ .xlr_audio_output_connectors_5.'1'
+    .net_xlr_audio_output_connectors_5_2: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_5_2 ~ .xlr_audio_output_connectors_5.'2'
+    .net_xlr_audio_output_connectors_5_3: ELEC::Interfaces::Electrical
+    .net_xlr_audio_output_connectors_5_3 ~ .xlr_audio_output_connectors_5.'3'
+    .net_xlr_dmx_input_connector_2: ELEC::Interfaces::Electrical
+    .net_xlr_dmx_input_connector_2 ~ .xlr_dmx_input_connector.'2' ~ .xlr_dmx_output_connector.'2' ~ .xlr_dmx_output_connector.'6' ~ .xlr_dmx_output_connector.'7'
+    .net_xlr_dmx_input_connector_3: ELEC::Interfaces::Electrical
+    .net_xlr_dmx_input_connector_3 ~ .xlr_dmx_input_connector.'3' ~ .xlr_dmx_output_connector.'3' ~ .xlr_dmx_output_connector.'5'
+}

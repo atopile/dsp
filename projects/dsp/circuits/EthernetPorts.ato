@@ -1,0 +1,219 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.C25117: @STD::Import { .org &= "jlc"; .project &= "C25117"; .version &= "0.1.0" }
+.C5296839: @STD::Import { .org &= "jlc"; .project &= "C5296839"; .version &= "0.1.0" }
+
+.EthernetPorts: @type {
+    /// Original DSP circuit, with its component and pad connectivity preserved.
+    .ic: C5296839::HCTL_HC_RJ45_059C_2_4_1
+    .led_activity_resistors_0: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_activity_resistors_1: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_activity_resistors_2: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_activity_resistors_3: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_activity_resistors_4: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_activity_resistors_5: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_activity_resistors_6: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_activity_resistors_7: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_link_resistors_0: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_link_resistors_1: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_link_resistors_2: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_link_resistors_3: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_link_resistors_4: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_link_resistors_5: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_link_resistors_6: C25117::UNI_ROYAL_0402WGF4700TCE
+    .led_link_resistors_7: C25117::UNI_ROYAL_0402WGF4700TCE
+
+    .ground: ELEC::Interfaces::Electrical
+    .ground ~ .ic.'100' ~ .ic.'101' ~ .ic.'102' ~ .ic.'11' ~ .ic.'21' ~ .ic.'23' ~ .ic.'33' ~ .ic.'35' ~ .ic.'45' ~ .ic.'47' ~ .ic.'58' ~ .ic.'60' ~ .ic.'70' ~ .ic.'72' ~ .ic.'82' ~ .ic.'84' ~ .ic.'9' ~ .ic.'94' ~ .ic.'96' ~ .ic.'97' ~ .ic.'98' ~ .ic.'99'
+    .net_ic_1: ELEC::Interfaces::Electrical
+    .net_ic_1 ~ .ic.'1'
+    .net_ic_13: ELEC::Interfaces::Electrical
+    .net_ic_13 ~ .ic.'13'
+    .net_ic_14: ELEC::Interfaces::Electrical
+    .net_ic_14 ~ .ic.'14'
+    .net_ic_15: ELEC::Interfaces::Electrical
+    .net_ic_15 ~ .ic.'15'
+    .net_ic_16: ELEC::Interfaces::Electrical
+    .net_ic_16 ~ .ic.'16'
+    .net_ic_17: ELEC::Interfaces::Electrical
+    .net_ic_17 ~ .ic.'17'
+    .net_ic_18: ELEC::Interfaces::Electrical
+    .net_ic_18 ~ .ic.'18'
+    .net_ic_19: ELEC::Interfaces::Electrical
+    .net_ic_19 ~ .ic.'19'
+    .net_ic_2: ELEC::Interfaces::Electrical
+    .net_ic_2 ~ .ic.'2'
+    .net_ic_20: ELEC::Interfaces::Electrical
+    .net_ic_20 ~ .ic.'20'
+    .net_ic_25: ELEC::Interfaces::Electrical
+    .net_ic_25 ~ .ic.'25'
+    .net_ic_26: ELEC::Interfaces::Electrical
+    .net_ic_26 ~ .ic.'26'
+    .net_ic_27: ELEC::Interfaces::Electrical
+    .net_ic_27 ~ .ic.'27'
+    .net_ic_28: ELEC::Interfaces::Electrical
+    .net_ic_28 ~ .ic.'28'
+    .net_ic_29: ELEC::Interfaces::Electrical
+    .net_ic_29 ~ .ic.'29'
+    .net_ic_3: ELEC::Interfaces::Electrical
+    .net_ic_3 ~ .ic.'3'
+    .net_ic_30: ELEC::Interfaces::Electrical
+    .net_ic_30 ~ .ic.'30'
+    .net_ic_31: ELEC::Interfaces::Electrical
+    .net_ic_31 ~ .ic.'31'
+    .net_ic_32: ELEC::Interfaces::Electrical
+    .net_ic_32 ~ .ic.'32'
+    .net_ic_37: ELEC::Interfaces::Electrical
+    .net_ic_37 ~ .ic.'37'
+    .net_ic_38: ELEC::Interfaces::Electrical
+    .net_ic_38 ~ .ic.'38'
+    .net_ic_39: ELEC::Interfaces::Electrical
+    .net_ic_39 ~ .ic.'39'
+    .net_ic_4: ELEC::Interfaces::Electrical
+    .net_ic_4 ~ .ic.'4'
+    .net_ic_40: ELEC::Interfaces::Electrical
+    .net_ic_40 ~ .ic.'40'
+    .net_ic_41: ELEC::Interfaces::Electrical
+    .net_ic_41 ~ .ic.'41'
+    .net_ic_42: ELEC::Interfaces::Electrical
+    .net_ic_42 ~ .ic.'42'
+    .net_ic_43: ELEC::Interfaces::Electrical
+    .net_ic_43 ~ .ic.'43'
+    .net_ic_44: ELEC::Interfaces::Electrical
+    .net_ic_44 ~ .ic.'44'
+    .net_ic_49: ELEC::Interfaces::Electrical
+    .net_ic_49 ~ .ic.'49'
+    .net_ic_5: ELEC::Interfaces::Electrical
+    .net_ic_5 ~ .ic.'5'
+    .net_ic_50: ELEC::Interfaces::Electrical
+    .net_ic_50 ~ .ic.'50'
+    .net_ic_51: ELEC::Interfaces::Electrical
+    .net_ic_51 ~ .ic.'51'
+    .net_ic_52: ELEC::Interfaces::Electrical
+    .net_ic_52 ~ .ic.'52'
+    .net_ic_53: ELEC::Interfaces::Electrical
+    .net_ic_53 ~ .ic.'53'
+    .net_ic_54: ELEC::Interfaces::Electrical
+    .net_ic_54 ~ .ic.'54'
+    .net_ic_55: ELEC::Interfaces::Electrical
+    .net_ic_55 ~ .ic.'55'
+    .net_ic_56: ELEC::Interfaces::Electrical
+    .net_ic_56 ~ .ic.'56'
+    .net_ic_6: ELEC::Interfaces::Electrical
+    .net_ic_6 ~ .ic.'6'
+    .net_ic_61: ELEC::Interfaces::Electrical
+    .net_ic_61 ~ .ic.'61'
+    .net_ic_62: ELEC::Interfaces::Electrical
+    .net_ic_62 ~ .ic.'62'
+    .net_ic_63: ELEC::Interfaces::Electrical
+    .net_ic_63 ~ .ic.'63'
+    .net_ic_64: ELEC::Interfaces::Electrical
+    .net_ic_64 ~ .ic.'64'
+    .net_ic_65: ELEC::Interfaces::Electrical
+    .net_ic_65 ~ .ic.'65'
+    .net_ic_66: ELEC::Interfaces::Electrical
+    .net_ic_66 ~ .ic.'66'
+    .net_ic_67: ELEC::Interfaces::Electrical
+    .net_ic_67 ~ .ic.'67'
+    .net_ic_68: ELEC::Interfaces::Electrical
+    .net_ic_68 ~ .ic.'68'
+    .net_ic_7: ELEC::Interfaces::Electrical
+    .net_ic_7 ~ .ic.'7'
+    .net_ic_73: ELEC::Interfaces::Electrical
+    .net_ic_73 ~ .ic.'73'
+    .net_ic_74: ELEC::Interfaces::Electrical
+    .net_ic_74 ~ .ic.'74'
+    .net_ic_75: ELEC::Interfaces::Electrical
+    .net_ic_75 ~ .ic.'75'
+    .net_ic_76: ELEC::Interfaces::Electrical
+    .net_ic_76 ~ .ic.'76'
+    .net_ic_77: ELEC::Interfaces::Electrical
+    .net_ic_77 ~ .ic.'77'
+    .net_ic_78: ELEC::Interfaces::Electrical
+    .net_ic_78 ~ .ic.'78'
+    .net_ic_79: ELEC::Interfaces::Electrical
+    .net_ic_79 ~ .ic.'79'
+    .net_ic_8: ELEC::Interfaces::Electrical
+    .net_ic_8 ~ .ic.'8'
+    .net_ic_80: ELEC::Interfaces::Electrical
+    .net_ic_80 ~ .ic.'80'
+    .net_ic_85: ELEC::Interfaces::Electrical
+    .net_ic_85 ~ .ic.'85'
+    .net_ic_86: ELEC::Interfaces::Electrical
+    .net_ic_86 ~ .ic.'86'
+    .net_ic_87: ELEC::Interfaces::Electrical
+    .net_ic_87 ~ .ic.'87'
+    .net_ic_88: ELEC::Interfaces::Electrical
+    .net_ic_88 ~ .ic.'88'
+    .net_ic_89: ELEC::Interfaces::Electrical
+    .net_ic_89 ~ .ic.'89'
+    .net_ic_90: ELEC::Interfaces::Electrical
+    .net_ic_90 ~ .ic.'90'
+    .net_ic_91: ELEC::Interfaces::Electrical
+    .net_ic_91 ~ .ic.'91'
+    .net_ic_92: ELEC::Interfaces::Electrical
+    .net_ic_92 ~ .ic.'92'
+    .net_ic_LED_Gpos_10: ELEC::Interfaces::Electrical
+    .net_ic_LED_Gpos_10 ~ .ic.'10' ~ .led_link_resistors_0.'2'
+    .net_ic_LED_Gpos_22: ELEC::Interfaces::Electrical
+    .net_ic_LED_Gpos_22 ~ .ic.'22' ~ .led_link_resistors_1.'2'
+    .net_ic_LED_Gpos_34: ELEC::Interfaces::Electrical
+    .net_ic_LED_Gpos_34 ~ .ic.'34' ~ .led_link_resistors_2.'2'
+    .net_ic_LED_Gpos_46: ELEC::Interfaces::Electrical
+    .net_ic_LED_Gpos_46 ~ .ic.'46' ~ .led_link_resistors_3.'2'
+    .net_ic_LED_Gpos_59: ELEC::Interfaces::Electrical
+    .net_ic_LED_Gpos_59 ~ .ic.'59' ~ .led_link_resistors_4.'2'
+    .net_ic_LED_Gpos_71: ELEC::Interfaces::Electrical
+    .net_ic_LED_Gpos_71 ~ .ic.'71' ~ .led_link_resistors_5.'2'
+    .net_ic_LED_Gpos_83: ELEC::Interfaces::Electrical
+    .net_ic_LED_Gpos_83 ~ .ic.'83' ~ .led_link_resistors_6.'2'
+    .net_ic_LED_Gpos_95: ELEC::Interfaces::Electrical
+    .net_ic_LED_Gpos_95 ~ .ic.'95' ~ .led_link_resistors_7.'2'
+    .net_ic_LED_Ypos_12: ELEC::Interfaces::Electrical
+    .net_ic_LED_Ypos_12 ~ .ic.'12' ~ .led_activity_resistors_0.'2'
+    .net_ic_LED_Ypos_24: ELEC::Interfaces::Electrical
+    .net_ic_LED_Ypos_24 ~ .ic.'24' ~ .led_activity_resistors_1.'2'
+    .net_ic_LED_Ypos_36: ELEC::Interfaces::Electrical
+    .net_ic_LED_Ypos_36 ~ .ic.'36' ~ .led_activity_resistors_2.'2'
+    .net_ic_LED_Ypos_48: ELEC::Interfaces::Electrical
+    .net_ic_LED_Ypos_48 ~ .ic.'48' ~ .led_activity_resistors_3.'2'
+    .net_ic_LED_Ypos_57: ELEC::Interfaces::Electrical
+    .net_ic_LED_Ypos_57 ~ .ic.'57' ~ .led_activity_resistors_4.'2'
+    .net_ic_LED_Ypos_69: ELEC::Interfaces::Electrical
+    .net_ic_LED_Ypos_69 ~ .ic.'69' ~ .led_activity_resistors_5.'2'
+    .net_ic_LED_Ypos_81: ELEC::Interfaces::Electrical
+    .net_ic_LED_Ypos_81 ~ .ic.'81' ~ .led_activity_resistors_6.'2'
+    .net_ic_LED_Ypos_93: ELEC::Interfaces::Electrical
+    .net_ic_LED_Ypos_93 ~ .ic.'93' ~ .led_activity_resistors_7.'2'
+    .net_led_activity_resistors_0_1: ELEC::Interfaces::Electrical
+    .net_led_activity_resistors_0_1 ~ .led_activity_resistors_0.'1'
+    .net_led_activity_resistors_1_1: ELEC::Interfaces::Electrical
+    .net_led_activity_resistors_1_1 ~ .led_activity_resistors_1.'1'
+    .net_led_activity_resistors_2_1: ELEC::Interfaces::Electrical
+    .net_led_activity_resistors_2_1 ~ .led_activity_resistors_2.'1'
+    .net_led_activity_resistors_3_1: ELEC::Interfaces::Electrical
+    .net_led_activity_resistors_3_1 ~ .led_activity_resistors_3.'1'
+    .net_led_activity_resistors_4_1: ELEC::Interfaces::Electrical
+    .net_led_activity_resistors_4_1 ~ .led_activity_resistors_4.'1'
+    .net_led_activity_resistors_5_1: ELEC::Interfaces::Electrical
+    .net_led_activity_resistors_5_1 ~ .led_activity_resistors_5.'1'
+    .net_led_activity_resistors_6_1: ELEC::Interfaces::Electrical
+    .net_led_activity_resistors_6_1 ~ .led_activity_resistors_6.'1'
+    .net_led_activity_resistors_7_1: ELEC::Interfaces::Electrical
+    .net_led_activity_resistors_7_1 ~ .led_activity_resistors_7.'1'
+    .net_led_link_resistors_0_1: ELEC::Interfaces::Electrical
+    .net_led_link_resistors_0_1 ~ .led_link_resistors_0.'1'
+    .net_led_link_resistors_1_1: ELEC::Interfaces::Electrical
+    .net_led_link_resistors_1_1 ~ .led_link_resistors_1.'1'
+    .net_led_link_resistors_2_1: ELEC::Interfaces::Electrical
+    .net_led_link_resistors_2_1 ~ .led_link_resistors_2.'1'
+    .net_led_link_resistors_3_1: ELEC::Interfaces::Electrical
+    .net_led_link_resistors_3_1 ~ .led_link_resistors_3.'1'
+    .net_led_link_resistors_4_1: ELEC::Interfaces::Electrical
+    .net_led_link_resistors_4_1 ~ .led_link_resistors_4.'1'
+    .net_led_link_resistors_5_1: ELEC::Interfaces::Electrical
+    .net_led_link_resistors_5_1 ~ .led_link_resistors_5.'1'
+    .net_led_link_resistors_6_1: ELEC::Interfaces::Electrical
+    .net_led_link_resistors_6_1 ~ .led_link_resistors_6.'1'
+    .net_led_link_resistors_7_1: ELEC::Interfaces::Electrical
+    .net_led_link_resistors_7_1 ~ .led_link_resistors_7.'1'
+}

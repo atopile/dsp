@@ -1,0 +1,37 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.C1525: @STD::Import { .org &= "jlc"; .project &= "C1525"; .version &= "0.1.0" }
+.C21189: @STD::Import { .org &= "jlc"; .project &= "C21189"; .version &= "0.1.0" }
+.C25905: @STD::Import { .org &= "jlc"; .project &= "C25905"; .version &= "0.1.0" }
+.C2765186: @STD::Import { .org &= "jlc"; .project &= "C2765186"; .version &= "0.1.0" }
+.C7519: @STD::Import { .org &= "jlc"; .project &= "C7519"; .version &= "0.1.0" }
+.C883109: @STD::Import { .org &= "jlc"; .project &= "C883109"; .version &= "0.1.0" }
+
+.Usb: @type {
+    /// Original DSP circuit, with its component and pad connectivity preserved.
+    .bypass_fuse_resistor: C21189::UNI_ROYAL_0603WAF0000T5E
+    .cc_resistors_0: C25905::UNI_ROYAL_0402WGF5101TCE
+    .cc_resistors_1: C25905::UNI_ROYAL_0402WGF5101TCE
+    .connector: C2765186::SHOU_HAN_TYPE_C_16PIN_2MD_073
+    .esd_protection: C7519::STMicroelectronics_USBLC6_2SC6
+    .esd_protection_decoupling_capacitor: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .fused_usb_fuse: C883109::BHFUSE_BSMD0805_050_15V
+
+    .ground: ELEC::Interfaces::Electrical
+    .ground ~ .cc_resistors_0.'2' ~ .cc_resistors_1.'2' ~ .connector.'13' ~ .connector.'14' ~ .connector.A1B12 ~ .connector.B1A12 ~ .esd_protection.'2' ~ .esd_protection_decoupling_capacitor.'2'
+    .net_bypass_fuse_resistor_1: ELEC::Interfaces::Electrical
+    .net_bypass_fuse_resistor_1 ~ .bypass_fuse_resistor.'1' ~ .connector.A4B9 ~ .connector.B4A9 ~ .fused_usb_fuse.'1'
+    .net_cc_resistors_0_1: ELEC::Interfaces::Electrical
+    .net_cc_resistors_0_1 ~ .cc_resistors_0.'1' ~ .connector.A5
+    .net_cc_resistors_1_1: ELEC::Interfaces::Electrical
+    .net_cc_resistors_1_1 ~ .cc_resistors_1.'1' ~ .connector.B5
+    .net_connector_Dn1: ELEC::Interfaces::Electrical
+    .net_connector_Dn1 ~ .connector.A7 ~ .connector.B7 ~ .esd_protection.'1' ~ .esd_protection.'6'
+    .net_connector_Dp1: ELEC::Interfaces::Electrical
+    .net_connector_Dp1 ~ .connector.A6 ~ .connector.B6 ~ .esd_protection.'3' ~ .esd_protection.'4'
+    .net_connector_SBU1: ELEC::Interfaces::Electrical
+    .net_connector_SBU1 ~ .connector.A8
+    .net_connector_SBU2: ELEC::Interfaces::Electrical
+    .net_connector_SBU2 ~ .connector.B8
+    .power_5v: ELEC::Interfaces::Electrical
+    .power_5v ~ .bypass_fuse_resistor.'2' ~ .esd_protection.'5' ~ .esd_protection_decoupling_capacitor.'1' ~ .fused_usb_fuse.'2'
+}

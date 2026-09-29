@@ -1,0 +1,104 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.C1525: @STD::Import { .org &= "jlc"; .project &= "C1525"; .version &= "0.1.0" }
+.C1549: @STD::Import { .org &= "jlc"; .project &= "C1549"; .version &= "0.1.0" }
+.C25741: @STD::Import { .org &= "jlc"; .project &= "C25741"; .version &= "0.1.0" }
+.C25744: @STD::Import { .org &= "jlc"; .project &= "C25744"; .version &= "0.1.0" }
+.C25884: @STD::Import { .org &= "jlc"; .project &= "C25884"; .version &= "0.1.0" }
+.C3010343: @STD::Import { .org &= "jlc"; .project &= "C3010343"; .version &= "0.1.0" }
+.C70593: @STD::Import { .org &= "jlc"; .project &= "C70593"; .version &= "0.1.0" }
+
+.EthernetSwitch: @type {
+    /// Original DSP circuit, with its component and pad connectivity preserved.
+    .crystal: C70593::YXC_Crystal_Oscillators_X322525MRB4SI
+    .crystal_caps_0: C1549::FH_0402CG180J500NT
+    .crystal_caps_1: C1549::FH_0402CG180J500NT
+    .decoupling_1v2_0: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_1v2_1: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_1v2_2: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_1v2_3: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_1v2_4: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_1v2_5: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_3v3_0: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_3v3_1: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_3v3_2: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_3v3_3: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_3v3_4: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .decoupling_3v3_5: C1525::Samsung_Electro_Mechanics_CL05B104KO5NNNC
+    .ibref_resistor: C25884::UNI_ROYAL_0402WGF2491TCE
+    .ic: C3010343::Realtek_Semicon_RTL8305NB_VB_CG
+    .ldind_config_pullup: C25744::UNI_ROYAL_0402WGF1002TCE
+    .p0_config_pulldown: C25741::UNI_ROYAL_0402WGF1003TCE
+    .p2_config_pullup: C25744::UNI_ROYAL_0402WGF1002TCE
+    .reset_pullup: C25744::UNI_ROYAL_0402WGF1002TCE
+
+    .ground: ELEC::Interfaces::Electrical
+    .ground ~ .crystal.'2' ~ .crystal.'4' ~ .crystal_caps_0.'2' ~ .crystal_caps_1.'2' ~ .decoupling_1v2_0.'2' ~ .decoupling_1v2_1.'2' ~ .decoupling_1v2_2.'2' ~ .decoupling_1v2_3.'2' ~ .decoupling_1v2_4.'2' ~ .decoupling_1v2_5.'2' ~ .decoupling_3v3_0.'2' ~ .decoupling_3v3_1.'2' ~ .decoupling_3v3_2.'2' ~ .decoupling_3v3_3.'2' ~ .decoupling_3v3_4.'2' ~ .decoupling_3v3_5.'2' ~ .ibref_resistor.'2' ~ .ic.'49' ~ .p0_config_pulldown.'2'
+    .net_ic_AVDDL_1: ELEC::Interfaces::Electrical
+    .net_ic_AVDDL_1 ~ .decoupling_1v2_0.'1' ~ .decoupling_1v2_1.'1' ~ .decoupling_1v2_2.'1' ~ .decoupling_1v2_3.'1' ~ .decoupling_1v2_4.'1' ~ .decoupling_1v2_5.'1' ~ .ic.'1' ~ .ic.'13' ~ .ic.'23' ~ .ic.'24' ~ .ic.'35' ~ .ic.'36' ~ .ic.'41' ~ .ic.'43' ~ .ic.'7'
+    .net_ic_IBREF: ELEC::Interfaces::Electrical
+    .net_ic_IBREF ~ .ibref_resistor.'1' ~ .ic.'42'
+    .net_ic_LDIND_DIS_LD: ELEC::Interfaces::Electrical
+    .net_ic_LDIND_DIS_LD ~ .ic.'28' ~ .ldind_config_pullup.'1'
+    .net_ic_P0LED_DIS_EEE: ELEC::Interfaces::Electrical
+    .net_ic_P0LED_DIS_EEE ~ .ic.'29' ~ .p0_config_pulldown.'1'
+    .net_ic_P1LED: ELEC::Interfaces::Electrical
+    .net_ic_P1LED ~ .ic.'30'
+    .net_ic_P2LED_DIS_RST_BLNK: ELEC::Interfaces::Electrical
+    .net_ic_P2LED_DIS_RST_BLNK ~ .ic.'32' ~ .p2_config_pullup.'1'
+    .net_ic_P3LED: ELEC::Interfaces::Electrical
+    .net_ic_P3LED ~ .ic.'33'
+    .net_ic_P4LED: ELEC::Interfaces::Electrical
+    .net_ic_P4LED ~ .ic.'34'
+    .net_ic_RESETB: ELEC::Interfaces::Electrical
+    .net_ic_RESETB ~ .ic.'27' ~ .reset_pullup.'1'
+    .net_ic_RXIN0: ELEC::Interfaces::Electrical
+    .net_ic_RXIN0 ~ .ic.'45'
+    .net_ic_RXIN1: ELEC::Interfaces::Electrical
+    .net_ic_RXIN1 ~ .ic.'3'
+    .net_ic_RXIN2: ELEC::Interfaces::Electrical
+    .net_ic_RXIN2 ~ .ic.'11'
+    .net_ic_RXIN3: ELEC::Interfaces::Electrical
+    .net_ic_RXIN3 ~ .ic.'15'
+    .net_ic_RXIN4: ELEC::Interfaces::Electrical
+    .net_ic_RXIN4 ~ .ic.'21'
+    .net_ic_RXIP0: ELEC::Interfaces::Electrical
+    .net_ic_RXIP0 ~ .ic.'44'
+    .net_ic_RXIP1: ELEC::Interfaces::Electrical
+    .net_ic_RXIP1 ~ .ic.'2'
+    .net_ic_RXIP2: ELEC::Interfaces::Electrical
+    .net_ic_RXIP2 ~ .ic.'12'
+    .net_ic_RXIP3: ELEC::Interfaces::Electrical
+    .net_ic_RXIP3 ~ .ic.'14'
+    .net_ic_RXIP4: ELEC::Interfaces::Electrical
+    .net_ic_RXIP4 ~ .ic.'22'
+    .net_ic_SCL_MDC: ELEC::Interfaces::Electrical
+    .net_ic_SCL_MDC ~ .ic.'25'
+    .net_ic_SDA_MDIO: ELEC::Interfaces::Electrical
+    .net_ic_SDA_MDIO ~ .ic.'26'
+    .net_ic_TXON0: ELEC::Interfaces::Electrical
+    .net_ic_TXON0 ~ .ic.'46'
+    .net_ic_TXON1: ELEC::Interfaces::Electrical
+    .net_ic_TXON1 ~ .ic.'4'
+    .net_ic_TXON2: ELEC::Interfaces::Electrical
+    .net_ic_TXON2 ~ .ic.'10'
+    .net_ic_TXON3: ELEC::Interfaces::Electrical
+    .net_ic_TXON3 ~ .ic.'16'
+    .net_ic_TXON4: ELEC::Interfaces::Electrical
+    .net_ic_TXON4 ~ .ic.'20'
+    .net_ic_TXOP0: ELEC::Interfaces::Electrical
+    .net_ic_TXOP0 ~ .ic.'47'
+    .net_ic_TXOP1: ELEC::Interfaces::Electrical
+    .net_ic_TXOP1 ~ .ic.'5'
+    .net_ic_TXOP2: ELEC::Interfaces::Electrical
+    .net_ic_TXOP2 ~ .ic.'9'
+    .net_ic_TXOP3: ELEC::Interfaces::Electrical
+    .net_ic_TXOP3 ~ .ic.'17'
+    .net_ic_TXOP4: ELEC::Interfaces::Electrical
+    .net_ic_TXOP4 ~ .ic.'19'
+    .net_ic_XI: ELEC::Interfaces::Electrical
+    .net_ic_XI ~ .crystal.'1' ~ .crystal_caps_0.'1' ~ .ic.'40'
+    .net_ic_XO: ELEC::Interfaces::Electrical
+    .net_ic_XO ~ .crystal.'3' ~ .crystal_caps_1.'1' ~ .ic.'39'
+    .power_3v3_digital: ELEC::Interfaces::Electrical
+    .power_3v3_digital ~ .decoupling_3v3_0.'1' ~ .decoupling_3v3_1.'1' ~ .decoupling_3v3_2.'1' ~ .decoupling_3v3_3.'1' ~ .decoupling_3v3_4.'1' ~ .decoupling_3v3_5.'1' ~ .ic.'18' ~ .ic.'31' ~ .ic.'37' ~ .ic.'38' ~ .ic.'48' ~ .ic.'6' ~ .ic.'8' ~ .ldind_config_pullup.'2' ~ .p2_config_pullup.'2' ~ .reset_pullup.'2'
+}
