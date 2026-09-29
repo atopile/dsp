@@ -108,8 +108,8 @@
 
     # Board-control outputs; separate from all assigned peripheral pins.
     # [0] DSP reset, [1] codec reset, [2] switch reset,
-    # [3:4] switch MDC/MDIO, [5] DMX direction, [6:7] spare.
-    .gpios: [8]ELEC::ElectricLogic
+    # [3:4], [6:7], [8:9] switch MDC/MDIO; [5] DMX DE, [10] DMX /RE.
+    .gpios: [11]ELEC::ElectricLogic
     .gpios[0].line ~ .ic.GPIO24
     .gpios[1].line ~ .ic.GPIO25
     .gpios[2].line ~ .ic.GPIO26
@@ -118,6 +118,12 @@
     .gpios[5].line ~ .ic.GPIO6
     .gpios[6].line ~ .ic.GPIO22
     .gpios[7].line ~ .ic.GPIO23
+    .gpios[8].line ~ .ic.GPIO12
+    .gpios[9].line ~ .ic.GPIO13
+    .gpios[10].line ~ .ic.GPIO16
+
+    .usb_p := .ic.USB_P
+    .usb_n := .ic.USB_N
 
     .decoupling_caps: [2]ELEC::Capacitor
     @for(.decoupling_caps, {

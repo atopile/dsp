@@ -12,8 +12,8 @@
 
 .DspBoard: @type {
     /// Networked audio DSP: a compute module drives an ADAU1452 SigmaDSP
-    /// and an AD1938 codec, with balanced XLR I/O, an onboard RTL8305NB
-    /// ethernet switch, and an SP3485-driven DMX512 output — modeled on
+    /// and two AD1938 codecs, with fourteen balanced audio outputs, three
+    /// RTL8305NB Ethernet switches, and SP3485-driven DMX512 I/O — modeled on
     /// atopile's public DSP design.
     .jlc_stackup: ELEC::JLCPCB::JLC041612_3313
     @trait(_): ELEC::PCB::is_pcb
@@ -22,17 +22,19 @@
     .power: PWR::PowerSupply
     .cm: VCM::RPI_CM5
     .dsp: VDSP::ADI_ADAU145x
-    .codec: VCOD::Analog_Devices_AD1938
-    .eth_switch: VSW::Realtek_RTL8305NB
+    .codecs: [2]VCOD::Analog_Devices_AD1938
+    .eth_switches: [3]VSW::Realtek_RTL8305NB
     .dmx_phy: VRS::MaxLinear_SP3485
 
     # --- Power distribution ---
     .power.power_5v ~ .cm.power_5v
     .power.power_3v3d ~ .dsp.power
-    .power.power_3v3d ~ .eth_switch.power_3v3
+    @for(.eth_switches, { power.power_3v3d ~ .obj.power_3v3 })
     .power.power_3v3d ~ .dmx_phy.power
-    .power.power_3v3a ~ .codec.power
-    .power.power_3v3a ~ .codec.power_analog
+    @for(.codecs, {
+        power.power_3v3a ~ .obj.power
+        power.power_3v3a ~ .obj.power_analog
+    })
 
     # --- Control plane ---
     # CM -> DSP: register access over I2C, with pull-ups on the bus
@@ -48,13 +50,14 @@
     .cm.i2cs[0].sda.line ~> .i2c_pullups[1] ~> .power.power_3v3d.hv
 
     # CM -> codec: register access over SPI
-    .cm.spis[0] ~ .codec.spi
-    .cm.spi0_cs[0] ~ .codec.spi_cs
+    @for(.codecs, { cm.spis[0] ~ .obj.spi })
+    .cm.spi0_cs[0] ~ .codecs[0].spi_cs
+    .cm.spi0_cs[1] ~ .codecs[1].spi_cs
 
     # Resets and strapping
     .cm.gpios[0] ~ .dsp.reset_disable
-    .cm.gpios[1] ~ .codec.reset_disable
-    .cm.gpios[2] ~ .eth_switch.reset
+    @for(.codecs, { cm.gpios[1] ~ .obj.reset_disable })
+    @for(.eth_switches, { cm.gpios[2] ~ .obj.reset })
     .dsp.selfboot_enable.line ~ .power.power_3v3d.lv  # boot from host, not flash
 
     # --- Audio path ---
@@ -63,10 +66,10 @@
     .dsp.i2s_outs[0] ~ .cm.i2s_input
 
     # DSP CLKOUT provides the codec master clock
-    .dsp.pll_clock_out ~ .codec.pll_clock_in
+    @for(.codecs, { dsp.pll_clock_out ~ .obj.pll_clock_in })
 
     # DSP -> codec: series-damped I2S lines across the digital/analog split
-    .i2s_series_resistors: [3]ELEC::Stuff::Resistor
+    .i2s_series_resistors: [6]ELEC::Stuff::Resistor
     @for(.i2s_series_resistors, {
         .damper := .obj
         .damper.resistance &= 10ohm +/- 5%
@@ -74,11 +77,16 @@
     @trait(_, .i2s_series_resistors[0]): PARTS::has_package_requirements { .size &= "0402" }
     @trait(_, .i2s_series_resistors[1]): PARTS::has_package_requirements { .size &= "0402" }
     @trait(_, .i2s_series_resistors[2]): PARTS::has_package_requirements { .size &= "0402" }
-    .dsp.i2s_outs[1].sck.line ~> .i2s_series_resistors[0] ~> .codec.i2s_in.sck.line
-    .dsp.i2s_outs[1].ws.line ~> .i2s_series_resistors[1] ~> .codec.i2s_in.ws.line
-    .dsp.i2s_outs[1].sd.line ~> .i2s_series_resistors[2] ~> .codec.i2s_in.sd.line
-    # Codec ADC -> DSP return path (serial port 1)
-    .codec.i2s_out ~ .dsp.i2s_ins[1]
+    @trait(_, .i2s_series_resistors[3]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .i2s_series_resistors[4]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .i2s_series_resistors[5]): PARTS::has_package_requirements { .size &= "0402" }
+    .dsp.i2s_outs[1].sck.line ~> .i2s_series_resistors[0] ~> .codecs[0].i2s_in.sck.line
+    .dsp.i2s_outs[1].ws.line ~> .i2s_series_resistors[1] ~> .codecs[0].i2s_in.ws.line
+    .dsp.i2s_outs[1].sd.line ~> .i2s_series_resistors[2] ~> .codecs[0].i2s_in.sd.line
+    .dsp.i2s_outs[2].sck.line ~> .i2s_series_resistors[3] ~> .codecs[1].i2s_in.sck.line
+    .dsp.i2s_outs[2].ws.line ~> .i2s_series_resistors[4] ~> .codecs[1].i2s_in.ws.line
+    .dsp.i2s_outs[2].sd.line ~> .i2s_series_resistors[5] ~> .codecs[1].i2s_in.sd.line
+    .codecs[0].i2s_out ~ .dsp.i2s_ins[1]
 
     # Balanced XLR inputs -> DC-blocked ADC inputs
     .xlr_in: [2]PANEL::AudioInput
@@ -91,62 +99,121 @@
     @trait(_, .input_dc_block_caps[1]): PARTS::has_package_requirements { .size &= "0805" }
     @trait(_, .input_dc_block_caps[2]): PARTS::has_package_requirements { .size &= "0805" }
     @trait(_, .input_dc_block_caps[3]): PARTS::has_package_requirements { .size &= "0805" }
-    .xlr_in[0].signal.p.line ~> .input_dc_block_caps[0] ~> .codec.adc_in[0].p.line
-    .xlr_in[0].signal.n.line ~> .input_dc_block_caps[1] ~> .codec.adc_in[0].n.line
-    .xlr_in[1].signal.p.line ~> .input_dc_block_caps[2] ~> .codec.adc_in[1].p.line
-    .xlr_in[1].signal.n.line ~> .input_dc_block_caps[3] ~> .codec.adc_in[1].n.line
+    .xlr_in[0].signal.p.line ~> .input_dc_block_caps[0] ~> .codecs[0].adc_in[0].p.line
+    .xlr_in[0].signal.n.line ~> .input_dc_block_caps[1] ~> .codecs[0].adc_in[0].n.line
+    .xlr_in[1].signal.p.line ~> .input_dc_block_caps[2] ~> .codecs[0].adc_in[1].p.line
+    .xlr_in[1].signal.n.line ~> .input_dc_block_caps[3] ~> .codecs[0].adc_in[1].n.line
 
-    # Codec DAC -> DRV135 line drivers -> balanced XLR outputs
-    .line_drivers: [2]VDRV::TI_DRV135
-    .xlr_out: [2]PANEL::AudioOutput
-    .power.power_18v_pos ~ .line_drivers[0].positive_power
-    .power.power_18v_neg ~ .line_drivers[0].negative_power
-    .power.power_18v_pos ~ .line_drivers[1].positive_power
-    .power.power_18v_neg ~ .line_drivers[1].negative_power
-    .codec.dac_out[0] ~ .line_drivers[0].input_signal
-    .codec.dac_out[1] ~ .line_drivers[1].input_signal
+    # Fourteen analog outputs: six XLR and two four-channel EtherCON ports.
+    .line_drivers: [14]VDRV::TI_DRV135
+    .xlr_out: [6]PANEL::AudioOutput
+    .ethercon_out: [2]PANEL::EtherConAudioOutput
+    @for(.line_drivers, { .obj.output_force ~ .obj.output_sense })
+    .power.audio_banks[0].positive.power_out ~ .line_drivers[0].positive_power
+    .power.audio_banks[0].negative.power_out ~ .line_drivers[0].negative_power
+    .codecs[0].dac_out[0] ~ .line_drivers[0].input_signal
     .line_drivers[0].output_force ~ .xlr_out[0].signal
+    .power.audio_banks[0].positive.power_out ~ .line_drivers[1].positive_power
+    .power.audio_banks[0].negative.power_out ~ .line_drivers[1].negative_power
+    .codecs[0].dac_out[1] ~ .line_drivers[1].input_signal
     .line_drivers[1].output_force ~ .xlr_out[1].signal
-    # 4-wire sense closed at the connector
-    .line_drivers[0].output_force ~ .line_drivers[0].output_sense
-    .line_drivers[1].output_force ~ .line_drivers[1].output_sense
+    .power.audio_banks[0].positive.power_out ~ .line_drivers[2].positive_power
+    .power.audio_banks[0].negative.power_out ~ .line_drivers[2].negative_power
+    .codecs[0].dac_out[2] ~ .line_drivers[2].input_signal
+    .line_drivers[2].output_force ~ .xlr_out[2].signal
+    .power.audio_banks[0].positive.power_out ~ .line_drivers[3].positive_power
+    .power.audio_banks[0].negative.power_out ~ .line_drivers[3].negative_power
+    .codecs[0].dac_out[3] ~ .line_drivers[3].input_signal
+    .line_drivers[3].output_force ~ .xlr_out[3].signal
+    .power.audio_banks[0].positive.power_out ~ .line_drivers[4].positive_power
+    .power.audio_banks[0].negative.power_out ~ .line_drivers[4].negative_power
+    .codecs[0].dac_out[4] ~ .line_drivers[4].input_signal
+    .line_drivers[4].output_force ~ .xlr_out[4].signal
+    .power.audio_banks[0].positive.power_out ~ .line_drivers[5].positive_power
+    .power.audio_banks[0].negative.power_out ~ .line_drivers[5].negative_power
+    .codecs[0].dac_out[5] ~ .line_drivers[5].input_signal
+    .line_drivers[5].output_force ~ .xlr_out[5].signal
+    .power.audio_banks[1].positive.power_out ~ .line_drivers[6].positive_power
+    .power.audio_banks[1].negative.power_out ~ .line_drivers[6].negative_power
+    .codecs[1].dac_out[0] ~ .line_drivers[6].input_signal
+    .line_drivers[6].output_force ~ .ethercon_out[0].signals[0]
+    .power.audio_banks[1].positive.power_out ~ .line_drivers[7].positive_power
+    .power.audio_banks[1].negative.power_out ~ .line_drivers[7].negative_power
+    .codecs[1].dac_out[1] ~ .line_drivers[7].input_signal
+    .line_drivers[7].output_force ~ .ethercon_out[0].signals[1]
+    .power.audio_banks[1].positive.power_out ~ .line_drivers[8].positive_power
+    .power.audio_banks[1].negative.power_out ~ .line_drivers[8].negative_power
+    .codecs[1].dac_out[2] ~ .line_drivers[8].input_signal
+    .line_drivers[8].output_force ~ .ethercon_out[0].signals[2]
+    .power.audio_banks[1].positive.power_out ~ .line_drivers[9].positive_power
+    .power.audio_banks[1].negative.power_out ~ .line_drivers[9].negative_power
+    .codecs[1].dac_out[3] ~ .line_drivers[9].input_signal
+    .line_drivers[9].output_force ~ .ethercon_out[0].signals[3]
+    .power.audio_banks[2].positive.power_out ~ .line_drivers[10].positive_power
+    .power.audio_banks[2].negative.power_out ~ .line_drivers[10].negative_power
+    .codecs[1].dac_out[4] ~ .line_drivers[10].input_signal
+    .line_drivers[10].output_force ~ .ethercon_out[1].signals[0]
+    .power.audio_banks[2].positive.power_out ~ .line_drivers[11].positive_power
+    .power.audio_banks[2].negative.power_out ~ .line_drivers[11].negative_power
+    .codecs[1].dac_out[5] ~ .line_drivers[11].input_signal
+    .line_drivers[11].output_force ~ .ethercon_out[1].signals[1]
+    .power.audio_banks[2].positive.power_out ~ .line_drivers[12].positive_power
+    .power.audio_banks[2].negative.power_out ~ .line_drivers[12].negative_power
+    .codecs[1].dac_out[6] ~ .line_drivers[12].input_signal
+    .line_drivers[12].output_force ~ .ethercon_out[1].signals[2]
+    .power.audio_banks[2].positive.power_out ~ .line_drivers[13].positive_power
+    .power.audio_banks[2].negative.power_out ~ .line_drivers[13].negative_power
+    .codecs[1].dac_out[7] ~ .line_drivers[13].input_signal
+    .line_drivers[13].output_force ~ .ethercon_out[1].signals[3]
 
-    # --- Network ---
-    # CM uplink into the switch (port 4), two panel jacks out (ports 0/1)
-    .rj45: [2]PANEL::EthernetJack
-    .rj45[0].ground ~ .power.power_3v3d.lv
-    .rj45[1].ground ~ .power.power_3v3d.lv
-    .cm.ethernet ~ .eth_switch.ethernets[4]
-    .eth_switch.ethernets[0] ~ .rj45[0].ethernet
-    .eth_switch.ethernets[1] ~ .rj45[1].ethernet
-    # Switch management (SMI bit-banged from CM GPIOs)
-    .cm.gpios[3] ~ .eth_switch.mdc
-    .cm.gpios[4] ~ .eth_switch.mdio
+    # Original three-switch network: two four-port edges plus a CM5 uplink.
+    .ports: PANEL::EthernetPorts
+    .ports.ethernet[0] ~ .eth_switches[0].ethernets[3]
+    .ports.ethernet[1] ~ .eth_switches[0].ethernets[1]
+    .ports.ethernet[2] ~ .eth_switches[1].ethernets[3]
+    .ports.ethernet[3] ~ .eth_switches[1].ethernets[1]
+    .ports.ethernet[4] ~ .eth_switches[0].ethernets[4]
+    .ports.ethernet[5] ~ .eth_switches[0].ethernets[2]
+    .ports.ethernet[6] ~ .eth_switches[1].ethernets[2]
+    .ports.ethernet[7] ~ .eth_switches[1].ethernets[0]
+    .cm.ethernet ~ .eth_switches[2].ethernets[4]
+    .eth_switches[2].ethernets[3] ~ .eth_switches[0].ethernets[0]
+    .eth_switches[2].ethernets[2] ~ .eth_switches[1].ethernets[4]
+    .cm.gpios[3] ~ .eth_switches[0].mdc
+    .cm.gpios[4] ~ .eth_switches[0].mdio
+    .cm.gpios[6] ~ .eth_switches[1].mdc
+    .cm.gpios[7] ~ .eth_switches[1].mdio
+    .cm.gpios[8] ~ .eth_switches[2].mdc
+    .cm.gpios[9] ~ .eth_switches[2].mdio
 
-    # --- DMX512 ---
+    .xlr_dmx_in: PANEL::DmxInput
     .xlr_dmx_out: PANEL::DmxOutput
     .cm.uart0 ~ .dmx_phy.uart
     .cm.gpios[5] ~ .dmx_phy.driver_enable
-    .cm.gpios[5] ~ .dmx_phy.n_receiver_enable  # driver_enable doubles as /RE
-    .dmx_phy.rs485_bus ~ .xlr_dmx_out.signal
-    .dmx_phy.power.lv ~ .xlr_dmx_out.common
+    .cm.gpios[10] ~ .dmx_phy.n_receiver_enable
+    .dmx_phy.rs485_bus ~ .xlr_dmx_in.signal ~ .xlr_dmx_out.signal
+    .dmx_phy.power.lv ~ .xlr_dmx_in.common ~ .xlr_dmx_out.common
 
-    # --- Chassis / shields ---
-    .xlr_in[0].shield ~ .power.earth
-    .xlr_in[1].shield ~ .power.earth
-    .xlr_out[0].shield ~ .power.earth
-    .xlr_out[1].shield ~ .power.earth
-    .xlr_dmx_out.shield ~ .power.earth
-    .rj45[0].shield ~ .power.earth
-    .rj45[1].shield ~ .power.earth
+    .debug: PANEL::DebugHeader
+    .debug.i2c ~ .cm.i2cs[0]
+    .debug.reset ~ .dsp.reset_disable
+    .debug.ground ~ .power.power_5v.lv
+    .usb: PANEL::UsbDeviceConnector
+    .usb.data_p ~ .cm.usb_p
+    .usb.data_n ~ .cm.usb_n
+    .usb.ground ~ .power.power_5v.lv
+
+    # Panel shields remain separate from circuit common.
+    @for(.xlr_in, { .obj.shield ~ power.earth })
+    @for(.xlr_out, { .obj.shield ~ power.earth })
+    @for(.ethercon_out, { .obj.shield ~ power.earth })
+    .xlr_dmx_in.shield ~ .xlr_dmx_out.shield ~ .ports.shield ~ .usb.shield ~ .power.earth
 
     # Net names for the interesting nets
     @trait(_, .power.power_5v.hv): ELEC::has_net_name { .name &= "P5V" }
     @trait(_, .power.power_5v.lv): ELEC::has_net_name { .name &= "GND" }
     @trait(_, .power.power_3v3d.hv): ELEC::has_net_name { .name &= "P3V3_DIG" }
     @trait(_, .power.power_3v3a.hv): ELEC::has_net_name { .name &= "P3V3_ANA" }
-    @trait(_, .power.power_18v_pos.hv): ELEC::has_net_name { .name &= "P18V" }
-    @trait(_, .power.power_18v_neg.lv): ELEC::has_net_name { .name &= "N18V" }
     @trait(_, .dmx_phy.rs485_bus.p.line): ELEC::has_net_name { .name &= "DMX_P" }
     @trait(_, .dmx_phy.rs485_bus.n.line): ELEC::has_net_name { .name &= "DMX_N" }
 }

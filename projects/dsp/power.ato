@@ -17,6 +17,16 @@
     # Reserve at most 60 mA for the external load on each 18 V rail.
 }
 
+.AudioPowerBank: @type {
+    /// Independent +/-18 V pair, 60 mA available per rail.
+    .positive: Isolated18VRail
+    .negative: Isolated18VRail
+    .power_in := .positive.power_in
+    .power_in ~ .negative.power_in
+    .positive.power_out.lv ~ .power_in.lv
+    .negative.power_out.hv ~ .power_in.lv
+}
+
 .PowerSupply: @type {
     /// Regulated external 5 V input; separate digital/analog 3.3 V and +/-18 V.
     .power_dc_in: ELEC::ElectricPower { .voltage &= 5V +/- 5% }
@@ -28,25 +38,16 @@
 
     .buck_3v3_digital: BUCK::TPSM863257
     .ldo_3v3_analog: VLDO::TI_TLV75901
-    .boost_18v_pos: Isolated18VRail
-    .boost_18v_neg: Isolated18VRail
+    .audio_banks: [3]AudioPowerBank
+    @for(.audio_banks, { power_5v ~ .obj.power_in })
 
     .power_3v3d := .buck_3v3_digital.power_out
     .power_3v3a := .ldo_3v3_analog.power_out
-    .power_18v_pos := .boost_18v_pos.power_out
-    .power_18v_neg := .boost_18v_neg.power_out
     .power_3v3d.voltage &= 3.3V +/- 3%
     .power_3v3a.voltage &= 3.3V +/- 3%
 
     .power_5v ~ .buck_3v3_digital.power_in
     .power_5v ~ .ldo_3v3_analog.power_in
-    .power_5v ~ .boost_18v_pos.power_in
-    .power_5v ~ .boost_18v_neg.power_in
-
-    # Each secondary/LDO is floating. Ground the negative rail's positive end.
-    .power_18v_pos.lv ~ .power_5v.lv
-    .power_18v_neg.hv ~ .power_5v.lv
-
     .bulk_cap_5v: ELEC::Capacitor {
         .capacitance &= 22uF +/- 20%
         .max_voltage >= 16V

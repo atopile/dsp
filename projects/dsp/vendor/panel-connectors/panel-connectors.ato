@@ -2,7 +2,7 @@
 .AUDIO_IN: @STD::Import { .org &= "jlc"; .project &= "C368458"; .version &= "0.1.0" }
 .AUDIO_OUT: @STD::Import { .org &= "jlc"; .project &= "C368463"; .version &= "0.1.0" }
 .DMX_OUT: @STD::Import { .org &= "jlc"; .project &= "C368501"; .version &= "0.1.0" }
-.ETHERNET: @STD::Import { .org &= "jlc"; .project &= "C12074"; .version &= "0.1.0" }
+.ETHERNET: @STD::Import { .org &= "jlc"; .project &= "C5296839"; .version &= "0.1.0" }
 
 .AudioInput: @type {
     /// Neutrik NCJ6FA-H balanced XLR / TRS combo input.
@@ -38,23 +38,147 @@
     # Secondary data pins 4/5 and mechanical pads 6/7 remain unconnected.
 }
 
-.EthernetJack: @type {
-    /// HanRun HR911105A 10/100 jack with magnetics and cable-side termination.
-    /// Pair ordering follows this board's RTL8305NB driver: 0 RX, 1 TX.
-    .connector: ETHERNET::HANRUN_HR911105A
-    .ethernet: ELEC::Interfaces::Ethernet
+
+.DMX_IN: @STD::Import { .org &= "jlc"; .project &= "C368509"; .version &= "0.1.0" }
+.ETHERCON: @STD::Import { .org &= "jlc"; .project &= "C368528"; .version &= "0.1.0" }
+.DEBUG: @STD::Import { .org &= "jlc"; .project &= "C225520"; .version &= "0.1.0" }
+.USB: @STD::Import { .org &= "jlc"; .project &= "C2765186"; .version &= "0.1.0" }
+.PARTS := .ELEC::PARTS
+
+.DmxInput: @type {
+    .connector: DMX_IN::Neutrik_NC5MAH
+    .signal: ELEC::Interfaces::DifferentialPair
+    .common: ELEC::Interfaces::Electrical
+    .shield: ELEC::Interfaces::Electrical
+    .common ~ .connector.'1'
+    .signal.n.line ~ .connector.'2'
+    .signal.p.line ~ .connector.'3'
+    .shield ~ .connector.'6'
+    # Pins 4/5 are the unused secondary data pair.
+}
+
+.EtherConAudioOutput: @type {
+    /// Four balanced analog audio channels, not Ethernet.
+    .connector: ETHERCON::Neutrik_NE8FAH_C5
+    .signals: [4]ELEC::Interfaces::DifferentialPair
+    .shield: ELEC::Interfaces::Electrical
+    .shield ~ .connector.G
+    .signals[0].p.line ~ .connector.'4'
+    .signals[0].n.line ~ .connector.'5'
+    .signals[1].p.line ~ .connector.'3'
+    .signals[1].n.line ~ .connector.'6'
+    .signals[2].p.line ~ .connector.'1'
+    .signals[2].n.line ~ .connector.'2'
+    .signals[3].p.line ~ .connector.'7'
+    .signals[3].n.line ~ .connector.'8'
+}
+
+.EthernetPorts: @type {
+    /// Original HCTL 2x4 RJ45 block. This part has no integrated magnetics.
+    .connector: ETHERNET::HCTL_HC_RJ45_059C_2_4_1
+    .ethernet: [8]ELEC::Interfaces::Ethernet
+    .shield: ELEC::Interfaces::Electrical
+    .ethernet[0].pairs[0].p.line ~ .connector.'3'
+    .ethernet[0].pairs[0].n.line ~ .connector.'6'
+    .ethernet[0].pairs[1].p.line ~ .connector.'1'
+    .ethernet[0].pairs[1].n.line ~ .connector.'2'
+    .ethernet[0].pairs[2].p.line ~ .connector.'4'
+    .ethernet[0].pairs[2].n.line ~ .connector.'5'
+    .ethernet[0].pairs[3].p.line ~ .connector.'7'
+    .ethernet[0].pairs[3].n.line ~ .connector.'8'
+    .ethernet[1].pairs[0].p.line ~ .connector.'15'
+    .ethernet[1].pairs[0].n.line ~ .connector.'18'
+    .ethernet[1].pairs[1].p.line ~ .connector.'13'
+    .ethernet[1].pairs[1].n.line ~ .connector.'14'
+    .ethernet[1].pairs[2].p.line ~ .connector.'16'
+    .ethernet[1].pairs[2].n.line ~ .connector.'17'
+    .ethernet[1].pairs[3].p.line ~ .connector.'19'
+    .ethernet[1].pairs[3].n.line ~ .connector.'20'
+    .ethernet[2].pairs[0].p.line ~ .connector.'27'
+    .ethernet[2].pairs[0].n.line ~ .connector.'30'
+    .ethernet[2].pairs[1].p.line ~ .connector.'25'
+    .ethernet[2].pairs[1].n.line ~ .connector.'26'
+    .ethernet[2].pairs[2].p.line ~ .connector.'28'
+    .ethernet[2].pairs[2].n.line ~ .connector.'29'
+    .ethernet[2].pairs[3].p.line ~ .connector.'31'
+    .ethernet[2].pairs[3].n.line ~ .connector.'32'
+    .ethernet[3].pairs[0].p.line ~ .connector.'39'
+    .ethernet[3].pairs[0].n.line ~ .connector.'42'
+    .ethernet[3].pairs[1].p.line ~ .connector.'37'
+    .ethernet[3].pairs[1].n.line ~ .connector.'38'
+    .ethernet[3].pairs[2].p.line ~ .connector.'40'
+    .ethernet[3].pairs[2].n.line ~ .connector.'41'
+    .ethernet[3].pairs[3].p.line ~ .connector.'43'
+    .ethernet[3].pairs[3].n.line ~ .connector.'44'
+    .ethernet[4].pairs[0].p.line ~ .connector.'51'
+    .ethernet[4].pairs[0].n.line ~ .connector.'54'
+    .ethernet[4].pairs[1].p.line ~ .connector.'49'
+    .ethernet[4].pairs[1].n.line ~ .connector.'50'
+    .ethernet[4].pairs[2].p.line ~ .connector.'52'
+    .ethernet[4].pairs[2].n.line ~ .connector.'53'
+    .ethernet[4].pairs[3].p.line ~ .connector.'55'
+    .ethernet[4].pairs[3].n.line ~ .connector.'56'
+    .ethernet[5].pairs[0].p.line ~ .connector.'63'
+    .ethernet[5].pairs[0].n.line ~ .connector.'66'
+    .ethernet[5].pairs[1].p.line ~ .connector.'61'
+    .ethernet[5].pairs[1].n.line ~ .connector.'62'
+    .ethernet[5].pairs[2].p.line ~ .connector.'64'
+    .ethernet[5].pairs[2].n.line ~ .connector.'65'
+    .ethernet[5].pairs[3].p.line ~ .connector.'67'
+    .ethernet[5].pairs[3].n.line ~ .connector.'68'
+    .ethernet[6].pairs[0].p.line ~ .connector.'75'
+    .ethernet[6].pairs[0].n.line ~ .connector.'78'
+    .ethernet[6].pairs[1].p.line ~ .connector.'73'
+    .ethernet[6].pairs[1].n.line ~ .connector.'74'
+    .ethernet[6].pairs[2].p.line ~ .connector.'76'
+    .ethernet[6].pairs[2].n.line ~ .connector.'77'
+    .ethernet[6].pairs[3].p.line ~ .connector.'79'
+    .ethernet[6].pairs[3].n.line ~ .connector.'80'
+    .ethernet[7].pairs[0].p.line ~ .connector.'87'
+    .ethernet[7].pairs[0].n.line ~ .connector.'90'
+    .ethernet[7].pairs[1].p.line ~ .connector.'85'
+    .ethernet[7].pairs[1].n.line ~ .connector.'86'
+    .ethernet[7].pairs[2].p.line ~ .connector.'88'
+    .ethernet[7].pairs[2].n.line ~ .connector.'89'
+    .ethernet[7].pairs[3].p.line ~ .connector.'91'
+    .ethernet[7].pairs[3].n.line ~ .connector.'92'
+    .shield ~ .connector.'97'
+    .shield ~ .connector.'98'
+    .shield ~ .connector.'99'
+    .shield ~ .connector.'100'
+    .shield ~ .connector.'101'
+    .shield ~ .connector.'102'
+    # LEDs are unused. PHY isolation/coupling remains a hardware qualification item.
+}
+
+.DebugHeader: @type {
+    .connector: DEBUG::CJT_A2541WV_2x5P
+    .i2c: ELEC::Interfaces::I2C
+    .reset: ELEC::ElectricLogic
+    .ground: ELEC::Interfaces::Electrical
+    .connector.'1' ~ .i2c.scl.line
+    .connector.'3' ~ .i2c.sda.line
+    .connector.'6' ~ .reset.line
+    .connector.'10' ~ .ground
+    # VCC pin 4 remains open; the board is externally powered.
+}
+
+.UsbDeviceConnector: @type {
+    /// USB-C data connection; VBUS does not power this externally powered board.
+    .connector: USB::SHOU_HAN_TYPE_C_16PIN_2MD_073
+    .data_p: ELEC::Interfaces::Electrical
+    .data_n: ELEC::Interfaces::Electrical
     .ground: ELEC::Interfaces::Electrical
     .shield: ELEC::Interfaces::Electrical
-    .ethernet.pairs[0].p.line ~ .connector.RDpos
-    .ethernet.pairs[0].n.line ~ .connector.RDneg
-    .ethernet.pairs[1].p.line ~ .connector.TDpos
-    .ethernet.pairs[1].n.line ~ .connector.TDneg
-    .shield ~ .connector.SH1 ~ .connector.SH2
-    # HanRun's datasheet specifies pin 8 (internal termination return) to PCB GND.
-    .ground ~ .connector.CHSGND
-    # Expose both PHY-side center taps: their bias/AC return must be qualified
-    # against the exact RTL8305NB-VB reference circuit before hardware release.
-    .tx_center_tap := .connector.'4'
-    .rx_center_tap := .connector.'5'
-    # Pin 7 is NC. LEDs (9-12) are unused; the inherited switch omits LED wiring.
+    .data_p ~ .connector.Dp1 ~ .connector.Dp2
+    .data_n ~ .connector.Dn1 ~ .connector.Dn2
+    .ground ~ .connector.GND_A1B12 ~ .connector.GND_B1A12
+    .shield ~ .connector.EH_13 ~ .connector.EH_14
+    .cc_resistors: [2]ELEC::Resistor
+    @for(.cc_resistors, {
+        .obj.resistance &= 5.1kohm +/- 1%
+        @trait(_, .obj): PARTS::has_package_requirements { .size &= "0402" }
+    })
+    .connector.CC1 ~> .cc_resistors[0] ~> .ground
+    .connector.CC2 ~> .cc_resistors[1] ~> .ground
 }

@@ -7,8 +7,8 @@ from `apps/gauntlet/suites/prism-viz/fixtures/dsp`.
 See [the originating PR](https://github.com/atopile/monopile/pull/2657).
 
 The snapshot includes ato v2 source, vendored drivers, referenced parts, and
-native layout files. It models the CM5 host, ADAU1452 DSP, AD1938 codec,
-balanced audio I/O, Ethernet, DMX output, and power supplies.
+native layout files. It models the CM5 host, ADAU1452 DSP, two AD1938 codecs,
+balanced audio I/O, Ethernet, DMX input/output, and power supplies.
 
 ## Build
 
@@ -32,7 +32,7 @@ server and a valid sign-in session or `ATO_SERVICES_LIBRARY_TOKEN`. This build
 used the local development library. No library credentials are stored here.
 
 The build produces the BOM, connectivity, native layout, Gerbers, and a JLCPCB
-placement file with 110 components. The checked-in layout was synchronized by
+placement file with 250 components. The checked-in layout was synchronized by
 that build. The original nine parts’ STEP/GLB assets were restored from
 Narayan’s earlier commit
 [`63ba9e409b`](https://github.com/atopile/monopile/commit/63ba9e409b),
@@ -46,8 +46,8 @@ The power section now has physical catalog parts for every conversion stage:
   pin 2 return); no onboard mains supply is instantiated.
 - TPSM863257 buck for digital 3.3 V and TLV75901 LDO for analog 3.3 V.
   Both feedback dividers are calculated from the output-voltage requirement.
-- Two B0524S-2WR3 isolated 24 V modules, each followed by a TPS7A4700 set to
-  18.0 V. Their floating outputs are stacked around system ground for +/-18 V.
+- Three independent +/-18 V banks, each using two B0524S-2WR3 isolated 24 V
+  modules followed by TPS7A4700 regulators. The banks supply 6/4/4 line drivers.
 - Input/output capacitors, buck feedforward and enable circuitry, LDO noise
   reduction, and minimum-load resistors are included with voltage/power ratings.
 
@@ -63,20 +63,30 @@ operating assumptions.
 
 ## Panel connectors
 
-All seven panel connectors now use versioned catalog parts with footprints and
-3D models: two Neutrik NCJ6FA-H combo audio inputs, two NC3MAAH audio outputs,
-one NC5FAH five-pin female DMX output, and two HanRun HR911105A 10/100 RJ45
-jacks with integrated magnetics. See [connector wiring and limits](CONNECTORS.md).
+The original connector complement is restored with physical catalog parts:
+two combo audio inputs, six XLR audio outputs, two EtherCON connectors carrying
+four balanced analog outputs each, eight Ethernet ports in one 2x4 block,
+five-pin DMX input/output, USB-C, and a ten-pin USBI debug header.
+See [connector wiring and limits](CONNECTORS.md).
 
-## Remaining scope
+## Layout and remaining scope
 
-The RJ45 PHY-side center taps remain unconnected pending confirmation of the
-RTL8305NB-VB bias/termination circuit. The existing direct CM5-to-switch PHY
-connection also needs electrical review; a successful build does not establish
-working Ethernet. The jack LEDs are not wired.
+The native layout restores the original 359.01 x 73.78 mm board envelope and ten
+mounting holes. All 250 components are placed, with the panel connectors along
+the original edge. Placement was inspected using the actual catalog 3D models;
+the native physical check reports zero courtyard overlaps or body clashes.
 
-The inherited routing and board outline still need reconciliation with the circuit. DRC and
-physical-check configuration are unchanged: `PCB.requires_drc_check` remains
-excluded, and the latest saved reports are unresolved DRC (135 findings) and
-four courtyard overlaps plus four body clashes. These are not manufacturing
-clearance; this change completes circuit capture and the build, not PCB layout.
+Obsolete copper from the earlier circuit was removed. This is a placed, unrouted
+board, not manufacturing-ready artwork. DRC/physical-check configuration is
+unchanged; `PCB.requires_drc_check` remains excluded. The current DRC reports
+202 disconnected copper findings, eight short-circuit and seven shorted-component
+findings around the DSP exposed-pad geometry, and nine unsupported artwork checks.
+These DRC findings are separate from the passing component-overlap check. Panel
+hardware, signal integrity, clearance and routing still require engineering review.
+
+The original eight-port RJ45 block has no integrated magnetics. External Ethernet
+isolation/bias circuitry and the direct PHY-to-PHY links remain unfinished; a
+successful build does not establish working Ethernet. USB-C has data and CC
+connections but VBUS is left unconnected because the board is externally powered.
+Firmware, USB protection and the complete operating power budget still need
+qualification. No fallback or migration logic is introduced.

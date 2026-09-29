@@ -1,5 +1,5 @@
 # Vendored v2 port of the `atopile/adi-adau145x` package driver (simplified:
-# serial ports 0/1 exposed, fixed support-component values, no aux ADC/SPDIF).
+# serial inputs 0/1 and outputs 0/1/2 exposed, fixed support-component values, no aux ADC/SPDIF).
 .ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
 .PARTS := .ELEC::PARTS
 
@@ -12,7 +12,7 @@
     /// IOVDD/AVDD/PVDD run from 3.3V; the 1.2V DVDD core rail is generated
     /// by the on-chip regulator driving an external PNP pass transistor.
     /// Master clock comes from a 12.288MHz oscillator; serial audio ports
-    /// 0 and 1 are exposed as I2S in/out pairs.
+    /// 0/1 carry host and codec input; outputs 1/2 feed the two codecs.
     .ic: DSP_IC::Analog_Devices_ADAU1452WBCPZ_package
 
     .power: ELEC::ElectricPower           # 3.3V main supply
@@ -24,7 +24,7 @@
     .pll_clock_out: ELEC::ElectricSignal  # CLKOUT, master clock for a codec
 
     .i2s_ins: [2]ELEC::Interfaces::I2S
-    .i2s_outs: [2]ELEC::Interfaces::I2S
+    .i2s_outs: [3]ELEC::Interfaces::I2S
 
     # --- Supplies ---
     .power.hv ~ .ic.IOVDD
@@ -69,6 +69,9 @@
     .i2s_outs[1].sck.line ~ .ic.BCLK_OUT1
     .i2s_outs[1].ws.line ~ .ic.LRCLK_OUT1_MP5
     .i2s_outs[1].sd.line ~ .ic.SDATA_OUT1
+    .i2s_outs[2].sck.line ~ .ic.BCLK_OUT2
+    .i2s_outs[2].ws.line ~ .ic.LRCLK_OUT2_MP8
+    .i2s_outs[2].sd.line ~ .ic.SDATA_OUT2
 
     # --- Master clock: 12.288MHz oscillator into XTALIN/MCLK ---
     .osc: OSC_IC::Yajingxin_TXM12_288M0004322FBCDO00T_package

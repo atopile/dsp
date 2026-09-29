@@ -9,8 +9,8 @@ pinned to version `0.1.0`; their sources are fetched by the normal build.
 | External 5 V input | DB2ERC-5.08-2P-BK, pin 1 +5 V, pin 2 GND | `jlc/C430456` |
 | Digital 3.3 V | TPSM863257 buck module | `jlc/C19190416` |
 | Analog 3.3 V | Existing TLV75901, now with calculated feedback | Existing vendored part |
-| Two floating 24 V supplies | B0524S-2WR3 | `jlc/C5369477` |
-| Two 18 V post-regulators | TPS7A4700 | `jlc/C28286` |
+| Six floating 24 V supplies | B0524S-2WR3 | `jlc/C5369477` |
+| Six 18 V post-regulators | TPS7A4700 | `jlc/C28286` |
 
 The 5 V input must remain within 4.75–5.25 V at the board, including cable drop.
 Size the external supply for the CM5 plus the actual peripheral load; the legacy
@@ -36,7 +36,12 @@ This meets the datasheet's 10% minimum load and >5x resistor-power guidance.
 The +/-15% output envelope is the datasheet's nominal-input characterization,
 not a verified bound over input, load and temperature corners.
 
-Allow at most 60 mA external load per 18 V rail, reserving the rest of each
+Three independent bipolar banks supply 6/4/4 line drivers. At 5.5 mA quiescent
+current per driver, the largest bank uses 33 mA per rail before output loading.
+The banks are intended for high-impedance audio loads; simultaneous full-level
+600-ohm drive is not qualified.
+
+Allow at most 60 mA external load per 18 V rail in each bank, reserving the rest of each
 83 mA converter rating for preload and regulator current. This is a design
 budget, not a load-summing check. Each post-regulator has a 10 uF input capacitor,
 44 uF nominal output capacitance and 1 uF noise-reduction capacitor. All capacitors

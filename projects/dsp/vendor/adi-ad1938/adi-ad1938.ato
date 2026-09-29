@@ -1,5 +1,4 @@
-# Vendored v2 port of the `atopile/adi-ad1938` package driver (simplified:
-# ADC pair 1 + DAC pair 1 exposed, fixed support-component values).
+# AD1938 driver: stereo ADC input and all eight DAC outputs over TDM.
 .ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
 .PARTS := .ELEC::PARTS
 
@@ -7,8 +6,8 @@
 
 .Analog_Devices_AD1938: @type {
     /// Analog Devices AD1938 audio codec: 4-channel differential ADC in,
-    /// 8-channel DAC out, configured over SPI. This port exposes ADC pair 1
-    /// (stereo balanced input) and DAC pair 1 (stereo single-ended output);
+    /// 8-channel DAC out, configured over SPI. DSDATA1 carries eight-channel TDM;
+    /// the host configures serial format and slot count for all DAC channels;
     /// the PLL master clock comes in on MCLKI.
     .ic: CODEC_IC::Analog_Devices_AD1938WBSTZ_RL_package
 
@@ -25,8 +24,8 @@
 
     # Balanced analog inputs to ADC1 (0 = left, 1 = right)
     .adc_in: [2]ELEC::Interfaces::DifferentialPair
-    # Single-ended DAC1 outputs (0 = left, 1 = right)
-    .dac_out: [2]ELEC::ElectricSignal
+    # Single-ended DAC outputs: L1, R1, L2, R2, L3, R3, L4, R4.
+    .dac_out: [8]ELEC::ElectricSignal
 
     # --- Supplies ---
     .power.hv ~ .ic.DVDD
@@ -63,6 +62,12 @@
     .adc_in[1].n.line ~ .ic.ADC1RN
     .dac_out[0].line ~ .ic.OL1
     .dac_out[1].line ~ .ic.OR1
+    .dac_out[2].line ~ .ic.OL2
+    .dac_out[3].line ~ .ic.OR2
+    .dac_out[4].line ~ .ic.OL3
+    .dac_out[5].line ~ .ic.OR3
+    .dac_out[6].line ~ .ic.OL4
+    .dac_out[7].line ~ .ic.OR4
 
     # --- PLL loop filter (datasheet values) ---
     .pll_filter_r: ELEC::Stuff::Resistor {
