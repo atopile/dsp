@@ -1,11 +1,8 @@
-# Build-generated state — a fixture consumer rebuilds these locally.
-# (layouts/ IS checked in: it carries the upstream board's preserved
-# placement and routing, relinked to the v2 instance paths. The baked
-# 3d_models are regenerated from part bundles on every sync.)
+# Build-generated state. Native layouts and their referenced 3D assets
+# are checked in so the saved board can be opened before rebuilding.
 .ato/
 build/
 manufacturing/
-layouts/default/default.pcb.hl/3d_models/
 
 # Parts the picker installs for generic R/C picks during a build (checksummed
 # archives, re-downloaded per build). Only the hand-referenced IC/support
