@@ -3,10 +3,10 @@
   "schema_version": 0,
   "layer": "atopile_decorators",
   "created_at": "2026-07-23T17:29:22Z",
-  "high_water_mark": "2026-09-29T18:10:26Z",
+  "high_water_mark": "2026-09-29T20:52:32Z",
   "dirty": false,
-  "record_count_total": 103,
-  "record_count_live": 103
+  "record_count_total": 110,
+  "record_count_live": 110
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
@@ -1139,5 +1139,82 @@
     "id": "-g_8_O4A7SgLOtkYnndQwA",
     "target": "@project:P2P4_ImDVvT3ZmseFhiC2Q",
     "atopile_address": "power.ldo_3v3_analog.feedback.chain.resistors[1]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "pqWw9egGeq3wq3otmynQzw",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "pqWw9egGeq3wq3otmynQzw",
+    "target": "@project:8IIrVeqa3zYJuP7AjBEYcg",
+    "atopile_address": "xlr_in[0].connector"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "kAxbryymswQz-bgaQ_28Ng",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "kAxbryymswQz-bgaQ_28Ng",
+    "target": "@project:HLoH39dS3o0DNTlrmi9VTA",
+    "atopile_address": "xlr_in[1].connector"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Cj6sKOxF_ZG-Riry3NfyEg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "Cj6sKOxF_ZG-Riry3NfyEg",
+    "target": "@project:TmvtyzayQ1Xsbn5h2mLmQQ",
+    "atopile_address": "xlr_out[0].connector"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "0DG9-NvUZ4AL2w2cCQbnOg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "0DG9-NvUZ4AL2w2cCQbnOg",
+    "target": "@project:NO-RJ4y7jf-M6ACq5bp5qg",
+    "atopile_address": "xlr_out[1].connector"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "OMJZ7DuXZYnhIWi0ab_2JA",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "OMJZ7DuXZYnhIWi0ab_2JA",
+    "target": "@project:JaGg3RE1fq4xsmQTyKYtBA",
+    "atopile_address": "rj45[0].connector"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "U67b00TijwFoT-C2G2h4fw",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "U67b00TijwFoT-C2G2h4fw",
+    "target": "@project:UuT0tBuEXbHo9rJAkat7ig",
+    "atopile_address": "rj45[1].connector"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "6pB2AGr05sHIRM_Gawq_mQ",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "6pB2AGr05sHIRM_Gawq_mQ",
+    "target": "@project:htXZ2qZ6P8jesOqX4hXpRg",
+    "atopile_address": "xlr_dmx_out.connector"
   }
 }

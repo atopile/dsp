@@ -1,0 +1,60 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.AUDIO_IN: @STD::Import { .org &= "jlc"; .project &= "C368458"; .version &= "0.1.0" }
+.AUDIO_OUT: @STD::Import { .org &= "jlc"; .project &= "C368463"; .version &= "0.1.0" }
+.DMX_OUT: @STD::Import { .org &= "jlc"; .project &= "C368501"; .version &= "0.1.0" }
+.ETHERNET: @STD::Import { .org &= "jlc"; .project &= "C12074"; .version &= "0.1.0" }
+
+.AudioInput: @type {
+    /// Neutrik NCJ6FA-H balanced XLR / TRS combo input.
+    .connector: AUDIO_IN::Neutrik_NCJ6FA_H
+    .signal: ELEC::Interfaces::DifferentialPair
+    .shield: ELEC::Interfaces::Electrical
+    .signal.p.line ~ .connector.'2' ~ .connector.T_6 ~ .connector.T_7
+    .signal.n.line ~ .connector.'3' ~ .connector.R
+    .shield ~ .connector.'1' ~ .connector.S ~ .connector.G
+}
+
+.AudioOutput: @type {
+    /// Neutrik NC3MAAH: pin 2 hot, pin 3 cold, pin 1 shield.
+    .connector: AUDIO_OUT::Neutrik_NC3MAAH
+    .signal: ELEC::Interfaces::DifferentialPair
+    .shield: ELEC::Interfaces::Electrical
+    .signal.p.line ~ .connector.'2'
+    .signal.n.line ~ .connector.'3'
+    # Catalog pad 4 is the separate shell contact G in Neutrik's drawing.
+    .shield ~ .connector.'1' ~ .connector.'4'
+}
+
+.DmxOutput: @type {
+    /// Neutrik NC5FAH female output: pin 2 data-, pin 3 data+.
+    .connector: DMX_OUT::Neutrik_NC5FAH
+    .signal: ELEC::Interfaces::DifferentialPair
+    .common: ELEC::Interfaces::Electrical
+    .shield: ELEC::Interfaces::Electrical
+    .common ~ .connector.'1'
+    .signal.n.line ~ .connector.'2'
+    .signal.p.line ~ .connector.'3'
+    .shield ~ .connector.G
+    # Secondary data pins 4/5 and mechanical pads 6/7 remain unconnected.
+}
+
+.EthernetJack: @type {
+    /// HanRun HR911105A 10/100 jack with magnetics and cable-side termination.
+    /// Pair ordering follows this board's RTL8305NB driver: 0 RX, 1 TX.
+    .connector: ETHERNET::HANRUN_HR911105A
+    .ethernet: ELEC::Interfaces::Ethernet
+    .ground: ELEC::Interfaces::Electrical
+    .shield: ELEC::Interfaces::Electrical
+    .ethernet.pairs[0].p.line ~ .connector.RDpos
+    .ethernet.pairs[0].n.line ~ .connector.RDneg
+    .ethernet.pairs[1].p.line ~ .connector.TDpos
+    .ethernet.pairs[1].n.line ~ .connector.TDneg
+    .shield ~ .connector.SH1 ~ .connector.SH2
+    # HanRun's datasheet specifies pin 8 (internal termination return) to PCB GND.
+    .ground ~ .connector.CHSGND
+    # Expose both PHY-side center taps: their bias/AC return must be qualified
+    # against the exact RTL8305NB-VB reference circuit before hardware release.
+    .tx_center_tap := .connector.'4'
+    .rx_center_tap := .connector.'5'
+    # Pin 7 is NC. LEDs (9-12) are unused; the inherited switch omits LED wiring.
+}

@@ -32,7 +32,7 @@ server and a valid sign-in session or `ATO_SERVICES_LIBRARY_TOKEN`. This build
 used the local development library. No library credentials are stored here.
 
 The build produces the BOM, connectivity, native layout, Gerbers, and a JLCPCB
-placement file with 103 components. The checked-in layout was synchronized by
+placement file with 110 components. The checked-in layout was synchronized by
 that build. The original nine parts’ STEP/GLB assets were restored from
 Narayan’s earlier commit
 [`63ba9e409b`](https://github.com/atopile/monopile/commit/63ba9e409b),
@@ -61,10 +61,21 @@ socket procurement and mechanical qualification are not supplied by this driver.
 See [power implementation and limits](POWER.md) for the circuit sources and
 operating assumptions.
 
+## Panel connectors
+
+All seven panel connectors now use versioned catalog parts with footprints and
+3D models: two Neutrik NCJ6FA-H combo audio inputs, two NC3MAAH audio outputs,
+one NC5FAH five-pin female DMX output, and two HanRun HR911105A 10/100 RJ45
+jacks with integrated magnetics. See [connector wiring and limits](CONNECTORS.md).
+
 ## Remaining scope
 
-The XLR/RJ45 connectors remain interface-only placeholders. The inherited
-routing and board outline still need reconciliation with the circuit. DRC and
+The RJ45 PHY-side center taps remain unconnected pending confirmation of the
+RTL8305NB-VB bias/termination circuit. The existing direct CM5-to-switch PHY
+connection also needs electrical review; a successful build does not establish
+working Ethernet. The jack LEDs are not wired.
+
+The inherited routing and board outline still need reconciliation with the circuit. DRC and
 physical-check configuration are unchanged: `PCB.requires_drc_check` remains
 excluded, and the latest saved reports are unresolved DRC (135 findings) and
 four courtyard overlaps plus four body clashes. These are not manufacturing

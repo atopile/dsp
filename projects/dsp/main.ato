@@ -8,23 +8,7 @@
 .VRS:  @STD::Import { .uri &= "vendor/maxlinear-sp3485/maxlinear-sp3485.ato" }
 .VDRV: @STD::Import { .uri &= "vendor/ti-drv135/ti-drv135.ato" }
 
-.XlrFemale: @type {
-    /// 3-pin female XLR connector (panel input).
-    .signal: ELEC::Interfaces::DifferentialPair
-    .shield: ELEC::Interfaces::Electrical
-}
-
-.XlrMale: @type {
-    /// 3-pin male XLR connector (panel output).
-    .signal: ELEC::Interfaces::DifferentialPair
-    .shield: ELEC::Interfaces::Electrical
-}
-
-.Rj45Jack: @type {
-    /// RJ45 jack with integrated magnetics (panel ethernet port).
-    .ethernet: ELEC::Interfaces::Ethernet
-    .shield: ELEC::Interfaces::Electrical
-}
+.PANEL: @STD::Import { .uri &= "vendor/panel-connectors/panel-connectors.ato" }
 
 .DspBoard: @type {
     /// Networked audio DSP: a compute module drives an ADAU1452 SigmaDSP
@@ -97,7 +81,7 @@
     .codec.i2s_out ~ .dsp.i2s_ins[1]
 
     # Balanced XLR inputs -> DC-blocked ADC inputs
-    .xlr_in: [2]XlrFemale
+    .xlr_in: [2]PANEL::AudioInput
     .input_dc_block_caps: [4]ELEC::Stuff::Capacitor
     @for(.input_dc_block_caps, {
         .blocker := .obj
@@ -114,7 +98,7 @@
 
     # Codec DAC -> DRV135 line drivers -> balanced XLR outputs
     .line_drivers: [2]VDRV::TI_DRV135
-    .xlr_out: [2]XlrMale
+    .xlr_out: [2]PANEL::AudioOutput
     .power.power_18v_pos ~ .line_drivers[0].positive_power
     .power.power_18v_neg ~ .line_drivers[0].negative_power
     .power.power_18v_pos ~ .line_drivers[1].positive_power
@@ -129,7 +113,9 @@
 
     # --- Network ---
     # CM uplink into the switch (port 4), two panel jacks out (ports 0/1)
-    .rj45: [2]Rj45Jack
+    .rj45: [2]PANEL::EthernetJack
+    .rj45[0].ground ~ .power.power_3v3d.lv
+    .rj45[1].ground ~ .power.power_3v3d.lv
     .cm.ethernet ~ .eth_switch.ethernets[4]
     .eth_switch.ethernets[0] ~ .rj45[0].ethernet
     .eth_switch.ethernets[1] ~ .rj45[1].ethernet
@@ -138,11 +124,12 @@
     .cm.gpios[4] ~ .eth_switch.mdio
 
     # --- DMX512 ---
-    .xlr_dmx_out: XlrMale
+    .xlr_dmx_out: PANEL::DmxOutput
     .cm.uart0 ~ .dmx_phy.uart
     .cm.gpios[5] ~ .dmx_phy.driver_enable
     .cm.gpios[5] ~ .dmx_phy.n_receiver_enable  # driver_enable doubles as /RE
     .dmx_phy.rs485_bus ~ .xlr_dmx_out.signal
+    .dmx_phy.power.lv ~ .xlr_dmx_out.common
 
     # --- Chassis / shields ---
     .xlr_in[0].shield ~ .power.earth

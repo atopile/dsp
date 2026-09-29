@@ -3,10 +3,10 @@
   "schema_version": 0,
   "layer": "project",
   "created_at": "2026-07-23T17:29:22Z",
-  "high_water_mark": "2026-09-29T18:10:26Z",
+  "high_water_mark": "2026-09-29T20:52:32Z",
   "dirty": false,
-  "record_count_total": 11460,
-  "record_count_live": 11460
+  "record_count_total": 11619,
+  "record_count_live": 11619
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
@@ -253850,6 +253850,1895 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
+  "id": "HC3DwcV7mW10sEY0sTHI9g",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.buck_3v3_digital.feedback.chain",
+    "members": [
+      "@project:LW5w45yGY6NbzJnEl8gAuQ",
+      "@project:ZhTowMUM2gVTsTtTer0QHA"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.buck_3v3_digital.feedback.chain"
+    },
+    "locked": false,
+    "id": "HC3DwcV7mW10sEY0sTHI9g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "d14aWUfUQ9Z4IGJu38Xe4Q",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.ldo_3v3_analog.feedback.chain",
+    "members": [
+      "@project:P2P4_ImDVvT3ZmseFhiC2Q",
+      "@project:R854tMoAVx16m8WOzqv8kQ"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.ldo_3v3_analog.feedback.chain"
+    },
+    "locked": false,
+    "id": "d14aWUfUQ9Z4IGJu38Xe4Q"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "V_87-XiCOkelIzAWVt2vEQ",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.boost_18v_neg.converter",
+    "members": [
+      "@project:6kLkZEgBJkiXOcpWf3MkXw",
+      "@project:85Di0iNkQ9oNa3k5Nw2pwA",
+      "@project:8uYI4QWZk_2PpyauQsUjhQ",
+      "@project:HOIOippqXf_ZM1J5-5nqvg",
+      "@project:SkP_Xqng_g1Jzpk7ptzXTA",
+      "@project:lHgPdy4ZMr6AfhyzAXNO6A",
+      "@project:ln7Ohk6uNX3AP49j2hTEdA"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.boost_18v_neg.converter"
+    },
+    "locked": false,
+    "id": "V_87-XiCOkelIzAWVt2vEQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "TLgwphoj-lFZ9ExqP2DeYw",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.boost_18v_neg.post_regulator",
+    "members": [
+      "@project:Dpfd5TgWZG0msfN6kogvfQ",
+      "@project:FJVocea8HAUhKkmVCTXspQ",
+      "@project:MSCCTnb8RFfFJ8TwEs1Xbg",
+      "@project:Z90cQ7XO9PKIFohA0GIxCw",
+      "@project:euL1mNyWWMhKjcTTzK4gAQ"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.boost_18v_neg.post_regulator"
+    },
+    "locked": false,
+    "id": "TLgwphoj-lFZ9ExqP2DeYw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "KsSbTIO9OX8pqEWOsk4gPg",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.boost_18v_pos.converter",
+    "members": [
+      "@project:-HlJf9U8f-GFLYJQ-P3wng",
+      "@project:LsNDTaRx_fbcIiN9w-WtRw",
+      "@project:PvqXPfjW49nMrWtFah5_pQ",
+      "@project:SYsD6H-SYmoIqbHaZ44ObQ",
+      "@project:XgP8-HLI71wH2rSllLaxgg",
+      "@project:g9DFiqMDdknEJCLDcA97uA",
+      "@project:wxKwajTC0cTi7Zzgji6B9g"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.boost_18v_pos.converter"
+    },
+    "locked": false,
+    "id": "KsSbTIO9OX8pqEWOsk4gPg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "yaAuqgjT2dkfBgRfq0Olcg",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.boost_18v_pos.post_regulator",
+    "members": [
+      "@project:YytvJTwPSHIDvxb-jPwOQg",
+      "@project:dHd_HfvSEBR6mVDsa4vKrg",
+      "@project:myL6B8luxnuViP2M4JnnlA",
+      "@project:y3fg3c3m9JUWISUHE8LqSw",
+      "@project:zPznXxupGnV0FmZcIjE6Tg"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.boost_18v_pos.post_regulator"
+    },
+    "locked": false,
+    "id": "yaAuqgjT2dkfBgRfq0Olcg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "SjE276vYv5TCbfUgTl6AIw",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.buck_3v3_digital.feedback",
+    "members": [
+      "@project:HC3DwcV7mW10sEY0sTHI9g"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.buck_3v3_digital.feedback"
+    },
+    "locked": false,
+    "id": "SjE276vYv5TCbfUgTl6AIw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "GqKPNYblVJQjp-lakQ3Q7Q",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.ldo_3v3_analog.feedback",
+    "members": [
+      "@project:d14aWUfUQ9Z4IGJu38Xe4Q"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.ldo_3v3_analog.feedback"
+    },
+    "locked": false,
+    "id": "GqKPNYblVJQjp-lakQ3Q7Q"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "P9gZFFVqaj2XGELP5jWSGQ",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.boost_18v_neg",
+    "members": [
+      "@project:TLgwphoj-lFZ9ExqP2DeYw",
+      "@project:V_87-XiCOkelIzAWVt2vEQ"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.boost_18v_neg"
+    },
+    "locked": false,
+    "id": "P9gZFFVqaj2XGELP5jWSGQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "4u9Cvqje7jCLOnV3psAT7Q",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.boost_18v_pos",
+    "members": [
+      "@project:KsSbTIO9OX8pqEWOsk4gPg",
+      "@project:yaAuqgjT2dkfBgRfq0Olcg"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.boost_18v_pos"
+    },
+    "locked": false,
+    "id": "4u9Cvqje7jCLOnV3psAT7Q"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "aFm0Wyd_yIOW_E4bSSEFGg",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.buck_3v3_digital",
+    "members": [
+      "@project:F_QCEa51rjMlvVYNTD8wNQ",
+      "@project:G8Uzuf_kC8ap8RSiucBNew",
+      "@project:S9McqXgUEKCtloTs6xmi_g",
+      "@project:Sf0nU93DrWT16D8j0_SZzw",
+      "@project:SjE276vYv5TCbfUgTl6AIw",
+      "@project:YoV3gGpqetkx-eIQhJO2iQ",
+      "@project:ogLYo_8-nfdrfbJG8hHcaw",
+      "@project:rHO21j8suXz8IciffOnyUw",
+      "@project:zI365mZwbcxPwCwuK9s_yA"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.buck_3v3_digital"
+    },
+    "locked": false,
+    "id": "aFm0Wyd_yIOW_E4bSSEFGg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "dRFF8Ikw76Nn9pnIpRJS5g",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power.ldo_3v3_analog",
+    "members": [
+      "@project:GqKPNYblVJQjp-lakQ3Q7Q",
+      "@project:Ue7rL6qlTFiAU4z8RkJSSw",
+      "@project:rKe2WrKfSE27CvnzRkJSSw",
+      "@project:sjzqGm9CQQC_u8HZRkJSSw"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power.ldo_3v3_analog"
+    },
+    "locked": false,
+    "id": "dRFF8Ikw76Nn9pnIpRJS5g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "CyUc6nR9BWA_j4sgsG7EZw",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "cm",
+    "members": [
+      "@project:Z7CJ-HKlo2FadSu0g-S2tg",
+      "@project:lZ7QxJhuedT-rbelte_p_A",
+      "@project:n-OAn1SNvllosS0J7JtHTA"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "cm"
+    },
+    "locked": false,
+    "id": "CyUc6nR9BWA_j4sgsG7EZw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "1TFwo6zsx9DbadE3NVySdg",
+  "object": {
+    "__type__": "Type:pcb.project.Hierarchy.Group",
+    "name": "power",
+    "members": [
+      "@project:2kncpGYZTCiBni6PRkJSSw",
+      "@project:4u9Cvqje7jCLOnV3psAT7Q",
+      "@project:P9gZFFVqaj2XGELP5jWSGQ",
+      "@project:aFm0Wyd_yIOW_E4bSSEFGg",
+      "@project:dRFF8Ikw76Nn9pnIpRJS5g",
+      "@project:mlQ7apT-dohuAPk4MbN_hg"
+    ],
+    "source": {
+      "__type__": "Type:pcb.project.LayoutReuseSource",
+      "block_name": "power"
+    },
+    "locked": false,
+    "id": "1TFwo6zsx9DbadE3NVySdg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "f9btE_ROryOEdjmHScMTwQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:VDGUHb40OjM89o4GPojOHw",
+    "id": "f9btE_ROryOEdjmHScMTwQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "cajEYKzCxLyfSRsnTnC1oQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:BxhBAQa5SX8DO0y0OzqjxA",
+    "id": "cajEYKzCxLyfSRsnTnC1oQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "5ipSNPcvAXI2d3M7IyzabA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:2Ps0zCsGxMgVtGnamJFbxQ",
+    "id": "5ipSNPcvAXI2d3M7IyzabA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "p-d7mBYUTjuru4V_eCcG0Q",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:fnUzDrgvmkO6YuGfCt1C2g",
+    "id": "p-d7mBYUTjuru4V_eCcG0Q"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "u-ENVyq9JTOtTpk77Y0rqA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:f_iVmrviPLNgO6xOz0VDlA",
+    "id": "u-ENVyq9JTOtTpk77Y0rqA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "ygLJftlKemG6OdXWE01yiw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:nFevV3i9lt3EaZp1Bl_asg",
+    "id": "ygLJftlKemG6OdXWE01yiw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "QkKoTLIbvIwwSCfT5b_pew",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:TR6MNuSrHBQHswZBUsBu8g",
+    "id": "QkKoTLIbvIwwSCfT5b_pew"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "qGM307xFWAMYkRCEsj_M_w",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:It47lNUzpa_DShwFF5fecg",
+    "id": "qGM307xFWAMYkRCEsj_M_w"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "bs-ZznbUQHMZ81WxnX961g",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:X357BUPE4eYRnGeQ85fFGA",
+    "id": "bs-ZznbUQHMZ81WxnX961g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "G52Zsr3uluPOnZFW49pKCg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:vO8tl7Qk0GD2Klbbk3MlKA",
+    "id": "G52Zsr3uluPOnZFW49pKCg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "HDb11A-Jl2Kg5-l914gV7w",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:0pL8S-KER-XeImZUM7MgzQ",
+    "id": "HDb11A-Jl2Kg5-l914gV7w"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "0YbFNBfq4zX9ajr0gAUUbQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:YsJc666wXv98vBrDU3KQgg",
+    "id": "0YbFNBfq4zX9ajr0gAUUbQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "yzKAmhOy5q1tcivu4GSuig",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:uSxQMO0KxP-QPmiakfpNZw",
+    "id": "yzKAmhOy5q1tcivu4GSuig"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "hsWUjRRs9QUQDFdrG0ubLg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:CEdHgipOWhjbDcHpUHha-A",
+    "id": "hsWUjRRs9QUQDFdrG0ubLg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "LFOEfDFj46wyIhYRArYUFg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:WJXU70TrmH9bNSTmSGgD-g",
+    "id": "LFOEfDFj46wyIhYRArYUFg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "m6vhpxGbvuwe9YDQ4Z8WEA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:x_12rG9lRWHsxH3sihh33g",
+    "id": "m6vhpxGbvuwe9YDQ4Z8WEA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "XR94mMPH3XrFK9soZD7anQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:0nT6QeKCd4bYaCtcVZOrvg",
+    "id": "XR94mMPH3XrFK9soZD7anQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "DOgN2GS4QDA0ruCMnb4SxQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:85HFSG6cuzm0KdN1AxMNhA",
+    "id": "DOgN2GS4QDA0ruCMnb4SxQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "cEcdw4x-1017mU7aHhjwxw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:Vslyq-w--qwDmVglaTtDUQ",
+    "id": "cEcdw4x-1017mU7aHhjwxw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "MIAPXsnH10fgfHO9P3w_vQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:9OYTUsrCG5T5vuqxq5iAbA",
+    "id": "MIAPXsnH10fgfHO9P3w_vQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "iylW_Um6rZa_JqaUf5C_QA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:DtCq8gTemGrGuFYCQROtGw",
+    "id": "iylW_Um6rZa_JqaUf5C_QA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "bJ7LgtpqdCHRDghqEM39Qw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:aud0jqtma-tbssW9OIZDtw",
+    "id": "bJ7LgtpqdCHRDghqEM39Qw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "r60198oB2PHk8jj4aPVezw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:w88UGySiyGIc_cyFRxStiQ",
+    "id": "r60198oB2PHk8jj4aPVezw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "DFs5Ww7cnMPZtb3MbzwMRg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:7j3Kvmzu7RjqyTqIT3K7sg",
+    "id": "DFs5Ww7cnMPZtb3MbzwMRg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "GYUO-Bure8aFLayD4iqePQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:cgL8aautF0sQxOQpbI2csA",
+    "id": "GYUO-Bure8aFLayD4iqePQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "HjviFyYTu--bCgsr7Tk3Sw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:uCXRQWPD4P8lpPRRaX9muQ",
+    "id": "HjviFyYTu--bCgsr7Tk3Sw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "megu3Seh3ZlUeHd5dVG3Sw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:RsmyZ1ZbnzLFTRey_9CyTQ",
+    "id": "megu3Seh3ZlUeHd5dVG3Sw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Is7J90KrhiU-_1ZKv_TpCA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:NP-eWuc9eiES7Lv29Tt5mw",
+    "id": "Is7J90KrhiU-_1ZKv_TpCA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "JS89WWrzE_RzjJ2-8r8eSQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:qONtqv1gWl98rxBCYYIg0A",
+    "id": "JS89WWrzE_RzjJ2-8r8eSQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "TRzM5d-DjBSTfDe6OthOIA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:DoW1SfIHuI80RRVA_8Uplg",
+    "id": "TRzM5d-DjBSTfDe6OthOIA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "AXY5Pn4bF21KAVjamov0hQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:SXebv6jA4Mv-HOKw8PCr1Q",
+    "id": "AXY5Pn4bF21KAVjamov0hQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "IOjfkOBDLo4SBCDFkJYEfg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:sbQSnEQSwhV9R1huNR4yGQ",
+    "id": "IOjfkOBDLo4SBCDFkJYEfg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "akIsX8PXtv19lgcMaKuWXQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:osUBvIPhy5HbkkoP1kvhzQ",
+    "id": "akIsX8PXtv19lgcMaKuWXQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "4X8bI--nx5hEZlP1G15fqQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:0UR_9woYF58YsivKx8m0qA",
+    "id": "4X8bI--nx5hEZlP1G15fqQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "2dJ8Ok8u7G4n11sYym8VNA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:8l_iV1UNbz60s1EazlCHZQ",
+    "id": "2dJ8Ok8u7G4n11sYym8VNA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Qa4Iiswuk_InutFKBNl02w",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:U2xEZnlo7ivu7jB_ZFYXBw",
+    "id": "Qa4Iiswuk_InutFKBNl02w"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "GmIJSpucEnHXZE9w3y7Inw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:CnZmT0Kea1NYxjgP-jPZgQ",
+    "id": "GmIJSpucEnHXZE9w3y7Inw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "oTdya01i_qAyRpNvztOBOw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:TJ2kFVmVWXangtXlTjVWpA",
+    "id": "oTdya01i_qAyRpNvztOBOw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "DFbvX2L6t-Fw0rmMghXHEQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:-PIMQkFuPF-t0b7eLAGvIg",
+    "id": "DFbvX2L6t-Fw0rmMghXHEQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "SXHDNVLQ-v_k2bU_qSTRIw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:2IZ-WHq4Yh1znxCeS3FbYg",
+    "id": "SXHDNVLQ-v_k2bU_qSTRIw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "x-RaldJC0V_WTFW2u9Hecw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:XOPJIumfh1V7h8S-Q4VbQg",
+    "id": "x-RaldJC0V_WTFW2u9Hecw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "1t907V6xJ7tDrHYLw-ro9Q",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:9Qv42MCDO-yrMuVKTs4JKg",
+    "id": "1t907V6xJ7tDrHYLw-ro9Q"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "V4n9nzZSr2Q9WSxa2uHFaA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:5uxvfpQRVC0m-SO5qvhgYw",
+    "id": "V4n9nzZSr2Q9WSxa2uHFaA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "ZDUoNpmZTUOwZB779zO4Aw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:yB5lRmJLeAGLkhGxgPY80Q",
+    "id": "ZDUoNpmZTUOwZB779zO4Aw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "c7DniqiuNo2cGZe5e46eNA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:qCxe7LnNT--7djcaZRO4gQ",
+    "id": "c7DniqiuNo2cGZe5e46eNA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "iRFblec4midWK6LvvAz__g",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:-VDh2sDp4JS9msnws5Ko3Q",
+    "id": "iRFblec4midWK6LvvAz__g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "oIw9795zTXUbT8wRIXMYGA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:gJTFPWA_mcj-HXM-mQ-zsw",
+    "id": "oIw9795zTXUbT8wRIXMYGA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "5IvifyWSS7Tv9CwvUawkMA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:FRZ5UKhrXRiPiGY_xnCJjw",
+    "id": "5IvifyWSS7Tv9CwvUawkMA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "rW_3JdKC42MPlU43XYAJ3A",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:7BbyqatkI1fCyVrldtcBZw",
+    "id": "rW_3JdKC42MPlU43XYAJ3A"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "tR93yr-idqtDffH92-lsFg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:-krdBSarjqh9R4fCaALCpw",
+    "id": "tR93yr-idqtDffH92-lsFg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "wkIr6LT43gcFjHXuEOnsVw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:SgyXlJZZI-IaD2zqutdJMQ",
+    "id": "wkIr6LT43gcFjHXuEOnsVw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "VKS0HArxE_0zxNdmxi5M0g",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:q0vAGhvup6kplIyhWReuTQ",
+    "id": "VKS0HArxE_0zxNdmxi5M0g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "6Q1m_yZxiG5yjXZQiqpYRA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:APUsBBLx2gNK7mstkdvo2A",
+    "id": "6Q1m_yZxiG5yjXZQiqpYRA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Fj4KCwQ7IMbcD9a_KxDfLQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:I95_jPS5QSxxQBThM1d4vg",
+    "id": "Fj4KCwQ7IMbcD9a_KxDfLQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "xrIfT3BIQAVXHM4iT-2nXA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:NVF0bYdLmmriZOkTeBYihg",
+    "id": "xrIfT3BIQAVXHM4iT-2nXA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "h8togaFaX8awdn6gRYKu_A",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:UjeYRg85IpwhpAJdQ2lueA",
+    "id": "h8togaFaX8awdn6gRYKu_A"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "VbrXawBw6M5CRhQ7Od8MDg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:gck0TAelYZqb7K4pSNdUrQ",
+    "id": "VbrXawBw6M5CRhQ7Od8MDg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "sihGNV0wPD1n-gL3n9ySgA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:MjhYzM7yx2W9yj4z4wZ6sA",
+    "id": "sihGNV0wPD1n-gL3n9ySgA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "rd9RAOmoMfOY_C0vgxz4TA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:E0tPGzWotTv-finRyXzHpQ",
+    "id": "rd9RAOmoMfOY_C0vgxz4TA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "IcQz5MQWVfxRUz4_KhWmWQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:Cq2bmIqm2O0iuvV1YfdBnA",
+    "id": "IcQz5MQWVfxRUz4_KhWmWQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "SMlVOZvxxV9Lgea6fRth5g",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:-ltfqWy5xC6oHgkCIm23Xg",
+    "id": "SMlVOZvxxV9Lgea6fRth5g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Rrtxevc1sLmG2kRXAHuVqg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:_v3Riq5_x_NxNCdEc0pqEQ",
+    "id": "Rrtxevc1sLmG2kRXAHuVqg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "vFicR_71B4uXbZOrauT7nA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:wuF24qsIYJtQuxQeqGEVPg",
+    "id": "vFicR_71B4uXbZOrauT7nA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "NTIk2-to-lCiMg_BkJ-CTg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:rnrrEhSpXU0ZWaL3OqZCpw",
+    "id": "NTIk2-to-lCiMg_BkJ-CTg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "q8sWaezuLX95sZ0ajuYYYg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:iesuNclt1u--UxIH0F1gGg",
+    "id": "q8sWaezuLX95sZ0ajuYYYg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "RgiN3Jqzv9DPUq0d90C5BQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:6WzxoDrkEiFxk4QzcgsA8w",
+    "id": "RgiN3Jqzv9DPUq0d90C5BQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "IR5-W_HUeKCUiWFxluq1cA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:fBKEciT_LLwQsT7iwms6AQ",
+    "id": "IR5-W_HUeKCUiWFxluq1cA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "EHuHbXtTOwjaX5BuB8WvTw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:U-V_4BlAzYOciytt9ZZzUg",
+    "id": "EHuHbXtTOwjaX5BuB8WvTw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "gDb-sjxTVfYnsNR8c4CeBA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:retsLwhNyWFUA85etPYtpA",
+    "id": "gDb-sjxTVfYnsNR8c4CeBA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "YPMy2OZz2Bu6iAGhZ16YZQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:DZ43yOgyBiLqDizP40rzlA",
+    "id": "YPMy2OZz2Bu6iAGhZ16YZQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "cAxuPpVyv_D1g4TQIMrbyg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:FNjk3gRMIBlEPccxLzkEYw",
+    "id": "cAxuPpVyv_D1g4TQIMrbyg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "atTHNkTjsiXl8Kdc6Xthjg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:QbLKdtY8h8uJsoeIfoVbPg",
+    "id": "atTHNkTjsiXl8Kdc6Xthjg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "HItla7fXnxIUpYnDWnoJrw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:wcxOhbhXn6pWrHgoBXVDkg",
+    "id": "HItla7fXnxIUpYnDWnoJrw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "tGIzwIx5QMdd8gazjjKl5A",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:7nz0tyzICi1EXl8DGqCi-g",
+    "id": "tGIzwIx5QMdd8gazjjKl5A"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "UlQor-zFya89yJ75_uqtJg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:kQlQPHJCYwnYyBGnU56LDQ",
+    "id": "UlQor-zFya89yJ75_uqtJg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "dgLvsu5nzWYSAxLcwQqZCQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:Q0zwHTlOcI1JnIxBVejSsw",
+    "id": "dgLvsu5nzWYSAxLcwQqZCQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "g3xNpfWYmdtq7JXXPYSvww",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:P8YqBr342WlZx-DyWBj7LA",
+    "id": "g3xNpfWYmdtq7JXXPYSvww"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "im9oMkmnSX8S1xO2GYTa4g",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:apzFXrAWAkXzQX5fT3rSlw",
+    "id": "im9oMkmnSX8S1xO2GYTa4g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "frkE0qBL4SFydbLXgKAOww",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:Sv9IlyDfcOhyyq4PmXUFIA",
+    "id": "frkE0qBL4SFydbLXgKAOww"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "KT6zG9FW1qORl5DyoPGjwA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:60RnkYS9-2XrW1T5knQLag",
+    "id": "KT6zG9FW1qORl5DyoPGjwA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "ee681NyvmxSQnE4-pEFr8Q",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:aaLesybFaNsUK0a8FGBmxw",
+    "id": "ee681NyvmxSQnE4-pEFr8Q"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "N3t1f8-_RkGCs1kkm_BmOQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:yCljfbPSezyBT33MTFxGcQ",
+    "id": "N3t1f8-_RkGCs1kkm_BmOQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "JYwcATBF4EBAajJ4bhrdUQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:51jl0Qki2RAs7x6hXOGgiA",
+    "id": "JYwcATBF4EBAajJ4bhrdUQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "k-QRKdTfjRE8E7CJy-FhQw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:DoEMfQ056ew_xEI1L6TEOA",
+    "id": "k-QRKdTfjRE8E7CJy-FhQw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "aCguayWCEJ33GwbABz-1iA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:aFagMFJApL9acOvFZ36C1Q",
+    "id": "aCguayWCEJ33GwbABz-1iA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "1m1-RBvV2pzLkbf5DZsk1g",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:ym-PQPxbmQJ0uFXpPF_uGQ",
+    "id": "1m1-RBvV2pzLkbf5DZsk1g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "jCsgQEdYwOleRp91qWYl-w",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:WNVWdNJlc602aP6jZYEzMg",
+    "id": "jCsgQEdYwOleRp91qWYl-w"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "x6zApEoDcYISEln75lh_Zw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:a7ZTp5ZNZ1S-o7LLjzd1GA",
+    "id": "x6zApEoDcYISEln75lh_Zw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "k1PzPTfmoHjVN85wDun3Xg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:TT8oJLhSKuDKcfHC5Datmw",
+    "id": "k1PzPTfmoHjVN85wDun3Xg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "AKxptN05VWSgjTTovdUScw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:4dFVQBxcKOTnx78w3TDEBA",
+    "id": "AKxptN05VWSgjTTovdUScw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "4dcBf8TqHX8Bt7oqY50uJQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:momqX5nMyyMDZiHBS6Roug",
+    "id": "4dcBf8TqHX8Bt7oqY50uJQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "_155hntXwNCDOihWtXI6FQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:f9YrL1P0hLmd9-oa-B5gHQ",
+    "id": "_155hntXwNCDOihWtXI6FQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "_5hspyamDmxHRBB2q2wLOg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:tEY4ZTSSQVRHU92hHG_2tQ",
+    "id": "_5hspyamDmxHRBB2q2wLOg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "2sfy8hgUl2YHVaSM2DOh6Q",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:u6K3L0pl_nyaduKyB01bag",
+    "id": "2sfy8hgUl2YHVaSM2DOh6Q"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "_hXFVXEhuzoCNSBg9_waPQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:7wAmhKK9w68F9gtB3Ji3BQ",
+    "id": "_hXFVXEhuzoCNSBg9_waPQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "YNyZwQTYFVERDbjRS6ZsSg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:2kG42AN8CdHi6mfdl7mcoA",
+    "id": "YNyZwQTYFVERDbjRS6ZsSg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "djSJod2qiUEerHOM66IRfQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:psW4DzRaZglFvopndJwsBg",
+    "id": "djSJod2qiUEerHOM66IRfQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "aTTEzJMNqowIk2avznHuCw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:LI1d778RRlsU2KNtABcYkQ",
+    "id": "aTTEzJMNqowIk2avznHuCw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "EcNI6MupOQ4feoWGKPMJEw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:iovOP3uzQIGZqmoV28DGdQ",
+    "id": "EcNI6MupOQ4feoWGKPMJEw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "YY88mU0m7yXmuU-zY7wTJQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:vj1y6Pf0_TZnpuHURU_d9Q",
+    "id": "YY88mU0m7yXmuU-zY7wTJQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "T3y-MMVMVOtCxiXmCPuGZQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:HA2So9uPIUfn0glCv5EPpA",
+    "id": "T3y-MMVMVOtCxiXmCPuGZQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "5Gm1Gn56pjPU8LitVgLbwQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:_YCa_Vb-FmkdQisemJwydQ",
+    "id": "5Gm1Gn56pjPU8LitVgLbwQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "YyluSuzeXpSsfOLkO5WX-w",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:Qid8W7pPVfdC9vNX1vLehw",
+    "id": "YyluSuzeXpSsfOLkO5WX-w"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "FLKQCUFxquuf4JroGxVA6A",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:2DuoSB0hMx70Dzzt6igacg",
+    "id": "FLKQCUFxquuf4JroGxVA6A"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "M6Ls9ev4tL13x4rSCsUNdA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:EH7bIJzffw5NxB1pZVoJTA",
+    "id": "M6Ls9ev4tL13x4rSCsUNdA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "MTLaW97G3xmp1mUDo19f8g",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:2ccmsqHRi8dVcWt4yvHPEQ",
+    "id": "MTLaW97G3xmp1mUDo19f8g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "ljkDuKmSKZp-ayKxAzZVLQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:nir4d8xf4hzdfvvJpWnrdQ",
+    "id": "ljkDuKmSKZp-ayKxAzZVLQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "SxyWl-SxsSv3EY4pmFHPgA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:dkTSYOW2rX_MXkJUMi5iGQ",
+    "id": "SxyWl-SxsSv3EY4pmFHPgA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "bRbYyCepwqCPSAbRR5NmWQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:72igaJwpNHWkMN72Hleogg",
+    "id": "bRbYyCepwqCPSAbRR5NmWQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "K5YKlVSiSxILLHfgXR34aQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:s46e8IS8NXm366asD6zpHA",
+    "id": "K5YKlVSiSxILLHfgXR34aQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "mJV_piMTzWUKWK6DR8vTTA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:gvYE7VlVH_WE0pHdg5OGbg",
+    "id": "mJV_piMTzWUKWK6DR8vTTA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "sb4YGZS68YaKDnc7lCidoQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:MHgeDNOXig0REgibiVJzGQ",
+    "id": "sb4YGZS68YaKDnc7lCidoQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "t-eqhpM9SwfvVunAuGFluQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:5aIxbO_33B73ApuzSbNxDg",
+    "id": "t-eqhpM9SwfvVunAuGFluQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "xCogXDJdbotCDFQIBqyCbg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:_NQSJcOjhi96PC_BRB7Ung",
+    "id": "xCogXDJdbotCDFQIBqyCbg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "O3nB4gRNTEkwBgG8bKFVRg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:RPVvpSWPrbR8sUt4P7VA9Q",
+    "id": "O3nB4gRNTEkwBgG8bKFVRg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "xjaMxD3hm59InUvaCg8ycg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:7jStc-bp1hJ3QqXtf7QP3Q",
+    "id": "xjaMxD3hm59InUvaCg8ycg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "tmmUxIRrudU-NLsBtZ5_1Q",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:sR6asU4RJRMslfTE-DjLZQ",
+    "id": "tmmUxIRrudU-NLsBtZ5_1Q"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "-RZ1mwkIafdqhOMg2Ur-qw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:gj2iG0AXewwnkcrb6IjgKQ",
+    "id": "-RZ1mwkIafdqhOMg2Ur-qw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "X37LiDP3xRoMDwaBZdHcTA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:s4LTHRVt-CxLH9HWWgPQxQ",
+    "id": "X37LiDP3xRoMDwaBZdHcTA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "xyNv2Tx4qp-ekRFBWMfKqA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:F7kT0IsF2S8Sefzn52TycA",
+    "id": "xyNv2Tx4qp-ekRFBWMfKqA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "kz6o3OH4qk3IA2-3f5fiZw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:qyoUReazS14YVy1vxxiF7w",
+    "id": "kz6o3OH4qk3IA2-3f5fiZw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "VMn_jvPj1TbC9UeFkHqOxQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:n8rUZhAK0M9KEomNYnxsQw",
+    "id": "VMn_jvPj1TbC9UeFkHqOxQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "7gEdDMmiJRlWCqXcMP0Tdw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:AIvmBHR0tydzhc154-6ywA",
+    "id": "7gEdDMmiJRlWCqXcMP0Tdw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "gK1zGw_ykiMnEVKSkP_b7g",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:2tUqaP2Dt4ganBKmY6wwLw",
+    "id": "gK1zGw_ykiMnEVKSkP_b7g"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "sU-Kx6M_qIdJZ273XlNedQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:cBtsBYSFdRUq6_By_6mh0A",
+    "id": "sU-Kx6M_qIdJZ273XlNedQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "c_ymBkkBRhsHBTlXHS55CQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:uYFnXDBoJOjdngGYTJXltg",
+    "id": "c_ymBkkBRhsHBTlXHS55CQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "3EdM9R7QzwfBuF6pwXgljg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:G4DLMRd94x-xm_l1D4p67g",
+    "id": "3EdM9R7QzwfBuF6pwXgljg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "8CR30nBKMUA0EhtQ85aUDQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:t2YHiyGtsZfkQ5K9znNy5w",
+    "id": "8CR30nBKMUA0EhtQ85aUDQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "d6wuy9BtIHj8UZQ0--QIrQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:S3lnd-ktHCGHvWuDJF9diA",
+    "id": "d6wuy9BtIHj8UZQ0--QIrQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "xgMeXmynxx-XDm03w4c2lg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:_iP30INAA-HexN_723izfg",
+    "id": "xgMeXmynxx-XDm03w4c2lg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "uM9ZFv8ndzI4sRjjy-sSMQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:ZK8w6AJbuqUsLAZ3-wwHWA",
+    "id": "uM9ZFv8ndzI4sRjjy-sSMQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "BxvzzrB8KjYsCHUVfK9p2A",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:b8wOUFKQQRdCk-YJE1MEBg",
+    "id": "BxvzzrB8KjYsCHUVfK9p2A"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "izCZdvIbb0s4cNANAbnDIw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:vo7_z9qrz-HBC-4sDpgLuQ",
+    "id": "izCZdvIbb0s4cNANAbnDIw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "xBXcR04j3J5lNSWFpM8J6A",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:S1dRJ3LHT-TUC8-JCdkCtg",
+    "id": "xBXcR04j3J5lNSWFpM8J6A"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "wMi_mpBKyFk5FIXaBdX3kA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:p5h3_HokyY7XqCLKnPlF5Q",
+    "id": "wMi_mpBKyFk5FIXaBdX3kA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "fkfRWe5Lat31R-lYPyO0gg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:yT4kglj334jFBzurD2E3bw",
+    "id": "fkfRWe5Lat31R-lYPyO0gg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Xtj4eCJI8soB2mVqRv5H3Q",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:w-xnlPLqAMmLi6-QaOP-8Q",
+    "id": "Xtj4eCJI8soB2mVqRv5H3Q"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "8EEBpJmyHPauTeutt7tDYQ",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:4YNj_aIX1QJX89ERUv3vfw",
+    "id": "8EEBpJmyHPauTeutt7tDYQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "-TWxZJGmgr3VwrO1CbxfEA",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:eCbOGhDfTBTIl-W0Qvt9yA",
+    "id": "-TWxZJGmgr3VwrO1CbxfEA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "t42eJRi54rhXKGLPIiGYkg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:pPTue7C1_lJjINbNT1YSag",
+    "id": "t42eJRi54rhXKGLPIiGYkg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "1sveMudeh3Be-bBBVES36A",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:x8TnX6oNz1-vQCxNn71_ZQ",
+    "id": "1sveMudeh3Be-bBBVES36A"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "H-g7Y9MyF5zr7-7RMApa1A",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:gy04Nu281wdJtpm7Y69JMg",
+    "id": "H-g7Y9MyF5zr7-7RMApa1A"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "dOoC4ED6LELGF5jk0fP_Yw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:lgaSRNUvZ_ib1bY0n8yI0w",
+    "id": "dOoC4ED6LELGF5jk0fP_Yw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "JRBqfEtzEcAlLKX0eMOiaw",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:2RDwjY7U4-mIEU4wfwprIQ",
+    "id": "JRBqfEtzEcAlLKX0eMOiaw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "5tKqXuj2GLMdCC_q6vtdQg",
+  "object": {
+    "__type__": "Type:pcb.project.PCBADocumentation.PhysicalGeometry",
+    "locked": false,
+    "manufacturing_operation": "@manufacturing:VsskDylqJ-IOJ_nJTJkk4Q",
+    "id": "5tKqXuj2GLMdCC_q6vtdQg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
   "id": "mlQ7apT-dohuAPk4MbN_hg",
   "object": {
     "__type__": "Type:pcb.project.Assembly.Footprint",
@@ -272184,6 +274073,1122 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
+  "id": "8IIrVeqa3zYJuP7AjBEYcg",
+  "object": {
+    "__type__": "Type:pcb.project.Assembly.Footprint",
+    "designator": "PS2",
+    "pads": [
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "8",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:izKHfA_jPVMkZoEFFSXr0w",
+          "@manufacturing:qzmzY6WmrnPEMMaLiUHrRg",
+          "@manufacturing:1DebOGaAgRWzFEa-ilmGwA",
+          "@manufacturing:_pGPx9SMtjMgyAQMeCCjEA",
+          "@manufacturing:yIbnV4LeMD8s2e3SxrpwFA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "7",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:pvG0PAtPVzxoNF4FtAWIeg",
+          "@manufacturing:qZjJ12iUg4mN5num4mpQ3g",
+          "@manufacturing:hO9ozdlYr35Cw0RiJ0zxWg",
+          "@manufacturing:SOB5cUj5-3jMXATD0O_H8g",
+          "@manufacturing:kbJX02the_pdwdjYR7JbJA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "6",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:00ZrGf3xuKCOvdkS0o2icA",
+          "@manufacturing:bi48r-hUJ_ZhG6uwcV2L7Q",
+          "@manufacturing:ksTyDDOP5mmKEPQaHwnGbA",
+          "@manufacturing:Oe8PcMh1R1zeGyV24eABDA",
+          "@manufacturing:e7h3r1RpOl9EfGLJwsnS2Q"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "5",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:Sb9Gv1mtdvRG_epjvvspAA",
+          "@manufacturing:2EU4k3mC8S7VcmDY4cJKQg",
+          "@manufacturing:qvJVlgPYvizL-C8JLrSNLg",
+          "@manufacturing:sr96fy22yLD02PDl7tgI4w",
+          "@manufacturing:8WQ1qPbOSp6bbb6t2MJxCQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "4",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:_TszKE6hmjq98o8AIWYe3Q",
+          "@manufacturing:Uczh5Ep0fMv4KCUnvojhlA",
+          "@manufacturing:lS-bs21C9Ou9ikPKd-lUuQ",
+          "@manufacturing:aR9fi9tCOWF2RTlF8T1A4Q",
+          "@manufacturing:eUC__V7A4ADrx22ncX5-Yw"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "3",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:3vQ8UOhIB3TMQsGXH1UBRg",
+          "@manufacturing:WAOoQcD4iyO0L2nQ3DtRjQ",
+          "@manufacturing:FwIy56rUG0dV6ri2toO6gA",
+          "@manufacturing:mfJL9povefOvkUNxzOu2pg",
+          "@manufacturing:1J-nIVfT3x3NF8RMAEmbQg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "2",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:2hCBsqlzFl1PXBdSv0cJAw",
+          "@manufacturing:msZKwx3U_d9wQ4jvZEdoCg",
+          "@manufacturing:p6De5hUvBUG_zLs7PmJyUQ",
+          "@manufacturing:wsCsraHOTUsTFsaMSviDRA",
+          "@manufacturing:t9NavQ_UnB-BjZtK6RB1xg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "1",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:oU64vVogF3fAgAchFavE3Q",
+          "@manufacturing:maiyKiBJI9bnr7Jz24GxRQ",
+          "@manufacturing:NkJHKoKrq7bv7LMIwC9QXg",
+          "@manufacturing:jSBH7o20dgOLILGMTZDMLw",
+          "@manufacturing:S5LKYaicJFkdqE1ddqYhxw"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:yh-xmGYQo5bAK834zoOtvg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:VrPhiOfJr5I9JBlqtRVbfg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:YPIcnVP4edot0Q6fYi3cuA"
+        ]
+      }
+    ],
+    "geometry": [
+      "@project:f9btE_ROryOEdjmHScMTwQ",
+      "@project:cajEYKzCxLyfSRsnTnC1oQ",
+      "@project:5ipSNPcvAXI2d3M7IyzabA",
+      "@project:p-d7mBYUTjuru4V_eCcG0Q",
+      "@project:u-ENVyq9JTOtTpk77Y0rqA",
+      "@project:ygLJftlKemG6OdXWE01yiw",
+      "@project:QkKoTLIbvIwwSCfT5b_pew",
+      "@project:qGM307xFWAMYkRCEsj_M_w",
+      "@project:bs-ZznbUQHMZ81WxnX961g",
+      "@project:G52Zsr3uluPOnZFW49pKCg",
+      "@project:HDb11A-Jl2Kg5-l914gV7w",
+      "@project:0YbFNBfq4zX9ajr0gAUUbQ",
+      "@project:yzKAmhOy5q1tcivu4GSuig",
+      "@project:hsWUjRRs9QUQDFdrG0ubLg",
+      "@project:LFOEfDFj46wyIhYRArYUFg",
+      "@project:m6vhpxGbvuwe9YDQ4Z8WEA",
+      "@project:XR94mMPH3XrFK9soZD7anQ",
+      "@project:DOgN2GS4QDA0ruCMnb4SxQ",
+      "@project:cEcdw4x-1017mU7aHhjwxw",
+      "@project:MIAPXsnH10fgfHO9P3w_vQ",
+      "@project:iylW_Um6rZa_JqaUf5C_QA",
+      "@project:bJ7LgtpqdCHRDghqEM39Qw",
+      "@project:r60198oB2PHk8jj4aPVezw",
+      "@project:DFs5Ww7cnMPZtb3MbzwMRg",
+      "@project:GYUO-Bure8aFLayD4iqePQ",
+      "@project:HjviFyYTu--bCgsr7Tk3Sw",
+      "@project:megu3Seh3ZlUeHd5dVG3Sw",
+      "@project:Is7J90KrhiU-_1ZKv_TpCA",
+      "@project:JS89WWrzE_RzjJ2-8r8eSQ",
+      "@project:TRzM5d-DjBSTfDe6OthOIA",
+      "@project:AXY5Pn4bF21KAVjamov0hQ",
+      "@project:IOjfkOBDLo4SBCDFkJYEfg",
+      "@project:akIsX8PXtv19lgcMaKuWXQ",
+      "@project:4X8bI--nx5hEZlP1G15fqQ",
+      "@project:2dJ8Ok8u7G4n11sYym8VNA"
+    ],
+    "properties": [
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "atopile_footprint_source_digest",
+        "value": "24125aceba8134b352e7e9105ae04991173d665d2265fa67ad1d5b244fa12127",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Reference",
+        "value": "PS2",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Value",
+        "value": "",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Datasheet",
+        "value": ".ato/cache/2ffd7719-1d4b-4110-a021-687932bf5437.git/Neutrik_NCJ6FA_H.datasheet.pdf",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "LCSC",
+        "value": "C368458",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Manufacturer",
+        "value": "Neutrik",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Partnumber",
+        "value": "NCJ6FA-H",
+        "visible": false
+      }
+    ],
+    "pick_and_place": "@manufacturing:glC-oH_-IM2UXLXhK7N_-Q",
+    "models_3d": [
+      {
+        "__type__": "Type:pcb.project.Model3D",
+        "asset_dir": "assets/3d_models/Neutrik_NCJ6FA_H",
+        "hide": false,
+        "opacity": 1,
+        "user_alignment": {
+          "__type__": "Type:pcb.project.Model3DUserAlignment",
+          "offset_xyz_pm": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyz_deg": [
+            0,
+            0,
+            0
+          ],
+          "scale_xyz": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "locked": false,
+    "id": "8IIrVeqa3zYJuP7AjBEYcg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "HLoH39dS3o0DNTlrmi9VTA",
+  "object": {
+    "__type__": "Type:pcb.project.Assembly.Footprint",
+    "designator": "PS3",
+    "pads": [
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "8",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:ztBEcJaN3bvTqolpyVecgQ",
+          "@manufacturing:T5iCpZF1nf5__KgwQW4ROA",
+          "@manufacturing:00-9MXGN7kHefjxeIXwn9Q",
+          "@manufacturing:ktgrnEOiCcPMsSUeKcFJBA",
+          "@manufacturing:r47solFIPYRorx8ALNr4lQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "7",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:ePfIEqHpJD92mD2NuBkN5g",
+          "@manufacturing:idydVkrbZ5swsqhh19uiag",
+          "@manufacturing:0nc-JGKYRSyI9divk8zgGQ",
+          "@manufacturing:n-n86NSUqaGPFmA1iVUB6A",
+          "@manufacturing:JneibWj6_-t90iAba-_YaA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "6",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:9xfDjFH0e9fQmFXAlDMlrg",
+          "@manufacturing:SJn7gFSU4EqUC6_W1pyJHg",
+          "@manufacturing:7g1NEuJXR3ixTdicZsetfw",
+          "@manufacturing:sdOJ_nqnVyM2QGW0ebIe7g",
+          "@manufacturing:cgHgrCK_rwFZJQd6eoyV8w"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "5",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:MGF6-3_8NjN3EB7GvfBgFw",
+          "@manufacturing:cO4CkShIe2O3qkrpIH9fXQ",
+          "@manufacturing:gQSYKHj6HBkd_6FbxeFcWA",
+          "@manufacturing:hHU0lhSJrkX4PtOARFp3pQ",
+          "@manufacturing:4PLYXXlfhmqvYH2ee7IT6g"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "4",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:bsumKIF8s8gzxAZL0wlzCw",
+          "@manufacturing:4n5V_ASlZwEsT2i5mD3rag",
+          "@manufacturing:GCzSmR4Hk-hiLTvj62cIjQ",
+          "@manufacturing:waY50HWEm8SLTIi0jXs4oQ",
+          "@manufacturing:vSSpcxGyYcmzxsBWP2t6Uw"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "3",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:9wVUDuKI4kVXJz3eFK3WYg",
+          "@manufacturing:aXZglu1DgAnhTrlj_ahfeA",
+          "@manufacturing:J5AZMxuoYJhqsPThiNL7UQ",
+          "@manufacturing:z3EH5lWQgCXHmT0u8ytIkg",
+          "@manufacturing:SYGdE6X2V6FYGEajxcEbuA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "2",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:jvQWrOG4Ut1x5w00zI9kCQ",
+          "@manufacturing:ICSkRRPNdDZ4AMnK-LwofQ",
+          "@manufacturing:cCe7jNr5SWbVl80xkM21QA",
+          "@manufacturing:5JJdU1uFCmZuTYOwdiqDnQ",
+          "@manufacturing:8aIEkJM_YTOr74LfrRpo9w"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "1",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:lnRYMRQGulq_8JM98sv8xA",
+          "@manufacturing:h_R7rqz0eIZa3NpR4h7OSg",
+          "@manufacturing:zVDPxfxsmfuRn0ku0dsE3A",
+          "@manufacturing:XX1hPpwCMvGz_6V9Rz5KVA",
+          "@manufacturing:F1DOOxX3lJ3eE-tbUZ8SvA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:5TkT_oQo50dpYYRr43w_bA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:MQIIkayGKWFOauCRYOyyAQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:lPlRtXWUshMfGy0Ssb5IAw"
+        ]
+      }
+    ],
+    "geometry": [
+      "@project:Qa4Iiswuk_InutFKBNl02w",
+      "@project:GmIJSpucEnHXZE9w3y7Inw",
+      "@project:oTdya01i_qAyRpNvztOBOw",
+      "@project:DFbvX2L6t-Fw0rmMghXHEQ",
+      "@project:SXHDNVLQ-v_k2bU_qSTRIw",
+      "@project:x-RaldJC0V_WTFW2u9Hecw",
+      "@project:1t907V6xJ7tDrHYLw-ro9Q",
+      "@project:V4n9nzZSr2Q9WSxa2uHFaA",
+      "@project:ZDUoNpmZTUOwZB779zO4Aw",
+      "@project:c7DniqiuNo2cGZe5e46eNA",
+      "@project:iRFblec4midWK6LvvAz__g",
+      "@project:oIw9795zTXUbT8wRIXMYGA",
+      "@project:5IvifyWSS7Tv9CwvUawkMA",
+      "@project:rW_3JdKC42MPlU43XYAJ3A",
+      "@project:tR93yr-idqtDffH92-lsFg",
+      "@project:wkIr6LT43gcFjHXuEOnsVw",
+      "@project:VKS0HArxE_0zxNdmxi5M0g",
+      "@project:6Q1m_yZxiG5yjXZQiqpYRA",
+      "@project:Fj4KCwQ7IMbcD9a_KxDfLQ",
+      "@project:xrIfT3BIQAVXHM4iT-2nXA",
+      "@project:h8togaFaX8awdn6gRYKu_A",
+      "@project:VbrXawBw6M5CRhQ7Od8MDg",
+      "@project:sihGNV0wPD1n-gL3n9ySgA",
+      "@project:rd9RAOmoMfOY_C0vgxz4TA",
+      "@project:IcQz5MQWVfxRUz4_KhWmWQ",
+      "@project:SMlVOZvxxV9Lgea6fRth5g",
+      "@project:Rrtxevc1sLmG2kRXAHuVqg",
+      "@project:vFicR_71B4uXbZOrauT7nA",
+      "@project:NTIk2-to-lCiMg_BkJ-CTg",
+      "@project:q8sWaezuLX95sZ0ajuYYYg",
+      "@project:RgiN3Jqzv9DPUq0d90C5BQ",
+      "@project:IR5-W_HUeKCUiWFxluq1cA",
+      "@project:EHuHbXtTOwjaX5BuB8WvTw",
+      "@project:gDb-sjxTVfYnsNR8c4CeBA",
+      "@project:YPMy2OZz2Bu6iAGhZ16YZQ"
+    ],
+    "properties": [
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "atopile_footprint_source_digest",
+        "value": "24125aceba8134b352e7e9105ae04991173d665d2265fa67ad1d5b244fa12127",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Reference",
+        "value": "PS3",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Value",
+        "value": "",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Datasheet",
+        "value": ".ato/cache/2ffd7719-1d4b-4110-a021-687932bf5437.git/Neutrik_NCJ6FA_H.datasheet.pdf",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "LCSC",
+        "value": "C368458",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Manufacturer",
+        "value": "Neutrik",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Partnumber",
+        "value": "NCJ6FA-H",
+        "visible": false
+      }
+    ],
+    "pick_and_place": "@manufacturing:95OQSxdImfBmo6FUVKOXSA",
+    "models_3d": [
+      {
+        "__type__": "Type:pcb.project.Model3D",
+        "asset_dir": "assets/3d_models/Neutrik_NCJ6FA_H",
+        "hide": false,
+        "opacity": 1,
+        "user_alignment": {
+          "__type__": "Type:pcb.project.Model3DUserAlignment",
+          "offset_xyz_pm": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyz_deg": [
+            0,
+            0,
+            0
+          ],
+          "scale_xyz": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "locked": false,
+    "id": "HLoH39dS3o0DNTlrmi9VTA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
   "id": "7lqjm1UZSU-zbFYARkJSSw",
   "object": {
     "__type__": "Type:pcb.project.Assembly.Footprint",
@@ -272947,6 +275952,2787 @@
     ],
     "locked": false,
     "id": "rZGBiq_ASyC7sc1pRkJSSw"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "TmvtyzayQ1Xsbn5h2mLmQQ",
+  "object": {
+    "__type__": "Type:pcb.project.Assembly.Footprint",
+    "designator": "PS4",
+    "pads": [
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "4",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:cc1MNHe3iLKdwkO99N5nFg",
+          "@manufacturing:YxSBwB6ZbihuDElJZ9w1NA",
+          "@manufacturing:DNLcvSe_vIgA30rWLXE-Wg",
+          "@manufacturing:auNJ7FmlppsmUL4Aramvqg",
+          "@manufacturing:mtOJdCibMkL1kz1p1H40Rw"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "3",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:UwmmL1A4s4aqNtCcu1PL8g",
+          "@manufacturing:cVrsS0xF3KjvxhgW9OAv0Q",
+          "@manufacturing:6mDx07xDgLRN8dkRjNefqg",
+          "@manufacturing:_fpWzrjwZ1XrGIs92f0KwA",
+          "@manufacturing:9e40SjQr-oyR0lM5PxZy1A"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "2",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:xSpM3jwLyCi1xSzdvlN9xA",
+          "@manufacturing:GDWjEZGaSJgg_hf1S4Tbtw",
+          "@manufacturing:03Vdrurb5Ow39PZ3pSmHDw",
+          "@manufacturing:fyZa_x3wgz-IV3wCLY-5xg",
+          "@manufacturing:I0-4S_GitPD-Dh5q8tR7Fg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "1",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:1dHCRebvxbPMQRHuGFD-jA",
+          "@manufacturing:NuwvZOBICc6TTO2A6q8B_A",
+          "@manufacturing:vnWMTFd9emxUTa2oI_aTBw",
+          "@manufacturing:_U4YUTuJos-xhlV4ZdFVww",
+          "@manufacturing:ihyr9f1rHE2koGBTX2hWVg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:jm8Q1rFdDCbS5jNvZmLt-A"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:3OTGpOnziSrLBTu7Vl_CwA"
+        ]
+      }
+    ],
+    "geometry": [
+      "@project:cAxuPpVyv_D1g4TQIMrbyg",
+      "@project:atTHNkTjsiXl8Kdc6Xthjg",
+      "@project:HItla7fXnxIUpYnDWnoJrw",
+      "@project:tGIzwIx5QMdd8gazjjKl5A",
+      "@project:UlQor-zFya89yJ75_uqtJg",
+      "@project:dgLvsu5nzWYSAxLcwQqZCQ",
+      "@project:g3xNpfWYmdtq7JXXPYSvww",
+      "@project:im9oMkmnSX8S1xO2GYTa4g",
+      "@project:frkE0qBL4SFydbLXgKAOww",
+      "@project:KT6zG9FW1qORl5DyoPGjwA",
+      "@project:ee681NyvmxSQnE4-pEFr8Q",
+      "@project:N3t1f8-_RkGCs1kkm_BmOQ",
+      "@project:JYwcATBF4EBAajJ4bhrdUQ"
+    ],
+    "properties": [
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "atopile_footprint_source_digest",
+        "value": "e086e165ef9adef86de497adf3fe80090b735b1b183644c088f8414ff8358667",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Reference",
+        "value": "PS4",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Value",
+        "value": "",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Datasheet",
+        "value": ".ato/cache/247d8433-a182-48db-98d7-1431f0512bec.git/Neutrik_NC3MAAH.datasheet.pdf",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "LCSC",
+        "value": "C368463",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Manufacturer",
+        "value": "Neutrik",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Partnumber",
+        "value": "NC3MAAH",
+        "visible": false
+      }
+    ],
+    "pick_and_place": "@manufacturing:KJ5UmoK3N_KlgtPVZcnMCQ",
+    "models_3d": [
+      {
+        "__type__": "Type:pcb.project.Model3D",
+        "asset_dir": "assets/3d_models/Neutrik_NC3MAAH",
+        "hide": false,
+        "opacity": 1,
+        "user_alignment": {
+          "__type__": "Type:pcb.project.Model3DUserAlignment",
+          "offset_xyz_pm": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyz_deg": [
+            0,
+            0,
+            0
+          ],
+          "scale_xyz": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "locked": false,
+    "id": "TmvtyzayQ1Xsbn5h2mLmQQ"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "NO-RJ4y7jf-M6ACq5bp5qg",
+  "object": {
+    "__type__": "Type:pcb.project.Assembly.Footprint",
+    "designator": "PS5",
+    "pads": [
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "4",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:18_qXXJsDroekokMc1o92w",
+          "@manufacturing:sL8oGqryiYfC2HbLjxzEZQ",
+          "@manufacturing:zKk_VpYxnlx5NL8juKDE3g",
+          "@manufacturing:8ePvlnNuvTc6fMIevMAlLw",
+          "@manufacturing:e6PXbBkEGOwnOMqhPqBO3w"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "3",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:Hg-K2alErVTboSdlXHUDWQ",
+          "@manufacturing:xYOQRD2zuez1tyTVMbEtYA",
+          "@manufacturing:YfDM6MC_bRe2Tg7FG6Jszg",
+          "@manufacturing:fQIGE3VkDA5CfY7-L5JtrQ",
+          "@manufacturing:Fq8gIHaeYx18sd_cHA4zxg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "2",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:vplDY8O37OBCAksAl_L-zQ",
+          "@manufacturing:Kg0IAkTVpnJZK_n1TH3ozQ",
+          "@manufacturing:I9rQVB8wRCIck7WK6MhgwA",
+          "@manufacturing:HKBr9awrWTdxCNMqtRm5lQ",
+          "@manufacturing:-te7QkgVu1QcObWh2f5A1g"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "1",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:ILSbAln2J9lnsltIQgXVfQ",
+          "@manufacturing:JZGTd_m2-OtsfXgdigD25Q",
+          "@manufacturing:X_i9dZ9YrhvVTKyq8fyuAg",
+          "@manufacturing:ebcMyPYFcLxg20rUn-niMw",
+          "@manufacturing:86um7ltwWe15KwtYy3u7YQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:tvAaTWuS389iPNV5C7V7Fg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:VEvQ5ZrEvexqIN4dwWF18w"
+        ]
+      }
+    ],
+    "geometry": [
+      "@project:k-QRKdTfjRE8E7CJy-FhQw",
+      "@project:aCguayWCEJ33GwbABz-1iA",
+      "@project:1m1-RBvV2pzLkbf5DZsk1g",
+      "@project:jCsgQEdYwOleRp91qWYl-w",
+      "@project:x6zApEoDcYISEln75lh_Zw",
+      "@project:k1PzPTfmoHjVN85wDun3Xg",
+      "@project:AKxptN05VWSgjTTovdUScw",
+      "@project:4dcBf8TqHX8Bt7oqY50uJQ",
+      "@project:_155hntXwNCDOihWtXI6FQ",
+      "@project:_5hspyamDmxHRBB2q2wLOg",
+      "@project:2sfy8hgUl2YHVaSM2DOh6Q",
+      "@project:_hXFVXEhuzoCNSBg9_waPQ",
+      "@project:YNyZwQTYFVERDbjRS6ZsSg"
+    ],
+    "properties": [
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "atopile_footprint_source_digest",
+        "value": "e086e165ef9adef86de497adf3fe80090b735b1b183644c088f8414ff8358667",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Reference",
+        "value": "PS5",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Value",
+        "value": "",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Datasheet",
+        "value": ".ato/cache/247d8433-a182-48db-98d7-1431f0512bec.git/Neutrik_NC3MAAH.datasheet.pdf",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "LCSC",
+        "value": "C368463",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Manufacturer",
+        "value": "Neutrik",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Partnumber",
+        "value": "NC3MAAH",
+        "visible": false
+      }
+    ],
+    "pick_and_place": "@manufacturing:OKQKj0ku6AhQOiiY2MWNCA",
+    "models_3d": [
+      {
+        "__type__": "Type:pcb.project.Model3D",
+        "asset_dir": "assets/3d_models/Neutrik_NC3MAAH",
+        "hide": false,
+        "opacity": 1,
+        "user_alignment": {
+          "__type__": "Type:pcb.project.Model3DUserAlignment",
+          "offset_xyz_pm": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyz_deg": [
+            0,
+            0,
+            0
+          ],
+          "scale_xyz": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "locked": false,
+    "id": "NO-RJ4y7jf-M6ACq5bp5qg"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "JaGg3RE1fq4xsmQTyKYtBA",
+  "object": {
+    "__type__": "Type:pcb.project.Assembly.Footprint",
+    "designator": "J1",
+    "pads": [
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "rect"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "rect"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "rect"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "rect"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "1",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:oTHBvHIlBvqHAyKNJTSZOA",
+          "@manufacturing:IsN90OMzJtD97UQ0-Mflbg",
+          "@manufacturing:aSmBfx9jX0F7bwmlBhnxZQ",
+          "@manufacturing:ME8w00scMjBGePUWK3cDFQ",
+          "@manufacturing:EC_qkyAk2rDPHrUXnOiZ7g"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "2",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:bdBkF2waOeIScjfdQQZphA",
+          "@manufacturing:YROxFDsnQsGdAb7bNCnFqQ",
+          "@manufacturing:u4-aqgQ_10k_CLojl6pJXg",
+          "@manufacturing:pUguUOvaf86KuuWGClIiZw",
+          "@manufacturing:Y-FHeYmNNJwWNoMWZlIMcQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "3",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:FaNXlZbSzeab_-YnEPVzhg",
+          "@manufacturing:HUb83eSUb9I_hWJPe_ftXA",
+          "@manufacturing:pNwcyXB9JWsiEnSGjihhZg",
+          "@manufacturing:Fwlhr60A7fnPV0luYIl9jQ",
+          "@manufacturing:k6DA3KR9ELpTqEOLZbbeHg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "4",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:GcUywDckxuz6Oi5x8bPxhQ",
+          "@manufacturing:oRIegkjbRdNnRnPF-C7Ppg",
+          "@manufacturing:vUN8jwrkwto9-x-bdqdf0w",
+          "@manufacturing:hBNAFJtBgdYuRb4WHz-Fug",
+          "@manufacturing:0JXCqxBqIaSqD78KYM_hZQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "5",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:X8aGPsXzGdQkkF7vLyZP8g",
+          "@manufacturing:Urbua7oIvVgcO7tC-r1WSg",
+          "@manufacturing:yAPTVlFmWCfypyWL0H73Cg",
+          "@manufacturing:R3dybwHMz_mi5DJMAVY99A",
+          "@manufacturing:nwOXELc-mCfRZrlOdUhIIQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "6",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:NN6aX-KWYxlsEaDvGJGF9Q",
+          "@manufacturing:6jVxb-uIEb2BlnA3iJoFlA",
+          "@manufacturing:rLP5SOxDYJXw33l8EXzrqQ",
+          "@manufacturing:1GLXsYPiiinhHAak54TPKA",
+          "@manufacturing:bJ-qBSLQLY9JPk2fPDn8HQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "7",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:9BYew8_NzPKke1XS18lWjw",
+          "@manufacturing:-A-jImfr6t3AAURnlu6JEg",
+          "@manufacturing:30gsnghX5h-mP9UQcvSQcQ",
+          "@manufacturing:LlOUYuM7loBKJPOQT4k0aA",
+          "@manufacturing:i20in_SeXBcCDojXmReEQQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "8",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:6isKCW5wklpXt-PhvYe1kg",
+          "@manufacturing:8LHcwAYgX5eRPqE3NNiGVg",
+          "@manufacturing:UOmZB6ECDx4unE1M9RxD0A",
+          "@manufacturing:hKD2DmQ-EqD0GXFv2G_BtA",
+          "@manufacturing:n-1fa7H4x4Dh53lCPWBnUA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "9",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:sh64swQJZt3UapHtwH__EQ",
+          "@manufacturing:zEGopPI3AjSNOrCIm_jvjQ",
+          "@manufacturing:YfFK0Zp9hdkkFc1l19nVBg",
+          "@manufacturing:f8BGhUP5KpIRvuQ5I6GCsw",
+          "@manufacturing:zogLutotWpfGuU9Tz-GMGw"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "10",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:86SkRUfecxTOHfKcd2_G9w",
+          "@manufacturing:9aPF7zixV5TO7badY5qV5Q",
+          "@manufacturing:rxwjFNrTopyQTh2lTk35bA",
+          "@manufacturing:y_uCy_heHa8iOPUs6sdl2Q",
+          "@manufacturing:SC-cHrPaEeEmrec8ANjPvg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "11",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:WsJykRTJ26TkXh8i7K81Wg",
+          "@manufacturing:MtDluvPxKHkT1jBqQiUQAQ",
+          "@manufacturing:xcAOh7G6OzJQhmtdStLL0A",
+          "@manufacturing:QLPVIQCmel9bUtzugckkEw",
+          "@manufacturing:B1vpq405g3G8GimNhGDxew"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "12",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:ZPaYn7VIFuR7SNWstwkL_A",
+          "@manufacturing:ruRwYBVh4lHNMmFiF3eRNA",
+          "@manufacturing:RNh6uG-oexvyHcfaN3PoiQ",
+          "@manufacturing:hi9ZaAx3LzyHRcViqWUp7Q",
+          "@manufacturing:MF6Q7fz1AhKjCZnMASblxg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "SH1",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:3FcvffQcs2egRCjqHUWNpQ",
+          "@manufacturing:eY_fi97XnIRSEKFjNIPrKA",
+          "@manufacturing:l8JV1mnMdDZOBbyixL7cJw",
+          "@manufacturing:oKtW8PxyOlA0K_guhKJwzg",
+          "@manufacturing:O6zetVoronNM6USoNRsV5A"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "SH2",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:0lCae5JimInL7vUqZ-zw5g",
+          "@manufacturing:IvhYxvDcvggtN2fsfyTtuQ",
+          "@manufacturing:qHe-fDmgAJI31XhfYC7C6g",
+          "@manufacturing:ACLsEklMhSiywV5Gyd04gg",
+          "@manufacturing:PmuBMK6Fq_gJ3ntZWEgQ8w"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:WD-WVrKplAfCZI3ZcX9CWw"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:c4TcT41mQzY3dSz9RfBDPA"
+        ]
+      }
+    ],
+    "geometry": [
+      "@project:djSJod2qiUEerHOM66IRfQ",
+      "@project:aTTEzJMNqowIk2avznHuCw",
+      "@project:EcNI6MupOQ4feoWGKPMJEw",
+      "@project:YY88mU0m7yXmuU-zY7wTJQ",
+      "@project:T3y-MMVMVOtCxiXmCPuGZQ",
+      "@project:5Gm1Gn56pjPU8LitVgLbwQ",
+      "@project:YyluSuzeXpSsfOLkO5WX-w",
+      "@project:FLKQCUFxquuf4JroGxVA6A",
+      "@project:M6Ls9ev4tL13x4rSCsUNdA",
+      "@project:MTLaW97G3xmp1mUDo19f8g",
+      "@project:ljkDuKmSKZp-ayKxAzZVLQ"
+    ],
+    "properties": [
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "atopile_footprint_source_digest",
+        "value": "db0533d3ed009c41ef2868b4b73f18a0547f68d32d539c8785e8347133d86b2c",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Reference",
+        "value": "J1",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Value",
+        "value": "",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Datasheet",
+        "value": ".ato/cache/a74cb4d7-49ca-4a0e-bfe4-c4ddaed72333.git/HANRUN_HR911105A.datasheet.pdf",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "LCSC",
+        "value": "C12074",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Manufacturer",
+        "value": "HANRUN",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Partnumber",
+        "value": "HR911105A",
+        "visible": false
+      }
+    ],
+    "pick_and_place": "@manufacturing:MDw1lkTrryEDkd-XBrAodA",
+    "models_3d": [
+      {
+        "__type__": "Type:pcb.project.Model3D",
+        "asset_dir": "assets/3d_models/HANRUN_HR911105A",
+        "hide": false,
+        "opacity": 1,
+        "user_alignment": {
+          "__type__": "Type:pcb.project.Model3DUserAlignment",
+          "offset_xyz_pm": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyz_deg": [
+            0,
+            0,
+            0
+          ],
+          "scale_xyz": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "locked": false,
+    "id": "JaGg3RE1fq4xsmQTyKYtBA"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "UuT0tBuEXbHo9rJAkat7ig",
+  "object": {
+    "__type__": "Type:pcb.project.Assembly.Footprint",
+    "designator": "J2",
+    "pads": [
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "rect"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "rect"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "rect"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "rect"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "1",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:_6SSHPzOnPMouyrEWwJZgg",
+          "@manufacturing:mbxbmo-B46Hh5TP7XeyXDw",
+          "@manufacturing:zqUs1efTr_G7oE-crxUUKA",
+          "@manufacturing:_8Ik-LQzaQAuhnkr61xg7Q",
+          "@manufacturing:LjZCnXGvu1eExJTXpqtCJw"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "2",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:ZB9rCgqm4D3T6ZLEwU-eEw",
+          "@manufacturing:Pnsn-i7n-fqGTEYYvtuDPg",
+          "@manufacturing:AB8oaStoMiG9W611hTua1A",
+          "@manufacturing:MhfxbfOhIdTdR_rLfnpibg",
+          "@manufacturing:oKB0Rgbj_o6hx5n0d5yXzQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "3",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:xH6iiX69Ut657zU2L8iefw",
+          "@manufacturing:xUIkOLRsj83M0CsggJCYQw",
+          "@manufacturing:jnzn4-CNxrhkgZ1ExMVlWQ",
+          "@manufacturing:f1NaN6LiLb8E8P5fFHzq9g",
+          "@manufacturing:FynJJgGZ-Mpye8ppSpCcew"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "4",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:yYcONBUZILNOHo8NCP02Yw",
+          "@manufacturing:_l34In4dpZIDV68OnQzMQQ",
+          "@manufacturing:iPnx4HYWQNZJ-j-_X22Xcg",
+          "@manufacturing:cmITrai4cK8FRZKAHwJbCw",
+          "@manufacturing:mpohHTo5GirQZV8bC87uEA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "5",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:Gc4Lbwn0ymjEU-KDlBzsVg",
+          "@manufacturing:0NG33Vteo18O1v0YYoPwIA",
+          "@manufacturing:HkbMSMILCkGPQ6TBDFEGbw",
+          "@manufacturing:4Nxwb0stLwSrOH4EJLsRZw",
+          "@manufacturing:GerxOoYlOG1p1V7Wd80nvg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "6",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:ffHNPPfeqQFhwDxWJ-0LQA",
+          "@manufacturing:ugbyGTFudNRxgoqOw6HTIg",
+          "@manufacturing:tkgzSB5KkAMP6uAq1dw_RQ",
+          "@manufacturing:6z8Ao2kElJmHU6GZeMs4wA",
+          "@manufacturing:0Jf77o1nsCXUdd_ktYL5ow"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "7",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:DGXZQKm8vcTOinOQhpPRQg",
+          "@manufacturing:hcQ3ozUJqE0q4drp2nEw2w",
+          "@manufacturing:cVM_Nm1gW-bqTG-9hW9kOg",
+          "@manufacturing:MLf7EPIyUbhY1jsJDrKCPQ",
+          "@manufacturing:xuHMGTg0W1DvEhgqVEH3-w"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "8",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:Kj_AzO5X0NVu1ydtwmYOGg",
+          "@manufacturing:9oC21yr8s1twa_gNEb6FvQ",
+          "@manufacturing:GUwsT0an7cexfNeCofCsFQ",
+          "@manufacturing:IQ6RdZ4lt-PrnfOaTxih_A",
+          "@manufacturing:rzqKzBehb2RZOHxJ6TGVYA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "9",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:BIVQ9baGLG8HTMHU5PP19g",
+          "@manufacturing:mhFb50482ZQi0UGHmV1gaw",
+          "@manufacturing:hdzoUOASKoQPjS555M0-lw",
+          "@manufacturing:N2qVwwVp_4OjZZjClOZubw",
+          "@manufacturing:JYY0-Hyq-29LOs9NZW-lqQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "10",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:2ssHBpxFbo0FEBNq6BEMZg",
+          "@manufacturing:C5SLCkWcU40d0oMWnwXHlw",
+          "@manufacturing:JM3hlJ_p0tJnD_0Plas--A",
+          "@manufacturing:UCLrzwzWq2h7MLod0Cc59w",
+          "@manufacturing:dW1MILbn6ew9xNY_QoodaA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "11",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:po3qGgaOsU2Fqhf9B105-g",
+          "@manufacturing:cRJUOE7wUky-5djHd5tlwQ",
+          "@manufacturing:-3I60At3RUn9V1CLYPjsaw",
+          "@manufacturing:3zPjuA6OGsxKNNQggP212w",
+          "@manufacturing:OSirkz4z86SpcRbYwoLBHQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "12",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:TMNU0JjH9l_5KjP3Mp8sWg",
+          "@manufacturing:Knej8lIw3ud0XM0HQHI-ZA",
+          "@manufacturing:a-wL7se_RxQ3zVwD35HIjQ",
+          "@manufacturing:927RpIv23ab5u4W2FHwEIQ",
+          "@manufacturing:hONSM9AlHbLfKXqt3y4k7A"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "SH1",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:5klPNbskEJGbSq2qnnQ8Nw",
+          "@manufacturing:ABvCmL6XhYQpew_EdNKn0g",
+          "@manufacturing:OW86K6cfzwVT3x2G6-Urzw",
+          "@manufacturing:AV3ELgtqjEib6uXffPfxow",
+          "@manufacturing:GKsptPmO_pNK7WJpWJmS0Q"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "SH2",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:zPh22A-RPhqZ3npoJN5h7g",
+          "@manufacturing:2Gj2N_7s523v4yExdMpNIg",
+          "@manufacturing:JDXalIHl66QTuj_FTi1O-w",
+          "@manufacturing:lPlFW31ydT2NxwX0O3qX3A",
+          "@manufacturing:ThiDMUAvwCh8TP2GRyAfCg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:9Hoq393zlARsnLNA1L-hGw"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": false
+        },
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:vxKohS1v7FQ2QhfcBA6a3w"
+        ]
+      }
+    ],
+    "geometry": [
+      "@project:SxyWl-SxsSv3EY4pmFHPgA",
+      "@project:bRbYyCepwqCPSAbRR5NmWQ",
+      "@project:K5YKlVSiSxILLHfgXR34aQ",
+      "@project:mJV_piMTzWUKWK6DR8vTTA",
+      "@project:sb4YGZS68YaKDnc7lCidoQ",
+      "@project:t-eqhpM9SwfvVunAuGFluQ",
+      "@project:xCogXDJdbotCDFQIBqyCbg",
+      "@project:O3nB4gRNTEkwBgG8bKFVRg",
+      "@project:xjaMxD3hm59InUvaCg8ycg",
+      "@project:tmmUxIRrudU-NLsBtZ5_1Q",
+      "@project:-RZ1mwkIafdqhOMg2Ur-qw"
+    ],
+    "properties": [
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "atopile_footprint_source_digest",
+        "value": "db0533d3ed009c41ef2868b4b73f18a0547f68d32d539c8785e8347133d86b2c",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Reference",
+        "value": "J2",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Value",
+        "value": "",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Datasheet",
+        "value": ".ato/cache/a74cb4d7-49ca-4a0e-bfe4-c4ddaed72333.git/HANRUN_HR911105A.datasheet.pdf",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "LCSC",
+        "value": "C12074",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Manufacturer",
+        "value": "HANRUN",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Partnumber",
+        "value": "HR911105A",
+        "visible": false
+      }
+    ],
+    "pick_and_place": "@manufacturing:Vzq03-DqQZ2uK32dUYFFqg",
+    "models_3d": [
+      {
+        "__type__": "Type:pcb.project.Model3D",
+        "asset_dir": "assets/3d_models/HANRUN_HR911105A",
+        "hide": false,
+        "opacity": 1,
+        "user_alignment": {
+          "__type__": "Type:pcb.project.Model3DUserAlignment",
+          "offset_xyz_pm": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyz_deg": [
+            0,
+            0,
+            0
+          ],
+          "scale_xyz": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "locked": false,
+    "id": "UuT0tBuEXbHo9rJAkat7ig"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "htXZ2qZ6P8jesOqX4hXpRg",
+  "object": {
+    "__type__": "Type:pcb.project.Assembly.Footprint",
+    "designator": "PS1",
+    "pads": [
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "2",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:cYCcvBGaO10RnhiCHz9MhA",
+          "@manufacturing:iAz_944oK87rtv82SDVLGg",
+          "@manufacturing:Mbi1VL_3-PiPzNRSaHkhXg",
+          "@manufacturing:aA13W67kmatLRnSyyV2fjg",
+          "@manufacturing:T6gMcjDof5TrUKQ8r7GHhQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "G",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:e_x5HfmSKxHPwfheFnQAAA",
+          "@manufacturing:4JzEOLt0rl91hQ6HFUIkJQ",
+          "@manufacturing:vpLeJ0SRWaW0IodueGVX9Q",
+          "@manufacturing:_lqURWqu5RuXPyy-g60vLw",
+          "@manufacturing:7KBvJqm1CcPbnZLhbUDPpA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "3",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:OAZ0jy0Jnu5zWU5ni2RRSQ",
+          "@manufacturing:b0y2d_d_yuaM1tBNgoqlZw",
+          "@manufacturing:t130hqFTaRuPd92D4ZI98Q",
+          "@manufacturing:BHQQugBdzbLPp_liSkZblg",
+          "@manufacturing:wIOhwQc8Qer66zSGevPhBA"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "1",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:tvwLaHlmwetXS4mqxpTBUg",
+          "@manufacturing:rKy5UYQQLZZlg_lF_iTjww",
+          "@manufacturing:UJnsmjvJuG01ZHuSoX_yvA",
+          "@manufacturing:SMBI4yqhxPlwnUJIBNBs2w",
+          "@manufacturing:BCDAyYPSlrL4yGKol7Q5aw"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "5",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:Dxl_tg_C19w7mDjmF1gIdw",
+          "@manufacturing:E096S0V7wJV42NdQNimiiA",
+          "@manufacturing:Dn31-3fgU4WHB5KB-z0mTQ",
+          "@manufacturing:_mif7seXOSLqkcNuZDJfzg",
+          "@manufacturing:zx3gKCJ17t8QnfaUBnanQg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "4",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:MVg-EcEcX0j9E_ORi_4d5g",
+          "@manufacturing:GP4maNr6CcnE2fzil2fh3g",
+          "@manufacturing:0U0-fpEvMwOYZEBCA7j6iA",
+          "@manufacturing:4n4fxOjekN9AjLRgMGWukw",
+          "@manufacturing:sdTy0f3O-kIDbNUgloS1lQ"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "7",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:cIkorIfEGal-qoJ5LJrEmg",
+          "@manufacturing:f1N-1Bfy84LlsNhdnJo3_Q",
+          "@manufacturing:lGgbxa_k9qf1DvpkgpmFJw",
+          "@manufacturing:by2HakEoUKGcVMPitA_GEA",
+          "@manufacturing:dzGhwwbU99Hq_hH3WnE4bg"
+        ]
+      },
+      {
+        "__type__": "Type:pcb.project.THTPad",
+        "layers": [
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          },
+          {
+            "__type__": "Type:pcb.project.PadLayer",
+            "shape": {
+              "__type__": "Type:pcb.project.PadShapeSimple",
+              "kind": "oval"
+            }
+          }
+        ],
+        "hole": {
+          "__type__": "Type:pcb.project.HoleRule",
+          "plated": true
+        },
+        "pad_number": "6",
+        "electrical_type": "load",
+        "stack_topology": "simple",
+        "locked": false,
+        "free": true,
+        "manufacturing_operations": [
+          "@manufacturing:wjQL2L_Bp3uKeKcijVZmJw",
+          "@manufacturing:QICIT-yYG-PyTf5-FBpB2Q",
+          "@manufacturing:GcGtJRAkDesKbXE4_DFjfA",
+          "@manufacturing:qTm9YSw_wtI6Czi99hCSNg",
+          "@manufacturing:4tuTVkO_t7jsxOVe36-ngg"
+        ]
+      }
+    ],
+    "geometry": [
+      "@project:X37LiDP3xRoMDwaBZdHcTA",
+      "@project:xyNv2Tx4qp-ekRFBWMfKqA",
+      "@project:kz6o3OH4qk3IA2-3f5fiZw",
+      "@project:VMn_jvPj1TbC9UeFkHqOxQ",
+      "@project:7gEdDMmiJRlWCqXcMP0Tdw",
+      "@project:gK1zGw_ykiMnEVKSkP_b7g",
+      "@project:sU-Kx6M_qIdJZ273XlNedQ",
+      "@project:c_ymBkkBRhsHBTlXHS55CQ",
+      "@project:3EdM9R7QzwfBuF6pwXgljg",
+      "@project:8CR30nBKMUA0EhtQ85aUDQ",
+      "@project:d6wuy9BtIHj8UZQ0--QIrQ",
+      "@project:xgMeXmynxx-XDm03w4c2lg",
+      "@project:uM9ZFv8ndzI4sRjjy-sSMQ",
+      "@project:BxvzzrB8KjYsCHUVfK9p2A",
+      "@project:izCZdvIbb0s4cNANAbnDIw",
+      "@project:xBXcR04j3J5lNSWFpM8J6A",
+      "@project:wMi_mpBKyFk5FIXaBdX3kA",
+      "@project:fkfRWe5Lat31R-lYPyO0gg",
+      "@project:Xtj4eCJI8soB2mVqRv5H3Q",
+      "@project:8EEBpJmyHPauTeutt7tDYQ",
+      "@project:-TWxZJGmgr3VwrO1CbxfEA",
+      "@project:t42eJRi54rhXKGLPIiGYkg",
+      "@project:1sveMudeh3Be-bBBVES36A",
+      "@project:H-g7Y9MyF5zr7-7RMApa1A",
+      "@project:dOoC4ED6LELGF5jk0fP_Yw",
+      "@project:JRBqfEtzEcAlLKX0eMOiaw",
+      "@project:5tKqXuj2GLMdCC_q6vtdQg"
+    ],
+    "properties": [
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "atopile_footprint_source_digest",
+        "value": "4928b27252da6a264a8150bbbb32f0655ef5367d982f100a1b47c716aa5f9487",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Reference",
+        "value": "PS1",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Value",
+        "value": "",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Datasheet",
+        "value": ".ato/cache/75f6c3d5-f34b-4dbf-a971-42b7d3a029c8.git/Neutrik_NC5FAH.datasheet.pdf",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "LCSC",
+        "value": "C368501",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Manufacturer",
+        "value": "Neutrik",
+        "visible": false
+      },
+      {
+        "__type__": "Type:pcb.project.Property",
+        "name": "Partnumber",
+        "value": "NC5FAH",
+        "visible": false
+      }
+    ],
+    "pick_and_place": "@manufacturing:FfSJk-Abf4uKrgTZncQRag",
+    "models_3d": [
+      {
+        "__type__": "Type:pcb.project.Model3D",
+        "asset_dir": "assets/3d_models/Neutrik_NC5FAH",
+        "hide": false,
+        "opacity": 1,
+        "user_alignment": {
+          "__type__": "Type:pcb.project.Model3DUserAlignment",
+          "offset_xyz_pm": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyz_deg": [
+            0,
+            0,
+            0
+          ],
+          "scale_xyz": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    ],
+    "locked": false,
+    "id": "htXZ2qZ6P8jesOqX4hXpRg"
   }
 }{
   "__type__": "Type:ll.Op",
@@ -289176,294 +294962,126 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "HC3DwcV7mW10sEY0sTHI9g",
+  "id": "_BckxuRHmb0MD8t21EuK4A",
   "object": {
     "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.buck_3v3_digital.feedback.chain",
+    "name": "rj45[0]",
     "members": [
-      "@project:LW5w45yGY6NbzJnEl8gAuQ",
-      "@project:ZhTowMUM2gVTsTtTer0QHA"
+      "@project:JaGg3RE1fq4xsmQTyKYtBA"
     ],
     "source": {
       "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.buck_3v3_digital.feedback.chain"
+      "block_name": "rj45[0]"
     },
     "locked": false,
-    "id": "HC3DwcV7mW10sEY0sTHI9g"
+    "id": "_BckxuRHmb0MD8t21EuK4A"
   }
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "d14aWUfUQ9Z4IGJu38Xe4Q",
+  "id": "Gv3pf6I_QkJYvlddlVBdVQ",
   "object": {
     "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.ldo_3v3_analog.feedback.chain",
+    "name": "rj45[1]",
     "members": [
-      "@project:P2P4_ImDVvT3ZmseFhiC2Q",
-      "@project:R854tMoAVx16m8WOzqv8kQ"
+      "@project:UuT0tBuEXbHo9rJAkat7ig"
     ],
     "source": {
       "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.ldo_3v3_analog.feedback.chain"
+      "block_name": "rj45[1]"
     },
     "locked": false,
-    "id": "d14aWUfUQ9Z4IGJu38Xe4Q"
+    "id": "Gv3pf6I_QkJYvlddlVBdVQ"
   }
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "V_87-XiCOkelIzAWVt2vEQ",
+  "id": "b9IiFgSa2UocBSReHmJl4Q",
   "object": {
     "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.boost_18v_neg.converter",
+    "name": "xlr_dmx_out",
     "members": [
-      "@project:6kLkZEgBJkiXOcpWf3MkXw",
-      "@project:85Di0iNkQ9oNa3k5Nw2pwA",
-      "@project:8uYI4QWZk_2PpyauQsUjhQ",
-      "@project:HOIOippqXf_ZM1J5-5nqvg",
-      "@project:SkP_Xqng_g1Jzpk7ptzXTA",
-      "@project:lHgPdy4ZMr6AfhyzAXNO6A",
-      "@project:ln7Ohk6uNX3AP49j2hTEdA"
+      "@project:htXZ2qZ6P8jesOqX4hXpRg"
     ],
     "source": {
       "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.boost_18v_neg.converter"
+      "block_name": "xlr_dmx_out"
     },
     "locked": false,
-    "id": "V_87-XiCOkelIzAWVt2vEQ"
+    "id": "b9IiFgSa2UocBSReHmJl4Q"
   }
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "TLgwphoj-lFZ9ExqP2DeYw",
+  "id": "TevplPumqg4SQ2L4yDl8Aw",
   "object": {
     "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.boost_18v_neg.post_regulator",
+    "name": "xlr_in[0]",
     "members": [
-      "@project:Dpfd5TgWZG0msfN6kogvfQ",
-      "@project:FJVocea8HAUhKkmVCTXspQ",
-      "@project:MSCCTnb8RFfFJ8TwEs1Xbg",
-      "@project:Z90cQ7XO9PKIFohA0GIxCw",
-      "@project:euL1mNyWWMhKjcTTzK4gAQ"
+      "@project:8IIrVeqa3zYJuP7AjBEYcg"
     ],
     "source": {
       "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.boost_18v_neg.post_regulator"
+      "block_name": "xlr_in[0]"
     },
     "locked": false,
-    "id": "TLgwphoj-lFZ9ExqP2DeYw"
+    "id": "TevplPumqg4SQ2L4yDl8Aw"
   }
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "KsSbTIO9OX8pqEWOsk4gPg",
+  "id": "38VkJNF-Sk8h3W19GRwssw",
   "object": {
     "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.boost_18v_pos.converter",
+    "name": "xlr_in[1]",
     "members": [
-      "@project:-HlJf9U8f-GFLYJQ-P3wng",
-      "@project:LsNDTaRx_fbcIiN9w-WtRw",
-      "@project:PvqXPfjW49nMrWtFah5_pQ",
-      "@project:SYsD6H-SYmoIqbHaZ44ObQ",
-      "@project:XgP8-HLI71wH2rSllLaxgg",
-      "@project:g9DFiqMDdknEJCLDcA97uA",
-      "@project:wxKwajTC0cTi7Zzgji6B9g"
+      "@project:HLoH39dS3o0DNTlrmi9VTA"
     ],
     "source": {
       "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.boost_18v_pos.converter"
+      "block_name": "xlr_in[1]"
     },
     "locked": false,
-    "id": "KsSbTIO9OX8pqEWOsk4gPg"
+    "id": "38VkJNF-Sk8h3W19GRwssw"
   }
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "yaAuqgjT2dkfBgRfq0Olcg",
+  "id": "HzKb3JJi7Gd53ZIobTA3RA",
   "object": {
     "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.boost_18v_pos.post_regulator",
+    "name": "xlr_out[0]",
     "members": [
-      "@project:YytvJTwPSHIDvxb-jPwOQg",
-      "@project:dHd_HfvSEBR6mVDsa4vKrg",
-      "@project:myL6B8luxnuViP2M4JnnlA",
-      "@project:y3fg3c3m9JUWISUHE8LqSw",
-      "@project:zPznXxupGnV0FmZcIjE6Tg"
+      "@project:TmvtyzayQ1Xsbn5h2mLmQQ"
     ],
     "source": {
       "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.boost_18v_pos.post_regulator"
+      "block_name": "xlr_out[0]"
     },
     "locked": false,
-    "id": "yaAuqgjT2dkfBgRfq0Olcg"
+    "id": "HzKb3JJi7Gd53ZIobTA3RA"
   }
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "SjE276vYv5TCbfUgTl6AIw",
+  "id": "m--N2z4MqnAYh_FcoVp3SA",
   "object": {
     "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.buck_3v3_digital.feedback",
+    "name": "xlr_out[1]",
     "members": [
-      "@project:HC3DwcV7mW10sEY0sTHI9g"
+      "@project:NO-RJ4y7jf-M6ACq5bp5qg"
     ],
     "source": {
       "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.buck_3v3_digital.feedback"
+      "block_name": "xlr_out[1]"
     },
     "locked": false,
-    "id": "SjE276vYv5TCbfUgTl6AIw"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "GqKPNYblVJQjp-lakQ3Q7Q",
-  "object": {
-    "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.ldo_3v3_analog.feedback",
-    "members": [
-      "@project:d14aWUfUQ9Z4IGJu38Xe4Q"
-    ],
-    "source": {
-      "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.ldo_3v3_analog.feedback"
-    },
-    "locked": false,
-    "id": "GqKPNYblVJQjp-lakQ3Q7Q"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "P9gZFFVqaj2XGELP5jWSGQ",
-  "object": {
-    "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.boost_18v_neg",
-    "members": [
-      "@project:TLgwphoj-lFZ9ExqP2DeYw",
-      "@project:V_87-XiCOkelIzAWVt2vEQ"
-    ],
-    "source": {
-      "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.boost_18v_neg"
-    },
-    "locked": false,
-    "id": "P9gZFFVqaj2XGELP5jWSGQ"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "4u9Cvqje7jCLOnV3psAT7Q",
-  "object": {
-    "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.boost_18v_pos",
-    "members": [
-      "@project:KsSbTIO9OX8pqEWOsk4gPg",
-      "@project:yaAuqgjT2dkfBgRfq0Olcg"
-    ],
-    "source": {
-      "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.boost_18v_pos"
-    },
-    "locked": false,
-    "id": "4u9Cvqje7jCLOnV3psAT7Q"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "aFm0Wyd_yIOW_E4bSSEFGg",
-  "object": {
-    "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.buck_3v3_digital",
-    "members": [
-      "@project:F_QCEa51rjMlvVYNTD8wNQ",
-      "@project:G8Uzuf_kC8ap8RSiucBNew",
-      "@project:S9McqXgUEKCtloTs6xmi_g",
-      "@project:Sf0nU93DrWT16D8j0_SZzw",
-      "@project:SjE276vYv5TCbfUgTl6AIw",
-      "@project:YoV3gGpqetkx-eIQhJO2iQ",
-      "@project:ogLYo_8-nfdrfbJG8hHcaw",
-      "@project:rHO21j8suXz8IciffOnyUw",
-      "@project:zI365mZwbcxPwCwuK9s_yA"
-    ],
-    "source": {
-      "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.buck_3v3_digital"
-    },
-    "locked": false,
-    "id": "aFm0Wyd_yIOW_E4bSSEFGg"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "dRFF8Ikw76Nn9pnIpRJS5g",
-  "object": {
-    "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power.ldo_3v3_analog",
-    "members": [
-      "@project:GqKPNYblVJQjp-lakQ3Q7Q",
-      "@project:Ue7rL6qlTFiAU4z8RkJSSw",
-      "@project:rKe2WrKfSE27CvnzRkJSSw",
-      "@project:sjzqGm9CQQC_u8HZRkJSSw"
-    ],
-    "source": {
-      "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power.ldo_3v3_analog"
-    },
-    "locked": false,
-    "id": "dRFF8Ikw76Nn9pnIpRJS5g"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "CyUc6nR9BWA_j4sgsG7EZw",
-  "object": {
-    "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "cm",
-    "members": [
-      "@project:Z7CJ-HKlo2FadSu0g-S2tg",
-      "@project:lZ7QxJhuedT-rbelte_p_A",
-      "@project:n-OAn1SNvllosS0J7JtHTA"
-    ],
-    "source": {
-      "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "cm"
-    },
-    "locked": false,
-    "id": "CyUc6nR9BWA_j4sgsG7EZw"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "1TFwo6zsx9DbadE3NVySdg",
-  "object": {
-    "__type__": "Type:pcb.project.Hierarchy.Group",
-    "name": "power",
-    "members": [
-      "@project:2kncpGYZTCiBni6PRkJSSw",
-      "@project:4u9Cvqje7jCLOnV3psAT7Q",
-      "@project:P9gZFFVqaj2XGELP5jWSGQ",
-      "@project:aFm0Wyd_yIOW_E4bSSEFGg",
-      "@project:dRFF8Ikw76Nn9pnIpRJS5g",
-      "@project:mlQ7apT-dohuAPk4MbN_hg"
-    ],
-    "source": {
-      "__type__": "Type:pcb.project.LayoutReuseSource",
-      "block_name": "power"
-    },
-    "locked": false,
-    "id": "1TFwo6zsx9DbadE3NVySdg"
+    "id": "m--N2z4MqnAYh_FcoVp3SA"
   }
 }

@@ -3,10 +3,10 @@
   "schema_version": 0,
   "layer": "electrical",
   "created_at": "2026-07-23T17:29:22Z",
-  "high_water_mark": "2026-09-29T18:10:26Z",
+  "high_water_mark": "2026-09-29T20:52:32Z",
   "dirty": false,
-  "record_count_total": 618,
-  "record_count_live": 618
+  "record_count_total": 637,
+  "record_count_live": 637
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
@@ -11983,21 +11983,6 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "yLrf6WxxSMKl_jXQ3h5xWg",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "rj45[1]-ethernet-ETH_N0_N",
-    "id": "yLrf6WxxSMKl_jXQ3h5xWg",
-    "members": [
-      "@manufacturing:-s7ZiJkVXeU5s-CEGwn4yg",
-      "@manufacturing:ln401pDGEICJMLU0Crz_tQ",
-      "@manufacturing:l-VUwAVUS512d1s9ze4fqA"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
   "id": "CNvA7lOeRy2bdnOKyj03uw",
   "object": {
     "__type__": "Type:pcb.electrical.NetRule",
@@ -12007,21 +11992,6 @@
       "@manufacturing:OdjXsZlD2q_FdxCD9BMOtw",
       "@manufacturing:JmiSv5tbTGo_RXLf_vN0jg",
       "@manufacturing:qU0X-xs4ssBkU9S5-13P5A"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "DVVhX9xeTyKEO2G3-KDOhQ",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "DMX_P",
-    "id": "DVVhX9xeTyKEO2G3-KDOhQ",
-    "members": [
-      "@manufacturing:QrtDzsvx4Vk0aNpxvnvSHg",
-      "@manufacturing:0AdfOowgCVn9fslOfCvqzw",
-      "@manufacturing:EPzv2fIjikTbvazl_QvxBQ"
     ]
   }
 }{
@@ -12040,21 +12010,6 @@
       "@manufacturing:c0SQIVPiMHChYqFLTsqKFg",
       "@manufacturing:lE5rkvfzFg5OT1dicxAesg",
       "@manufacturing:DVq8bJhskiZy65qfBEYjaA"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "t8vfezz_S4a_MQGPHS33eQ",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "DMX_N",
-    "id": "t8vfezz_S4a_MQGPHS33eQ",
-    "members": [
-      "@manufacturing:z505dY5qdHP_4TEwoSTzHg",
-      "@manufacturing:brtibI-TFWV1-Q9oo9kIGg",
-      "@manufacturing:rB_WHh3ma1VSAHj_IfHSVQ"
     ]
   }
 }{
@@ -12100,21 +12055,6 @@
       "@manufacturing:bxmgbBqlccT_iM8csQvluw",
       "@manufacturing:1H7dRdueSv6TGcJhtJIG9A",
       "@manufacturing:ge4ExzytF5B0kq-qBOd6Ww"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "9K_gOP5WR6S7V4ZbqYkARQ",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "rj45[1]-ethernet-ETH_N1_N",
-    "id": "9K_gOP5WR6S7V4ZbqYkARQ",
-    "members": [
-      "@manufacturing:qiPPx9R3T8H-1hpMyW1lQQ",
-      "@manufacturing:mvaa6VGGDWt-j5DTZyJyyw",
-      "@manufacturing:gihEkdT7E46zc73kVf0Pqg"
     ]
   }
 }{
@@ -12169,21 +12109,6 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "9RyHyskSTNGj3viSq5OdHA",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "rj45[0]-ethernet-ETH_P0_P",
-    "id": "9RyHyskSTNGj3viSq5OdHA",
-    "members": [
-      "@manufacturing:2UL0OsO-jC4w0lZPQjeA_g",
-      "@manufacturing:4hd8YnUK11ET4hHwukiIPg",
-      "@manufacturing:prQQ7e7EiJBcpuECWVvohw"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
   "id": "DKvMZOuMQpCB4c2dXkgk3w",
   "object": {
     "__type__": "Type:pcb.electrical.NetRule",
@@ -12193,21 +12118,6 @@
       "@manufacturing:kZjqQfaiQ0cpaGc9-pAT4w",
       "@manufacturing:fLBVR9OpErbCTAYKuyrDEA",
       "@manufacturing:XH5xTM6aCoII5zzgoTHlnw"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "dCygCC9QRW-VST9mZdHj1g",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "rj45[0]-ethernet-ETH_N0_N",
-    "id": "dCygCC9QRW-VST9mZdHj1g",
-    "members": [
-      "@manufacturing:acXGuu956ioqNJBZb7rv4w",
-      "@manufacturing:Ir_Ow218vR9SBJfHnXiJ1g",
-      "@manufacturing:MSfsKGgWsJNEIDSi84_BwQ"
     ]
   }
 }{
@@ -12235,21 +12145,6 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "Nu7X3I7MTs-ZaBLdDVovdQ",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "rj45[0]-ethernet-ETH_N1_N",
-    "id": "Nu7X3I7MTs-ZaBLdDVovdQ",
-    "members": [
-      "@manufacturing:8YvH2sarSp71R0XaFwGqjg",
-      "@manufacturing:72C4xVLO3rUpWPYAC3f0rw",
-      "@manufacturing:ynHD1KmEWGXRCZ9L60nH2Q"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
   "id": "kDZBSTX0RKmRt6_gu-8Z6w",
   "object": {
     "__type__": "Type:pcb.electrical.NetRule",
@@ -12259,36 +12154,6 @@
       "@manufacturing:wcvb0R2jthsNTAvtklwHZA",
       "@manufacturing:v4lk-XxlLwrw-eXIT7WHjA",
       "@manufacturing:CgoXeL4ViQHoRRmvh5LfrQ"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "YBuI2iO_T2eZ_Y-c9cc5mg",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "rj45[0]-ethernet-ETH_P1_P",
-    "id": "YBuI2iO_T2eZ_Y-c9cc5mg",
-    "members": [
-      "@manufacturing:8YqnWXw_rlFn9TKNnUFPQg",
-      "@manufacturing:J_bEVEhdsxhOE7uDEQxV_A",
-      "@manufacturing:weydT4nouCRIwsjpZAHTFg"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "loabVLQPRiiO0ypJ42MwNg",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "rj45[1]-ethernet-ETH_P1_P",
-    "id": "loabVLQPRiiO0ypJ42MwNg",
-    "members": [
-      "@manufacturing:tejIXkZNA2CgMSqTMYq-RA",
-      "@manufacturing:Er2eY5qBIYtxXZEk3MpoeQ",
-      "@manufacturing:3xsUmDmhLoSJwzJLNGGg_w"
     ]
   }
 }{
@@ -12442,21 +12307,6 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "wsnVh5oJTcCCv7GEq95XVg",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "power_P",
-    "id": "wsnVh5oJTcCCv7GEq95XVg",
-    "members": [
-      "@manufacturing:QcXi9URwoJ_OTVBPy9Krbw",
-      "@manufacturing:H8y7lyXM2MxcKwzhHNoHNw",
-      "@manufacturing:eWbIWI-NWXT8WKWQvquMxg"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
   "id": "OHw8Bv1sS4yrpOF_27Ai7w",
   "object": {
     "__type__": "Type:pcb.electrical.NetRule",
@@ -12472,21 +12322,6 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "xI3s7Ui1RAC2Um77ogrLCw",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "power_N",
-    "id": "xI3s7Ui1RAC2Um77ogrLCw",
-    "members": [
-      "@manufacturing:cfXpoFyRE6ZqCQHrZ-YVTw",
-      "@manufacturing:2RE9Mj3KP1ldjNB9yJ5yTA",
-      "@manufacturing:m-S0H-aZlDiuD5HsaMrSEQ"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
   "id": "kl1BeWBTTEukBCt-VgJr1A",
   "object": {
     "__type__": "Type:pcb.electrical.NetRule",
@@ -12496,21 +12331,6 @@
       "@manufacturing:ZhCj-vtFQPMQDlSOO9DI2g",
       "@manufacturing:EArKlEt4aUnYpShnX87ExA",
       "@manufacturing:iJs0XmUbYgrb7GhgVA9OKA"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "1CpeATKgRB2fJP3xOEDfmg",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "input_dc_block_caps[2]-power-power_P",
-    "id": "1CpeATKgRB2fJP3xOEDfmg",
-    "members": [
-      "@manufacturing:3Db9tUXTFEwYPwoRieXnVw",
-      "@manufacturing:FcoNmSz3stXkr4o2kEWnAw",
-      "@manufacturing:-A0hHeQazU8weQk4HtNoww"
     ]
   }
 }{
@@ -12550,21 +12370,6 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "0kSUCsWgQuO-lIIxgdTCpQ",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "input_dc_block_caps[3]-power-power_N",
-    "id": "0kSUCsWgQuO-lIIxgdTCpQ",
-    "members": [
-      "@manufacturing:5a4nOc2FWOcokSLfWhXGmQ",
-      "@manufacturing:S1lIZHbBVPCzUTpQ7Kv-Dw",
-      "@manufacturing:q4E-1pYhRgawLOot6IMcbg"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
   "id": "3YGgGhL0Tj-LS3sZw0FEsA",
   "object": {
     "__type__": "Type:pcb.electrical.NetRule",
@@ -12577,24 +12382,6 @@
       "@manufacturing:QW0hg9bxgJGxfzlkghOgNw",
       "@manufacturing:HS9Zpz8r5s6hZdq-nXYhBQ",
       "@manufacturing:aIYIPVEaHMwKaWpewNWUCw"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "eeLR-JQZTI2YqmIl9S1KLw",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "SENSEneg_N",
-    "id": "eeLR-JQZTI2YqmIl9S1KLw",
-    "members": [
-      "@manufacturing:keXaqPnQgyqoof3mJ5V0GA",
-      "@manufacturing:uYxMERZrS3eQpvHiGBntrQ",
-      "@manufacturing:jcNlzEmm6RAx6ENEUrMZtw",
-      "@manufacturing:E09prNXntlkeReIk6uVeDQ",
-      "@manufacturing:Z6MZMS9GHHn8EQroDC-KyQ",
-      "@manufacturing:Cn8KB9yBtcVKnqJpK3zf5Q"
     ]
   }
 }{
@@ -12652,42 +12439,6 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "gtgngaRCTAu60bp9FlU-fA",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "SENSEpos_P",
-    "id": "gtgngaRCTAu60bp9FlU-fA",
-    "members": [
-      "@manufacturing:h8-WiDZsLy8SAeDrhg2-GQ",
-      "@manufacturing:E8HDn-i8PXK2ru-v6GuK2A",
-      "@manufacturing:ghRLTvnLdB6mNiGTs3ScNg",
-      "@manufacturing:pyoTqbU2PjiLQHtsWhGvoQ",
-      "@manufacturing:xefEPtd4qn61cXvjsP8ITg",
-      "@manufacturing:i6gE0HJUR-VQrkC5QLQZDA"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "xTzcQmtGTeWYE-MChlsrCg",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "xlr_out[1]-signal-SENSEneg_N",
-    "id": "xTzcQmtGTeWYE-MChlsrCg",
-    "members": [
-      "@manufacturing:5xFtSAEZNVouQevJswlcHg",
-      "@manufacturing:ISVADh8RvoK9G2nNvYQ7fw",
-      "@manufacturing:Sm5FS8MUQF2XIBiK4I7X7Q",
-      "@manufacturing:gs99TxiI1TucnqStF3MONQ",
-      "@manufacturing:7U2qD2GlWhn5u8lplB6Uyw",
-      "@manufacturing:nSmDoumWeHZrQj5OAT2Zjw"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
   "id": "ar_08BayT9m6VHhEoeqXGQ",
   "object": {
     "__type__": "Type:pcb.electrical.NetRule",
@@ -12715,24 +12466,6 @@
       "@manufacturing:2rx-WPtpVlepvyz-INwdhw",
       "@manufacturing:UMAoFj6V2GY_aJHWXdzEdA",
       "@manufacturing:VqjjpkepwTmnkDgz9lXkxg"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "roNJD1tTSvqAr_Rpx-tVEw",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "xlr_out[1]-signal-SENSEpos_P",
-    "id": "roNJD1tTSvqAr_Rpx-tVEw",
-    "members": [
-      "@manufacturing:uhtw9LQNU1HRQBFWd2FujA",
-      "@manufacturing:mh26XlB_7-DJjLIehjg0-g",
-      "@manufacturing:McG2nfZYvor_Pw4ZA6EzhA",
-      "@manufacturing:PU1LHn1iK0e-9_YKvOdsog",
-      "@manufacturing:TJfIZi2vdqwmF_lw79xAyg",
-      "@manufacturing:ZTUZJ0q9RdcvgJ546cFM5g"
     ]
   }
 }{
@@ -13387,21 +13120,6 @@
       "@manufacturing:OAsRVXG-qMQ5f5UUkIic1A",
       "@manufacturing:xtv83eRRO-nFMMVmB7SP-Q",
       "@manufacturing:PolC2KJSqWJaQrX_ytzbTw"
-    ]
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "whufhd_ESwSNDf2dR8d-ag",
-  "object": {
-    "__type__": "Type:pcb.electrical.NetRule",
-    "name": "rj45[1]-ethernet-ETH_P0_P",
-    "id": "whufhd_ESwSNDf2dR8d-ag",
-    "members": [
-      "@manufacturing:xRbk4rlSSTYiFcchSOpMxw",
-      "@manufacturing:lSAtSUtxUtJ2cImahiJZTw",
-      "@manufacturing:HXnW3BvdcHfNve7R8IRDTg"
     ]
   }
 }{
@@ -16690,6 +16408,399 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
+  "id": "mjBGi9k6SrKgokQJQR2jWQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1].connector-4",
+    "id": "mjBGi9k6SrKgokQJQR2jWQ",
+    "members": [
+      "@manufacturing:_l34In4dpZIDV68OnQzMQQ",
+      "@manufacturing:cmITrai4cK8FRZKAHwJbCw",
+      "@manufacturing:iPnx4HYWQNZJ-j-_X22Xcg",
+      "@manufacturing:mpohHTo5GirQZV8bC87uEA",
+      "@manufacturing:yYcONBUZILNOHo8NCP02Yw"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "wSfHVE7BQxi3flcAsdIzpQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1].connector-5",
+    "id": "wSfHVE7BQxi3flcAsdIzpQ",
+    "members": [
+      "@manufacturing:0NG33Vteo18O1v0YYoPwIA",
+      "@manufacturing:4Nxwb0stLwSrOH4EJLsRZw",
+      "@manufacturing:Gc4Lbwn0ymjEU-KDlBzsVg",
+      "@manufacturing:GerxOoYlOG1p1V7Wd80nvg",
+      "@manufacturing:HkbMSMILCkGPQ6TBDFEGbw"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Hu5BArPDQ66IGukmO9V99w",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[0].connector-10",
+    "id": "Hu5BArPDQ66IGukmO9V99w",
+    "members": [
+      "@manufacturing:86SkRUfecxTOHfKcd2_G9w",
+      "@manufacturing:9aPF7zixV5TO7badY5qV5Q",
+      "@manufacturing:SC-cHrPaEeEmrec8ANjPvg",
+      "@manufacturing:rxwjFNrTopyQTh2lTk35bA",
+      "@manufacturing:y_uCy_heHa8iOPUs6sdl2Q"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Nph76N1gQZGNkAdAqdwl6g",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[0].connector-11",
+    "id": "Nph76N1gQZGNkAdAqdwl6g",
+    "members": [
+      "@manufacturing:B1vpq405g3G8GimNhGDxew",
+      "@manufacturing:MtDluvPxKHkT1jBqQiUQAQ",
+      "@manufacturing:QLPVIQCmel9bUtzugckkEw",
+      "@manufacturing:WsJykRTJ26TkXh8i7K81Wg",
+      "@manufacturing:xcAOh7G6OzJQhmtdStLL0A"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "mz_cRo12SpWwzenhzGy7eA",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1].connector-NC",
+    "id": "mz_cRo12SpWwzenhzGy7eA",
+    "members": [
+      "@manufacturing:DGXZQKm8vcTOinOQhpPRQg",
+      "@manufacturing:MLf7EPIyUbhY1jsJDrKCPQ",
+      "@manufacturing:cVM_Nm1gW-bqTG-9hW9kOg",
+      "@manufacturing:hcQ3ozUJqE0q4drp2nEw2w",
+      "@manufacturing:xuHMGTg0W1DvEhgqVEH3-w"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "lW9o41J9Rwig_at4SiwR2g",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[0].connector-12",
+    "id": "lW9o41J9Rwig_at4SiwR2g",
+    "members": [
+      "@manufacturing:MF6Q7fz1AhKjCZnMASblxg",
+      "@manufacturing:RNh6uG-oexvyHcfaN3PoiQ",
+      "@manufacturing:ZPaYn7VIFuR7SNWstwkL_A",
+      "@manufacturing:hi9ZaAx3LzyHRcViqWUp7Q",
+      "@manufacturing:ruRwYBVh4lHNMmFiF3eRNA"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "nKWReF0HTMq2cNemdm8o-g",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1].connector-9",
+    "id": "nKWReF0HTMq2cNemdm8o-g",
+    "members": [
+      "@manufacturing:BIVQ9baGLG8HTMHU5PP19g",
+      "@manufacturing:JYY0-Hyq-29LOs9NZW-lqQ",
+      "@manufacturing:N2qVwwVp_4OjZZjClOZubw",
+      "@manufacturing:hdzoUOASKoQPjS555M0-lw",
+      "@manufacturing:mhFb50482ZQi0UGHmV1gaw"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "cL22NhsoTGeMYCjjYACfsw",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "xlr_dmx_out.connector-4",
+    "id": "cL22NhsoTGeMYCjjYACfsw",
+    "members": [
+      "@manufacturing:0U0-fpEvMwOYZEBCA7j6iA",
+      "@manufacturing:4n4fxOjekN9AjLRgMGWukw",
+      "@manufacturing:GP4maNr6CcnE2fzil2fh3g",
+      "@manufacturing:MVg-EcEcX0j9E_ORi_4d5g",
+      "@manufacturing:sdTy0f3O-kIDbNUgloS1lQ"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "q5kwHc19Tv-6-m7Ce1Uk1g",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "xlr_dmx_out.connector-5",
+    "id": "q5kwHc19Tv-6-m7Ce1Uk1g",
+    "members": [
+      "@manufacturing:Dn31-3fgU4WHB5KB-z0mTQ",
+      "@manufacturing:Dxl_tg_C19w7mDjmF1gIdw",
+      "@manufacturing:E096S0V7wJV42NdQNimiiA",
+      "@manufacturing:_mif7seXOSLqkcNuZDJfzg",
+      "@manufacturing:zx3gKCJ17t8QnfaUBnanQg"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "liOrjY2ESCGpleapj-5ezw",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "4",
+    "id": "liOrjY2ESCGpleapj-5ezw",
+    "members": [
+      "@manufacturing:0JXCqxBqIaSqD78KYM_hZQ",
+      "@manufacturing:GcUywDckxuz6Oi5x8bPxhQ",
+      "@manufacturing:hBNAFJtBgdYuRb4WHz-Fug",
+      "@manufacturing:oRIegkjbRdNnRnPF-C7Ppg",
+      "@manufacturing:vUN8jwrkwto9-x-bdqdf0w"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "729jhNliTKazw3zYP3tpDQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "xlr_dmx_out.connector-6",
+    "id": "729jhNliTKazw3zYP3tpDQ",
+    "members": [
+      "@manufacturing:4tuTVkO_t7jsxOVe36-ngg",
+      "@manufacturing:GcGtJRAkDesKbXE4_DFjfA",
+      "@manufacturing:QICIT-yYG-PyTf5-FBpB2Q",
+      "@manufacturing:qTm9YSw_wtI6Czi99hCSNg",
+      "@manufacturing:wjQL2L_Bp3uKeKcijVZmJw"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "PFVxinDiQZS-WEEdS2ORDg",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "5",
+    "id": "PFVxinDiQZS-WEEdS2ORDg",
+    "members": [
+      "@manufacturing:R3dybwHMz_mi5DJMAVY99A",
+      "@manufacturing:Urbua7oIvVgcO7tC-r1WSg",
+      "@manufacturing:X8aGPsXzGdQkkF7vLyZP8g",
+      "@manufacturing:nwOXELc-mCfRZrlOdUhIIQ",
+      "@manufacturing:yAPTVlFmWCfypyWL0H73Cg"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "1D0tOintSO2Iw9MxMiEklA",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "xlr_dmx_out.connector-7",
+    "id": "1D0tOintSO2Iw9MxMiEklA",
+    "members": [
+      "@manufacturing:by2HakEoUKGcVMPitA_GEA",
+      "@manufacturing:cIkorIfEGal-qoJ5LJrEmg",
+      "@manufacturing:dzGhwwbU99Hq_hH3WnE4bg",
+      "@manufacturing:f1N-1Bfy84LlsNhdnJo3_Q",
+      "@manufacturing:lGgbxa_k9qf1DvpkgpmFJw"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "f96REiKDQaK0dwJlT6Q6hA",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "NC",
+    "id": "f96REiKDQaK0dwJlT6Q6hA",
+    "members": [
+      "@manufacturing:-A-jImfr6t3AAURnlu6JEg",
+      "@manufacturing:30gsnghX5h-mP9UQcvSQcQ",
+      "@manufacturing:9BYew8_NzPKke1XS18lWjw",
+      "@manufacturing:LlOUYuM7loBKJPOQT4k0aA",
+      "@manufacturing:i20in_SeXBcCDojXmReEQQ"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Y3Elscu3TmWLA5ejugF0QQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[0].connector-9",
+    "id": "Y3Elscu3TmWLA5ejugF0QQ",
+    "members": [
+      "@manufacturing:YfFK0Zp9hdkkFc1l19nVBg",
+      "@manufacturing:f8BGhUP5KpIRvuQ5I6GCsw",
+      "@manufacturing:sh64swQJZt3UapHtwH__EQ",
+      "@manufacturing:zEGopPI3AjSNOrCIm_jvjQ",
+      "@manufacturing:zogLutotWpfGuU9Tz-GMGw"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "8EQ0T2bCTjCEVyPQqkZOuQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "shield",
+    "id": "8EQ0T2bCTjCEVyPQqkZOuQ",
+    "members": [
+      "@manufacturing:86um7ltwWe15KwtYy3u7YQ",
+      "@manufacturing:ILSbAln2J9lnsltIQgXVfQ",
+      "@manufacturing:JZGTd_m2-OtsfXgdigD25Q",
+      "@manufacturing:X_i9dZ9YrhvVTKyq8fyuAg",
+      "@manufacturing:ebcMyPYFcLxg20rUn-niMw",
+      "@manufacturing:Uczh5Ep0fMv4KCUnvojhlA",
+      "@manufacturing:_TszKE6hmjq98o8AIWYe3Q",
+      "@manufacturing:aR9fi9tCOWF2RTlF8T1A4Q",
+      "@manufacturing:eUC__V7A4ADrx22ncX5-Yw",
+      "@manufacturing:lS-bs21C9Ou9ikPKd-lUuQ",
+      "@manufacturing:4n5V_ASlZwEsT2i5mD3rag",
+      "@manufacturing:GCzSmR4Hk-hiLTvj62cIjQ",
+      "@manufacturing:bsumKIF8s8gzxAZL0wlzCw",
+      "@manufacturing:vSSpcxGyYcmzxsBWP2t6Uw",
+      "@manufacturing:waY50HWEm8SLTIi0jXs4oQ",
+      "@manufacturing:0lCae5JimInL7vUqZ-zw5g",
+      "@manufacturing:ACLsEklMhSiywV5Gyd04gg",
+      "@manufacturing:IvhYxvDcvggtN2fsfyTtuQ",
+      "@manufacturing:PmuBMK6Fq_gJ3ntZWEgQ8w",
+      "@manufacturing:qHe-fDmgAJI31XhfYC7C6g",
+      "@manufacturing:5klPNbskEJGbSq2qnnQ8Nw",
+      "@manufacturing:ABvCmL6XhYQpew_EdNKn0g",
+      "@manufacturing:AV3ELgtqjEib6uXffPfxow",
+      "@manufacturing:GKsptPmO_pNK7WJpWJmS0Q",
+      "@manufacturing:OW86K6cfzwVT3x2G6-Urzw",
+      "@manufacturing:DNLcvSe_vIgA30rWLXE-Wg",
+      "@manufacturing:YxSBwB6ZbihuDElJZ9w1NA",
+      "@manufacturing:auNJ7FmlppsmUL4Aramvqg",
+      "@manufacturing:cc1MNHe3iLKdwkO99N5nFg",
+      "@manufacturing:mtOJdCibMkL1kz1p1H40Rw",
+      "@manufacturing:18_qXXJsDroekokMc1o92w",
+      "@manufacturing:8ePvlnNuvTc6fMIevMAlLw",
+      "@manufacturing:e6PXbBkEGOwnOMqhPqBO3w",
+      "@manufacturing:sL8oGqryiYfC2HbLjxzEZQ",
+      "@manufacturing:zKk_VpYxnlx5NL8juKDE3g",
+      "@manufacturing:4JzEOLt0rl91hQ6HFUIkJQ",
+      "@manufacturing:7KBvJqm1CcPbnZLhbUDPpA",
+      "@manufacturing:_lqURWqu5RuXPyy-g60vLw",
+      "@manufacturing:e_x5HfmSKxHPwfheFnQAAA",
+      "@manufacturing:vpLeJ0SRWaW0IodueGVX9Q",
+      "@manufacturing:NkJHKoKrq7bv7LMIwC9QXg",
+      "@manufacturing:S5LKYaicJFkdqE1ddqYhxw",
+      "@manufacturing:jSBH7o20dgOLILGMTZDMLw",
+      "@manufacturing:maiyKiBJI9bnr7Jz24GxRQ",
+      "@manufacturing:oU64vVogF3fAgAchFavE3Q",
+      "@manufacturing:1dHCRebvxbPMQRHuGFD-jA",
+      "@manufacturing:NuwvZOBICc6TTO2A6q8B_A",
+      "@manufacturing:_U4YUTuJos-xhlV4ZdFVww",
+      "@manufacturing:ihyr9f1rHE2koGBTX2hWVg",
+      "@manufacturing:vnWMTFd9emxUTa2oI_aTBw",
+      "@manufacturing:3FcvffQcs2egRCjqHUWNpQ",
+      "@manufacturing:O6zetVoronNM6USoNRsV5A",
+      "@manufacturing:eY_fi97XnIRSEKFjNIPrKA",
+      "@manufacturing:l8JV1mnMdDZOBbyixL7cJw",
+      "@manufacturing:oKtW8PxyOlA0K_guhKJwzg",
+      "@manufacturing:1DebOGaAgRWzFEa-ilmGwA",
+      "@manufacturing:_pGPx9SMtjMgyAQMeCCjEA",
+      "@manufacturing:izKHfA_jPVMkZoEFFSXr0w",
+      "@manufacturing:qzmzY6WmrnPEMMaLiUHrRg",
+      "@manufacturing:yIbnV4LeMD8s2e3SxrpwFA",
+      "@manufacturing:F1DOOxX3lJ3eE-tbUZ8SvA",
+      "@manufacturing:XX1hPpwCMvGz_6V9Rz5KVA",
+      "@manufacturing:h_R7rqz0eIZa3NpR4h7OSg",
+      "@manufacturing:lnRYMRQGulq_8JM98sv8xA",
+      "@manufacturing:zVDPxfxsmfuRn0ku0dsE3A",
+      "@manufacturing:00-9MXGN7kHefjxeIXwn9Q",
+      "@manufacturing:T5iCpZF1nf5__KgwQW4ROA",
+      "@manufacturing:ktgrnEOiCcPMsSUeKcFJBA",
+      "@manufacturing:r47solFIPYRorx8ALNr4lQ",
+      "@manufacturing:ztBEcJaN3bvTqolpyVecgQ",
+      "@manufacturing:2Gj2N_7s523v4yExdMpNIg",
+      "@manufacturing:JDXalIHl66QTuj_FTi1O-w",
+      "@manufacturing:ThiDMUAvwCh8TP2GRyAfCg",
+      "@manufacturing:lPlFW31ydT2NxwX0O3qX3A",
+      "@manufacturing:zPh22A-RPhqZ3npoJN5h7g"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "aYNC7kXsQyWfTkt11sbOyg",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1].connector-10",
+    "id": "aYNC7kXsQyWfTkt11sbOyg",
+    "members": [
+      "@manufacturing:2ssHBpxFbo0FEBNq6BEMZg",
+      "@manufacturing:C5SLCkWcU40d0oMWnwXHlw",
+      "@manufacturing:JM3hlJ_p0tJnD_0Plas--A",
+      "@manufacturing:UCLrzwzWq2h7MLod0Cc59w",
+      "@manufacturing:dW1MILbn6ew9xNY_QoodaA"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "s3z1Ha7dRC69iNs-jLFifg",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1].connector-11",
+    "id": "s3z1Ha7dRC69iNs-jLFifg",
+    "members": [
+      "@manufacturing:-3I60At3RUn9V1CLYPjsaw",
+      "@manufacturing:3zPjuA6OGsxKNNQggP212w",
+      "@manufacturing:OSirkz4z86SpcRbYwoLBHQ",
+      "@manufacturing:cRJUOE7wUky-5djHd5tlwQ",
+      "@manufacturing:po3qGgaOsU2Fqhf9B105-g"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "E6tvSG4QT0yz0VRR2pAkjA",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1].connector-12",
+    "id": "E6tvSG4QT0yz0VRR2pAkjA",
+    "members": [
+      "@manufacturing:927RpIv23ab5u4W2FHwEIQ",
+      "@manufacturing:Knej8lIw3ud0XM0HQHI-ZA",
+      "@manufacturing:TMNU0JjH9l_5KjP3Mp8sWg",
+      "@manufacturing:a-wL7se_RxQ3zVwD35HIjQ",
+      "@manufacturing:hONSM9AlHbLfKXqt3y4k7A"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
   "id": "cDr2mYwbSzSePzkuIYMrxw",
   "object": {
     "__type__": "Type:pcb.electrical.NetRule",
@@ -16749,6 +16860,7 @@
       "@manufacturing:6U5buKdOS4FIq8Dibh1STA",
       "@manufacturing:6WYuJAX5ZUGVrwr4EybD5Q",
       "@manufacturing:6i5_P7NF3cwoJTHnhAE8Bw",
+      "@manufacturing:6isKCW5wklpXt-PhvYe1kg",
       "@manufacturing:6kKRA5Uzkl-Y701XGqlEoQ",
       "@manufacturing:7INyOH18VsqjwoCGs9e-WA",
       "@manufacturing:7SXlXmpaKECTyzp8uQKoeQ",
@@ -16756,6 +16868,7 @@
       "@manufacturing:81lwcd37T6jte7_8W5ZFUg",
       "@manufacturing:8AHmUKQ4kFKNjMFLHFqFIA",
       "@manufacturing:8EwVNHGVRZqL7QfUe-U5aA",
+      "@manufacturing:8LHcwAYgX5eRPqE3NNiGVg",
       "@manufacturing:8hvHrLLiub-WgDidJ9VUJQ",
       "@manufacturing:8jMH1PYFAP1WaqT1rVc7Qg",
       "@manufacturing:8rAkjELIKTl1BdxFtrZsHQ",
@@ -16764,6 +16877,7 @@
       "@manufacturing:98ad6mYcHmsZHLn08z8GMA",
       "@manufacturing:9N8QmvDlHZp6ZaOG35JDjg",
       "@manufacturing:9X7XWMOj4rDbCy6LTjW68g",
+      "@manufacturing:9oC21yr8s1twa_gNEb6FvQ",
       "@manufacturing:9rWd2AQdm_DYc1zhqy60Sg",
       "@manufacturing:9w4JQIj-0J-1gF9kfa31fw",
       "@manufacturing:A0mNxh-Xvx3aqb8U2E2jKw",
@@ -16778,6 +16892,7 @@
       "@manufacturing:Axxisxh-nrEawKUDYZ3GoQ",
       "@manufacturing:B4FNgybBkiQUARu7gj2pxQ",
       "@manufacturing:B6-sBoTnDyQpWMw-owGvMA",
+      "@manufacturing:BCDAyYPSlrL4yGKol7Q5aw",
       "@manufacturing:BJq87tiGcVpDltQSYam8lg",
       "@manufacturing:BPMYk_k7uVrzZEfAeRQojg",
       "@manufacturing:BR6TIIjLgC7y6zgBmQ3Rig",
@@ -16809,6 +16924,7 @@
       "@manufacturing:Fi86ODIgxCjhksXu24OO0A",
       "@manufacturing:FoUTDVeeEtfUc0SBSIgZtw",
       "@manufacturing:GH9MK1uR3-bh7Ak67zs33A",
+      "@manufacturing:GUwsT0an7cexfNeCofCsFQ",
       "@manufacturing:Ggnu5BwzLzCEjcP2uB1wGw",
       "@manufacturing:GkbDprx4DzcF8vEUNIQbaA",
       "@manufacturing:GnC5qVCfFWUE_ntD6EfxtA",
@@ -16825,6 +16941,7 @@
       "@manufacturing:IJI4IbLZ3VNR1PAra-IYGQ",
       "@manufacturing:IKQkPwNEmFCdDhI92mRBvw",
       "@manufacturing:IN3awpPH8djNoVUFyR70lA",
+      "@manufacturing:IQ6RdZ4lt-PrnfOaTxih_A",
       "@manufacturing:ISJF674wDb3RexhJ-A6ytA",
       "@manufacturing:IYZCtMr-U-Cq4rZ_k8FiOA",
       "@manufacturing:IYjHGN4f0AGUPnYEgncIaA",
@@ -16848,6 +16965,7 @@
       "@manufacturing:KQoEYQSxy7y19Om5R0Ngzg",
       "@manufacturing:KYztOBDC6vvakFcX0csjtA",
       "@manufacturing:KjGB7bN9nnfBQi_oEHLszw",
+      "@manufacturing:Kj_AzO5X0NVu1ydtwmYOGg",
       "@manufacturing:L95HVArQXP5nY1DhnhNzQg",
       "@manufacturing:LAgGWZFYbbi-AfOQNx5-ZA",
       "@manufacturing:LGHKMhlqRf0JzCXOBxGKrg",
@@ -16914,6 +17032,7 @@
       "@manufacturing:RvTM3jL_ek0WeIl3NHhrZw",
       "@manufacturing:SKEHldKcQghXj8aSHAmAkA",
       "@manufacturing:SLDj-qNaFfyY9IMWh0vxxQ",
+      "@manufacturing:SMBI4yqhxPlwnUJIBNBs2w",
       "@manufacturing:SYKIgUHmNBWcrvpUOWuYXQ",
       "@manufacturing:Si2xBkdMW2CmJM3E3Gub7w",
       "@manufacturing:SiVGcoz-kq-sFgO0Si6bfw",
@@ -16929,6 +17048,8 @@
       "@manufacturing:To1Z6LO9w5JclNcf9nuR1g",
       "@manufacturing:U7leFILQEwknlqmipIlspA",
       "@manufacturing:UHaenPPXa9zUB7l3cNA5Ig",
+      "@manufacturing:UJnsmjvJuG01ZHuSoX_yvA",
+      "@manufacturing:UOmZB6ECDx4unE1M9RxD0A",
       "@manufacturing:UV-aZeg3iCzHxARryBa2SQ",
       "@manufacturing:Uw63MY9Hr6L3AEOSEYmm3Q",
       "@manufacturing:UyeA72cdr1V9cW10aFIU-g",
@@ -17017,6 +17138,7 @@
       "@manufacturing:h0lmmsTmE4yowPJDYoYT2A",
       "@manufacturing:h4EvzxdzjXMx9K5ywDmUsA",
       "@manufacturing:h9elyS-7YueE2hE0sYy9kg",
+      "@manufacturing:hKD2DmQ-EqD0GXFv2G_BtA",
       "@manufacturing:hUEwSpVKPRXa4C38u-xbRw",
       "@manufacturing:hiAxffSM0nPjhLZWSI56Uw",
       "@manufacturing:hu4KhLxsU4ewAWKpyBkoTw",
@@ -17056,6 +17178,7 @@
       "@manufacturing:miwqtFC9OlMfmXlsa_zSMw",
       "@manufacturing:mnsKaK-q26_h4-BbVVM-nQ",
       "@manufacturing:mxtZtjK0_JUVW00gxL6q8w",
+      "@manufacturing:n-1fa7H4x4Dh53lCPWBnUA",
       "@manufacturing:n-RFQvgk55vksM6gAwyUkw",
       "@manufacturing:n98UaBSP2U5XKDPwvA0eEw",
       "@manufacturing:nF-l_MnvIjRuuE-GlMxi8w",
@@ -17100,11 +17223,13 @@
       "@manufacturing:r6oN1OYm0xZq7vWQ-qGk7w",
       "@manufacturing:r7JizvNA33Ze2E7D6s4tYg",
       "@manufacturing:r9JvEFUiXPngllUh_tuk0g",
+      "@manufacturing:rKy5UYQQLZZlg_lF_iTjww",
       "@manufacturing:rUrM_8eF03mOmVh34MnFOQ",
       "@manufacturing:rZzjRaf-7sY_kV4utbBY1Q",
       "@manufacturing:rg1nDJnmV_IYjIEDWGGB2w",
       "@manufacturing:rhwhIGazYDBzBZPbTkblFQ",
       "@manufacturing:ry_8TtXc3PR2wOGnH8ymVw",
+      "@manufacturing:rzqKzBehb2RZOHxJ6TGVYA",
       "@manufacturing:s-ulnGOuc6QtF7R8dISULA",
       "@manufacturing:s28SLbP8ir8bYVEmqJ-6Vw",
       "@manufacturing:sBntKOAjwUCXzmxNpOuXsQ",
@@ -17117,6 +17242,7 @@
       "@manufacturing:tWJsCCpKWjDKdQZaFVefDQ",
       "@manufacturing:tYcQ7NIc2LLGk4lvB8_c8A",
       "@manufacturing:tcZJQS4rKdscPMAMA6lfig",
+      "@manufacturing:tvwLaHlmwetXS4mqxpTBUg",
       "@manufacturing:tyPFAgzmxwaHlBC48jN-vw",
       "@manufacturing:uNPTw7dp3LLqtSWEmbn4Fg",
       "@manufacturing:uPfLrDQIT8PebxE3Q3QOvQ",
@@ -17163,6 +17289,408 @@
       "@manufacturing:zKbbXyNgOF9zG1OtZ4wX6Q",
       "@manufacturing:zbybJKzY5mNvgCJ3xprAzw",
       "@manufacturing:zpTIE4jX9RfuzkZrPXuimg"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "YBuI2iO_T2eZ_Y-c9cc5mg",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[0]-ethernet-ETH_P1_P",
+    "id": "YBuI2iO_T2eZ_Y-c9cc5mg",
+    "members": [
+      "@manufacturing:8YqnWXw_rlFn9TKNnUFPQg",
+      "@manufacturing:EC_qkyAk2rDPHrUXnOiZ7g",
+      "@manufacturing:IsN90OMzJtD97UQ0-Mflbg",
+      "@manufacturing:J_bEVEhdsxhOE7uDEQxV_A",
+      "@manufacturing:ME8w00scMjBGePUWK3cDFQ",
+      "@manufacturing:aSmBfx9jX0F7bwmlBhnxZQ",
+      "@manufacturing:oTHBvHIlBvqHAyKNJTSZOA",
+      "@manufacturing:weydT4nouCRIwsjpZAHTFg"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Nu7X3I7MTs-ZaBLdDVovdQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[0]-ethernet-ETH_N1_N",
+    "id": "Nu7X3I7MTs-ZaBLdDVovdQ",
+    "members": [
+      "@manufacturing:72C4xVLO3rUpWPYAC3f0rw",
+      "@manufacturing:8YvH2sarSp71R0XaFwGqjg",
+      "@manufacturing:Y-FHeYmNNJwWNoMWZlIMcQ",
+      "@manufacturing:YROxFDsnQsGdAb7bNCnFqQ",
+      "@manufacturing:bdBkF2waOeIScjfdQQZphA",
+      "@manufacturing:pUguUOvaf86KuuWGClIiZw",
+      "@manufacturing:u4-aqgQ_10k_CLojl6pJXg",
+      "@manufacturing:ynHD1KmEWGXRCZ9L60nH2Q"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "9RyHyskSTNGj3viSq5OdHA",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[0]-ethernet-ETH_P0_P",
+    "id": "9RyHyskSTNGj3viSq5OdHA",
+    "members": [
+      "@manufacturing:2UL0OsO-jC4w0lZPQjeA_g",
+      "@manufacturing:4hd8YnUK11ET4hHwukiIPg",
+      "@manufacturing:FaNXlZbSzeab_-YnEPVzhg",
+      "@manufacturing:Fwlhr60A7fnPV0luYIl9jQ",
+      "@manufacturing:HUb83eSUb9I_hWJPe_ftXA",
+      "@manufacturing:k6DA3KR9ELpTqEOLZbbeHg",
+      "@manufacturing:pNwcyXB9JWsiEnSGjihhZg",
+      "@manufacturing:prQQ7e7EiJBcpuECWVvohw"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "dCygCC9QRW-VST9mZdHj1g",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[0]-ethernet-ETH_N0_N",
+    "id": "dCygCC9QRW-VST9mZdHj1g",
+    "members": [
+      "@manufacturing:1GLXsYPiiinhHAak54TPKA",
+      "@manufacturing:6jVxb-uIEb2BlnA3iJoFlA",
+      "@manufacturing:Ir_Ow218vR9SBJfHnXiJ1g",
+      "@manufacturing:MSfsKGgWsJNEIDSi84_BwQ",
+      "@manufacturing:NN6aX-KWYxlsEaDvGJGF9Q",
+      "@manufacturing:acXGuu956ioqNJBZb7rv4w",
+      "@manufacturing:bJ-qBSLQLY9JPk2fPDn8HQ",
+      "@manufacturing:rLP5SOxDYJXw33l8EXzrqQ"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "loabVLQPRiiO0ypJ42MwNg",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1]-ethernet-ETH_P1_P",
+    "id": "loabVLQPRiiO0ypJ42MwNg",
+    "members": [
+      "@manufacturing:3xsUmDmhLoSJwzJLNGGg_w",
+      "@manufacturing:Er2eY5qBIYtxXZEk3MpoeQ",
+      "@manufacturing:LjZCnXGvu1eExJTXpqtCJw",
+      "@manufacturing:_6SSHPzOnPMouyrEWwJZgg",
+      "@manufacturing:_8Ik-LQzaQAuhnkr61xg7Q",
+      "@manufacturing:mbxbmo-B46Hh5TP7XeyXDw",
+      "@manufacturing:tejIXkZNA2CgMSqTMYq-RA",
+      "@manufacturing:zqUs1efTr_G7oE-crxUUKA"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "9K_gOP5WR6S7V4ZbqYkARQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1]-ethernet-ETH_N1_N",
+    "id": "9K_gOP5WR6S7V4ZbqYkARQ",
+    "members": [
+      "@manufacturing:AB8oaStoMiG9W611hTua1A",
+      "@manufacturing:MhfxbfOhIdTdR_rLfnpibg",
+      "@manufacturing:Pnsn-i7n-fqGTEYYvtuDPg",
+      "@manufacturing:ZB9rCgqm4D3T6ZLEwU-eEw",
+      "@manufacturing:gihEkdT7E46zc73kVf0Pqg",
+      "@manufacturing:mvaa6VGGDWt-j5DTZyJyyw",
+      "@manufacturing:oKB0Rgbj_o6hx5n0d5yXzQ",
+      "@manufacturing:qiPPx9R3T8H-1hpMyW1lQQ"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "whufhd_ESwSNDf2dR8d-ag",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1]-ethernet-ETH_P0_P",
+    "id": "whufhd_ESwSNDf2dR8d-ag",
+    "members": [
+      "@manufacturing:FynJJgGZ-Mpye8ppSpCcew",
+      "@manufacturing:HXnW3BvdcHfNve7R8IRDTg",
+      "@manufacturing:f1NaN6LiLb8E8P5fFHzq9g",
+      "@manufacturing:jnzn4-CNxrhkgZ1ExMVlWQ",
+      "@manufacturing:lSAtSUtxUtJ2cImahiJZTw",
+      "@manufacturing:xH6iiX69Ut657zU2L8iefw",
+      "@manufacturing:xRbk4rlSSTYiFcchSOpMxw",
+      "@manufacturing:xUIkOLRsj83M0CsggJCYQw"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "yLrf6WxxSMKl_jXQ3h5xWg",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "rj45[1]-ethernet-ETH_N0_N",
+    "id": "yLrf6WxxSMKl_jXQ3h5xWg",
+    "members": [
+      "@manufacturing:-s7ZiJkVXeU5s-CEGwn4yg",
+      "@manufacturing:0Jf77o1nsCXUdd_ktYL5ow",
+      "@manufacturing:6z8Ao2kElJmHU6GZeMs4wA",
+      "@manufacturing:ffHNPPfeqQFhwDxWJ-0LQA",
+      "@manufacturing:l-VUwAVUS512d1s9ze4fqA",
+      "@manufacturing:ln401pDGEICJMLU0Crz_tQ",
+      "@manufacturing:tkgzSB5KkAMP6uAq1dw_RQ",
+      "@manufacturing:ugbyGTFudNRxgoqOw6HTIg"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "1CpeATKgRB2fJP3xOEDfmg",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "input_dc_block_caps[2]-power-power_P",
+    "id": "1CpeATKgRB2fJP3xOEDfmg",
+    "members": [
+      "@manufacturing:-A0hHeQazU8weQk4HtNoww",
+      "@manufacturing:0nc-JGKYRSyI9divk8zgGQ",
+      "@manufacturing:3Db9tUXTFEwYPwoRieXnVw",
+      "@manufacturing:5JJdU1uFCmZuTYOwdiqDnQ",
+      "@manufacturing:7g1NEuJXR3ixTdicZsetfw",
+      "@manufacturing:8aIEkJM_YTOr74LfrRpo9w",
+      "@manufacturing:9xfDjFH0e9fQmFXAlDMlrg",
+      "@manufacturing:FcoNmSz3stXkr4o2kEWnAw",
+      "@manufacturing:ICSkRRPNdDZ4AMnK-LwofQ",
+      "@manufacturing:JneibWj6_-t90iAba-_YaA",
+      "@manufacturing:SJn7gFSU4EqUC6_W1pyJHg",
+      "@manufacturing:cCe7jNr5SWbVl80xkM21QA",
+      "@manufacturing:cgHgrCK_rwFZJQd6eoyV8w",
+      "@manufacturing:ePfIEqHpJD92mD2NuBkN5g",
+      "@manufacturing:idydVkrbZ5swsqhh19uiag",
+      "@manufacturing:jvQWrOG4Ut1x5w00zI9kCQ",
+      "@manufacturing:n-n86NSUqaGPFmA1iVUB6A",
+      "@manufacturing:sdOJ_nqnVyM2QGW0ebIe7g"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "0kSUCsWgQuO-lIIxgdTCpQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "input_dc_block_caps[3]-power-power_N",
+    "id": "0kSUCsWgQuO-lIIxgdTCpQ",
+    "members": [
+      "@manufacturing:4PLYXXlfhmqvYH2ee7IT6g",
+      "@manufacturing:5a4nOc2FWOcokSLfWhXGmQ",
+      "@manufacturing:9wVUDuKI4kVXJz3eFK3WYg",
+      "@manufacturing:J5AZMxuoYJhqsPThiNL7UQ",
+      "@manufacturing:MGF6-3_8NjN3EB7GvfBgFw",
+      "@manufacturing:S1lIZHbBVPCzUTpQ7Kv-Dw",
+      "@manufacturing:SYGdE6X2V6FYGEajxcEbuA",
+      "@manufacturing:aXZglu1DgAnhTrlj_ahfeA",
+      "@manufacturing:cO4CkShIe2O3qkrpIH9fXQ",
+      "@manufacturing:gQSYKHj6HBkd_6FbxeFcWA",
+      "@manufacturing:hHU0lhSJrkX4PtOARFp3pQ",
+      "@manufacturing:q4E-1pYhRgawLOot6IMcbg",
+      "@manufacturing:z3EH5lWQgCXHmT0u8ytIkg"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "wsnVh5oJTcCCv7GEq95XVg",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "power_P",
+    "id": "wsnVh5oJTcCCv7GEq95XVg",
+    "members": [
+      "@manufacturing:00ZrGf3xuKCOvdkS0o2icA",
+      "@manufacturing:2hCBsqlzFl1PXBdSv0cJAw",
+      "@manufacturing:H8y7lyXM2MxcKwzhHNoHNw",
+      "@manufacturing:Oe8PcMh1R1zeGyV24eABDA",
+      "@manufacturing:QcXi9URwoJ_OTVBPy9Krbw",
+      "@manufacturing:SOB5cUj5-3jMXATD0O_H8g",
+      "@manufacturing:bi48r-hUJ_ZhG6uwcV2L7Q",
+      "@manufacturing:e7h3r1RpOl9EfGLJwsnS2Q",
+      "@manufacturing:eWbIWI-NWXT8WKWQvquMxg",
+      "@manufacturing:hO9ozdlYr35Cw0RiJ0zxWg",
+      "@manufacturing:kbJX02the_pdwdjYR7JbJA",
+      "@manufacturing:ksTyDDOP5mmKEPQaHwnGbA",
+      "@manufacturing:msZKwx3U_d9wQ4jvZEdoCg",
+      "@manufacturing:p6De5hUvBUG_zLs7PmJyUQ",
+      "@manufacturing:pvG0PAtPVzxoNF4FtAWIeg",
+      "@manufacturing:qZjJ12iUg4mN5num4mpQ3g",
+      "@manufacturing:t9NavQ_UnB-BjZtK6RB1xg",
+      "@manufacturing:wsCsraHOTUsTFsaMSviDRA"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "xI3s7Ui1RAC2Um77ogrLCw",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "power_N",
+    "id": "xI3s7Ui1RAC2Um77ogrLCw",
+    "members": [
+      "@manufacturing:1J-nIVfT3x3NF8RMAEmbQg",
+      "@manufacturing:2EU4k3mC8S7VcmDY4cJKQg",
+      "@manufacturing:2RE9Mj3KP1ldjNB9yJ5yTA",
+      "@manufacturing:3vQ8UOhIB3TMQsGXH1UBRg",
+      "@manufacturing:8WQ1qPbOSp6bbb6t2MJxCQ",
+      "@manufacturing:FwIy56rUG0dV6ri2toO6gA",
+      "@manufacturing:Sb9Gv1mtdvRG_epjvvspAA",
+      "@manufacturing:WAOoQcD4iyO0L2nQ3DtRjQ",
+      "@manufacturing:cfXpoFyRE6ZqCQHrZ-YVTw",
+      "@manufacturing:m-S0H-aZlDiuD5HsaMrSEQ",
+      "@manufacturing:mfJL9povefOvkUNxzOu2pg",
+      "@manufacturing:qvJVlgPYvizL-C8JLrSNLg",
+      "@manufacturing:sr96fy22yLD02PDl7tgI4w"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "eeLR-JQZTI2YqmIl9S1KLw",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "SENSEneg_N",
+    "id": "eeLR-JQZTI2YqmIl9S1KLw",
+    "members": [
+      "@manufacturing:6mDx07xDgLRN8dkRjNefqg",
+      "@manufacturing:9e40SjQr-oyR0lM5PxZy1A",
+      "@manufacturing:Cn8KB9yBtcVKnqJpK3zf5Q",
+      "@manufacturing:E09prNXntlkeReIk6uVeDQ",
+      "@manufacturing:UwmmL1A4s4aqNtCcu1PL8g",
+      "@manufacturing:Z6MZMS9GHHn8EQroDC-KyQ",
+      "@manufacturing:_fpWzrjwZ1XrGIs92f0KwA",
+      "@manufacturing:cVrsS0xF3KjvxhgW9OAv0Q",
+      "@manufacturing:jcNlzEmm6RAx6ENEUrMZtw",
+      "@manufacturing:keXaqPnQgyqoof3mJ5V0GA",
+      "@manufacturing:uYxMERZrS3eQpvHiGBntrQ"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "gtgngaRCTAu60bp9FlU-fA",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "SENSEpos_P",
+    "id": "gtgngaRCTAu60bp9FlU-fA",
+    "members": [
+      "@manufacturing:03Vdrurb5Ow39PZ3pSmHDw",
+      "@manufacturing:E8HDn-i8PXK2ru-v6GuK2A",
+      "@manufacturing:GDWjEZGaSJgg_hf1S4Tbtw",
+      "@manufacturing:I0-4S_GitPD-Dh5q8tR7Fg",
+      "@manufacturing:fyZa_x3wgz-IV3wCLY-5xg",
+      "@manufacturing:ghRLTvnLdB6mNiGTs3ScNg",
+      "@manufacturing:h8-WiDZsLy8SAeDrhg2-GQ",
+      "@manufacturing:i6gE0HJUR-VQrkC5QLQZDA",
+      "@manufacturing:pyoTqbU2PjiLQHtsWhGvoQ",
+      "@manufacturing:xSpM3jwLyCi1xSzdvlN9xA",
+      "@manufacturing:xefEPtd4qn61cXvjsP8ITg"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "DVVhX9xeTyKEO2G3-KDOhQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "DMX_P",
+    "id": "DVVhX9xeTyKEO2G3-KDOhQ",
+    "members": [
+      "@manufacturing:0AdfOowgCVn9fslOfCvqzw",
+      "@manufacturing:BHQQugBdzbLPp_liSkZblg",
+      "@manufacturing:EPzv2fIjikTbvazl_QvxBQ",
+      "@manufacturing:OAZ0jy0Jnu5zWU5ni2RRSQ",
+      "@manufacturing:QrtDzsvx4Vk0aNpxvnvSHg",
+      "@manufacturing:b0y2d_d_yuaM1tBNgoqlZw",
+      "@manufacturing:t130hqFTaRuPd92D4ZI98Q",
+      "@manufacturing:wIOhwQc8Qer66zSGevPhBA"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "t8vfezz_S4a_MQGPHS33eQ",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "DMX_N",
+    "id": "t8vfezz_S4a_MQGPHS33eQ",
+    "members": [
+      "@manufacturing:Mbi1VL_3-PiPzNRSaHkhXg",
+      "@manufacturing:T6gMcjDof5TrUKQ8r7GHhQ",
+      "@manufacturing:aA13W67kmatLRnSyyV2fjg",
+      "@manufacturing:brtibI-TFWV1-Q9oo9kIGg",
+      "@manufacturing:cYCcvBGaO10RnhiCHz9MhA",
+      "@manufacturing:iAz_944oK87rtv82SDVLGg",
+      "@manufacturing:rB_WHh3ma1VSAHj_IfHSVQ",
+      "@manufacturing:z505dY5qdHP_4TEwoSTzHg"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "xTzcQmtGTeWYE-MChlsrCg",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "xlr_out[1]-signal-SENSEneg_N",
+    "id": "xTzcQmtGTeWYE-MChlsrCg",
+    "members": [
+      "@manufacturing:5xFtSAEZNVouQevJswlcHg",
+      "@manufacturing:7U2qD2GlWhn5u8lplB6Uyw",
+      "@manufacturing:Fq8gIHaeYx18sd_cHA4zxg",
+      "@manufacturing:Hg-K2alErVTboSdlXHUDWQ",
+      "@manufacturing:ISVADh8RvoK9G2nNvYQ7fw",
+      "@manufacturing:Sm5FS8MUQF2XIBiK4I7X7Q",
+      "@manufacturing:YfDM6MC_bRe2Tg7FG6Jszg",
+      "@manufacturing:fQIGE3VkDA5CfY7-L5JtrQ",
+      "@manufacturing:gs99TxiI1TucnqStF3MONQ",
+      "@manufacturing:nSmDoumWeHZrQj5OAT2Zjw",
+      "@manufacturing:xYOQRD2zuez1tyTVMbEtYA"
+    ]
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "roNJD1tTSvqAr_Rpx-tVEw",
+  "object": {
+    "__type__": "Type:pcb.electrical.NetRule",
+    "name": "xlr_out[1]-signal-SENSEpos_P",
+    "id": "roNJD1tTSvqAr_Rpx-tVEw",
+    "members": [
+      "@manufacturing:-te7QkgVu1QcObWh2f5A1g",
+      "@manufacturing:HKBr9awrWTdxCNMqtRm5lQ",
+      "@manufacturing:I9rQVB8wRCIck7WK6MhgwA",
+      "@manufacturing:Kg0IAkTVpnJZK_n1TH3ozQ",
+      "@manufacturing:McG2nfZYvor_Pw4ZA6EzhA",
+      "@manufacturing:PU1LHn1iK0e-9_YKvOdsog",
+      "@manufacturing:TJfIZi2vdqwmF_lw79xAyg",
+      "@manufacturing:ZTUZJ0q9RdcvgJ546cFM5g",
+      "@manufacturing:mh26XlB_7-DJjLIehjg0-g",
+      "@manufacturing:uhtw9LQNU1HRQBFWd2FujA",
+      "@manufacturing:vplDY8O37OBCAksAl_L-zQ"
     ]
   }
 }
