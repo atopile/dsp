@@ -1,18 +1,18 @@
-# Vendored v2 port of the `atopile/ti-tlv75901` package driver (simplified:
-# fixed 3.3V feedback divider instead of a solver-driven adjustable divider).
+# TLV75901 adjustable LDO. Feedback values follow power_out.voltage.
 .ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
 .PARTS := .ELEC::PARTS
 
 .LDO_IC: @STD::Import { .uri &= "parts/Texas_Instruments_TLV75901PDRVR/Texas_Instruments_TLV75901PDRVR.ato" }
 
 .TI_TLV75901: @type {
-    /// TI TLV75901 1A adjustable low-noise LDO, configured for 3.3V out.
-    /// Vout = 0.55V * (1 + Rtop/Rbottom); 9.09k/1.82k gives 3.30V.
+    /// TI TLV75901 1A adjustable low-noise LDO.
+    /// Vout = 0.55V * (1 + Rtop/Rbottom), solved with resistor tolerances.
     /// Enable is strapped to the input rail (always on).
     .ic: LDO_IC::Texas_Instruments_TLV75901PDRVR_package
 
-    .power_in: ELEC::ElectricPower
-    .power_out: ELEC::ElectricPower
+    .power_in: ELEC::ElectricPower { .voltage &= 1.5V..6V }
+    .power_out: ELEC::ElectricPower { .voltage &= 2.5V..5.5V }
+    .power_in.voltage >= .power_out.voltage + 0.3V
 
     .power_in.lv ~ .power_out.lv
 
@@ -23,26 +23,24 @@
     .ic.EP ~ .power_out.lv
     .ic.EN ~ .power_in.hv  # always enabled
 
-    # --- Feedback divider (sets 3.3V) ---
-    .feedback_top: ELEC::Stuff::Resistor {
-        .resistance &= 9.09kohm +/- 1%
-        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
-    }
-    .feedback_bottom: ELEC::Stuff::Resistor {
-        .resistance &= 1.82kohm +/- 1%
-        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
-    }
-    .ic.OUT ~> .feedback_top ~> .ic.FB
-    .ic.FB ~> .feedback_bottom ~> .power_out.lv
+    .feedback: ELEC::ResistorVoltageDivider
+    .power_out ~ .feedback.ref_in
+    .feedback.ref_out.hv ~ .ic.FB
+    .feedback.v_out &= 0.55V +/- 1%
+    .feedback.chain.resistors[1].resistance &= 1.82kohm +/- 1%
+    @trait(_, .feedback.chain.resistors[0]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .feedback.chain.resistors[1]): PARTS::has_package_requirements { .size &= "0402" }
 
     # --- Decoupling ---
     .input_decoupling_capacitor: ELEC::Stuff::Capacitor {
-        .capacitance &= 1uF +/- 10%
-        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+        .capacitance &= 4.7uF +/- 20%
+        .max_voltage >= 16V
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
     }
     .output_decoupling_capacitor: ELEC::Stuff::Capacitor {
-        .capacitance &= 1uF +/- 10%
-        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+        .capacitance &= 4.7uF +/- 20%
+        .max_voltage >= 16V
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
     }
     .power_in.hv ~> .input_decoupling_capacitor ~> .power_in.lv
     .power_out.hv ~> .output_decoupling_capacitor ~> .power_out.lv

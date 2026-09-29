@@ -1,0 +1,40 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.PARTS := .ELEC::PARTS
+.DEVICE: @STD::Import { .org &= "jlc"; .project &= "C5369477"; .version &= "0.1.0" }
+
+.B0524S: @type {
+    /// 5 V to isolated nominal 24 V, 2 W / 83 mA module from the original DSP.
+    /// YLPTEC B_S-2WR3 datasheet: 10% minimum load, 220 uF capacitive-load limit.
+    .ic: DEVICE::YLPTEC_B0524S_2WR3
+    .power_in: ELEC::ElectricPower { .voltage &= 4.5V..5.5V }
+    .power_out: ELEC::ElectricPower { .voltage &= 24V +/- 15% }
+    .power_in.hv ~ .ic.VINpos
+    .power_in.lv ~ .ic.VINneg
+    .power_out.hv ~ .ic.VOUTpos
+    .power_out.lv ~ .ic.VOUTneg
+    # Deliberately no input/output ground connection: the secondary floats.
+
+    .input_cap: ELEC::Capacitor {
+        .capacitance &= 4.7uF +/- 20%
+        .max_voltage >= 16V
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
+    }
+    .output_cap: ELEC::Capacitor {
+        .capacitance &= 470nF +/- 10%
+        .max_voltage >= 50V
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
+    }
+    .power_in.hv ~> .input_cap ~> .power_in.lv
+    .power_out.hv ~> .output_cap ~> .power_out.lv
+
+    # Four parallel 8.2k resistors guarantee >9.8 mA at 20.4 V.
+    # At 27.6 V each dissipates <95 mW; 0.5 W is >5x, per the datasheet.
+    .preload: [4]ELEC::Resistor
+    @for(.preload, {
+        .obj.resistance &= 8.2kohm +/- 1%
+        .obj.max_power >= 0.5W
+        .obj.max_voltage >= 50V
+        @trait(_, .obj): PARTS::has_package_requirements { .size &= "1206" }
+        power_out.hv ~> .obj ~> power_out.lv
+    })
+}

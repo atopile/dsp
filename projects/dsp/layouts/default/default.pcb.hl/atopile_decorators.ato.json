@@ -3,10 +3,10 @@
   "schema_version": 0,
   "layer": "atopile_decorators",
   "created_at": "2026-07-23T17:29:22Z",
-  "high_water_mark": "2026-09-29T16:47:07Z",
+  "high_water_mark": "2026-09-29T18:10:26Z",
   "dirty": false,
-  "record_count_total": 69,
-  "record_count_live": 69
+  "record_count_total": 103,
+  "record_count_live": 103
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
@@ -242,17 +242,6 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "_U_xfpxSGfH3-PkmKXF9BQ",
-  "object": {
-    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
-    "id": "_U_xfpxSGfH3-PkmKXF9BQ",
-    "target": "@project:Ue7rL6qlTFiAU4z8RkJSSw",
-    "atopile_address": "power.ldo_3v3_analog.input_decoupling_capacitor"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
   "id": "CAUEEv1sd7DTTHIfYDT1Dg",
   "object": {
     "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
@@ -407,17 +396,6 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "rXqvPP6j0f5g56BH5lOsWQ",
-  "object": {
-    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
-    "id": "rXqvPP6j0f5g56BH5lOsWQ",
-    "target": "@project:pjrCY4sWQz-PFMisRkJSSw",
-    "atopile_address": "power.bulk_cap_3v3d"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
   "id": "xbyFadkrNwOmKGWcBuP5pA",
   "object": {
     "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
@@ -468,17 +446,6 @@
     "id": "_b_h8eHB2qq61ZPvhfvzlQ",
     "target": "@project:qnvwZv0ESR2XaryYRkJSSw",
     "atopile_address": "eth_switch.p2_config_pullup"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "CamJQFbpab1RjViatxxnKA",
-  "object": {
-    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
-    "id": "CamJQFbpab1RjViatxxnKA",
-    "target": "@project:rKe2WrKfSE27CvnzRkJSSw",
-    "atopile_address": "power.ldo_3v3_analog.output_decoupling_capacitor"
   }
 }{
   "__type__": "Type:ll.Op",
@@ -589,28 +556,6 @@
     "id": "6rk3OJSWfj6KELpmwjfeCg",
     "target": "@project:zIEQEaaJS8epDfOPRkJSSw",
     "atopile_address": "eth_switch.decoupling_caps_1v2[0]"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "NtdVY5k727O4MB8iIf1gHQ",
-  "object": {
-    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
-    "id": "NtdVY5k727O4MB8iIf1gHQ",
-    "target": "@project:2kncpGYZTCiBni6PRkJSSw",
-    "atopile_address": "power.bulk_cap_5v"
-  }
-}{
-  "__type__": "Type:ll.Op",
-  "op": "create",
-  "timestamp": "1970-01-01T00:00:00Z",
-  "id": "GVTCZlFAWpw1pFB0SxSrug",
-  "object": {
-    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
-    "id": "GVTCZlFAWpw1pFB0SxSrug",
-    "target": "@project:2unOrxCmS6aI3zTxRkJSSw",
-    "atopile_address": "power.bulk_cap_3v3a"
   }
 }{
   "__type__": "Type:ll.Op",
@@ -748,22 +693,451 @@
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "3W06uUJwjR9b4WfQvAl1kQ",
+  "id": "dxWv2BnzfJO3QqInMnYxkA",
   "object": {
     "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
-    "id": "3W06uUJwjR9b4WfQvAl1kQ",
-    "target": "@project:3wgvLKAR4-K3ioeHYL2Lnw",
-    "atopile_address": "power.ldo_3v3_analog.feedback_bottom"
+    "id": "dxWv2BnzfJO3QqInMnYxkA",
+    "target": "@project:2kncpGYZTCiBni6PRkJSSw",
+    "atopile_address": "power.bulk_cap_5v"
   }
 }{
   "__type__": "Type:ll.Op",
   "op": "create",
   "timestamp": "1970-01-01T00:00:00Z",
-  "id": "cGUEoql8YBVsmRCZESYrZA",
+  "id": "uUVX8r_rIWqFwVRQFSxZZA",
   "object": {
     "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
-    "id": "cGUEoql8YBVsmRCZESYrZA",
-    "target": "@project:-rTS1n2bngZv1z5TVrhVyA",
-    "atopile_address": "power.ldo_3v3_analog.feedback_top"
+    "id": "uUVX8r_rIWqFwVRQFSxZZA",
+    "target": "@project:Ue7rL6qlTFiAU4z8RkJSSw",
+    "atopile_address": "power.ldo_3v3_analog.input_decoupling_capacitor"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "AspkMJwI2SW_BbzeEVefIw",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "AspkMJwI2SW_BbzeEVefIw",
+    "target": "@project:rKe2WrKfSE27CvnzRkJSSw",
+    "atopile_address": "power.ldo_3v3_analog.output_decoupling_capacitor"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "dsuvPTEba8PcQZe2-1fpqg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "dsuvPTEba8PcQZe2-1fpqg",
+    "target": "@project:mlQ7apT-dohuAPk4MbN_hg",
+    "atopile_address": "power.input_connector"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "HheZwP6jTjpnFWgaN92KKQ",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "HheZwP6jTjpnFWgaN92KKQ",
+    "target": "@project:YoV3gGpqetkx-eIQhJO2iQ",
+    "atopile_address": "power.buck_3v3_digital.ic"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "kNjhd_O_X2NZ5K_gSxZ6_w",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "kNjhd_O_X2NZ5K_gSxZ6_w",
+    "target": "@project:-HlJf9U8f-GFLYJQ-P3wng",
+    "atopile_address": "power.boost_18v_pos.converter.ic"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "z0CQoDhTF0ae8JYK5MTp3w",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "z0CQoDhTF0ae8JYK5MTp3w",
+    "target": "@project:dHd_HfvSEBR6mVDsa4vKrg",
+    "atopile_address": "power.boost_18v_pos.post_regulator.ic"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "ElGYGc3sHSFlariAYBwODQ",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "ElGYGc3sHSFlariAYBwODQ",
+    "target": "@project:lHgPdy4ZMr6AfhyzAXNO6A",
+    "atopile_address": "power.boost_18v_neg.converter.ic"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "FuXijikCCA3eJzUp05hbqQ",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "FuXijikCCA3eJzUp05hbqQ",
+    "target": "@project:euL1mNyWWMhKjcTTzK4gAQ",
+    "atopile_address": "power.boost_18v_neg.post_regulator.ic"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "J_a0bAJjwhFrwZMuFzL_lQ",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "J_a0bAJjwhFrwZMuFzL_lQ",
+    "target": "@project:lZ7QxJhuedT-rbelte_p_A",
+    "atopile_address": "cm.ic"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "uQgXRVS5t1hsb_G1t4qT0A",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "uQgXRVS5t1hsb_G1t4qT0A",
+    "target": "@project:SkP_Xqng_g1Jzpk7ptzXTA",
+    "atopile_address": "power.boost_18v_neg.converter.input_cap"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "HPwCMqTvx2NB1NU3Lmxx5Q",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "HPwCMqTvx2NB1NU3Lmxx5Q",
+    "target": "@project:ln7Ohk6uNX3AP49j2hTEdA",
+    "atopile_address": "power.boost_18v_neg.converter.output_cap"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "_rddJvpKxijf0V3ZDuXJiQ",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "_rddJvpKxijf0V3ZDuXJiQ",
+    "target": "@project:HOIOippqXf_ZM1J5-5nqvg",
+    "atopile_address": "power.boost_18v_neg.converter.preload[0]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "4mR96xrEPNjOo_Hijfy_zw",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "4mR96xrEPNjOo_Hijfy_zw",
+    "target": "@project:6kLkZEgBJkiXOcpWf3MkXw",
+    "atopile_address": "power.boost_18v_neg.converter.preload[1]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "tnmi_AXRJBwL2CDNLYd3DA",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "tnmi_AXRJBwL2CDNLYd3DA",
+    "target": "@project:8uYI4QWZk_2PpyauQsUjhQ",
+    "atopile_address": "power.boost_18v_neg.converter.preload[2]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Ri46BM3grDsOWZ1ZI4n5rg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "Ri46BM3grDsOWZ1ZI4n5rg",
+    "target": "@project:85Di0iNkQ9oNa3k5Nw2pwA",
+    "atopile_address": "power.boost_18v_neg.converter.preload[3]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "KR7Pn2IfdzWiKleeMKt68g",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "KR7Pn2IfdzWiKleeMKt68g",
+    "target": "@project:MSCCTnb8RFfFJ8TwEs1Xbg",
+    "atopile_address": "power.boost_18v_neg.post_regulator.input_cap"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "5DI1iqhRY75kF0pRAnZkbA",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "5DI1iqhRY75kF0pRAnZkbA",
+    "target": "@project:FJVocea8HAUhKkmVCTXspQ",
+    "atopile_address": "power.boost_18v_neg.post_regulator.noise_reduction"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "ELOga-Ozm7aPCWaDnbEn4g",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "ELOga-Ozm7aPCWaDnbEn4g",
+    "target": "@project:Z90cQ7XO9PKIFohA0GIxCw",
+    "atopile_address": "power.boost_18v_neg.post_regulator.output_caps[0]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "2dpXtn2TpJDEoNpY_4Sjkg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "2dpXtn2TpJDEoNpY_4Sjkg",
+    "target": "@project:Dpfd5TgWZG0msfN6kogvfQ",
+    "atopile_address": "power.boost_18v_neg.post_regulator.output_caps[1]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "tfTWtdfCgCHnVNvntYmGNw",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "tfTWtdfCgCHnVNvntYmGNw",
+    "target": "@project:LsNDTaRx_fbcIiN9w-WtRw",
+    "atopile_address": "power.boost_18v_pos.converter.input_cap"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "Ukk0bAoOdPro2TRP8eQIfA",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "Ukk0bAoOdPro2TRP8eQIfA",
+    "target": "@project:XgP8-HLI71wH2rSllLaxgg",
+    "atopile_address": "power.boost_18v_pos.converter.output_cap"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "tQxMvgY4769BERAT4xQgPA",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "tQxMvgY4769BERAT4xQgPA",
+    "target": "@project:g9DFiqMDdknEJCLDcA97uA",
+    "atopile_address": "power.boost_18v_pos.converter.preload[0]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "A1oeDvMKZ2cKbTcY8BFdIg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "A1oeDvMKZ2cKbTcY8BFdIg",
+    "target": "@project:SYsD6H-SYmoIqbHaZ44ObQ",
+    "atopile_address": "power.boost_18v_pos.converter.preload[1]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "SvqNsgq-2cb6MC_kmJ1hjw",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "SvqNsgq-2cb6MC_kmJ1hjw",
+    "target": "@project:wxKwajTC0cTi7Zzgji6B9g",
+    "atopile_address": "power.boost_18v_pos.converter.preload[2]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "O3AJryQRzJzmzMzFjBLrSg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "O3AJryQRzJzmzMzFjBLrSg",
+    "target": "@project:PvqXPfjW49nMrWtFah5_pQ",
+    "atopile_address": "power.boost_18v_pos.converter.preload[3]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "6jbruByn4LUSgWvI-VjDjg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "6jbruByn4LUSgWvI-VjDjg",
+    "target": "@project:YytvJTwPSHIDvxb-jPwOQg",
+    "atopile_address": "power.boost_18v_pos.post_regulator.input_cap"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "RlvfMjWql6KkNnAUbiBUjA",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "RlvfMjWql6KkNnAUbiBUjA",
+    "target": "@project:zPznXxupGnV0FmZcIjE6Tg",
+    "atopile_address": "power.boost_18v_pos.post_regulator.noise_reduction"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "auHXLuNsmZ2UKJrdjEDAyA",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "auHXLuNsmZ2UKJrdjEDAyA",
+    "target": "@project:myL6B8luxnuViP2M4JnnlA",
+    "atopile_address": "power.boost_18v_pos.post_regulator.output_caps[0]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "DoRrhE000VQ2VzX4nEmldw",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "DoRrhE000VQ2VzX4nEmldw",
+    "target": "@project:y3fg3c3m9JUWISUHE8LqSw",
+    "atopile_address": "power.boost_18v_pos.post_regulator.output_caps[1]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "zsrC-94X_zsWEDKiIBjPYw",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "zsrC-94X_zsWEDKiIBjPYw",
+    "target": "@project:S9McqXgUEKCtloTs6xmi_g",
+    "atopile_address": "power.buck_3v3_digital.enable_pullup"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "uK3l1xMGhPWUZe-XQyRz6A",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "uK3l1xMGhPWUZe-XQyRz6A",
+    "target": "@project:ZhTowMUM2gVTsTtTer0QHA",
+    "atopile_address": "power.buck_3v3_digital.feedback.chain.resistors[0]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "11ee_Q6ixbHwh7AkB5yDQg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "11ee_Q6ixbHwh7AkB5yDQg",
+    "target": "@project:LW5w45yGY6NbzJnEl8gAuQ",
+    "atopile_address": "power.buck_3v3_digital.feedback.chain.resistors[1]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "neRwEFvB4Q9nJtbo1ogoYg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "neRwEFvB4Q9nJtbo1ogoYg",
+    "target": "@project:ogLYo_8-nfdrfbJG8hHcaw",
+    "atopile_address": "power.buck_3v3_digital.feedforward"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "hHUuGcLGLac0Zl9q0ctp8A",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "hHUuGcLGLac0Zl9q0ctp8A",
+    "target": "@project:G8Uzuf_kC8ap8RSiucBNew",
+    "atopile_address": "power.buck_3v3_digital.input_bypass"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "_uIOaNwFeAucMCwuICuetw",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "_uIOaNwFeAucMCwuICuetw",
+    "target": "@project:F_QCEa51rjMlvVYNTD8wNQ",
+    "atopile_address": "power.buck_3v3_digital.input_caps[0]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "3Jf1bvDzUZu_K9DgHbHeig",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "3Jf1bvDzUZu_K9DgHbHeig",
+    "target": "@project:zI365mZwbcxPwCwuK9s_yA",
+    "atopile_address": "power.buck_3v3_digital.input_caps[1]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "_kFo6WGBQu38ZQNhY_bHyA",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "_kFo6WGBQu38ZQNhY_bHyA",
+    "target": "@project:Sf0nU93DrWT16D8j0_SZzw",
+    "atopile_address": "power.buck_3v3_digital.output_caps[0]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "KsPI7Nyc9Vt8x13HxPYOaQ",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "KsPI7Nyc9Vt8x13HxPYOaQ",
+    "target": "@project:rHO21j8suXz8IciffOnyUw",
+    "atopile_address": "power.buck_3v3_digital.output_caps[1]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "WNvDxMbOozN15-Ioy0y2Jg",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "WNvDxMbOozN15-Ioy0y2Jg",
+    "target": "@project:R854tMoAVx16m8WOzqv8kQ",
+    "atopile_address": "power.ldo_3v3_analog.feedback.chain.resistors[0]"
+  }
+}{
+  "__type__": "Type:ll.Op",
+  "op": "create",
+  "timestamp": "1970-01-01T00:00:00Z",
+  "id": "-g_8_O4A7SgLOtkYnndQwA",
+  "object": {
+    "__type__": "Type:pcb.atopile_decorators.AtopileFootprint",
+    "id": "-g_8_O4A7SgLOtkYnndQwA",
+    "target": "@project:P2P4_ImDVvT3ZmseFhiC2Q",
+    "atopile_address": "power.ldo_3v3_analog.feedback.chain.resistors[1]"
   }
 }

@@ -1,31 +1,131 @@
-# Structural stand-in for the `atopile/rpi-cm5` package (the real module is
-# a board-to-board assembly; vendoring its connector stack is out of scope
-# for eval fixtures). Interface names follow the upstream package driver.
-.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
 .PARTS := .ELEC::PARTS
+.DEVICE: @STD::Import { .org &= "jlc"; .project &= "C42394220"; .version &= "0.1.0" }
 
 .RPI_CM5: @type {
-    /// Raspberry Pi CM5-class Linux compute module (structural stand-in).
-    /// Hosts the control software: configures the DSP over I2C, the codec
-    /// over SPI, streams audio over I2S, and drives DMX over UART.
-    .power_5v: ELEC::ElectricPower
+    /// CM5104032: 4 GB RAM, 32 GB eMMC, wireless. Physical module from the catalog.
+    /// Pin names follow the Raspberry Pi CM5 datasheet. Firmware must select
+    /// the documented I2C1, SPI0, UART0 and I2S functions on the assigned GPIOs.
+    .ic: DEVICE::Raspberry_Pi_CM5104032_Compute_Module_CM5_4GB_RAM_32GB_eMMC_Wireless
+    .power_5v: ELEC::ElectricPower { .voltage &= 4.75V..5.25V }
+    .power_io: ELEC::ElectricPower { .voltage &= 3.3V +/- 5% }
+    .power_5v.lv ~ .power_io.lv
+    .ic.CM5_3_3VOutput_84 ~ .ic.CM5_3_3VOutput_86 ~ .power_io.hv ~ .ic.GPIO_VREF
+    # GPIO_VREF uses the CM5's own 3.3 V output, not the board's buck output.
+    .power_5v.hv ~ .ic.P5VInputpos_77
+    .power_5v.hv ~ .ic.P5VInputpos_79
+    .power_5v.hv ~ .ic.P5VInputpos_81
+    .power_5v.hv ~ .ic.P5VInputpos_83
+    .power_5v.hv ~ .ic.P5VInputpos_85
+    .power_5v.hv ~ .ic.P5VInputpos_87
+    .power_5v.lv ~ .ic.GND_1
+    .power_5v.lv ~ .ic.GND_2
+    .power_5v.lv ~ .ic.GND_7
+    .power_5v.lv ~ .ic.GND_8
+    .power_5v.lv ~ .ic.GND_13
+    .power_5v.lv ~ .ic.GND_14
+    .power_5v.lv ~ .ic.GND_22
+    .power_5v.lv ~ .ic.GND_23
+    .power_5v.lv ~ .ic.GND_32
+    .power_5v.lv ~ .ic.GND_33
+    .power_5v.lv ~ .ic.GND_42
+    .power_5v.lv ~ .ic.GND_43
+    .power_5v.lv ~ .ic.GND_52
+    .power_5v.lv ~ .ic.GND_53
+    .power_5v.lv ~ .ic.GND_59
+    .power_5v.lv ~ .ic.GND_60
+    .power_5v.lv ~ .ic.GND_65
+    .power_5v.lv ~ .ic.GND_66
+    .power_5v.lv ~ .ic.GND_71
+    .power_5v.lv ~ .ic.GND_74
+    .power_5v.lv ~ .ic.GND_98
+    .power_5v.lv ~ .ic.GND_107
+    .power_5v.lv ~ .ic.GND_108
+    .power_5v.lv ~ .ic.GND_113
+    .power_5v.lv ~ .ic.GND_114
+    .power_5v.lv ~ .ic.GND_119
+    .power_5v.lv ~ .ic.GND_120
+    .power_5v.lv ~ .ic.GND_125
+    .power_5v.lv ~ .ic.GND_126
+    .power_5v.lv ~ .ic.GND_131
+    .power_5v.lv ~ .ic.GND_132
+    .power_5v.lv ~ .ic.GND_137
+    .power_5v.lv ~ .ic.GND_138
+    .power_5v.lv ~ .ic.GND_144
+    .power_5v.lv ~ .ic.GND_150
+    .power_5v.lv ~ .ic.GND_155
+    .power_5v.lv ~ .ic.GND_156
+    .power_5v.lv ~ .ic.GND_161
+    .power_5v.lv ~ .ic.GND_162
+    .power_5v.lv ~ .ic.GND_167
+    .power_5v.lv ~ .ic.GND_168
+    .power_5v.lv ~ .ic.GND_173
+    .power_5v.lv ~ .ic.GND_174
+    .power_5v.lv ~ .ic.GND_179
+    .power_5v.lv ~ .ic.GND_180
+    .power_5v.lv ~ .ic.GND_185
+    .power_5v.lv ~ .ic.GND_186
+    .power_5v.lv ~ .ic.GND_191
+    .power_5v.lv ~ .ic.GND_192
+    .power_5v.lv ~ .ic.GND_197
+    .power_5v.lv ~ .ic.GND_198
 
     .i2cs: [2]ELEC::Interfaces::I2C
+    .i2cs[0].sda.line ~ .ic.GPIO2
+    .i2cs[0].scl.line ~ .ic.GPIO3
+    .i2cs[1].sda.line ~ .ic.SDA0
+    .i2cs[1].scl.line ~ .ic.SCL0
+
     .spis: [1]ELEC::Interfaces::SPI
     .spi0_cs: [2]ELEC::ElectricLogic
+    .spis[0].sclk.line ~ .ic.GPIO11
+    .spis[0].mosi.line ~ .ic.GPIO10
+    .spis[0].miso.line ~ .ic.GPIO9
+    .spi0_cs[0].line ~ .ic.GPIO8
+    .spi0_cs[1].line ~ .ic.GPIO7
+
+    # Full-duplex I2S shares bit/frame clocks; data directions use separate pins.
     .i2s_output: ELEC::Interfaces::I2S
     .i2s_input: ELEC::Interfaces::I2S
-    .ethernet: ELEC::Interfaces::Ethernet
-    .uart0: ELEC::Interfaces::UART_Base
-    .gpios: [8]ELEC::ElectricLogic
+    .i2s_output.sck.line ~ .i2s_input.sck.line ~ .ic.GPIO18
+    .i2s_output.ws.line ~ .i2s_input.ws.line ~ .ic.GPIO19
+    .i2s_output.sd.line ~ .ic.GPIO21
+    .i2s_input.sd.line ~ .ic.GPIO20
 
-    .decoupling_caps: [2]ELEC::Stuff::Capacitor
+    .ethernet: ELEC::Interfaces::Ethernet
+    .ethernet.pairs[0].p.line ~ .ic.Ethernet_Pair0_P
+    .ethernet.pairs[0].n.line ~ .ic.Ethernet_Pair0_N
+    .ethernet.pairs[1].p.line ~ .ic.Ethernet_Pair1_P
+    .ethernet.pairs[1].n.line ~ .ic.Ethernet_Pair1_N
+    .ethernet.pairs[2].p.line ~ .ic.Ethernet_Pair2_P
+    .ethernet.pairs[2].n.line ~ .ic.Ethernet_Pair2_N
+    .ethernet.pairs[3].p.line ~ .ic.Ethernet_Pair3_P
+    .ethernet.pairs[3].n.line ~ .ic.Ethernet_Pair3_N
+
+    .uart0: ELEC::Interfaces::UART_Base
+    .uart0.tx.line ~ .ic.GPIO14
+    .uart0.rx.line ~ .ic.GPIO15
+
+    # Board-control outputs; separate from all assigned peripheral pins.
+    # [0] DSP reset, [1] codec reset, [2] switch reset,
+    # [3:4] switch MDC/MDIO, [5] DMX direction, [6:7] spare.
+    .gpios: [8]ELEC::ElectricLogic
+    .gpios[0].line ~ .ic.GPIO24
+    .gpios[1].line ~ .ic.GPIO25
+    .gpios[2].line ~ .ic.GPIO26
+    .gpios[3].line ~ .ic.GPIO4
+    .gpios[4].line ~ .ic.GPIO5
+    .gpios[5].line ~ .ic.GPIO6
+    .gpios[6].line ~ .ic.GPIO22
+    .gpios[7].line ~ .ic.GPIO23
+
+    .decoupling_caps: [2]ELEC::Capacitor
     @for(.decoupling_caps, {
-        .cap := .obj
-        .cap.capacitance &= 100nF +/- 20%
+        .obj.capacitance &= 100nF +/- 20%
+        .obj.max_voltage >= 16V
+        @trait(_, .obj): PARTS::has_package_requirements { .size &= "0402" }
+        power_5v.hv ~> .obj ~> power_5v.lv
     })
-    @trait(_, .decoupling_caps[0]): PARTS::has_package_requirements { .size &= "0402" }
-    @trait(_, .decoupling_caps[1]): PARTS::has_package_requirements { .size &= "0402" }
-    .power_5v.hv ~> .decoupling_caps[0] ~> .power_5v.lv
-    .power_5v.hv ~> .decoupling_caps[1] ~> .power_5v.lv
+    # Optional radio-disable, EEPROM WP, boot and PMIC control pins retain
+    # the module's internal pulls; unused peripheral pins stay unconnected.
 }

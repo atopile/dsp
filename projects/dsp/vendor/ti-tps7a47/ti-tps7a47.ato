@@ -1,0 +1,38 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.PARTS := .ELEC::PARTS
+.DEVICE: @STD::Import { .org &= "jlc"; .project &= "C28286"; .version &= "0.1.0" }
+
+.TPS7A4700_18V: @type {
+    /// Low-noise 18 V post-regulator. Each instance retains its own ground.
+    /// TI TPS7A47 datasheet: ANY-OUT programming and typical application.
+    .ic: DEVICE::Texas_Instruments_TPS7A4700RGWT
+    .power_in: ELEC::ElectricPower { .voltage &= 19V..35V }
+    .power_out: ELEC::ElectricPower { .voltage &= 18V +/- 2.5% }
+    .power_in.voltage >= .power_out.voltage + 0.5V
+    .power_in.hv ~ .ic.IN_15 ~ .ic.IN_16 ~ .ic.EN
+    .power_in.lv ~ .power_out.lv ~ .ic.GND ~ .ic.EP
+    .power_out.hv ~ .ic.OUT_1 ~ .ic.OUT_20 ~ .ic.SENSE_FB
+
+    # Active-low straps: 1.4 + 6.4 + 6.4 + 3.2 + 0.4 + 0.2 = 18.0 V.
+    .ic.P6P4V1 ~ .ic.P6P4V2 ~ .ic.P3P2V ~ .ic.P0P4V ~ .ic.P0P2V ~ .ic.GND
+    # P0P1V, P0P8V, P1P6V and NC pins intentionally remain open.
+    .input_cap: ELEC::Capacitor {
+        .capacitance &= 10uF +/- 20%
+        .max_voltage >= 50V
+        @trait(_): PARTS::has_package_requirements { .size &= "1210" }
+    }
+    .output_caps: [2]ELEC::Capacitor
+    @for(.output_caps, {
+        .obj.capacitance &= 22uF +/- 20%
+        .obj.max_voltage >= 50V
+        @trait(_, .obj): PARTS::has_package_requirements { .size &= "1812" }
+        power_out.hv ~> .obj ~> power_out.lv
+    })
+    .noise_reduction: ELEC::Capacitor {
+        .capacitance &= 1uF +/- 10%
+        .max_voltage >= 16V
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
+    }
+    .power_in.hv ~> .input_cap ~> .power_in.lv
+    .ic.NR ~> .noise_reduction ~> .power_in.lv
+}

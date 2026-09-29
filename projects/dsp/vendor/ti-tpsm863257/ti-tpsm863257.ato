@@ -1,0 +1,59 @@
+.ELEC: @STD::Import { .org &= "atopile"; .project &= "electronics" }
+.PARTS := .ELEC::PARTS
+.DEVICE: @STD::Import { .org &= "jlc"; .project &= "C19190416"; .version &= "0.1.0" }
+
+.TPSM863257: @type {
+    /// 3 A buck module, configured for the DSP's 5 V input.
+    /// TI TPSM86325x datasheet, table 8-2: 44 uF output and 22 pF feedforward.
+    .ic: DEVICE::Texas_Instruments_TPSM863257RDXR
+    .power_in: ELEC::ElectricPower { .voltage &= 4.5V..5.5V }
+    .power_out: ELEC::ElectricPower { .voltage &= 2.5V..3.6V }
+    .power_in.voltage >= .power_out.voltage + 0.5V
+    .power_in.lv ~ .power_out.lv ~ .ic.PGND
+    .power_in.hv ~ .ic.VIN
+    .power_out.hv ~ .ic.VOUT
+
+    .feedback: ELEC::ResistorVoltageDivider
+    .power_out ~ .feedback.ref_in
+    .feedback.ref_out.hv ~ .ic.FB
+    .feedback.v_out &= 0.6V +/- 1%
+    # Stay near TI's 30k feedback impedance while allowing an E96 pair
+    # that meets the configured rail tolerance (30k itself is not E96).
+    .feedback.chain.resistors[1].resistance &= 20kohm..40kohm
+    @trait(_, .feedback.chain.resistors[0]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .feedback.chain.resistors[1]): PARTS::has_package_requirements { .size &= "0402" }
+
+    .feedforward: ELEC::Capacitor {
+        .capacitance &= 22pF +/- 5%
+        .max_voltage >= 16V
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.VOUT ~> .feedforward ~> .ic.FB
+
+    .input_caps: [2]ELEC::Capacitor
+    @for(.input_caps, {
+        .obj.capacitance &= 10uF +/- 20%
+        .obj.max_voltage >= 16V
+        @trait(_, .obj): PARTS::has_package_requirements { .size &= "0805" }
+        power_in.hv ~> .obj ~> power_in.lv
+    })
+    .input_bypass: ELEC::Capacitor {
+        .capacitance &= 100nF +/- 10%
+        .max_voltage >= 16V
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .power_in.hv ~> .input_bypass ~> .power_in.lv
+    .output_caps: [2]ELEC::Capacitor
+    @for(.output_caps, {
+        .obj.capacitance &= 22uF +/- 20%
+        .obj.max_voltage >= 16V
+        @trait(_, .obj): PARTS::has_package_requirements { .size &= "1206" }
+        power_out.hv ~> .obj ~> power_out.lv
+    })
+    .enable_pullup: ELEC::Resistor {
+        .resistance &= 10kohm +/- 5%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .power_in.hv ~> .enable_pullup ~> .ic.EN
+    # PG is unused; SW must be left floating (datasheet pin functions).
+}
