@@ -1,0 +1,124 @@
+# Vendored v2 port of the `atopile/adi-adau145x` package driver (simplified:
+# serial ports 0/1 exposed, fixed support-component values, no aux ADC/SPDIF).
+.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
+.PARTS := .ELEC::PARTS
+
+.DSP_IC: @STD::Import { .uri &= "parts/Analog_Devices_ADAU1452WBCPZ/Analog_Devices_ADAU1452WBCPZ.ato" }
+.OSC_IC: @STD::Import { .uri &= "parts/Yajingxin_TXM12_288M0004322FBCDO00T/Yajingxin_TXM12_288M0004322FBCDO00T.ato" }
+.BJT_IC: @STD::Import { .uri &= "parts/Nexperia_PBSS5350X_115/Nexperia_PBSS5350X_115.ato" }
+
+.ADI_ADAU145x: @type {
+    /// Analog Devices ADAU1452 SigmaDSP audio processor.
+    /// IOVDD/AVDD/PVDD run from 3.3V; the 1.2V DVDD core rail is generated
+    /// by the on-chip regulator driving an external PNP pass transistor.
+    /// Master clock comes from a 12.288MHz oscillator; serial audio ports
+    /// 0 and 1 are exposed as I2S in/out pairs.
+    .ic: DSP_IC::Analog_Devices_ADAU1452WBCPZ_package
+
+    .power: ELEC::ElectricPower           # 3.3V main supply
+    .power_core: ELEC::ElectricPower      # internal 1.2V DVDD rail
+
+    .i2c: ELEC::Interfaces::I2C
+    .reset_disable: ELEC::ElectricLogic
+    .selfboot_enable: ELEC::ElectricLogic
+    .pll_clock_out: ELEC::ElectricSignal  # CLKOUT, master clock for a codec
+
+    .i2s_ins: [2]ELEC::Interfaces::I2S
+    .i2s_outs: [2]ELEC::Interfaces::I2S
+
+    # --- Supplies ---
+    .power.hv ~ .ic.IOVDD
+    .power.hv ~ .ic.AVDD
+    .power.hv ~ .ic.PVDD
+    .power.lv ~ .ic.DGND
+    .power.lv ~ .ic.AGND
+    .power.lv ~ .ic.PGND
+    .power.lv ~ .ic.EP
+    .power_core.lv ~ .power.lv
+
+    # DVDD core rail: VDRIVE drives an external PNP pass device
+    .pass_bjt: BJT_IC::Nexperia_PBSS5350X_115
+    .ic.IOVDD ~ .pass_bjt.emitter
+    .ic.VDRIVE ~ .pass_bjt.base
+    .pass_bjt.collector ~ .power_core.hv
+    .power_core.hv ~ .ic.DVDD
+    .vdrive_load: ELEC::Stuff::Resistor {
+        /// Minimum load on the VDRIVE regulator output
+        .resistance &= 1kohm +/- 5%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.IOVDD ~> .vdrive_load ~> .ic.VDRIVE
+
+    # --- Control plane ---
+    .i2c.scl.line ~ .ic.SCLK_SCL
+    .i2c.sda.line ~ .ic.MISO_SDA
+    .reset_disable.line ~ .ic.nRESET
+    .selfboot_enable.line ~ .ic.SELFBOOT
+    .pll_clock_out.line ~ .ic.CLKOUT
+
+    # --- Serial audio ports ---
+    .i2s_ins[0].sck.line ~ .ic.BCLK_IN0
+    .i2s_ins[0].ws.line ~ .ic.LRCLK_IN0_MP10
+    .i2s_ins[0].sd.line ~ .ic.SDATA_IN0
+    .i2s_ins[1].sck.line ~ .ic.BCLK_IN1
+    .i2s_ins[1].ws.line ~ .ic.LRCLK_IN1_MP11
+    .i2s_ins[1].sd.line ~ .ic.SDATA_IN1
+    .i2s_outs[0].sck.line ~ .ic.BCLK_OUT0
+    .i2s_outs[0].ws.line ~ .ic.LRCLK_OUT0_MP4
+    .i2s_outs[0].sd.line ~ .ic.SDATA_OUT0
+    .i2s_outs[1].sck.line ~ .ic.BCLK_OUT1
+    .i2s_outs[1].ws.line ~ .ic.LRCLK_OUT1_MP5
+    .i2s_outs[1].sd.line ~ .ic.SDATA_OUT1
+
+    # --- Master clock: 12.288MHz oscillator into XTALIN/MCLK ---
+    .osc: OSC_IC::Yajingxin_TXM12_288M0004322FBCDO00T_package
+    .osc.OUT ~ .ic.XTALIN_MCLK
+    .osc.GND ~ .power.lv
+    .osc_enable_pullup: ELEC::Stuff::Resistor {
+        .resistance &= 10kohm +/- 5%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .osc.nOE ~> .osc_enable_pullup ~> .power.hv
+
+    # --- PLL loop filter (datasheet values) ---
+    .pll_filter_r: ELEC::Stuff::Resistor {
+        .resistance &= 4.3kohm +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .pll_filter_c1: ELEC::Stuff::Capacitor {
+        .capacitance &= 5.6nF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .pll_filter_c2: ELEC::Stuff::Capacitor {
+        .capacitance &= 150pF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.PLLFILT ~> .pll_filter_r ~> .pll_filter_c1 ~> .ic.PVDD
+    .ic.PLLFILT ~> .pll_filter_c2 ~> .ic.PVDD
+
+    # --- Supply decoupling: 100nF per supply domain plus bulk reservoirs ---
+    .decoupling_caps: [4]ELEC::Stuff::Capacitor
+    @for(.decoupling_caps, {
+        .cap := .obj
+        .cap.capacitance &= 100nF +/- 20%
+    })
+    @trait(_, .decoupling_caps[0]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps[1]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps[2]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps[3]): PARTS::has_package_requirements { .size &= "0402" }
+    .power.hv ~> .decoupling_caps[0] ~> .power.lv           # IOVDD
+    .power.hv ~> .decoupling_caps[1] ~> .power.lv           # AVDD
+    .power.hv ~> .decoupling_caps[2] ~> .power.lv           # PVDD
+    .power_core.hv ~> .decoupling_caps[3] ~> .power_core.lv # DVDD
+
+    .bulk_cap: ELEC::Stuff::Capacitor {
+        .capacitance &= 10uF +/- 20%
+        @trait(_): PARTS::has_package_requirements { .size &= "0603" }
+    }
+    .power.hv ~> .bulk_cap ~> .power.lv
+    .bulk_cap_core: ELEC::Stuff::Capacitor {
+        .capacitance &= 10uF +/- 20%
+        @trait(_): PARTS::has_package_requirements { .size &= "0603" }
+    }
+    .power_core.hv ~> .bulk_cap_core ~> .power_core.lv
+}

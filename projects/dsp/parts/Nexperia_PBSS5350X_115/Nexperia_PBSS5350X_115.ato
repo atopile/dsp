@@ -1,19 +1,31 @@
-#pragma experiment("TRAITS")
-import has_designator_prefix
+import BJT
+import has_datasheet
+import has_package
 import has_part_picked
+import has_tags
 import is_atomic_part
-import is_auto_generated
 
-component Nexperia_PBSS5350X_115_package:
+module Nexperia_PBSS5350X_115 from BJT:
+    """-65℃~+150℃ 1 PNP 1.4W 100MHz 100nA 200 390mV 3A 50V 5V PNP SOT-89 Bipolar (BJT) ROHS"""
+
     # This trait marks this file as auto-generated
     # If you want to manually change it, remove the trait
-    trait is_auto_generated<system="ato_part", source="easyeda:C426844", date="2025-10-03T23:48:38.170916+00:00", checksum="4637d827150a33328b5fb43dbab8327cc607f4a9b6455fa3dd36310115425871">
 
-    trait is_atomic_part<manufacturer="Nexperia", partnumber="PBSS5350X,115", footprint="SOT-89-3_L4.5-W2.5-P1.50-LS4.1-TR.kicad_mod", symbol="PBSS5350X,115.kicad_sym", model="SOT-89-3_L4.3-W2.5-H1.6-LS4.1-P1.50.step">
+    trait is_atomic_part<identifier="jlc-C426844-v0.0.1", manufacturer="Nexperia", partnumber="PBSS5350X,115", footprint="Nexperia_PBSS5350X_115.footprint.hl", symbol="Nexperia_PBSS5350X_115.symbol.hl">
     trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C426844", manufacturer="Nexperia", partno="PBSS5350X,115">
-    trait has_designator_prefix<prefix="Q">
+    trait has_package<name="SOT-89">
+    trait has_tags<tags="Transistors,BJT,PNP">
 
     # pins
-    signal B ~ pin 3
-    signal C ~ pin 2
-    signal E ~ pin 1
+    base ~ pin 3
+    collector ~ pin 2
+    emitter ~ pin 1
+
+    # parameters
+    doping_type = "PNP"
+    max_collector_emitter_voltage = 50V
+    max_collector_current = 3A
+    max_power_dissipation = 1.4W
+    dc_current_gain = 200
+    transition_frequency = 100MHz
+    vce_sat = 390mV

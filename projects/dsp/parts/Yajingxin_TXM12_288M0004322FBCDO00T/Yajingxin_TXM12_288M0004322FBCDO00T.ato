@@ -1,0 +1,24 @@
+import has_datasheet
+import has_designator_prefix
+import has_package
+import has_part_picked
+import has_tags
+import is_atomic_part
+
+component Yajingxin_TXM12_288M0004322FBCDO00T_package:
+    """-40℃~+85℃ 12.288MHz 12pF 60Ω Crystal Oscillator ±10ppm ±20ppm SMD3225-4P Crystals ROHS"""
+
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+
+    trait is_atomic_part<identifier="jlc-C362472-v0.0.1", manufacturer="Yajingxin", partnumber="TXM12.288M0004322FBCDO00T", footprint="Yajingxin_TXM12_288M0004322FBCDO00T.footprint.hl", symbol="Yajingxin_TXM12_288M0004322FBCDO00T.symbol.hl">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C362472", manufacturer="Yajingxin", partno="TXM12.288M0004322FBCDO00T">
+    trait has_designator_prefix<prefix="X">
+    trait has_package<name="SMD3225-4P">
+    trait has_tags<tags="Crystals, Oscillators, Resonators,Crystals">
+
+    # pins
+    signal GND ~ pin 4
+    GND ~ pin 2
+    signal OUT ~ pin 3
+    signal nOE ~ pin 1

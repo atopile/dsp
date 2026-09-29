@@ -1,0 +1,70 @@
+.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
+.PARTS := .ELEC::PARTS
+.VLDO: @STD::Import { .uri &= "vendor/ti-tlv75901/ti-tlv75901.ato" }
+
+.PowerSupply: @type {
+    /// Multi-rail power stage for the DSP board.
+    /// Takes a regulated 5V wall-adapter input and derives the digital,
+    /// analog, and symmetric line-driver rails from it.
+
+    # External input from a 5V AC/DC brick
+    .power_dc_in: ELEC::ElectricPower { .voltage &= 5V +/- 5% }
+    .earth: ELEC::Interfaces::Electrical
+
+    # Derived rails
+    .power_5v: ELEC::ElectricPower { .voltage &= 5V +/- 5% }
+    .power_3v3d: ELEC::ElectricPower { .voltage &= 3.3V +/- 3% }
+    .power_3v3a: ELEC::ElectricPower { .voltage &= 3.3V +/- 3% }
+    .power_18v_pos: ELEC::ElectricPower { .voltage &= 18V +/- 5% }
+    .power_18v_neg: ELEC::ElectricPower { .voltage &= 18V +/- 5% }
+
+    .power_dc_in ~ .power_5v
+
+    # 5V -> 3.3V digital (buck) for the compute module, DSP, and switch
+    .buck_3v3_digital: ELEC::Stuff::Regulator {
+        .v_in &= 5V +/- 5%
+        .v_out &= 3.3V +/- 3%
+    }
+    .power_5v ~> .buck_3v3_digital ~> .power_3v3d
+    .buck_3v3_digital.power_in.lv ~ .buck_3v3_digital.power_out.lv
+
+    # 5V -> 3.3V analog (low-noise LDO, TI TLV75901) for the codec
+    .ldo_3v3_analog: VLDO::TI_TLV75901
+    .power_5v ~ .ldo_3v3_analog.power_in
+    .ldo_3v3_analog.power_out ~ .power_3v3a
+
+    # 5V -> +/-18V for the balanced line drivers (isolated boost pair,
+    # secondaries stacked around ground)
+    .boost_18v_pos: ELEC::Stuff::Regulator {
+        .v_in &= 5V +/- 5%
+        .v_out &= 18V +/- 5%
+    }
+    .boost_18v_neg: ELEC::Stuff::Regulator {
+        .v_in &= 5V +/- 5%
+        .v_out &= 18V +/- 5%
+    }
+    .power_5v ~> .boost_18v_pos ~> .power_18v_pos
+    .power_5v ~> .boost_18v_neg ~> .power_18v_neg
+
+    # Stack the isolated outputs around system ground:
+    # +18V rail returns to GND, -18V rail's positive terminal is GND.
+    .power_18v_pos.lv ~ .power_5v.lv
+    .power_18v_neg.hv ~ .power_5v.lv
+
+    # Bulk capacitance per rail
+    .bulk_cap_5v: ELEC::Stuff::Capacitor {
+        .capacitance &= 22uF +/- 20%
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
+    }
+    .bulk_cap_3v3d: ELEC::Stuff::Capacitor {
+        .capacitance &= 22uF +/- 20%
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
+    }
+    .bulk_cap_3v3a: ELEC::Stuff::Capacitor {
+        .capacitance &= 10uF +/- 20%
+        @trait(_): PARTS::has_package_requirements { .size &= "0603" }
+    }
+    .power_5v.hv ~> .bulk_cap_5v ~> .power_5v.lv
+    .power_3v3d.hv ~> .bulk_cap_3v3d ~> .power_3v3d.lv
+    .power_3v3a.hv ~> .bulk_cap_3v3a ~> .power_3v3a.lv
+}

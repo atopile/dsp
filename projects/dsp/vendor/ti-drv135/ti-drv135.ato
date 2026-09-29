@@ -1,0 +1,46 @@
+# Vendored v2 port of the `atopile/ti-drv135` package driver.
+.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
+.PARTS := .ELEC::PARTS
+
+.DRV_IC: @STD::Import { .uri &= "parts/Texas_Instruments_DRV135UA_2K5/Texas_Instruments_DRV135UA_2K5.ato" }
+
+.TI_DRV135: @type {
+    /// Texas Instruments DRV135 balanced audio line driver. Converts a
+    /// single-ended input into a balanced pair able to drive long cable
+    /// runs, powered from symmetric supply rails (typically +/-18V).
+    /// 4-wire output: force pair drives the load, sense pair closes the
+    /// feedback loop at the connector.
+    .ic: DRV_IC::Texas_Instruments_DRV135UA_2K5_package
+
+    .positive_power: ELEC::ElectricPower
+    .negative_power: ELEC::ElectricPower
+
+    .input_signal: ELEC::ElectricSignal
+    .output_force: ELEC::Interfaces::DifferentialPair
+    .output_sense: ELEC::Interfaces::DifferentialPair
+
+    # The two rails share a ground at the driver
+    .positive_power.lv ~ .negative_power.hv
+
+    # --- Package connections ---
+    .ic.VIN ~ .input_signal.line
+    .ic.Vpos ~ .positive_power.hv
+    .ic.GND ~ .positive_power.lv
+    .ic.Vneg ~ .negative_power.lv
+    .ic.VOpos ~ .output_force.p.line
+    .ic.VOneg ~ .output_force.n.line
+    .ic.SENSEpos ~ .output_sense.p.line
+    .ic.SENSEneg ~ .output_sense.n.line
+
+    # --- Decoupling ---
+    .positive_decoupling_capacitor: ELEC::Stuff::Capacitor {
+        .capacitance &= 1uF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
+    }
+    .negative_decoupling_capacitor: ELEC::Stuff::Capacitor {
+        .capacitance &= 1uF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
+    }
+    .positive_power.hv ~> .positive_decoupling_capacitor ~> .positive_power.lv
+    .negative_power.hv ~> .negative_decoupling_capacitor ~> .negative_power.lv
+}

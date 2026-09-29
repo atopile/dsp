@@ -1,0 +1,124 @@
+# Vendored v2 port of the `atopile/adi-ad1938` package driver (simplified:
+# ADC pair 1 + DAC pair 1 exposed, fixed support-component values).
+.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
+.PARTS := .ELEC::PARTS
+
+.CODEC_IC: @STD::Import { .uri &= "parts/Analog_Devices_AD1938WBSTZ_RL/Analog_Devices_AD1938WBSTZ_RL.ato" }
+
+.Analog_Devices_AD1938: @type {
+    /// Analog Devices AD1938 audio codec: 4-channel differential ADC in,
+    /// 8-channel DAC out, configured over SPI. This port exposes ADC pair 1
+    /// (stereo balanced input) and DAC pair 1 (stereo single-ended output);
+    /// the PLL master clock comes in on MCLKI.
+    .ic: CODEC_IC::Analog_Devices_AD1938WBSTZ_RL_package
+
+    .power: ELEC::ElectricPower          # DVDD digital/IO supply (3.3V)
+    .power_analog: ELEC::ElectricPower   # AVDD analog supply (3.3V)
+
+    .spi: ELEC::Interfaces::SPI
+    .spi_cs: ELEC::ElectricLogic         # nCLATCH
+    .reset_disable: ELEC::ElectricLogic
+    .pll_clock_in: ELEC::ElectricSignal  # MCLKI/XI
+
+    .i2s_in: ELEC::Interfaces::I2S       # DAC serial input
+    .i2s_out: ELEC::Interfaces::I2S      # ADC serial output
+
+    # Balanced analog inputs to ADC1 (0 = left, 1 = right)
+    .adc_in: [2]ELEC::Interfaces::DifferentialPair
+    # Single-ended DAC1 outputs (0 = left, 1 = right)
+    .dac_out: [2]ELEC::ElectricSignal
+
+    # --- Supplies ---
+    .power.hv ~ .ic.DVDD
+    .power.lv ~ .ic.DGND
+    .power_analog.hv ~ .ic.AVDD
+    .power_analog.lv ~ .ic.AGND
+    .power.lv ~ .power_analog.lv
+
+    # --- Control plane ---
+    .spi.sclk.line ~ .ic.CCLK
+    .spi.mosi.line ~ .ic.CIN
+    .spi.miso.line ~ .ic.COUT
+    .spi_cs.line ~ .ic.nCLATCH
+    .reset_disable.line ~ .ic.nPDh_RST
+    .pll_clock_in.line ~ .ic.MCLKI_XI
+    .reset_pulldown: ELEC::Stuff::Resistor {
+        /// Holds the codec in reset until the host releases it
+        .resistance &= 100kohm +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .reset_disable.line ~> .reset_pulldown ~> .power.lv
+
+    # --- Audio data ---
+    .i2s_in.sck.line ~ .ic.DBCLK
+    .i2s_in.ws.line ~ .ic.DLRCLK
+    .i2s_in.sd.line ~ .ic.DSDATA1
+    .i2s_out.sck.line ~ .ic.ABCLK
+    .i2s_out.ws.line ~ .ic.ALRCLK
+    .i2s_out.sd.line ~ .ic.ASDATA1
+
+    .adc_in[0].p.line ~ .ic.ADC1LP
+    .adc_in[0].n.line ~ .ic.ADC1LN
+    .adc_in[1].p.line ~ .ic.ADC1RP
+    .adc_in[1].n.line ~ .ic.ADC1RN
+    .dac_out[0].line ~ .ic.OL1
+    .dac_out[1].line ~ .ic.OR1
+
+    # --- PLL loop filter (datasheet values) ---
+    .pll_filter_r: ELEC::Stuff::Resistor {
+        .resistance &= 562ohm +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .pll_filter_c1: ELEC::Stuff::Capacitor {
+        .capacitance &= 5.6nF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .pll_filter_c2: ELEC::Stuff::Capacitor {
+        .capacitance &= 390pF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.LF ~> .pll_filter_r ~> .pll_filter_c1 ~> .power_analog.lv
+    .ic.LF ~> .pll_filter_c2 ~> .power_analog.lv
+
+    # --- Reference decoupling: common-mode and voltage reference ---
+    .cm_decoupling_cap: ELEC::Stuff::Capacitor {
+        .capacitance &= 100nF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .cm_bulk_cap: ELEC::Stuff::Capacitor {
+        .capacitance &= 47uF +/- 20%
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
+    }
+    .ic.CM ~> .cm_decoupling_cap ~> .power_analog.lv
+    .ic.CM ~> .cm_bulk_cap ~> .power_analog.lv
+    .vref_decoupling_cap: ELEC::Stuff::Capacitor {
+        .capacitance &= 100nF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.FILTR ~> .vref_decoupling_cap ~> .power_analog.lv
+
+    # --- Supply decoupling, one pair per supply domain plus analog bulk ---
+    .decoupling_caps_analog: [2]ELEC::Stuff::Capacitor
+    .decoupling_caps_digital: [2]ELEC::Stuff::Capacitor
+    @for(.decoupling_caps_analog, {
+        .cap := .obj
+        .cap.capacitance &= 100nF +/- 20%
+    })
+    @for(.decoupling_caps_digital, {
+        .cap := .obj
+        .cap.capacitance &= 100nF +/- 20%
+    })
+    @trait(_, .decoupling_caps_analog[0]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps_analog[1]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps_digital[0]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps_digital[1]): PARTS::has_package_requirements { .size &= "0402" }
+    .power_analog.hv ~> .decoupling_caps_analog[0] ~> .power_analog.lv
+    .power_analog.hv ~> .decoupling_caps_analog[1] ~> .power_analog.lv
+    .power.hv ~> .decoupling_caps_digital[0] ~> .power.lv
+    .power.hv ~> .decoupling_caps_digital[1] ~> .power.lv
+    .bulk_cap_analog: ELEC::Stuff::Capacitor {
+        .capacitance &= 10uF +/- 20%
+        @trait(_): PARTS::has_package_requirements { .size &= "0805" }
+    }
+    .power_analog.hv ~> .bulk_cap_analog ~> .power_analog.lv
+}

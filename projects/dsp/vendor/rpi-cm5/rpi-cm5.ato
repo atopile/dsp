@@ -1,0 +1,31 @@
+# Structural stand-in for the `atopile/rpi-cm5` package (the real module is
+# a board-to-board assembly; vendoring its connector stack is out of scope
+# for eval fixtures). Interface names follow the upstream package driver.
+.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
+.PARTS := .ELEC::PARTS
+
+.RPI_CM5: @type {
+    /// Raspberry Pi CM5-class Linux compute module (structural stand-in).
+    /// Hosts the control software: configures the DSP over I2C, the codec
+    /// over SPI, streams audio over I2S, and drives DMX over UART.
+    .power_5v: ELEC::ElectricPower
+
+    .i2cs: [2]ELEC::Interfaces::I2C
+    .spis: [1]ELEC::Interfaces::SPI
+    .spi0_cs: [2]ELEC::ElectricLogic
+    .i2s_output: ELEC::Interfaces::I2S
+    .i2s_input: ELEC::Interfaces::I2S
+    .ethernet: ELEC::Interfaces::Ethernet
+    .uart0: ELEC::Interfaces::UART_Base
+    .gpios: [8]ELEC::ElectricLogic
+
+    .decoupling_caps: [2]ELEC::Stuff::Capacitor
+    @for(.decoupling_caps, {
+        .cap := .obj
+        .cap.capacitance &= 100nF +/- 20%
+    })
+    @trait(_, .decoupling_caps[0]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps[1]): PARTS::has_package_requirements { .size &= "0402" }
+    .power_5v.hv ~> .decoupling_caps[0] ~> .power_5v.lv
+    .power_5v.hv ~> .decoupling_caps[1] ~> .power_5v.lv
+}

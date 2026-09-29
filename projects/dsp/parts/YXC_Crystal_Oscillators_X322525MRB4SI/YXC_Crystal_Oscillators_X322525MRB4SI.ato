@@ -1,0 +1,29 @@
+import Crystal
+import has_datasheet
+import has_package
+import has_part_picked
+import has_tags
+import is_atomic_part
+
+module YXC_Crystal_Oscillators_X322525MRB4SI from Crystal:
+    """-40℃~+85℃ 18pF 25MHz Crystal Oscillator ±10ppm ±20ppm SMD3225-4P Crystals ROHS"""
+
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+
+    trait is_atomic_part<identifier="jlc-C70593-v0.0.1", manufacturer="YXC Crystal Oscillators", partnumber="X322525MRB4SI", footprint="YXC_Crystal_Oscillators_X322525MRB4SI.footprint.hl", symbol="YXC_Crystal_Oscillators_X322525MRB4SI.symbol.hl">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C70593", manufacturer="YXC Crystal Oscillators", partno="X322525MRB4SI">
+    trait has_package<name="SMD3225-4P">
+    trait has_tags<tags="Crystals">
+
+    # pins
+    unnamed[0] ~ pin 1
+    unnamed[1] ~ pin 3
+    gnd ~ pin 4
+    gnd ~ pin 2
+
+    # parameters
+    frequency = 25MHz
+    frequency_tolerance = 10ppm
+    load_capacitance = 18pF
+    frequency_temperature_tolerance = 20ppm

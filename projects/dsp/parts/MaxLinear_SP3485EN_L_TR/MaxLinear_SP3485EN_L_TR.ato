@@ -1,0 +1,28 @@
+import has_datasheet
+import has_designator_prefix
+import has_package
+import has_part_picked
+import has_tags
+import is_atomic_part
+
+component MaxLinear_SP3485EN_L_TR_package:
+    """-40℃~+85℃ 1 1 10Mbps 2mA 3.3V 32 Half-Duplex Transceiver SOIC-8 RS-485 / RS-422 ICs ROHS"""
+
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+
+    trait is_atomic_part<identifier="jlc-C8963-v0.0.1", manufacturer="MaxLinear", partnumber="SP3485EN-L/TR", footprint="MaxLinear_SP3485EN_L_TR.footprint.hl", symbol="MaxLinear_SP3485EN_L_TR.symbol.hl">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C8963", manufacturer="MaxLinear", partno="SP3485EN-L/TR">
+    trait has_designator_prefix<prefix="U">
+    trait has_package<name="SOIC-8">
+    trait has_tags<tags="Interface,RS-485 / RS-422 ICs">
+
+    # pins
+    signal A ~ pin 6
+    signal B ~ pin 7
+    signal DE ~ pin 3
+    signal DI ~ pin 4
+    signal GND ~ pin 5
+    signal RO ~ pin 1
+    signal VCC ~ pin 8
+    signal nRE ~ pin 2

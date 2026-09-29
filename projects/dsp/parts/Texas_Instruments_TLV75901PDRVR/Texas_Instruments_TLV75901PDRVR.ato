@@ -1,0 +1,26 @@
+import has_designator_prefix
+import has_package
+import has_part_picked
+import has_tags
+import is_atomic_part
+
+component Texas_Instruments_TLV75901PDRVR_package:
+    """-40℃~+125℃@(Tj) 1 1A 225mV@(1A) 35uA 50dB@(1kHz) 53uVrms 550mV~5.5V 6V Adjustable Positive Under Voltage Lockout、Over Current Protection、Soft Start、Enable、Thermal Shutdown WSON-6-EP(2x2) Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS"""
+
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+
+    trait is_atomic_part<identifier="jlc-C544759-v0.0.1", manufacturer="Texas Instruments", partnumber="TLV75901PDRVR", footprint="Texas_Instruments_TLV75901PDRVR.footprint.hl", symbol="Texas_Instruments_TLV75901PDRVR.symbol.hl">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C544759", manufacturer="Texas Instruments", partno="TLV75901PDRVR">
+    trait has_designator_prefix<prefix="U">
+    trait has_package<name="WSON-6-EP(2x2)">
+    trait has_tags<tags="Power Management (PMIC),Voltage Regulators - Linear, Low Drop Out (LDO) Regulators">
+
+    # pins
+    signal DNC ~ pin 5
+    signal EN ~ pin 4
+    signal EP ~ pin 7
+    signal FB ~ pin 2
+    signal GND ~ pin 3
+    signal IN ~ pin 6
+    signal OUT ~ pin 1

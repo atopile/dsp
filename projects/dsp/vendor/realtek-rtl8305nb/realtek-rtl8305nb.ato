@@ -1,0 +1,134 @@
+# Vendored v2 port of the `atopile/realtek-rtl8305nb` package driver
+# (simplified: no LED wiring, condensed decoupling banks).
+.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
+.PARTS := .ELEC::PARTS
+
+.SW_IC:   @STD::Import { .uri &= "parts/Realtek_Semicon_RTL8305NB_VB_CG/Realtek_Semicon_RTL8305NB_VB_CG.ato" }
+.XTAL_IC: @STD::Import { .uri &= "parts/YXC_Crystal_Oscillators_X322525MRB4SI/YXC_Crystal_Oscillators_X322525MRB4SI.ato" }
+
+.Realtek_RTL8305NB: @type {
+    /// Realtek RTL8305NB 5-port 10/100 ethernet switch. Runs from 3.3V with
+    /// an on-chip 1.2V regulator (V12OUT); managed over SMI (MDC/MDIO);
+    /// clocked by a 25MHz crystal. Strapping: EEE disabled, reset blink and
+    /// loop detection enabled.
+    .ic: SW_IC::Realtek_Semicon_RTL8305NB_VB_CG_package
+
+    .power_3v3: ELEC::ElectricPower
+    .power_1v2: ELEC::ElectricPower  # internal rail from the on-chip regulator
+
+    .mdc: ELEC::ElectricLogic
+    .mdio: ELEC::ElectricLogic
+    .reset: ELEC::ElectricLogic
+
+    .ethernets: [5]ELEC::Interfaces::Ethernet
+
+    # --- Power ---
+    .ic.AVDDH ~ .power_3v3.hv
+    .ic.AVDDHPLL ~ .power_3v3.hv
+    .ic.DVDDH ~ .power_3v3.hv
+    .ic.V33IN ~ .power_3v3.hv
+    .ic.EP ~ .power_3v3.lv
+    .power_1v2.lv ~ .power_3v3.lv
+    # on-chip 1.2V regulator output feeds the low-voltage domains
+    .power_1v2.hv ~ .ic.V12OUT
+    .ic.AVDDL ~ .power_1v2.hv
+    .ic.AVDDLPLL ~ .power_1v2.hv
+    .ic.DVDDL ~ .power_1v2.hv
+
+    # --- Management (SMI) and reset ---
+    .mdc.line ~ .ic.SCL_MDC
+    .mdio.line ~ .ic.SDA_MDIO
+    .reset.line ~ .ic.RESETB
+    .reset_pullup: ELEC::Stuff::Resistor {
+        .resistance &= 10kohm +/- 5%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .reset.line ~> .reset_pullup ~> .power_3v3.hv
+
+    # --- 25MHz crystal with load capacitors ---
+    .crystal: XTAL_IC::YXC_Crystal_Oscillators_X322525MRB4SI
+    .crystal.unnamed[0] ~ .ic.XI
+    .crystal.unnamed[1] ~ .ic.XO
+    .crystal.gnd ~ .power_3v3.lv
+    .crystal_caps: [2]ELEC::Stuff::Capacitor
+    @for(.crystal_caps, {
+        .cap := .obj
+        .cap.capacitance &= 18pF +/- 10%
+    })
+    @trait(_, .crystal_caps[0]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .crystal_caps[1]): PARTS::has_package_requirements { .size &= "0402" }
+    .ic.XI ~> .crystal_caps[0] ~> .power_3v3.lv
+    .ic.XO ~> .crystal_caps[1] ~> .power_3v3.lv
+
+    # --- Bias and strapping ---
+    .ibref_resistor: ELEC::Stuff::Resistor {
+        /// Bandgap bias reference
+        .resistance &= 2.49kohm +/- 1%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.IBREF ~> .ibref_resistor ~> .power_3v3.lv
+    .p0_config_pulldown: ELEC::Stuff::Resistor {
+        /// DIS_EEE strap: EEE disabled for compatibility
+        .resistance &= 100kohm +/- 5%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.P0LED_DIS_EEE ~> .p0_config_pulldown ~> .power_3v3.lv
+    .p2_config_pullup: ELEC::Stuff::Resistor {
+        /// DIS_RST_BLNK strap: reset blink enabled
+        .resistance &= 10kohm +/- 5%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.P2LED_DIS_RST_BLNK ~> .p2_config_pullup ~> .power_3v3.hv
+    .ldind_config_pullup: ELEC::Stuff::Resistor {
+        /// DIS_LD strap: loop detection enabled
+        .resistance &= 10kohm +/- 5%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.LDIND_DIS_LD ~> .ldind_config_pullup ~> .power_3v3.hv
+
+    # --- Decoupling: per-rail 100nF banks ---
+    .decoupling_caps_3v3: [3]ELEC::Stuff::Capacitor
+    .decoupling_caps_1v2: [3]ELEC::Stuff::Capacitor
+    @for(.decoupling_caps_3v3, {
+        .cap := .obj
+        .cap.capacitance &= 100nF +/- 20%
+    })
+    @for(.decoupling_caps_1v2, {
+        .cap := .obj
+        .cap.capacitance &= 100nF +/- 20%
+    })
+    @trait(_, .decoupling_caps_3v3[0]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps_3v3[1]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps_3v3[2]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps_1v2[0]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps_1v2[1]): PARTS::has_package_requirements { .size &= "0402" }
+    @trait(_, .decoupling_caps_1v2[2]): PARTS::has_package_requirements { .size &= "0402" }
+    .power_3v3.hv ~> .decoupling_caps_3v3[0] ~> .power_3v3.lv
+    .power_3v3.hv ~> .decoupling_caps_3v3[1] ~> .power_3v3.lv
+    .power_3v3.hv ~> .decoupling_caps_3v3[2] ~> .power_3v3.lv
+    .power_1v2.hv ~> .decoupling_caps_1v2[0] ~> .power_1v2.lv
+    .power_1v2.hv ~> .decoupling_caps_1v2[1] ~> .power_1v2.lv
+    .power_1v2.hv ~> .decoupling_caps_1v2[2] ~> .power_1v2.lv
+
+    # --- Ethernet ports (pairs[0] = RX, pairs[1] = TX) ---
+    .ethernets[0].pairs[0].p.line ~ .ic.RXIP0
+    .ethernets[0].pairs[0].n.line ~ .ic.RXIN0
+    .ethernets[0].pairs[1].p.line ~ .ic.TXOP0
+    .ethernets[0].pairs[1].n.line ~ .ic.TXON0
+    .ethernets[1].pairs[0].p.line ~ .ic.RXIP1
+    .ethernets[1].pairs[0].n.line ~ .ic.RXIN1
+    .ethernets[1].pairs[1].p.line ~ .ic.TXOP1
+    .ethernets[1].pairs[1].n.line ~ .ic.TXON1
+    .ethernets[2].pairs[0].p.line ~ .ic.RXIP2
+    .ethernets[2].pairs[0].n.line ~ .ic.RXIN2
+    .ethernets[2].pairs[1].p.line ~ .ic.TXOP2
+    .ethernets[2].pairs[1].n.line ~ .ic.TXON2
+    .ethernets[3].pairs[0].p.line ~ .ic.RXIP3
+    .ethernets[3].pairs[0].n.line ~ .ic.RXIN3
+    .ethernets[3].pairs[1].p.line ~ .ic.TXOP3
+    .ethernets[3].pairs[1].n.line ~ .ic.TXON3
+    .ethernets[4].pairs[0].p.line ~ .ic.RXIP4
+    .ethernets[4].pairs[0].n.line ~ .ic.RXIN4
+    .ethernets[4].pairs[1].p.line ~ .ic.TXOP4
+    .ethernets[4].pairs[1].n.line ~ .ic.TXON4
+}

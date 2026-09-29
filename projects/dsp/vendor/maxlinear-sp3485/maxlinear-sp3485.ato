@@ -1,0 +1,37 @@
+# Vendored v2 port of the `atopile/maxlinear-sp3485` package driver.
+.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
+.PARTS := .ELEC::PARTS
+
+.RS_IC: @STD::Import { .uri &= "parts/MaxLinear_SP3485EN_L_TR/MaxLinear_SP3485EN_L_TR.ato" }
+
+.MaxLinear_SP3485: @type {
+    /// MaxLinear SP3485EN-L/TR — 3.3V low-power half-duplex RS-485
+    /// transceiver (up to 10Mbps). Exposes UART-side logic, driver/receiver
+    /// enables, and the RS-485 A/B bus (p = A, n = B).
+    .ic: RS_IC::MaxLinear_SP3485EN_L_TR_package
+
+    .power: ELEC::ElectricPower
+
+    .uart: ELEC::Interfaces::UART_Base
+    .driver_enable: ELEC::ElectricLogic       # DE, high enables the driver
+    .n_receiver_enable: ELEC::ElectricLogic   # RE, low enables the receiver
+
+    .rs485_bus: ELEC::Interfaces::DifferentialPair
+
+    # --- Package connections ---
+    .ic.VCC ~ .power.hv
+    .ic.GND ~ .power.lv
+    .ic.DI ~ .uart.tx.line
+    .ic.RO ~ .uart.rx.line
+    .ic.DE ~ .driver_enable.line
+    .ic.nRE ~ .n_receiver_enable.line
+    .ic.A ~ .rs485_bus.p.line
+    .ic.B ~ .rs485_bus.n.line
+
+    # --- Decoupling ---
+    .vcc_decoupling: ELEC::Stuff::Capacitor {
+        .capacitance &= 100nF +/- 20%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .power.hv ~> .vcc_decoupling ~> .power.lv
+}

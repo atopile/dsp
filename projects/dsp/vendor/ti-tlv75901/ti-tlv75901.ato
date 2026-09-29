@@ -1,0 +1,49 @@
+# Vendored v2 port of the `atopile/ti-tlv75901` package driver (simplified:
+# fixed 3.3V feedback divider instead of a solver-driven adjustable divider).
+.ELEC: @STD::Import { .project &= "electronics"; .org &= "atopile" }
+.PARTS := .ELEC::PARTS
+
+.LDO_IC: @STD::Import { .uri &= "parts/Texas_Instruments_TLV75901PDRVR/Texas_Instruments_TLV75901PDRVR.ato" }
+
+.TI_TLV75901: @type {
+    /// TI TLV75901 1A adjustable low-noise LDO, configured for 3.3V out.
+    /// Vout = 0.55V * (1 + Rtop/Rbottom); 9.09k/1.82k gives 3.30V.
+    /// Enable is strapped to the input rail (always on).
+    .ic: LDO_IC::Texas_Instruments_TLV75901PDRVR_package
+
+    .power_in: ELEC::ElectricPower
+    .power_out: ELEC::ElectricPower
+
+    .power_in.lv ~ .power_out.lv
+
+    # --- Package connections ---
+    .ic.IN ~ .power_in.hv
+    .ic.GND ~ .power_in.lv
+    .ic.OUT ~ .power_out.hv
+    .ic.EP ~ .power_out.lv
+    .ic.EN ~ .power_in.hv  # always enabled
+
+    # --- Feedback divider (sets 3.3V) ---
+    .feedback_top: ELEC::Stuff::Resistor {
+        .resistance &= 9.09kohm +/- 1%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .feedback_bottom: ELEC::Stuff::Resistor {
+        .resistance &= 1.82kohm +/- 1%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .ic.OUT ~> .feedback_top ~> .ic.FB
+    .ic.FB ~> .feedback_bottom ~> .power_out.lv
+
+    # --- Decoupling ---
+    .input_decoupling_capacitor: ELEC::Stuff::Capacitor {
+        .capacitance &= 1uF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .output_decoupling_capacitor: ELEC::Stuff::Capacitor {
+        .capacitance &= 1uF +/- 10%
+        @trait(_): PARTS::has_package_requirements { .size &= "0402" }
+    }
+    .power_in.hv ~> .input_decoupling_capacitor ~> .power_in.lv
+    .power_out.hv ~> .output_decoupling_capacitor ~> .power_out.lv
+}

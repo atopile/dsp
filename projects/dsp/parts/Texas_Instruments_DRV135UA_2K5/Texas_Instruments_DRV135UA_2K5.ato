@@ -1,0 +1,28 @@
+import has_datasheet
+import has_designator_prefix
+import has_package
+import has_part_picked
+import has_tags
+import is_atomic_part
+
+component Texas_Instruments_DRV135UA_2K5_package:
+    """-18V~-4.5V、4.5V~18V -40℃~+85℃ 0.0005% 1 Single-Ended Input 110dB 5.2mA SOIC-8 Audio Amplifiers ROHS"""
+
+    # This trait marks this file as auto-generated
+    # If you want to manually change it, remove the trait
+
+    trait is_atomic_part<identifier="jlc-C544663-v0.0.1", manufacturer="Texas Instruments", partnumber="DRV135UA/2K5", footprint="Texas_Instruments_DRV135UA_2K5.footprint.hl", symbol="Texas_Instruments_DRV135UA_2K5.symbol.hl">
+    trait has_part_picked::by_supplier<supplier_id="lcsc", supplier_partno="C544663", manufacturer="Texas Instruments", partno="DRV135UA/2K5">
+    trait has_designator_prefix<prefix="U">
+    trait has_package<name="SOIC-8">
+    trait has_tags<tags="Amplifiers/Comparators,Audio Amplifiers">
+
+    # pins
+    signal GND ~ pin 3
+    signal SENSEneg ~ pin 2
+    signal SENSEpos ~ pin 7
+    signal VIN ~ pin 4
+    signal VOneg ~ pin 1
+    signal VOpos ~ pin 8
+    signal Vneg ~ pin 5
+    signal Vpos ~ pin 6
